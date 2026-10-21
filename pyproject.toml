@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wbgtcad"
+version = "0.1.0.dev0"
+description = "Verified numerical and physics-informed solvers for wide-bandgap semiconductor device equations"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+# CPU-only torch is recommended:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+pinn = ["torch>=2.2"]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "pinn: tests that require torch",
+]
