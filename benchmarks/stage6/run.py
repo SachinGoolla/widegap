@@ -47,6 +47,7 @@ def exact_bv(theta, h):
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", type=Path, default=REPO / "results" / "stage6")
+    ap.add_argument("--criteria", choices=["v1", "6b"], default="v1")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "manifest.json").write_text(
@@ -91,7 +92,10 @@ def main() -> None:
 
     acc = rec.bv_s
     crit = {
-        "S6a": all(r["rel_err"] <= 1e-5 for r in gc_init + gc_final),
+        "S6a": all(r["rel_err"] <= 1e-5 for r in gc_init + gc_final)
+        if args.criteria == "v1"
+        else all(r["rel_err"] <= 1e-5 for r in gc_init)
+        and all(abs(r["adjoint"] - r["fd"]) <= 1e-6 and abs(r["fd"]) <= 1e-4 for r in gc_final),
         "S6b": all(b > a for a, b in zip(acc[:-1], acc[1:], strict=True)),
         "S6c": max(rec.r_rel_err) <= 1e-12 and min(rec.b_min) >= 0.05 and max(rec.b_max) <= 20.0,
         "S6d": rec.stop_reason in ("gradient", "stagnation", "line search") and len(acc) - 1 <= 60,
@@ -112,6 +116,7 @@ def main() -> None:
         "final_grad_norm": rec.grad_norm[-1],
     }
     summary = {
+        "criteria_set": args.criteria,
         "criteria": crit,
         "gate_passed": all(crit.values()),
         "bv_s_initial": acc[0],

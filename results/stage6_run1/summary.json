@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "S6a": false,
+    "S6b": true,
+    "S6c": true,
+    "S6d": true,
+    "S6e": true,
+    "S6f": true
+  },
+  "gate_passed": false,
+  "bv_s_initial": 80.62553264666107,
+  "bv_s_final": 89.75530937423179,
+  "best_linear_bv_s": 87.95096701929621,
+  "linear_grid_zero_bias_breakdowns": 4,
+  "iterations": 23,
+  "evaluations": 24,
+  "stop_reason": "gradient",
+  "reverify_exact_bv": {
+    "0.025": {
+      "bv_initial": 80.66402178883747,
+      "bv_final": 89.79799482727898,
+      "improvement": 9.13397303844151
+    },
+    "0.0125": {
+      "bv_initial": 79.52717123738198,
+      "bv_final": 88.73209660933327,
+      "improvement": 9.20492537195129
+    }
+  },
+  "worst_grad_rel_err": 0.006968691954514677
+}
