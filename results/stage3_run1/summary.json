@@ -1,0 +1,25 @@
+{
+  "criteria": {
+    "D1": true,
+    "D2": true,
+    "D3a": true,
+    "D3b": true,
+    "D3c": true,
+    "D3d": true,
+    "D5": true,
+    "D6": false
+  },
+  "gate_passed": false,
+  "reported": {
+    "D3e": {
+      "-2": 1.0000119190615768,
+      "-5": 1.000012596803239
+    },
+    "D4_ideality": {
+      "1-2": 1.0665044436931432,
+      "2-3": 0.855773067687552,
+      "3-4": 0.8153980653325924
+    },
+    "D7": "devsim.json not present"
+  }
+}
