@@ -10,7 +10,10 @@ def max_error(u_h: np.ndarray, u: np.ndarray) -> float:
 
 
 def _trapz_norm(x: np.ndarray, v: np.ndarray) -> float:
-    return float(np.sqrt(np.trapezoid(v**2, x)))
+    # Explicit trapezoid rule: np.trapezoid is NumPy >= 2.0 only, np.trapz is
+    # deprecated there, and pyproject.toml supports NumPy >= 1.26.
+    w = v**2
+    return float(np.sqrt(np.sum(0.5 * (w[1:] + w[:-1]) * np.diff(x))))
 
 
 def rel_l2_error(x: np.ndarray, u_h: np.ndarray, u: np.ndarray) -> float:
