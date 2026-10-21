@@ -296,7 +296,7 @@ def main(out):
         }
         rows.append(row)
         print(
-            "k=%2d V=%.6f J=%.6e A/cm2 j_scaled=%.8e conv=%s cons=%s"
+            "k=%2d V=%.6f J=%.6e A/cm2 j_scaled=%.8e conv=%s cons=%s"  # noqa: UP031
             % (
                 k,
                 V,
