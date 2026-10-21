@@ -62,6 +62,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-      - run: pip install "numpy==1.26.4" "scipy==1.11.4" pytest
+      - run: pip install "numpy==1.26.4" "scipy==1.11.4" "sympy==1.12" pytest
       - run: pip install --no-deps .
       - run: pytest -v

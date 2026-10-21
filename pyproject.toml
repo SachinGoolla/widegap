@@ -20,7 +20,7 @@ dependencies = [
 # CPU-only torch is recommended:
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu
 pinn = ["torch>=2.2"]
-test = ["pytest>=8"]
+test = ["pytest>=8", "sympy>=1.12"]
 plot = ["matplotlib>=3.8"]
 dev = ["ruff>=0.6", "pre-commit>=3.7", "sympy>=1.12"]
 
