@@ -24,6 +24,7 @@ from widegap.verification import observed_orders
 REPO = Path(__file__).resolve().parents[2]
 L, NDIODE, DELTA = 40.0, 1024, 1e-3
 VBI = float(2.0 * np.arcsinh(1.0 / (2.0 * DELTA)))
+TOL_MODE = "terms"
 
 
 def _pack(psi, n, p):
@@ -70,7 +71,7 @@ def run_d1():
         bc = [(psi[0], n[0], p[0]), (psi[-1], n[-1], p[-1])]
         X0 = _pack(psi[0] + (psi[-1] - psi[0]) * x, np.ones_like(x), 0.7 * np.ones_like(x))
         t0 = time.perf_counter()
-        sol = dd.solve(X0, bc)
+        sol = dd.solve(X0, bc, tol_mode=TOL_MODE)
         el = time.perf_counter() - t0
         for k, a, b in (("psi", sol.psi, psi), ("n", sol.n, n), ("p", sol.p, p)):
             errs[k].append(float(np.max(np.abs(a - b))))
@@ -102,7 +103,7 @@ def _diode(params: DDParams, biases_fwd, biases_rev):
         X = X_eq.copy()
         for v in branch:
             t0 = time.perf_counter()
-            sol = dd.solve(X, bc(v))
+            sol = dd.solve(X, bc(v), tol_mode=TOL_MODE)
             el = time.perf_counter() - t0
             X = _pack(sol.psi, sol.n, sol.p)
             jm = float(np.mean(sol.j))
@@ -134,7 +135,15 @@ def j_short(v):
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", type=Path, default=REPO / "results" / "stage3")
+    ap.add_argument(
+        "--tol-mode",
+        choices=["terms", "jacobian"],
+        default="terms",
+        help="terms = stage-3 run 1; jacobian = stage 3b",
+    )
     args = ap.parse_args()
+    global TOL_MODE
+    TOL_MODE = args.tol_mode
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "manifest.json").write_text(
         json.dumps(build_manifest(REPO, sys.argv, [0]), indent=2) + "\n"
@@ -192,6 +201,7 @@ def main() -> None:
         "D4_ideality": ideality_d4,
         "D7_ratio_to_devsim": d7,
         "Vbi": VBI,
+        "tol_mode": TOL_MODE,
     }
     summary = {
         "criteria": crit,

@@ -168,6 +168,19 @@ class DriftDiffusion1D:
             out.append(float(np.max(s[1:-1])))
         return tuple(out)
 
+    def roundoff_scale(self, X):
+        """Stage-3b S_b: max over rows of sum_j |J_ij X_j| + V_i |volume term|."""
+        psi, n, p = self.split(X)
+        r, _, _ = self.recombination(n, p)
+        J = self.jacobian(X)
+        jx = abs(J) @ np.abs(X)
+        vt = [
+            self.vol * (np.abs(p) + np.abs(n) + np.abs(self.c) + np.abs(self.s_psi)),
+            self.vol * (np.abs(r) + np.abs(self.s_n)),
+            self.vol * (np.abs(r) + np.abs(self.s_p)),
+        ]
+        return tuple(float(np.max((jx[b::3] + vt[b])[1:-1])) for b in range(3))
+
     def jacobian(self, X):
         psi, n, p = self.split(X)
         N = len(psi)
@@ -227,7 +240,9 @@ class DriftDiffusion1D:
         return sp.csc_matrix((V, (R, C)), shape=(3 * N, 3 * N))
 
     # ----- Newton ---------------------------------------------------------
-    def solve(self, X0, bc, max_iter=60, max_step=2.0):
+    def solve(self, X0, bc, max_iter=60, max_step=2.0, tol_mode="terms"):
+        """Newton solve. tol_mode: "terms" (stage-3 run 1) or "jacobian" (stage 3b)."""
+        scale = {"terms": self.term_scale, "jacobian": self.roundoff_scale}[tol_mode]
         X = np.array(X0, dtype=float)
         for k in (0, -1):
             j = 0 if k == 0 else len(X) // 3 - 1
@@ -236,7 +251,7 @@ class DriftDiffusion1D:
         for _ in range(max_iter + 1):
             F = self.residual(X, bc)
             norms = tuple(float(np.max(np.abs(F[v::3]))) for v in range(3))
-            tol = tuple(1e2 * EPS_MACH * s for s in self.term_scale(X))
+            tol = tuple(1e2 * EPS_MACH * s for s in scale(X))
             rep.residual_history.append(norms)
             rep.tolerance = tol
             if all(nb <= tb for nb, tb in zip(norms, tol, strict=True)) and rep.last_dpsi <= 1e-8:
