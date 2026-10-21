@@ -1,6 +1,6 @@
 # widegap
 
-Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), and discrete adjoint doping sensitivities of those objectives (stage 5). There are no SiC material models or device-scale simulations yet.**
+Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), discrete adjoint doping sensitivities of those objectives (stage 5), and constrained doping optimization on those proxies (stage 6). There are no SiC material models or device-scale simulations yet.**
 
 ## Status
 
@@ -112,11 +112,11 @@ python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSO
 
 ## Limitations
 
-- 1D only. No field-dependent mobility, impact ionization, avalanche breakdown, or optimization yet.
+- 1D only. No field-dependent mobility, impact ionization, or avalanche breakdown; optimized profiles are proxy results, not fabrication-ready designs.
 - No 4H-SiC parameters and no physical units; permittivity contrast and all values are dimensionless.
 - PINN timings are CPU-only and were measured on one machine.
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
-- Stages 2, 3 and 4 each failed their first run on a pre-registered criterion that was itself flawed (stages 2-3: below the round-off floor; stage 4: depletion-approximation references inadequate at ~100 V_T); each passed after a re-registered criterion disclosed as written after the failure.
+- Stages 2, 3, 4 and 6 each failed their first run on a pre-registered criterion that was itself flawed (stages 2-3: below the round-off floor; stage 4: depletion-approximation references inadequate at ~100 V_T; stage 6: relative gradient error is ill-posed at a stationary point); each passed after a re-registered criterion disclosed as written after the failure.
 - The field-based breakdown voltage is a proxy: no impact ionization is modelled, and E_crit is a study constant, not a material value.
 - Stages 2-3 are verified only for n_i/N0 >= 1e-8 (stage 2) and 1e-3 (stage 3); 4H-SiC-realistic n_i/N0 ~ 1e-25 is not supported.
 

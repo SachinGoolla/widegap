@@ -28,3 +28,33 @@ budget assumed an O(1) signal at both points, which cannot hold at a
 stationary point, so the relative measure there is ill-posed. The criterion
 is at fault, not the gradient. The gate stays failed. The re-registration is
 in `docs/benchmarks/stage6b_gradient_check.md`.
+
+## Run 2, criteria 6b (2026-10-20): gate PASSED
+
+Raw data: `results/stage6b/` (commit `dd3bd40`, clean tree). The run is
+bit-identical to run 1: the same $\theta$, the same ascent path, and the same
+exact-BV re-verification.
+
+| Criterion | Result | Value |
+|---|---|---|
+| S6a′-init | pass | ≤ 5.4e-9 relative |
+| S6a′-final | pass | \|adjoint − FD\| = 0.8e-8 to 2.5e-8 (≤ 1e-6); \|FD\| = 3.6e-6 to 2.3e-5 (≤ 1e-4), so the design is stationary |
+| S6b–S6f | pass | as in run 1 |
+
+**Result** (`figures/stage6_optimized_profile.png`): at a fixed drift
+resistance proxy, the optimizer lowers the drift doping near the junction
+($b\approx0.62$) and raises it toward the n⁺ layer ($b\approx15$). This
+flattens the field, so its integral (the voltage) at the same peak field is
+larger. The exact field-based BV rises from 80.66 to 89.80 $V_T$ (+11.3%)
+on $h=0.025$, and from 79.53 to 88.73 (+11.6%) on $h=0.0125$. It is the
+textbook mechanism behind graded drift layers, found here by verified
+adjoint-based optimization.
+
+**Not claimed:**
+- a fabrication-ready profile;
+- real (avalanche) breakdown;
+- that the resistance proxy equals the on-resistance under depletion or
+  injection;
+- that this is a global optimum (it is a stationary point within a
+  5-mode Legendre family that beats the best linear grading);
+- anything about 2D or SiC.
