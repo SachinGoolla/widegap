@@ -20,7 +20,7 @@ GOOD = {
     "unit": "eV",
     "param_class": "measured",
     "doi": "10.0/x",
-    "crossref_title_match": True,
+    "doi_metadata_match": True,
     "access": "full-text-read",
     "locator": "Table 1",
     "extracted_by": "agent-A",
@@ -34,7 +34,7 @@ GOOD = {
     [
         {"access": "abstract-only"},
         {"access": "paywalled"},
-        {"crossref_title_match": False},
+        {"doi_metadata_match": False},
         {"verified_by": "agent-A"},
         {"verified_value_match": False},
         {"locator": ""},
@@ -86,3 +86,11 @@ def test_neutrality_matches_single_donor_closed_form():
             # n1 such that N_D^+ = N_D / (1 + n / n1):  n1 = delta / e^{lg}
             n1 = delta * np.exp(-lg)
             assert abs(n / single_donor_electrons(nd, n1) - 1.0) <= 1e-10
+
+
+def test_shipped_sic4h_registry_entries_all_pass_provenance():
+    from importlib.resources import files
+
+    reg = Registry.from_json(files("widegap.materials") / "data" / "sic4h.json")
+    assert reg.names(), "registry is empty"
+    assert all(reg.usable(n) for n in reg.names())

@@ -1,7 +1,7 @@
 """Material-parameter registry with enforced provenance (stage 7).
 
 Rules (docs/benchmarks/stage7_sic_materials.md, section 1): a parameter is
-usable only if its full text was read, its DOI was checked against Crossref,
+usable only if its full text was read, its DOI metadata was checked with its registration agency,
 it has a locator, and it was independently re-verified by someone other than
 its extractor. Unusable parameters raise ``ProvenanceError``; there is no
 fallback value.
@@ -19,7 +19,7 @@ REQUIRED_FIELDS = (
     "unit",
     "param_class",
     "doi",
-    "crossref_title_match",
+    "doi_metadata_match",
     "access",
     "locator",
     "extracted_by",
@@ -59,8 +59,10 @@ def check_entry(e: dict) -> None:
         raise ProvenanceError(f"{e['name']}: unknown class {e['param_class']!r}")
     if e["access"] != "full-text-read":
         raise ProvenanceError(f"{e['name']}: full text not read (access={e['access']!r})")
-    if e["crossref_title_match"] is not True:
-        raise ProvenanceError(f"{e['name']}: DOI not verified against Crossref")
+    if e["doi_metadata_match"] is not True:
+        raise ProvenanceError(
+            f"{e['name']}: DOI metadata not verified against its registration agency"
+        )
     if e["verified_by"] == e["extracted_by"]:
         raise ProvenanceError(f"{e['name']}: not independently re-verified")
     if e["verified_value_match"] is not True:

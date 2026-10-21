@@ -78,3 +78,23 @@ Stage 7 passes if M1–M5 hold, plus M6 where applicable. A pass means the
 not mean the models are adequate for any particular SiC device. Interface
 traps, anisotropic mobility tensors, impact ionization and high-field
 transport remain out of scope.
+
+## 5. Amendments
+
+### 2026-10-21: DOI verification is not limited to Crossref (before the official run)
+
+§1 required DOIs to be "verified against Crossref". One read source, R.
+Ishikawa's PhD thesis (Kyoto University 2025, DOI 10.14989/doctor.k26017),
+has a JaLC-registered DOI that Crossref does not index. Restricting to one
+registration agency was arbitrary. The requirement becomes: the DOI's
+metadata from its registration agency must match the title, first author
+and year. It may be retrieved from Crossref, or through doi.org content
+negotiation (`Accept: application/vnd.citationstyles.csl+json`). The
+registry field is renamed `doi_metadata_match` and records the agency used.
+
+**Disclosure:** at the time of this amendment the literature search had
+already shown that set R is incomplete (no readable primary source for
+$E_g$(300 K), $N_c$, $N_v$, or site-resolved N-donor energies). The
+amendment therefore cannot change the stage-7 gate outcome. It only decides
+whether the thesis-sourced entries ($g_D$ and the Hall-mobility fits) are
+usable.

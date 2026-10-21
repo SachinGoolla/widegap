@@ -27,6 +27,9 @@ dev = ["ruff>=0.6", "pre-commit>=3.7", "sympy>=1.12"]
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+widegap = ["materials/data/*.json"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 markers = [
