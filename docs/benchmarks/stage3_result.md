@@ -31,3 +31,22 @@ but it is the *inverse* ideality factor $1/n$. D3c's window [0.97, 1.03] is
 symmetric about 1, so D3c is unaffected. For D4 the expected trend is toward
 0.5, that is $n\to2$. The observed 0.86 and 0.82 ($n\approx1.2$) are
 consistent with a growing depletion-region recombination share.
+
+## Run 2, stage 3b tolerance (2026-10-20): gate PASSED
+
+Raw data: `results/stage3b/`. The tolerance was re-registered in
+`docs/benchmarks/stage3b_tolerance.md` (disclosed as post-hoc). The run was
+made from a committed tree, and the only untracked file was the concurrent,
+unimported DEVSIM script.
+
+All gating criteria hold: D1, D2, D3a–D3d, D5 and D6. D1 at $N=512$ now
+converges in 4 Newton iterations. Every reported physics number (orders,
+Jacobian errors, D3a–D3e, D4) is unchanged from run 1, because only the
+stopping test differs.
+
+**Verified scope:** 1D, steady state, isothermal, Boltzmann statistics,
+complete ionization, constant mobility, SG fluxes, optional SRH, ohmic
+Dirichlet contacts, and $\delta=n_i/N_0=10^{-3}$. **Not verified:**
+4H-SiC-realistic $\delta\sim10^{-25}$ (round-off in $n,p$ variables will
+need quasi-Fermi or Slotboom variables, a stage-7 issue), field-dependent
+mobility, impact ionization, and 2D.
