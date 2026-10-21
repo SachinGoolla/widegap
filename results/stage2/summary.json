@@ -1,0 +1,21 @@
+{
+  "criteria": {
+    "S1": true,
+    "S2_E1": false,
+    "S2_E2": false,
+    "S3": true,
+    "S4": true,
+    "S5": true
+  },
+  "gate_passed": false,
+  "reported_S6_E3": {
+    "Vbi_thermal": 41.44653167389282,
+    "bulk_neutrality_max_rel": 9.16808679796155e-06,
+    "total_charge_rel": 3.706677658499055e-16,
+    "peak_field_numeric": 10.470640688838875,
+    "peak_field_depletion": 8.838096169916836,
+    "peak_field_rel_diff": 0.18471676337703855,
+    "solve_seconds": 0.002958355937153101
+  },
+  "S7_pinn": "not run (configuration amendment required first)"
+}
