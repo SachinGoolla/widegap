@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environments
+.venv/
+venv/
+.env
+
+# Local scratch output (committed benchmark results live in results/)
+scratch/
+*.log
+
+# Third-party papers are cited by DOI, never redistributed here
+*.pdf
+
+# Editors
+.vscode/
+.idea/
