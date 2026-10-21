@@ -39,3 +39,26 @@ which then reproduced the predicted failures.
 
 Under the project rules the gate stays failed. The criteria are
 re-registered in `docs/benchmarks/stage4b_first_integral.md`.
+
+## Run 2, re-registered criteria 4b (2026-10-20): gate PASSED
+
+Raw data: `results/stage4b/` (commit `5af89d4`, clean tree).
+
+| Criterion | Result | Value |
+|---|---|---|
+| G1 extraction | pass | \|B−1\| ≤ 2.4e-14 on all 5 meshes |
+| G2′ BV mesh convergence | pass | B1 orders 0.79, 0.90, 0.95; finest within 0.47% of Richardson BV 83.38. B2 orders 0.77, 0.89, 0.94; within 0.36% of 61.16 |
+| G3′ junction field vs exact first integral | pass | B1 3.0e-5 to 5.9e-5; B2 1.4e-5 to 4.9e-5 (threshold 2e-3) |
+| G6′ depletion-region field slope | pass | −0.99990 |
+| G7, G8, G9 | pass | as in run 1 |
+| depletion approximation (reported) | n/a | extrapolated BV / BV_dep = 0.858 (B1), 0.941 (B2) |
+
+**Verified:** the field-based breakdown index $B$ and its BV extraction, as
+*numerical quantities*, for 1D abrupt multilayer diodes in the zero-current
+approximation, with a constant $E_{crit}=15\,V_T/L_D$ chosen for the study.
+
+**Not claimed:** avalanche breakdown, any physical BV, or any SiC value.
+The max-element-field definition converges only at first order. Adjoint
+sensitivities of $B$ (stage 5) will have to account for this
+non-smoothness: $\max$ is not differentiable, and ZA19 widens it to nodes
+with $B>0.9\max B$.

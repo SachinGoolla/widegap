@@ -68,3 +68,33 @@ $$
 
 This is an approximation, used here only as a 10% plausibility check (S5).
 It is not an exact reference.
+
+## 2. Reverse-bias electrostatics and the breakdown index (stage 4)
+
+### 2.1 Zero-current approximation
+
+At reverse bias $V_R$ with negligible current, the quasi-Fermi potentials
+are flat: $\phi_n=0$ (cathode) and $\phi_p=-V_R$ (anode). Then
+$n=\delta e^{\psi-\phi_n}$, $p=\delta e^{\phi_p-\psi}$, and
+$-\psi''=\delta(e^{\phi_p-\psi}-e^{\psi-\phi_n})+C$ (`widegap.fv.reverse_bias`).
+
+### 2.2 Exact first integral
+
+Multiply by $\psi'$ and integrate. Since $E=-\psi'$ vanishes in a neutral
+bulk,
+$$\tfrac12E(x_0)^2=\int_{\psi(x_0)}^{\psi_{bulk}}\rho(\psi)\,d\psi .$$
+For a one-sided p⁺n junction ($N_A=aN_0$, $N_D=bN_0$) this gives, on the two
+sides,
+$\tfrac12E(0)^2=b\Delta\psi_n-b+p(0)=a\Delta\psi_p-a+p(0)$ (minority
+terms dropped), with $p(0)=a\,e^{-\Delta\psi_p}$. Hence
+$$\frac{d(E^2)}{dV}=2\,\frac{ab-b\,p(0)}{a+b}\quad(\text{for }b=1),$$
+which reduces to the depletion-approximation value $2ab/(a+b)$ only when
+$p(0)\ll a$. In stage 4, $p(0)\approx19$ for $a=100$, so this
+correction is about 20%.
+
+### 2.3 Breakdown index (Zhu & Andrei 2019, eq. 1)
+
+$B=\max_e|E_e|/E_{crit}$ over element fields $E_e=-(\psi_{e+1}-\psi_e)/h_e$.
+The field-based BV solves $B(V_R)=1$. Because the maximum sits on the
+element at the junction, where $|E'|=|\rho(0)|$, the discrete maximum
+converges at $O(h)$.

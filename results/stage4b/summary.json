@@ -1,0 +1,13 @@
+{
+  "criteria_set": "4b",
+  "criteria": {
+    "G1": true,
+    "G2'": true,
+    "G3'": true,
+    "G6'": true,
+    "G7": true,
+    "G8": true,
+    "G9": true
+  },
+  "gate_passed": true
+}
