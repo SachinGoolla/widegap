@@ -3,15 +3,15 @@
 import numpy as np
 import pytest
 
-from wbgtcad.fv.poisson1d import solve, uniform_mesh
-from wbgtcad.problems.poisson1d import (
+from widegap.fv.poisson1d import solve, uniform_mesh
+from widegap.problems.poisson1d import (
     evaluate,
     linear_charge_free,
     p1_smooth,
     p2_variable_eps,
     p3_interface,
 )
-from wbgtcad.verification import max_error, observed_orders
+from widegap.verification import max_error, observed_orders
 
 LEVELS = [32, 64, 128, 256, 512]
 

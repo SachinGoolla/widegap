@@ -22,10 +22,10 @@ from pathlib import Path
 
 import numpy as np
 
-from wbgtcad.fv.poisson1d import solve, uniform_mesh
-from wbgtcad.manifest import build_manifest
-from wbgtcad.problems.poisson1d import CASES, evaluate, linear_charge_free
-from wbgtcad.verification import max_error, observed_orders, rel_l2_error
+from widegap.fv.poisson1d import solve, uniform_mesh
+from widegap.manifest import build_manifest
+from widegap.problems.poisson1d import CASES, evaluate, linear_charge_free
+from widegap.verification import max_error, observed_orders, rel_l2_error
 
 REPO = Path(__file__).resolve().parents[2]
 LEVELS = [32, 64, 128, 256, 512]
@@ -87,7 +87,7 @@ def run_fv() -> dict:
 
 
 def run_single_pinn(case: str, seed: int, adam_steps: int | None, lbfgs: int | None) -> dict:
-    from wbgtcad.pinn.poisson1d import PINNConfig, train
+    from widegap.pinn.poisson1d import PINNConfig, train
 
     kw = {"seed": seed}
     if adam_steps is not None:
@@ -138,8 +138,12 @@ def main() -> None:
     ap.add_argument("--out", type=Path, default=REPO / "results" / "poisson1d")
     ap.add_argument("--cases", nargs="+", default=PINN_CASES)
     ap.add_argument("--seeds", nargs="+", type=int, default=SEEDS)
-    ap.add_argument("--adam-steps", type=int, default=None, help="override (non-benchmark runs only)")
-    ap.add_argument("--lbfgs-iter", type=int, default=None, help="override (non-benchmark runs only)")
+    ap.add_argument(
+        "--adam-steps", type=int, default=None, help="override (non-benchmark runs only)"
+    )
+    ap.add_argument(
+        "--lbfgs-iter", type=int, default=None, help="override (non-benchmark runs only)"
+    )
     ap.add_argument("--single", nargs=2, metavar=("CASE", "SEED"), help=argparse.SUPPRESS)
     args = ap.parse_args()
 

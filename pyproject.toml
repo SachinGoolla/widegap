@@ -1,12 +1,15 @@
 [build-system]
-requires = ["setuptools>=69", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "wbgtcad"
+name = "widegap"
 version = "0.1.0.dev0"
 description = "Verified numerical and physics-informed solvers for wide-bandgap semiconductor device equations"
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Sachin Chandra Goolla" }]
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.26",
@@ -18,6 +21,8 @@ dependencies = [
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu
 pinn = ["torch>=2.2"]
 test = ["pytest>=8"]
+plot = ["matplotlib>=3.8"]
+dev = ["ruff>=0.6", "pre-commit>=3.7", "sympy>=1.12"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -27,3 +32,11 @@ testpaths = ["tests"]
 markers = [
     "pinn: tests that require torch",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]  # line length is handled by ruff format

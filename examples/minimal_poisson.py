@@ -7,9 +7,9 @@ illustration. Benchmark numbers come from benchmarks/poisson1d/run.py.
 
 import numpy as np
 
-from wbgtcad.fv.poisson1d import solve, uniform_mesh
-from wbgtcad.problems.poisson1d import evaluate, p1_smooth
-from wbgtcad.verification import max_error, rel_l2_error
+from widegap.fv.poisson1d import solve, uniform_mesh
+from widegap.problems.poisson1d import evaluate, p1_smooth
+from widegap.verification import max_error, rel_l2_error
 
 problem = p1_smooth()
 
@@ -17,9 +17,11 @@ fv = solve(problem, uniform_mesh(256))
 print(f"FV  (N=256):      max error = {max_error(fv.u, evaluate(problem.u_exact, fv.x)):.3e}")
 
 try:
-    from wbgtcad.pinn.poisson1d import PINNConfig, train
+    from widegap.pinn.poisson1d import PINNConfig, train
 except ImportError:
-    print("PINN skipped: install torch (pip install torch --index-url https://download.pytorch.org/whl/cpu)")
+    print(
+        "PINN skipped: install torch (pip install torch --index-url https://download.pytorch.org/whl/cpu)"
+    )
 else:
     res = train(problem, PINNConfig(adam_steps=500, lbfgs_max_iter=100, seed=0))
     x = np.linspace(0.0, 1.0, 2001)

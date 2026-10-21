@@ -10,7 +10,7 @@ Discretization (docs/benchmarks/poisson_1d.md, section 3):
 * Dirichlet values imposed at both end nodes; tridiagonal system solved by
   banded LU.
 
-This module deliberately imports nothing from ``wbgtcad.pinn``.
+This module deliberately imports nothing from ``widegap.pinn``.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from dataclasses import dataclass
 import numpy as np
 from scipy.linalg import solve_banded
 
-from wbgtcad.problems.poisson1d import PoissonProblem1D, evaluate
+from widegap.problems.poisson1d import PoissonProblem1D, evaluate
 
 _GAUSS_ORDER = 8
 
@@ -42,10 +42,10 @@ def element_harmonic_eps(problem: PoissonProblem1D, x: np.ndarray) -> np.ndarray
     """h_e / int_e eps^{-1} dx per element, splitting at eps discontinuities."""
     gx, gw = np.polynomial.legendre.leggauss(_GAUSS_ORDER)
     eps_e = np.empty(len(x) - 1)
-    for i, (a, b) in enumerate(zip(x[:-1], x[1:])):
+    for i, (a, b) in enumerate(zip(x[:-1], x[1:], strict=True)):
         cuts = [a, *(c for c in problem.eps_breaks if a < c < b), b]
         inv_int = 0.0
-        for lo, hi in zip(cuts[:-1], cuts[1:]):
+        for lo, hi in zip(cuts[:-1], cuts[1:], strict=True):
             mid, half = 0.5 * (lo + hi), 0.5 * (hi - lo)
             q = mid + half * gx
             inv_int += half * np.sum(gw / evaluate(problem.eps, q))

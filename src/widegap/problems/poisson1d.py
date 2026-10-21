@@ -12,8 +12,9 @@ or ``torch``) so that the same formula is evaluated by both backends.
 from __future__ import annotations
 
 import math
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Any, Callable
+from typing import Any
 
 import numpy as np
 
@@ -56,8 +57,9 @@ def p2_variable_eps() -> PoissonProblem1D:
     return PoissonProblem1D(
         name="P2",
         eps=lambda x, xp: 1.0 + x**2,
-        f=lambda x, xp: -2.0 * x * (pi * xp.cos(pi * x) + 1.0)
-        + (1.0 + x**2) * pi**2 * xp.sin(pi * x),
+        f=lambda x, xp: (
+            -2.0 * x * (pi * xp.cos(pi * x) + 1.0) + (1.0 + x**2) * pi**2 * xp.sin(pi * x)
+        ),
         u_exact=lambda x, xp: xp.sin(pi * x) + x,
         g0=0.0,
         g1=1.0,

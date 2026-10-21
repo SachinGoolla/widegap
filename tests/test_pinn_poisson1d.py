@@ -7,9 +7,9 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
-from wbgtcad.pinn.poisson1d import PINNConfig, residual, train  # noqa: E402
-from wbgtcad.problems.poisson1d import evaluate, p1_smooth, p2_variable_eps  # noqa: E402
-from wbgtcad.verification import rel_l2_error  # noqa: E402
+from widegap.pinn.poisson1d import PINNConfig, residual, train  # noqa: E402
+from widegap.problems.poisson1d import evaluate, p1_smooth, p2_variable_eps  # noqa: E402
+from widegap.verification import rel_l2_error  # noqa: E402
 
 pytestmark = pytest.mark.pinn
 

@@ -32,7 +32,7 @@ def _cpu_model() -> str:
 
 def build_manifest(repo: Path, command: list[str], seeds: list[int]) -> dict:
     packages = {}
-    for name in ("wbgtcad", "numpy", "scipy", "torch"):
+    for name in ("widegap", "numpy", "scipy", "torch"):
         try:
             packages[name] = _md.version(name)
         except _md.PackageNotFoundError:

@@ -1,4 +1,4 @@
-# wbg-sciml-tcad
+# widegap
 
 Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **The current release solves only the linear 1D Poisson verification benchmark; there is no device simulation yet.**
 
@@ -25,7 +25,7 @@ pip install torch --index-url https://download.pytorch.org/whl/cpu   # optional,
 pip install -e ".[test]"
 ```
 
-Python >= 3.10. The package is named `wbgtcad`. torch is optional: the finite-volume reference solver depends only on NumPy and SciPy, and the PINN requires torch (CI runs the test suite and example both with and without torch).
+Python >= 3.10. The package is named `widegap`. torch is optional: the finite-volume reference solver depends only on NumPy and SciPy, and the PINN requires torch (CI runs the test suite and example both with and without torch).
 
 ## Minimal example
 
@@ -111,7 +111,6 @@ PINN timings are wall-clock on this CPU and are not an acceptance criterion.
 - PINN timings are CPU-only and were measured on one machine.
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
 - CI is configured (`.github/workflows/ci.yml`) but its first GitHub Actions run has not yet been observed.
-- No licence has been chosen.
 
 ## Scientific attribution
 
@@ -161,4 +160,4 @@ See [CITATION.cff](CITATION.cff). Please also cite the original works for the me
 
 ## License
 
-Not yet selected (see [docs/repository_metadata.md](docs/repository_metadata.md)). Until a licence file is added, no licence is granted.
+Apache License 2.0, see [LICENSE](LICENSE). Cited papers are the property of their authors and publishers and are not redistributed here.

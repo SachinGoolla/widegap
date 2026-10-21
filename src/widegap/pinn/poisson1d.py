@@ -3,7 +3,7 @@
 The configuration defaults are the pre-registered benchmark configuration.
 Dirichlet data are imposed exactly through the ansatz
 u(x) = g0 (1 - x) + g1 x + x (1 - x) N(x), so the loss is the PDE residual
-alone. This module deliberately imports nothing from ``wbgtcad.fv``.
+alone. This module deliberately imports nothing from ``widegap.fv``.
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ from dataclasses import asdict, dataclass, field
 import numpy as np
 import torch
 
-from wbgtcad.problems.poisson1d import PoissonProblem1D
+from widegap.problems.poisson1d import PoissonProblem1D
 
 
 @dataclass(frozen=True)
@@ -67,7 +67,8 @@ def residual(net, problem: PoissonProblem1D, x: torch.Tensor) -> torch.Tensor:
     return -dflux - problem.f(x, torch)
 
 
-def train(problem: PoissonProblem1D, cfg: PINNConfig = PINNConfig()) -> PINNResult:
+def train(problem: PoissonProblem1D, cfg: PINNConfig | None = None) -> PINNResult:
+    cfg = cfg or PINNConfig()
     torch.manual_seed(cfg.seed)
     gen = torch.Generator().manual_seed(cfg.seed)
     net = _mlp(cfg.hidden)

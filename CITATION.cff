@@ -1,12 +1,14 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below, and cite the original works for the methods it implements (see references)."
-title: "wbg-sciml-tcad: verified numerical and physics-informed solvers for wide-bandgap semiconductor device equations"
+title: "widegap: verified numerical and physics-informed solvers for wide-bandgap semiconductor device equations"
 type: software
 version: 0.1.0.dev0
-# TODO(owner): replace alias-only entry with given-names/family-names and ORCID if desired.
+license: Apache-2.0
 authors:
-  - alias: SachinGoolla
-repository-code: "https://github.com/SachinGoolla/wbg-sciml-tcad"
+  - given-names: Sachin Chandra
+    family-names: Goolla
+    alias: SachinGoolla
+repository-code: "https://github.com/SachinGoolla/widegap"
 keywords:
   - semiconductor device simulation
   - wide-bandgap semiconductors

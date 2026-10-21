@@ -2,12 +2,14 @@
 
 from pathlib import Path
 
-SRC = Path(__file__).resolve().parents[1] / "src" / "wbgtcad"
+SRC = Path(__file__).resolve().parents[1] / "src" / "widegap"
 
 
 def _imports(path: Path) -> str:
     return "\n".join(
-        line for line in path.read_text().splitlines() if line.lstrip().startswith(("import", "from"))
+        line
+        for line in path.read_text().splitlines()
+        if line.lstrip().startswith(("import", "from"))
     )
 
 
