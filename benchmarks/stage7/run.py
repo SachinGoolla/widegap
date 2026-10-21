@@ -190,7 +190,7 @@ def m5(reg: Registry, h_list=(0.025, 0.0125)):
 
 
 def m6(reg: Registry):
-    names = ["mu_n_max", "mu_n_min", "N_n_ref", "alpha_n"]
+    names = ["mu_n_max_par_c", "mu_n_min_par_c", "N_n_ref_par_c", "alpha_n_par_c"]
     if not all(reg.usable(n) for n in names):
         return {"available": False}
     mx, mn, nref, al = (reg.value(n) for n in names)
@@ -222,14 +222,18 @@ def main() -> None:
         "permittivity_usable": eps_ok,
     }
     crit = {"M1": not missing and eps_ok}
+    # M4 (synthetic levels) and M6 (mobility identities) do not depend on set R
+    res["M4"] = m4()
+    crit["M4"] = all(1.9 <= q <= 2.1 for q in res["M4"]["orders"][-3:])
+    res["M6"] = m6(reg)
+    if res["M6"]["available"]:
+        crit["M6"] = res["M6"]["mu_low_N_err"] <= 1e-14 and res["M6"]["mu_Nref_err"] <= 1e-14
     if crit["M1"]:
         m23, worst, lim_ok = m2_m3(reg)
         res["M2_M3"] = m23
         res["M2_worst_rel_err"] = worst
         crit["M2"] = worst <= 1e-10
         crit["M3"] = lim_ok
-        res["M4"] = m4()
-        crit["M4"] = all(1.9 <= q <= 2.1 for q in res["M4"]["orders"][-3:])
         res["M5"] = m5(reg)
         mm = res["M5"]["meshes"].values()
         crit["M5"] = (
@@ -237,11 +241,11 @@ def main() -> None:
             and res["M5"]["bulk_vs_neutrality"] <= 1e-10
             and res["M5"]["field_rel_err"] <= 2e-3
         )
-        res["M6"] = m6(reg)
-        if res["M6"]["available"]:
-            crit["M6"] = res["M6"]["mu_low_N_err"] <= 1e-14 and res["M6"]["mu_Nref_err"] <= 1e-14
-        ni300 = derived(reg, 300.0)[0]
-        res["R7a_ni_300K_cm3"] = ni300
+        res["R7a_ni_300K_cm3"] = derived(reg, 300.0)[0]
+    else:
+        res["blocked"] = (
+            "M2, M3, M5 not evaluable: required parameters lack a readable, verified primary source"
+        )
     crit = {k: bool(v) for k, v in crit.items()}
     summary = {
         "criteria": crit,
