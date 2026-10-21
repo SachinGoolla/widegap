@@ -1,0 +1,15 @@
+{
+  "criteria_set": "v1",
+  "criteria": {
+    "G1": true,
+    "G2": false,
+    "G3": false,
+    "G4": false,
+    "G5": false,
+    "G6": true,
+    "G7": true,
+    "G8": true,
+    "G9": true
+  },
+  "gate_passed": false
+}
