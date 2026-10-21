@@ -1,8 +1,7 @@
 # GitHub repository metadata (to be applied by the owner)
 
-These settings cannot be applied from the development machine (no `gh`
-CLI). Apply them in the GitHub UI or with `gh repo edit` after the
-repository is created.
+Applied with `gh repo create` / `gh repo edit` when the repository is
+created; kept here as the source of truth.
 
 **Description**
 
@@ -14,8 +13,7 @@ repository is created.
 
 **Suggested issues to open** (known limitations, see README)
 
-1. Licence not yet selected (blocks first release).
-2. Only linear 1D Poisson is implemented; nonlinear Poisson with Boltzmann carriers is the next stage.
-3. PINN timings are CPU-only (no GPU on the development machine).
-4. 4H-SiC material parameters: primary sources not yet collected.
-5. CI workflow configured but its first run on GitHub Actions has not yet been observed.
+1. Only linear 1D Poisson is implemented; nonlinear Poisson with Boltzmann carriers is the next stage.
+2. PINN timings are CPU-only (no GPU on the development machine).
+3. 4H-SiC material parameters: primary sources not yet collected.
+4. CI workflow configured but its first run on GitHub Actions has not yet been observed.

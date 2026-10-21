@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a reproducible defect in widegap code, tests or results
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please keep the reproducer minimal and runnable.
+        Scientific limitations (known physics or numerics gaps) belong in the
+        "Scientific limitation" form instead.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is wrong? Describe the behaviour in a few sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Minimal reproducer
+      description: A short, self-contained Python snippet or pytest test that triggers the problem.
+      render: python
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What should happen, and why (cite the equation, reference or test if relevant).
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What happens instead. Paste the full traceback or the wrong output.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        Fill in OS, Python version, and the output of the command below run inside the project environment:
+
+        ```
+        pip freeze | grep -E "widegap|numpy|scipy|torch"
+        ```
+      placeholder: |
+        OS:
+        Python:
+        pip freeze output:
+    validations:
+      required: true
+
+  - type: input
+    id: commit
+    attributes:
+      label: Commit hash
+      description: Output of `git rev-parse HEAD` in your checkout (or the release tag).
+      placeholder: e.g. ce1373d
+    validations:
+      required: true

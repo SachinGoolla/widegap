@@ -1,0 +1,61 @@
+name: Scientific limitation
+description: Report a physics or numerics limitation, or an unsupported regime, of a solver or model
+labels: ["scientific", "limitation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every known scientific or engineering limitation should have an issue
+        (see CONTRIBUTING.md). Use this form for physics or numerics gaps,
+        including approximations that affect published or planned claims.
+
+  - type: input
+    id: affected
+    attributes:
+      label: Affected model or solver
+      description: Name the module, equation set, discretisation or network component (for example the 1D Poisson finite-volume solver, or a PINN loss term).
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the limitation
+      description: State the assumption or regime that is not captured, and the expected direction or size of the error where known.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence (test, benchmark file, or reference with DOI)
+      description: |
+        Link to a test, a benchmark file (for example docs/benchmarks/... or benchmarks/.../run.py),
+        or a reference with DOI. Cite the primary source for any material parameter.
+      placeholder: |
+        - tests/test_xxx.py::test_yyy
+        - docs/benchmarks/xxx.md
+        - Author (Year), Title, DOI: 10.xxxx/xxxxx
+    validations:
+      required: true
+
+  - type: dropdown
+    id: classification
+    attributes:
+      label: Classification
+      description: How mature is the affected component?
+      options:
+        - implemented-but-limited
+        - experimental
+        - planned
+        - unsupported
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact on published claims
+      description: Which README, benchmark or documentation claims does this limitation affect? Write "none known" if there is no impact.
+    validations:
+      required: true

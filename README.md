@@ -39,63 +39,69 @@ It solves benchmark case P1 with the finite-volume solver and, if torch is insta
 
 Problem definitions, error measures and acceptance criteria were fixed before any solver result existed: [docs/benchmarks/poisson_1d.md](docs/benchmarks/poisson_1d.md). One dated amendment (R5 flux balance, restated as R5b/R5c) was also made before any solver output. All quantities are dimensionless.
 
+<!-- results:poisson1d:begin -->
 ### Finite-volume reference solver (uniform meshes)
 
 Max-norm nodal error against the exact solution (`results/poisson1d/fv.json`):
 
-| Case | N=32 | N=64 | N=128 | N=256 | N=512 | Observed orders (N=32→64 … 256→512) |
+| Case | N=32 | N=64 | N=128 | N=256 | N=512 | Observed orders |
 |---|---|---|---|---|---|---|
 | P1 | 8.0e-04 | 2.0e-04 | 5.0e-05 | 1.3e-05 | 3.1e-06 | 2.00, 2.00, 2.00, 2.00 |
 | P2 | 6.5e-04 | 1.6e-04 | 4.0e-05 | 1.0e-05 | 2.5e-06 | 2.00, 2.00, 2.00, 2.00 |
 | P4 | 1.7e-01 | 3.9e-02 | 9.7e-03 | 2.4e-03 | 6.1e-04 | 2.13, 2.01, 1.99, 2.00 |
 
-- P1 and P2 observed orders are within the pre-registered window [1.9, 2.1]. P4 is reported only (not gating).
-- P3 (piecewise-constant permittivity, harmonic-mean element permittivity): max error 5.0e-15 for N=64 (interface on a node) and 5.3e-14 for N=63 (interface inside an element).
+- P3 (dielectric interface): max error 5.0e-15 (N=64, interface on a node), 5.3e-14 (N=63, interface inside an element).
 - Linear exact solution: max error 5.7e-15.
-- R5b (discrete flux balance, P1, N=512): relative imbalance 2.1e-13.
-- R5c (reported, not gating): error of the end-element boundary flux for N=32 to 512 is 2.5e-03, 6.3e-04, 1.6e-04, 3.9e-05, 9.9e-06; observed orders 2.00, 2.00, 2.00, 2.00.
+- R5b discrete flux balance (P1, N=512): relative imbalance 2.1e-13.
+- R5c end-element boundary-flux error, N=32..512: 2.5e-03, 6.3e-04, 1.6e-04, 3.9e-05, 9.9e-06; observed orders 2.00, 2.00, 2.00, 2.00.
+- FV solve time at N=512: 4.3 ms.
 
-### PINN (3x32 tanh, float64, hard Dirichlet conditions, Adam then L-BFGS)
+### PINN (3x32 tanh, float64, exact Dirichlet ansatz, Adam then L-BFGS)
 
-All five seeds are reported; none was discarded (`results/poisson1d/pinn_<case>_seed<k>.json`). Relative L2 errors use a fixed 2001-point grid.
+Every seed that was run is listed. Relative L2 errors are evaluated on a fixed 2001-point grid.
 
-| Case | Seed | rel. L2 vs exact | rel. L2 vs FV (N=512) | Train time (s) |
-|---|---|---|---|---|
-| P1 | 0 | 3.2e-07 | 1.6e-06 | 26.7 |
-| P1 | 1 | 2.0e-06 | 3.6e-06 | 23.5 |
-| P1 | 2 | 5.5e-06 | 7.3e-06 | 27.0 |
-| P1 | 3 | 2.5e-06 | 4.1e-06 | 25.9 |
-| P1 | 4 | 4.0e-07 | 2.1e-06 | 25.5 |
-| P2 | 0 | 1.2e-06 | 2.2e-06 | 25.5 |
-| P2 | 1 | 3.1e-07 | 1.7e-06 | 26.4 |
-| P2 | 2 | 1.1e-06 | 2.4e-06 | 25.4 |
-| P2 | 3 | 1.3e-06 | 2.5e-06 | 27.0 |
-| P2 | 4 | 1.0e-06 | 2.1e-06 | 26.8 |
-| P4 | 0 | 3.0e-04 | 3.2e-04 | 25.0 |
-| P4 | 1 | 9.7e-06 | 1.2e-04 | 26.4 |
-| P4 | 2 | 4.2e-04 | 4.3e-04 | 24.3 |
-| P4 | 3 | 2.8e-05 | 1.2e-04 | 28.3 |
-| P4 | 4 | 1.1e-04 | 1.6e-04 | 24.1 |
+| Case | Seed | rel. L2 vs exact | rel. L2 vs FV (N=512) | final residual MSE | train time (s) | peak RSS (MiB) |
+|---|---|---|---|---|---|---|
+| P1 | 0 | 3.2e-07 | 1.6e-06 | 1.6e-08 | 28.2 | 401 |
+| P1 | 1 | 2.0e-06 | 3.6e-06 | 9.3e-07 | 26.6 | 402 |
+| P1 | 2 | 5.5e-06 | 7.3e-06 | 7.7e-07 | 29.4 | 402 |
+| P1 | 3 | 2.5e-06 | 4.1e-06 | 7.5e-07 | 27.7 | 402 |
+| P1 | 4 | 4.0e-07 | 2.1e-06 | 4.8e-08 | 29.4 | 402 |
+| P2 | 0 | 1.2e-06 | 2.2e-06 | 1.3e-06 | 25.6 | 402 |
+| P2 | 1 | 3.1e-07 | 1.7e-06 | 4.2e-08 | 25.8 | 401 |
+| P2 | 2 | 1.1e-06 | 2.4e-06 | 5.4e-07 | 26.5 | 403 |
+| P2 | 3 | 1.3e-06 | 2.5e-06 | 1.1e-06 | 27.7 | 402 |
+| P2 | 4 | 1.0e-06 | 2.1e-06 | 6.5e-07 | 26.2 | 403 |
+| P4 | 0 | 3.0e-04 | 3.2e-04 | 1.1e-03 | 26.0 | 401 |
+| P4 | 1 | 9.7e-06 | 1.2e-04 | 5.7e-05 | 26.9 | 401 |
+| P4 | 2 | 4.2e-04 | 4.3e-04 | 1.6e-03 | 26.8 | 401 |
+| P4 | 3 | 2.8e-05 | 1.2e-04 | 1.1e-04 | 27.4 | 401 |
+| P4 | 4 | 1.1e-04 | 1.6e-04 | 1.5e-03 | 26.8 | 401 |
 
-- N2: the "vs FV" column is dominated by the FV solution's own error (max 3.1e-06 for P1 at N=512), so it is larger than the "vs exact" column; the two comparisons agree to within that level, as pre-registered.
-- P4 (not gating): the rel. L2 error vs exact varies by about 40x across seeds (smallest 9.7e-06, largest 4.2e-04).
+**Gate:** passed (R1_P1 pass, R1_P2 pass, R2 pass, R3 pass, R4 pass, R5_linear pass, R5b pass, N1 pass). Pre-registered configuration: True.
 
-### Gate
+Provenance: commit `ce1373d` (clean tree: True), AMD Ryzen 7 5700U with Radeon Graphics, 8 torch threads, CPU only, torch 2.14.1+cpu, NumPy 2.5.4, SciPy 1.18.1, run at 2026-10-21T04:38:06 UTC.
+<!-- results:poisson1d:end -->
 
-From `results/poisson1d/summary.json`: R1 (P1 and P2), R2, R3, R4, R5 (linear), R5b and N1 all hold; `gate_passed` is true and `pre_registered_configuration` is true.
+Reading the tables:
 
-### Provenance
+- The "vs FV" column is dominated by the FV solution's own error (about 3e-6 for P1 at N=512), so it is larger than the "vs exact" column. The two comparisons agree to within that level, as pre-registered (N2).
+- P4 (steep layer) is a stress test and does not gate. Its PINN error varies by more than an order of magnitude across seeds.
+- Cost-to-accuracy: on P1 the PINN needs about 25 s of training to reach the error that the FV solver reaches in milliseconds. The gate shows the PINN code is correct, not that it is competitive.
+- Repeated runs of the same configuration on this machine and build gave bit-identical PINN errors. This is not a cross-platform determinism claim.
 
-- Hardware (`manifest.json`): AMD Ryzen 7 5700U with Radeon Graphics, 16 logical CPUs, 8 torch threads, CPU-only torch (2.14.1+cpu), no GPU. Python 3.12.3, NumPy 2.5.4, SciPy 1.18.1.
-- Peak resident memory per PINN run: about 370 MiB (`peak_rss_mib` in the `pinn_*.json` files).
-- Results were produced by git commit `91e0ee91c2636c698e6b82d48c92664b4e61f437` (`git_dirty` false in the manifest); an earlier run of the identical training code (commit `3d1990f`, which crashed only when writing `summary.json`; fixed in `91e0ee9`) produced bit-identical errors for all 15 PINN runs.
-- Reproduce:
+Figures are generated from the same JSON (`python benchmarks/poisson1d/make_figures.py`):
+
+![FV convergence](figures/poisson1d_fv_convergence.png)
+![PINN errors per seed](figures/poisson1d_pinn_errors.png)
+
+Reproduce everything:
 
 ```bash
 python benchmarks/poisson1d/run.py --out results/poisson1d
+python benchmarks/poisson1d/make_figures.py
+python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSON
 ```
-
-PINN timings are wall-clock on this CPU and are not an acceptance criterion.
 
 ## Supported features
 
@@ -146,13 +152,14 @@ The R1 to R5b checks run on the reference solver; the full N1 check is part of t
 
 ## Documentation
 
+- [Project specification v2 (stages, gates, rules)](docs/PROJECT_SPEC.md)
 - [Benchmark P1-P4 pre-registration and amendment](docs/benchmarks/poisson_1d.md)
 - [Literature and requirements report](docs/literature/requirements_report.md)
 - [Raw results and manifest](results/poisson1d/)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Citation
 
