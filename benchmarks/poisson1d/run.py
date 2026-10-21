@@ -129,8 +129,8 @@ def summarize(fv: dict, pinn: list[dict]) -> dict:
     }
     p1 = [r for r in pinn if r["case"] == "P1"]
     crit["N1"] = len(p1) == len(SEEDS) and all(r["e_l2_rel_exact"] <= 1e-3 for r in p1)
-    gating = crit
-    return {"criteria": crit, "gate_passed": all(gating.values())}
+    crit = {k: bool(v) for k, v in crit.items()}  # numpy bool_ is not JSON-serializable
+    return {"criteria": crit, "gate_passed": all(crit.values())}
 
 
 def main() -> None:

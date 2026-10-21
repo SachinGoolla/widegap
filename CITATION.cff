@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, and cite the original works for the methods it implements (see references)."
+title: "wbg-sciml-tcad: verified numerical and physics-informed solvers for wide-bandgap semiconductor device equations"
+type: software
+version: 0.1.0.dev0
+# TODO(owner): replace alias-only entry with given-names/family-names and ORCID if desired.
+authors:
+  - alias: SachinGoolla
+repository-code: "https://github.com/SachinGoolla/wbg-sciml-tcad"
+keywords:
+  - semiconductor device simulation
+  - wide-bandgap semiconductors
+  - silicon carbide
+  - physics-informed neural networks
+  - numerical PDEs
+references:
+  - type: article
+    title: "Adjoint method for the optimization of insulated gate bipolar transistors"
+    authors:
+      - family-names: Zhu
+        given-names: C.
+      - family-names: Andrei
+        given-names: P.
+    journal: "AIP Advances"
+    volume: 9
+    start: "095301"
+    year: 2019
+    doi: 10.1063/1.5113764
+  - type: article
+    title: "Large-scale optimization of doping profiles in 4H–SiC metal–oxide–semiconductor field-effect transistors"
+    authors:
+      - family-names: Brungi
+        given-names: P.
+      - family-names: Andrei
+        given-names: P.
+    journal: "AIP Advances"
+    volume: 16
+    start: "035014"
+    year: 2026
+    doi: 10.1063/5.0320204
+  - type: article
+    title: "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations"
+    authors:
+      - family-names: Raissi
+        given-names: M.
+      - family-names: Perdikaris
+        given-names: P.
+      - family-names: Karniadakis
+        given-names: G. E.
+    journal: "Journal of Computational Physics"
+    volume: 378
+    start: 686
+    end: 707
+    year: 2019
+    doi: 10.1016/j.jcp.2018.10.045
