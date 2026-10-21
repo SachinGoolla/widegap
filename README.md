@@ -4,7 +4,7 @@ Verified finite-volume and physics-informed neural network (PINN) solvers for se
 
 ## Status
 
-Each stage must pass its own verification gate before the next starts (`docs/literature/requirements_report.md`, section 5).
+Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each stage must pass its own pre-registered gate before the next starts.
 
 | Stage | Content | Status |
 |---|---|---|
@@ -13,8 +13,11 @@ Each stage must pass its own verification gate before the next starts (`docs/lit
 | 3 | Drift-diffusion with Scharfetter-Gummel fluxes (1D, steady state) | verified after one failed run and a disclosed re-registered tolerance ([result](docs/benchmarks/stage3_result.md)); DEVSIM cross-check reported separately |
 | 4 | Field-based breakdown-voltage index in 1D (numerical proxy, no impact ionization) | verified after one failed run and a disclosed re-registration against an exact first-integral reference ([result](docs/benchmarks/stage4_result.md)) |
 | 5 | Discrete adjoint doping sensitivities (potential, diode current, breakdown index, field-based BV) | verified on the first official run ([result](docs/benchmarks/stage5_result.md)); adjoint gradient costs 0.98 Newton iterations |
-| 6 | 4H-SiC material models (each parameter traced to a primary source) | not started |
-| 7 | PINN and SciML stages (surrogates, inverse doping problems) | not started |
+| 6 | Constrained doping optimization (1D: maximize field-based BV at fixed drift-resistance proxy) | verified after one failed run and a disclosed re-registered gradient check ([result](docs/benchmarks/stage6_result.md)); exact field-based BV +11.3% via graded drift doping |
+| 7 | 4H-SiC material models (each parameter traced to a primary source that was read) | not started |
+| 8 | 2D finite volume, then a SiC MOSFET half-cell | not started |
+| 9 | PINN / automatic-differentiation sensitivities vs the FV adjoint (research question) | not started |
+| 10 | GaN | out of scope for now |
 
 ## Installation
 
