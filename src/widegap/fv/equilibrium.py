@@ -82,6 +82,26 @@ def residual(psi, x, c_cv, delta, s_cv):
     return f
 
 
+def jacobian_banded(psi: np.ndarray, x: np.ndarray, delta: float) -> np.ndarray:
+    """dF/dpsi in scipy banded (1, 1) storage; Dirichlet rows are identity."""
+    g = 1.0 / np.diff(x)
+    vol = control_volumes(x)
+    ab = np.zeros((3, len(x)))
+    ab[1, 1:-1] = g[:-1] + g[1:] + vol[1:-1] * delta * (np.exp(-psi[1:-1]) + np.exp(psi[1:-1]))
+    ab[0, 2:] = -g[1:]
+    ab[2, :-2] = -g[:-1]
+    ab[1, 0] = ab[1, -1] = 1.0
+    return ab
+
+
+def banded_matvec(ab: np.ndarray, v: np.ndarray) -> np.ndarray:
+    """y = A v for a tridiagonal matrix in scipy (1, 1) banded storage."""
+    y = ab[1] * v
+    y[:-1] += ab[0, 1:] * v[1:]
+    y[1:] += ab[2, :-1] * v[:-1]
+    return y
+
+
 def solve(
     x: np.ndarray,
     c_cv: np.ndarray,
@@ -102,9 +122,6 @@ def solve(
     psi = neutral_potential(c_cv, delta) if psi0 is None else np.array(psi0, dtype=float)
     psi[0], psi[-1] = psi_left, psi_right
 
-    h = np.diff(x)
-    g = 1.0 / h
-    vol = control_volumes(x)
     rep = NewtonReport(converged=False, iterations=0, limited_steps=0)
 
     for _ in range(max_iter):
@@ -114,12 +131,7 @@ def solve(
         if rnorm <= tol:
             rep.converged = True
             break
-        ab = np.zeros((3, len(x)))
-        ab[1, 1:-1] = g[:-1] + g[1:] + vol[1:-1] * delta * (np.exp(-psi[1:-1]) + np.exp(psi[1:-1]))
-        ab[0, 2:] = -g[1:]
-        ab[2, :-2] = -g[:-1]
-        ab[1, 0] = ab[1, -1] = 1.0
-        dpsi = solve_banded((1, 1), ab, -f)
+        dpsi = solve_banded((1, 1), jacobian_banded(psi, x, delta), -f)
         step = float(np.max(np.abs(dpsi)))
         limited = step > max_step
         if limited:
