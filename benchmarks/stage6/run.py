@@ -66,9 +66,21 @@ def main() -> None:
         th = np.zeros(des.n_modes)
         th[0] = t1
         ok = feasible(des, th)[0]
-        bvs = evaluate(des, th, E_CRIT, KAPPA, grad=False)[0] if ok else None
-        grid.append({"theta1": float(t1), "feasible": ok, "bv_s": bvs})
-    best_lin = max(g["bv_s"] for g in grid if g["feasible"])
+        bvs, zero_bias_breakdown = None, False
+        if ok:
+            try:
+                bvs = evaluate(des, th, E_CRIT, KAPPA, grad=False)[0]
+            except ValueError:  # B_s >= 1 already at V_R = 0, i.e. BV_s <= 0
+                zero_bias_breakdown = True
+        grid.append(
+            {
+                "theta1": float(t1),
+                "feasible": ok,
+                "bv_s": bvs,
+                "breaks_down_at_zero_bias": zero_bias_breakdown,
+            }
+        )
+    best_lin = max(g["bv_s"] for g in grid if g["bv_s"] is not None)
 
     # Independent exact-BV re-verification on two meshes
     reverify = {}
@@ -105,6 +117,7 @@ def main() -> None:
         "bv_s_initial": acc[0],
         "bv_s_final": acc[-1],
         "best_linear_bv_s": best_lin,
+        "linear_grid_zero_bias_breakdowns": sum(g["breaks_down_at_zero_bias"] for g in grid),
         "iterations": len(acc) - 1,
         "evaluations": rec.evaluations,
         "stop_reason": rec.stop_reason,
