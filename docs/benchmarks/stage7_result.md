@@ -1,6 +1,6 @@
 # Stage 7 result: BLOCKED on provenance (2026-10-21)
 
-Raw data: `results/stage7/` (commit `0b20f2b`, clean tree). Registry:
+Raw data: `results/stage7/` (commit `8f1c70f`, clean tree). Registry:
 `src/widegap/materials/data/sic4h.json`. Search logs:
 `docs/literature/stage7/`.
 
