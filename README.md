@@ -1,6 +1,6 @@
 # widegap
 
-Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), and the field-based breakdown index as a numerical quantity (stage 4). There are no SiC material models or device-scale simulations yet.**
+Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), and discrete adjoint doping sensitivities of those objectives (stage 5). There are no SiC material models or device-scale simulations yet.**
 
 ## Status
 
@@ -12,7 +12,7 @@ Each stage must pass its own verification gate before the next starts (`docs/lit
 | 2 | Nonlinear equilibrium Poisson, Boltzmann carriers, 1D abrupt pn junction | verified after one failed run and a disclosed re-registered criterion ([result](docs/benchmarks/stage2_result.md)) |
 | 3 | Drift-diffusion with Scharfetter-Gummel fluxes (1D, steady state) | verified after one failed run and a disclosed re-registered tolerance ([result](docs/benchmarks/stage3_result.md)); DEVSIM cross-check reported separately |
 | 4 | Field-based breakdown-voltage index in 1D (numerical proxy, no impact ionization) | verified after one failed run and a disclosed re-registration against an exact first-integral reference ([result](docs/benchmarks/stage4_result.md)) |
-| 5 | Adjoint sensitivities checked against finite differences | not started |
+| 5 | Discrete adjoint doping sensitivities (potential, diode current, breakdown index, field-based BV) | verified on the first official run ([result](docs/benchmarks/stage5_result.md)); adjoint gradient costs 0.98 Newton iterations |
 | 6 | 4H-SiC material models (each parameter traced to a primary source) | not started |
 | 7 | PINN and SciML stages (surrogates, inverse doping problems) | not started |
 
@@ -112,7 +112,7 @@ python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSO
 
 ## Limitations
 
-- 1D only. No field-dependent mobility, impact ionization, breakdown, or adjoint machinery yet.
+- 1D only. No field-dependent mobility, impact ionization, avalanche breakdown, or optimization yet.
 - No 4H-SiC parameters and no physical units; permittivity contrast and all values are dimensionless.
 - PINN timings are CPU-only and were measured on one machine.
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
