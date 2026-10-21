@@ -61,3 +61,22 @@ recorded for every run.
 ## 5. Gate
 
 Stage 2 passes if S1–S5 hold. Otherwise stage 3 does not start.
+
+## 6. Amendments
+
+### 2026-10-20: S2 evaluation mesh and residual definition (before any stage-2 code)
+
+S2 did not fix the mesh it is evaluated on or the scaling of $F$. Both are
+fixed here, before implementation:
+
+- $F_i$ is the finite-volume balance at node $i$ (flux difference minus
+  control volume times the source), in the scaled units of §1. It is the
+  same quantity Newton drives to zero.
+- S2 is evaluated on E1 at $N=256$ and on E2 at $N=1024$ (uniform meshes).
+- "The final 3 unlimited iterations" means the last three Newton iterations
+  in which the step limiter was not active.
+- Peak field (S5) is $\max_e |\psi_{e+1}-\psi_e|/h_e$ over elements. The
+  depletion-approximation value for one-sided doping magnitudes $a=N_A/N_0$,
+  $b=N_D/N_0$ is $E_{max}=\sqrt{2ab(V_{bi}-2)/(a+b)}$ in units of
+  $V_T/L_D$, with $V_{bi}=\psi_{eq}(n)-\psi_{eq}(p)$. The derivation is in
+  `docs/equations.md`.
