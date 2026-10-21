@@ -48,3 +48,23 @@ on the lightly doped side, whose depletion region and Debye tail are wider.
 Both are expected qualitatively, and neither is gating. The E3 mesh
 ($h=0.078\,L_D$, against a heavy-side Debye length of $0.1\,L_D$) is
 marginal, and a refinement study belongs to S2′'s rerun.
+
+## Rerun under S2′ (2026-10-20): gate PASSED
+
+Criterion S2′ was re-registered in `docs/benchmarks/stage2b_newton_criterion.md`
+(with the disclosure that it was written after run 1). Raw data:
+`results/stage2b/`.
+
+| Criterion | Result | Value |
+|---|---|---|
+| S1 | pass | unchanged |
+| S2′a analytic Jacobian vs central FD | pass | max rel. error 1.1e-10 (E1), 8.9e-10 (E2); threshold 1e-6 |
+| S2′b convergence ≤ 40 iterations | pass | all E1 levels, E2 (12), E3 (24) |
+| S2′c E2 rate above round-off floor (2.6e-12) | pass | ratios 4.4e-6, 4.9, 4.6 |
+| S3, S4, S5 | pass | unchanged |
+| S2′d E1 (reported) | not evaluable | 1 qualifying step (ratio 3e-10) |
+| S2′d E3 (reported) | ok | ratios 9.8e-4, 0.035, 0.12 |
+
+Stage 2 is verified **for the stated model only**: Boltzmann statistics,
+complete ionization, constant permittivity, $\delta\ge10^{-8}$. It is not
+verified for 4H-SiC-realistic $n_i/N\sim10^{-25}$ (stage 7).

@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "S1": true,
+    "S2'a": true,
+    "S2'b": true,
+    "S2'c": true,
+    "S3": true,
+    "S4": true,
+    "S5": true
+  },
+  "gate_passed": true,
+  "reported_S2'd": {
+    "E1": false,
+    "E3": true
+  }
+}

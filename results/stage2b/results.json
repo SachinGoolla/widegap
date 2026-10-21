@@ -1,0 +1,72 @@
+{
+  "S1_orders": [
+    2.001003454106918,
+    1.9998438729049794,
+    2.000060716821434,
+    1.9999692417747987
+  ],
+  "S2a_jacobian": {
+    "E1": {
+      "max_rel_err": 1.1351928364940495e-10,
+      "states": 3,
+      "directions": 5
+    },
+    "E2": {
+      "max_rel_err": 8.913046870763873e-10,
+      "states": 3,
+      "directions": 5
+    }
+  },
+  "S2b_converged": {
+    "E1_N64": true,
+    "E1_N128": true,
+    "E1_N256": true,
+    "E1_N512": true,
+    "E1_N1024": true,
+    "E2": true,
+    "E3": true
+  },
+  "S2c_rate_E2": {
+    "converged": true,
+    "iterations": 12,
+    "limited_steps": 8,
+    "floor": 2.603978251992963e-12,
+    "qualifying_ratios": [
+      4.369224875938348e-06,
+      4.944391147088762,
+      4.593204997997223
+    ],
+    "pass": true
+  },
+  "S2d_rate_E1": {
+    "converged": true,
+    "iterations": 3,
+    "limited_steps": 1,
+    "floor": 5.3288462660905416e-12,
+    "qualifying_ratios": [
+      2.9916999462594044e-10
+    ],
+    "pass": false
+  },
+  "S2d_rate_E3": {
+    "converged": true,
+    "iterations": 24,
+    "limited_steps": 19,
+    "floor": 4.64989855013037e-12,
+    "qualifying_ratios": [
+      0.000981250412321135,
+      0.03521067849500398,
+      0.12472795699758894
+    ],
+    "pass": true
+  },
+  "E2": {
+    "Vbi_thermal": 36.841361487904734,
+    "bulk_neutrality_max_rel": 5.013820546517778e-07,
+    "total_charge_rel": 0.0,
+    "peak_field_numeric": 5.863637742678192,
+    "peak_field_depletion": 5.902657154867182,
+    "peak_field_rel_diff": 0.006610482561538538,
+    "solve_seconds": 0.0017461200477555394
+  }
+}
