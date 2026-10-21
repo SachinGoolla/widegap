@@ -81,3 +81,33 @@ Wall time and Newton iteration counts are recorded.
 
 Stage 3 passes if D1, D2, D3a–D3d, D5 and D6 hold. Otherwise stage 4 does
 not start.
+
+## 6. Amendments
+
+### 2026-10-20: tolerances vs the round-off floor (before any stage-3 code ran)
+
+Analysis before implementation shows two thresholds in §2 and §4 are below
+the double-precision floor.
+
+In the neutral regions the SG flux is the small difference of two terms of
+size $\mu B(\pm\Delta)\,c/h$. That is about 13 for D3 ($h=0.078$, $c\approx1$)
+and up to about 800 for D1 at $N=512$. The absolute floor of a continuity row
+is therefore about $\epsilon_{mach}$ times these, between $6\times10^{-15}$
+and $2\times10^{-13}$, so a fixed $10^{-14}$ tolerance is not attainable on
+fine meshes. Element-to-element variation of the total current equals the
+summed continuity residuals, so D3b at $10^{-8}$ relative is not attainable
+where $j\lesssim10^{-6}$ (low bias, $\delta=10^{-3}$).
+
+Restated before any code exists:
+
+- **Convergence (§2, and D6):** for each block $b\in\{\psi,n,p\}$,
+  $\lVert F_b\rVert_\infty\le\tau_b=10^{2}\,\epsilon_{mach}\,S_b$. Here $S_b$
+  is the maximum over rows of the sum of absolute values of the terms
+  entering that row (both element fluxes and the volume term), evaluated at
+  the current iterate. The final Newton update must also satisfy
+  $\lVert\Delta\psi\rVert_\infty\le10^{-8}$.
+- **D3b:** $\max_e|j_e-\bar j|/|\bar j|\le10^{-6}$, evaluated for
+  $|V|\ge3\,V_T$, where $|\bar j|$ exceeds the round-off scale by more than
+  $10^{6}$.
+
+All other criteria are unchanged.
