@@ -179,3 +179,27 @@ python benchmarks/poisson1d/run.py --out results/poisson1d
 This writes the raw per-case and per-seed JSON results and a reproducibility
 manifest (Git commit, package versions, CPU, threads, seeds, command,
 timestamp).
+
+## 7. Amendments
+
+### 2026-10-20: R5 flux-balance clause (before any solver result)
+
+As written, R5 compares the discrete flux balance with $\int_0^1 f\,dx$ at a
+$10^{-10}$ relative tolerance. That cannot hold, for an analytical reason
+found while writing the solver and before any solver output existed. In the
+box method the boundary fluxes satisfy
+$F_{N-1}-F_0=\sum_{i=1}^{N-1} f_i\,|V_i|$ exactly, by telescoping. This is a
+*discrete* quadrature of $\int f$ over $[x_{1/2},x_{N-1/2}]$, not the
+continuous integral over $[0,1]$. The two differ by $O(h)$ from the
+missing end half-cells and by $O(h^2)$ from the quadrature.
+
+The intended check, discrete conservation, is restated as:
+
+- **R5b (gating):** $|F_{N-1}-F_0-\sum_{i=1}^{N-1} f_i|V_i||\le10^{-10}\,\sum_i|f_i||V_i|$ for P1 at $N=512$.
+- **R5c (reported, not gating):** the error of the end-element fluxes against
+  the exact boundary fluxes $-\varepsilon u'(0)$ and $-\varepsilon u'(1)$, and
+  its observed order. The end-element flux is a one-sided quantity, so the
+  order is not prescribed in advance.
+
+The first clause of R5 (a linear solution reproduced to $\le10^{-12}$) is
+unchanged.
