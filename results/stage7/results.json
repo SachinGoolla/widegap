@@ -1,0 +1,63 @@
+{
+  "registry_names": [
+    "N_n_ref_par_c",
+    "N_n_ref_perp_c",
+    "N_p_ref_par_c",
+    "N_p_ref_perp_c",
+    "alpha_n_par_c",
+    "alpha_n_perp_c",
+    "alpha_p_par_c",
+    "alpha_p_perp_c",
+    "dE_Al_acceptor",
+    "dE_Al_acceptor_alpha",
+    "delta1_n_par_c",
+    "delta1_n_perp_c",
+    "delta2_n_par_c",
+    "delta2_n_perp_c",
+    "delta3_n_par_c",
+    "delta3_n_perp_c",
+    "eps_r_parallel_c",
+    "eps_r_perp_c",
+    "g_acceptor",
+    "g_donor",
+    "m_e_M_Gamma",
+    "m_e_M_K",
+    "m_e_parallel",
+    "mu_n_max_par_c",
+    "mu_n_max_perp_c",
+    "mu_n_min_par_c",
+    "mu_n_min_perp_c",
+    "mu_p_max_par_c",
+    "mu_p_max_perp_c",
+    "mu_p_min_par_c",
+    "mu_p_min_perp_c"
+  ],
+  "missing_required": [
+    "Eg_300K",
+    "Nc_300K",
+    "Nv_300K",
+    "dE_N_donor"
+  ],
+  "permittivity_usable": true,
+  "M4": {
+    "e_inf": [
+      0.0006959260965739844,
+      0.00017401732851674012,
+      4.350067337322017e-05,
+      1.0875661217379928e-05,
+      2.718896881859223e-06
+    ],
+    "orders": [
+      1.999703132401106,
+      2.000121337135926,
+      1.9999346170239845,
+      2.0000097752654695
+    ]
+  },
+  "M6": {
+    "available": true,
+    "mu_low_N_err": 0.0,
+    "mu_Nref_err": 0.0
+  },
+  "blocked": "M2, M3, M5 not evaluable: required parameters lack a readable, verified primary source"
+}
