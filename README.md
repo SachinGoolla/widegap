@@ -1,6 +1,6 @@
 # widegap
 
-Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **The current release solves only the linear 1D Poisson verification benchmark; there is no device simulation yet.**
+Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far: only the linear 1D Poisson benchmark (stage 1). There is no device simulation yet.**
 
 ## Status
 
@@ -9,7 +9,7 @@ Each stage must pass its own verification gate before the next starts (`docs/lit
 | Stage | Content | Status |
 |---|---|---|
 | 1 | Linear Poisson with heterogeneous permittivity (MMS, FV reference, PINN) | verified (gate passed) |
-| 2 | Nonlinear equilibrium Poisson, Boltzmann carriers, 1D abrupt pn junction | not started |
+| 2 | Nonlinear equilibrium Poisson, Boltzmann carriers, 1D abrupt pn junction | **gate failed** on criterion S2 (wording flaw at round-off floor; see [result](docs/benchmarks/stage2_result.md)); solver implemented |
 | 3 | Drift-diffusion with Scharfetter-Gummel fluxes, cross-check against DEVSIM | not started |
 | 4 | Field-based breakdown-voltage index in 1D | not started |
 | 5 | Adjoint sensitivities checked against finite differences | not started |
@@ -116,7 +116,7 @@ python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSO
 - No 4H-SiC parameters and no physical units; permittivity contrast and all values are dimensionless.
 - PINN timings are CPU-only and were measured on one machine.
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
-- CI is configured (`.github/workflows/ci.yml`) but its first GitHub Actions run has not yet been observed.
+- Stage 2 (nonlinear equilibrium Poisson) did not pass its pre-registered gate; its solver is present but not verified.
 
 ## Scientific attribution
 
