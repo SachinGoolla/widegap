@@ -1,0 +1,297 @@
+{
+  "devsim_version": "2.11.1",
+  "model": "1D abrupt pn diode, steady state, isothermal, Boltzmann, complete ionization, constant mobility, R=0, Scharfetter-Gummel/Bernoulli",
+  "inputs": {
+    "T_K": 300.0,
+    "k_B_J_per_K": 1.380649e-23,
+    "q_C": 1.602176634e-19,
+    "eps0_F_per_cm": 8.8541878128e-14,
+    "eps_r": 11.7,
+    "N0_cm3": 1e+16,
+    "n_i_cm3": 10000000000000.0,
+    "mu_n_cm2_Vs": 1000.0,
+    "mu_p_cm2_Vs": 1000.0,
+    "mu0_cm2_Vs": 1000.0,
+    "domain_half_width_in_LD": 40.0,
+    "n_nodes": 1025,
+    "n_elements": 1024,
+    "dx_cm": 3.1941050919853173e-07,
+    "doping_node_at_x0": 0.0,
+    "contacts": "anode (left, p-side, N_A=N0), cathode (right, n-side, N_D=N0, grounded)",
+    "contact_bc": "n,p = exact charge-neutral roots (n*p=n_i^2); psi = V_T*ln(n/n_i) + V_applied"
+  },
+  "V_T_V": 0.025851999786435535,
+  "L_D_cm": 4.088454517741206e-06,
+  "j_unit_A_cm2": 10130.83790470622,
+  "solver": {
+    "type": "dc (Newton, UMFPACK direct)",
+    "requested_relative_error": 1e-12,
+    "relative_ladder_tried": [
+      1e-12,
+      1e-10,
+      1e-08
+    ],
+    "absolute_ladder_tried": [
+      1e-30,
+      1e-20,
+      1e-17,
+      1e-14,
+      1e-10,
+      1e-06,
+      0.001,
+      1.0,
+      3.0,
+      10.0,
+      100.0
+    ],
+    "maximum_iterations_per_attempt": 30,
+    "setup_solves": {
+      "equilibrium_poisson_solve": {
+        "converged": true,
+        "relative_error_used": 1e-08,
+        "absolute_error_used": 1e-14,
+        "max_iterations": 30,
+        "attempts_before_success": 11
+      }
+    },
+    "initial_guess": "equilibrium (Poisson-only solve), then each bias uses previous solution",
+    "bias_step_in_VT": 1
+  },
+  "sweep": [
+    {
+      "k": 0,
+      "V": 0.0,
+      "J_anode_signed_A_cm2": 0.0,
+      "J_cathode_signed_A_cm2": 0.0,
+      "abs_J_A_cm2": 0.0,
+      "j_scaled": 0.0,
+      "abs_J_edge_mean_A_cm2": 1.077165897067792e-13,
+      "j_scaled_edge_mean": 1.0632544979990263e-17,
+      "Jn_anode": 0.0,
+      "Jp_anode": 0.0,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-08,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 29
+      },
+      "current_conservation_max_rel_dev": null
+    },
+    {
+      "k": 1,
+      "V": 0.025851999786435535,
+      "J_anode_signed_A_cm2": 0.0009483562014598592,
+      "J_cathode_signed_A_cm2": -0.0009483561895580782,
+      "abs_J_A_cm2": 0.0009483562014598592,
+      "j_scaled": 9.361083558738078e-08,
+      "abs_J_edge_mean_A_cm2": 0.0009483561664376993,
+      "j_scaled_edge_mean": 9.361083213039526e-08,
+      "Jn_anode": 0.0004741780832409616,
+      "Jp_anode": 0.00047417811821889763,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": null
+    },
+    {
+      "k": 2,
+      "V": 0.05170399957287107,
+      "J_anode_signed_A_cm2": 0.003511315437460988,
+      "J_cathode_signed_A_cm2": -0.0035113154290392027,
+      "abs_J_A_cm2": 0.003511315437460988,
+      "j_scaled": 3.4659674456244405e-07,
+      "abs_J_edge_mean_A_cm2": 0.003511315368596852,
+      "j_scaled_edge_mean": 3.465967377649672e-07,
+      "Jn_anode": 0.0017556576842980062,
+      "Jp_anode": 0.001755657753162982,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 4.686307934865481e-08
+    },
+    {
+      "k": 3,
+      "V": 0.0775559993593066,
+      "J_anode_signed_A_cm2": 0.010442322600299913,
+      "J_cathode_signed_A_cm2": -0.010442322526232197,
+      "abs_J_A_cm2": 0.010442322600299913,
+      "j_scaled": 1.0307461928148107e-06,
+      "abs_J_edge_mean_A_cm2": 0.010442322589020767,
+      "j_scaled_edge_mean": 1.030746191701463e-06,
+      "Jn_anode": 0.005221161294551653,
+      "Jp_anode": 0.005221161305748259,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 1.5779240885467986e-08
+    },
+    {
+      "k": 4,
+      "V": 0.10340799914574214,
+      "J_anode_signed_A_cm2": 0.02918613043099324,
+      "J_cathode_signed_A_cm2": -0.029186130375246915,
+      "abs_J_A_cm2": 0.02918613043099324,
+      "j_scaled": 2.880919693467309e-06,
+      "abs_J_edge_mean_A_cm2": 0.029186130411675372,
+      "j_scaled_edge_mean": 2.880919691560471e-06,
+      "Jn_anode": 0.014593065205909186,
+      "Jp_anode": 0.014593065225084053,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 5.170906083897832e-09
+    },
+    {
+      "k": 5,
+      "V": 0.12925999893217768,
+      "J_anode_signed_A_cm2": 0.07985736540146873,
+      "J_cathode_signed_A_cm2": -0.07985736544968627,
+      "abs_J_A_cm2": 0.07985736540146873,
+      "j_scaled": 7.88260222428112e-06,
+      "abs_J_edge_mean_A_cm2": 0.07985736539788187,
+      "j_scaled_edge_mean": 7.882602223927065e-06,
+      "Jn_anode": 0.03992868269891604,
+      "Jp_anode": 0.03992868270255268,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 1.7983881162846086e-09
+    },
+    {
+      "k": 6,
+      "V": 0.1551119987186132,
+      "J_anode_signed_A_cm2": 0.21672795739881273,
+      "J_cathode_signed_A_cm2": -0.2167279573956915,
+      "abs_J_A_cm2": 0.21672795739881273,
+      "j_scaled": 2.1392895576597177e-05,
+      "abs_J_edge_mean_A_cm2": 0.21672795741461415,
+      "j_scaled_edge_mean": 2.1392895578156913e-05,
+      "Jn_anode": 0.10836397870729296,
+      "Jp_anode": 0.10836397869151979,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 7.336042070963673e-10
+    },
+    {
+      "k": 7,
+      "V": 0.18096399850504874,
+      "J_anode_signed_A_cm2": 0.5857914192793342,
+      "J_cathode_signed_A_cm2": -0.5857914192932745,
+      "abs_J_A_cm2": 0.5857914192793342,
+      "j_scaled": 5.782260310444887e-05,
+      "abs_J_edge_mean_A_cm2": 0.5857914192712813,
+      "j_scaled_edge_mean": 5.782260310365398e-05,
+      "Jn_anode": 0.2928957096354539,
+      "Jp_anode": 0.2928957096438803,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 2.96779962925971e-10
+    },
+    {
+      "k": 8,
+      "V": 0.20681599829148428,
+      "J_anode_signed_A_cm2": 1.5769839402519232,
+      "J_cathode_signed_A_cm2": -1.5769839402404915,
+      "abs_J_A_cm2": 1.5769839402519232,
+      "j_scaled": 0.00015566174832580676,
+      "abs_J_edge_mean_A_cm2": 1.5769839402458632,
+      "j_scaled_edge_mean": 0.00015566174832520857,
+      "Jn_anode": 0.7884919701229482,
+      "Jp_anode": 0.7884919701289751,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 1.082590411341013e-10
+    },
+    {
+      "k": 9,
+      "V": 0.23266799807791982,
+      "J_anode_signed_A_cm2": 4.213593895712746,
+      "J_cathode_signed_A_cm2": -4.213593895721908,
+      "abs_J_A_cm2": 4.213593895712746,
+      "j_scaled": 0.0004159176106998362,
+      "abs_J_edge_mean_A_cm2": 4.213593895703422,
+      "j_scaled_edge_mean": 0.00041591761069891583,
+      "Jn_anode": 2.1067969478514676,
+      "Jp_anode": 2.106796947861278,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 3.8435230602849694e-11
+    },
+    {
+      "k": 10,
+      "V": 0.25851999786435537,
+      "J_anode_signed_A_cm2": 11.066940347192114,
+      "J_cathode_signed_A_cm2": -11.066940347182646,
+      "abs_J_A_cm2": 11.066940347192114,
+      "j_scaled": 0.0010924012851938963,
+      "abs_J_edge_mean_A_cm2": 11.066940347214494,
+      "j_scaled_edge_mean": 0.0010924012851961052,
+      "Jn_anode": 5.533470173607222,
+      "Jp_anode": 5.533470173584892,
+      "convergence": {
+        "converged": true,
+        "relative_error_used": 1e-12,
+        "absolute_error_used": 10.0,
+        "max_iterations": 30,
+        "attempts_before_success": 27
+      },
+      "current_conservation_max_rel_dev": 1.3511427850487189e-11
+    }
+  ],
+  "ratio_J_kp1_over_J_k_k4_to_8": {
+    "4": 2.7361409074176843,
+    "5": 2.7139382361195037,
+    "6": 2.702888110560596,
+    "7": 2.692057084400445,
+    "8": 2.671932026802774
+  },
+  "ideality_k4_to_8": {
+    "4": 0.9934941041734461,
+    "5": 1.001601757881039,
+    "6": 1.0057115648098633,
+    "7": 1.0097892843154004,
+    "8": 1.0174991370946933
+  },
+  "e": 2.718281828459045
+}

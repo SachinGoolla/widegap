@@ -50,3 +50,23 @@ Dirichlet contacts, and $\delta=n_i/N_0=10^{-3}$. **Not verified:**
 4H-SiC-realistic $\delta\sim10^{-25}$ (round-off in $n,p$ variables will
 need quasi-Fermi or Slotboom variables, a stage-7 issue), field-dependent
 mobility, impact ionization, and 2D.
+
+## D7: independent DEVSIM cross-check (reported)
+
+`benchmarks/stage3/devsim_crosscheck.py` builds the D3 diode in DEVSIM 2.11.1
+(Apache-2.0, S22) in physical units chosen so that the scaled problem is
+identical: $N_0=10^{16}$ cm⁻³, a fictitious $n_i=10^{13}$ cm⁻³ (so
+$\delta=10^{-3}$), $\varepsilon_r=11.7$, $\mu=1000$ cm²/Vs, 300 K,
+$[-40L_D,40L_D]$ with 1025 nodes, no recombination. It does not import
+widegap. Raw data: `results/stage3/devsim.json`. Comparison:
+`results/stage3b/d7_devsim_comparison.json`.
+
+**Result:** widegap / DEVSIM current ratio for $V=1\ldots10\,V_T$ deviates
+from 1 by at most **3.7e-8** (at $V=1\,V_T$), falling to about 2e-12 at
+$V=10\,V_T$, which is round-off level.
+
+**Scope of this evidence.** Both codes use the Scharfetter–Gummel box method
+on the same mesh, so the agreement verifies the *implementation* (signs,
+contact conditions, assembly, Newton convergence). It says nothing about the
+*discretization error*. That is covered by the manufactured-solution
+convergence test D1. DEVSIM's own tolerances are recorded in its JSON.

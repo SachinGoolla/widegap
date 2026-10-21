@@ -1,6 +1,6 @@
 # widegap
 
-Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far: only the linear 1D Poisson benchmark (stage 1). There is no device simulation yet.**
+Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), and steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3). There are no SiC material models or device-scale simulations yet.**
 
 ## Status
 
@@ -9,8 +9,8 @@ Each stage must pass its own verification gate before the next starts (`docs/lit
 | Stage | Content | Status |
 |---|---|---|
 | 1 | Linear Poisson with heterogeneous permittivity (MMS, FV reference, PINN) | verified (gate passed) |
-| 2 | Nonlinear equilibrium Poisson, Boltzmann carriers, 1D abrupt pn junction | **gate failed** on criterion S2 (wording flaw at round-off floor; see [result](docs/benchmarks/stage2_result.md)); solver implemented |
-| 3 | Drift-diffusion with Scharfetter-Gummel fluxes, cross-check against DEVSIM | not started |
+| 2 | Nonlinear equilibrium Poisson, Boltzmann carriers, 1D abrupt pn junction | verified after one failed run and a disclosed re-registered criterion ([result](docs/benchmarks/stage2_result.md)) |
+| 3 | Drift-diffusion with Scharfetter-Gummel fluxes (1D, steady state) | verified after one failed run and a disclosed re-registered tolerance ([result](docs/benchmarks/stage3_result.md)); DEVSIM cross-check reported separately |
 | 4 | Field-based breakdown-voltage index in 1D | not started |
 | 5 | Adjoint sensitivities checked against finite differences | not started |
 | 6 | 4H-SiC material models (each parameter traced to a primary source) | not started |
@@ -112,11 +112,12 @@ python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSO
 
 ## Limitations
 
-- 1D only; linear Poisson only. No carriers, doping, drift-diffusion, or breakdown/adjoint machinery.
+- 1D only. No field-dependent mobility, impact ionization, breakdown, or adjoint machinery yet.
 - No 4H-SiC parameters and no physical units; permittivity contrast and all values are dimensionless.
 - PINN timings are CPU-only and were measured on one machine.
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
-- Stage 2 (nonlinear equilibrium Poisson) did not pass its pre-registered gate; its solver is present but not verified.
+- Stages 2 and 3 each failed their first run on a convergence criterion that was below the floating-point round-off floor; both passed after a re-registered criterion that is disclosed as written after the failure. All physics criteria passed on the first run.
+- Stages 2-3 are verified only for n_i/N0 >= 1e-8 (stage 2) and 1e-3 (stage 3); 4H-SiC-realistic n_i/N0 ~ 1e-25 is not supported.
 
 ## Scientific attribution
 
