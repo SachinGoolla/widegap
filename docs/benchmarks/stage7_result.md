@@ -93,3 +93,44 @@ solver and the first-integral reference are consistent to 1e-6.
 - $N_c=1.72\times10^{19}$ cm⁻³ (1.03× the value Grivickas et al. quote from Persson & Lindefelt).
 - $N_v=3.78\times10^{19}$ cm⁻³, parabolic, which is an underestimate.
 - $n_i(300\,\text{K})=1.0\times10^{-8}$ cm⁻³.
+
+## Run 3, geometry 7b (2026-10-21): gate PASSED
+
+Raw data: `results/stage7b/` (commit `94ded3c`, clean tree). Every
+parameter, model and threshold is as in run 2. Only the M5 domain and the
+bulk check points changed (`docs/benchmarks/stage7b_geometry.md`, disclosed
+post-hoc).
+
+| Criterion | Result | Value |
+|---|---|---|
+| M1–M4, M6 | pass | as in run 2 |
+| M5(a) | pass | 52 Newton iterations at $\delta=1.0\times10^{-24}$ |
+| M5(b) | pass | 2.1e-14 $V_T$ (threshold 1e-10) |
+| M5(c) | pass | 9.8e-7 relative |
+
+**Verified:** the incomplete-ionization equilibrium model at realistic
+4H-SiC $n_i/N_0$, implemented correctly against exact references. Every
+4H-SiC number is traced to a primary full text that was read and
+independently re-verified (51 registry entries).
+
+**Physical results** (model outputs at 300 K, not validated against
+device measurements):
+- $E_g=3.263$ eV.
+- $n_i=1.0\times10^{-8}$ cm⁻³.
+- Built-in potential of the $N_A=10^{17}$ / $N_D=10^{16}$ cm⁻³ junction: 110.2 $V_T$ = 2.85 V.
+- Al ionized fraction in the p bulk: 7.7%.
+
+**Known model limitations (not hidden):**
+1. $N_v$ uses Persson & Lindefelt's band-edge masses in the parabolic
+   approximation. The source shows the nonparabolic DOS is larger, so
+   $N_v$, and through it $n_i$, are underestimates.
+2. $g_D=2$ ignores the 1s(E) valley-orbit state (Götz Eq. 5; effective
+   $g\approx5$ for the h site at 300 K).
+3. The permittivity is not used by the scaled equations. It enters only
+   through $L_D$.
+4. The mobility fits are Hall mobilities.
+5. Hole $\mu_{min,\perp c}$ conflict (thesis 40 vs journal 20) is unresolved.
+6. $E_g(T)$ at 500 K (used in M2) extrapolates beyond the 75–450 K data.
+7. Stage-3 drift-diffusion at realistic $\delta$ (R7b) was not attempted
+   in this stage; it is expected to need quasi-Fermi or Slotboom
+   variables.

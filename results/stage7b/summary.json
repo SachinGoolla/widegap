@@ -1,0 +1,12 @@
+{
+  "criteria": {
+    "M1": true,
+    "M4": true,
+    "M6": true,
+    "M2": true,
+    "M3": true,
+    "M5": true
+  },
+  "gate_passed": true,
+  "missing_required": []
+}

@@ -1,6 +1,6 @@
 # widegap
 
-Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), discrete adjoint doping sensitivities of those objectives (stage 5), and constrained doping optimization on those proxies (stage 6). There are no SiC material models or device-scale simulations yet.**
+Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), discrete adjoint doping sensitivities of those objectives (stage 5), constrained doping optimization on those proxies (stage 6), and 4H-SiC incomplete-ionization equilibrium with fully traced material parameters (stage 7). There are no SiC material models or device-scale simulations yet.**
 
 ## Status
 
@@ -14,7 +14,7 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 4 | Field-based breakdown-voltage index in 1D (numerical proxy, no impact ionization) | verified after one failed run and a disclosed re-registration against an exact first-integral reference ([result](docs/benchmarks/stage4_result.md)) |
 | 5 | Discrete adjoint doping sensitivities (potential, diode current, breakdown index, field-based BV) | verified on the first official run ([result](docs/benchmarks/stage5_result.md)); adjoint gradient costs 0.98 Newton iterations |
 | 6 | Constrained doping optimization (1D: maximize field-based BV at fixed drift-resistance proxy) | verified after one failed run and a disclosed re-registered gradient check ([result](docs/benchmarks/stage6_result.md)); exact field-based BV +11.3% via graded drift doping |
-| 7 | 4H-SiC material models (each parameter traced to a primary source that was read) | **blocked on provenance**: infrastructure and 31 independently verified parameters done; no readable primary source for Eg(300 K), Nc, Nv, N-donor energy ([result](docs/benchmarks/stage7_result.md)) |
+| 7 | 4H-SiC material models (each parameter traced to a primary source that was read) | verified after a provenance block (resolved with user-supplied full texts) and one disclosed geometry re-registration ([result](docs/benchmarks/stage7_result.md)); 51 independently verified parameters |
 | 8 | 2D finite volume, then a SiC MOSFET half-cell | not started |
 | 9 | PINN / automatic-differentiation sensitivities vs the FV adjoint (research question) | not started |
 | 10 | GaN | out of scope for now |
@@ -121,7 +121,7 @@ python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSO
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
 - Stages 2, 3, 4 and 6 each failed their first run on a pre-registered criterion that was itself flawed (stages 2-3: below the round-off floor; stage 4: depletion-approximation references inadequate at ~100 V_T; stage 6: relative gradient error is ill-posed at a stationary point); each passed after a re-registered criterion disclosed as written after the failure.
 - The field-based breakdown voltage is a proxy: no impact ionization is modelled, and E_crit is a study constant, not a material value.
-- Stages 2-3 are verified only for n_i/N0 >= 1e-8 (stage 2) and 1e-3 (stage 3); 4H-SiC-realistic n_i/N0 ~ 1e-25 is not supported.
+- Realistic 4H-SiC n_i/N0 (~1e-24) is verified for equilibrium electrostatics with incomplete ionization (stage 7) but NOT for drift-diffusion (stage 3 is verified only for n_i/N0 >= 1e-3).
 
 ## Scientific attribution
 
