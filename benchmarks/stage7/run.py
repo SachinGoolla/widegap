@@ -34,7 +34,11 @@ REPO = Path(__file__).resolve().parents[2]
 REGISTRY = REPO / "src" / "widegap" / "materials" / "data" / "sic4h.json"
 N0 = 1e16  # cm^-3, scaling density
 REQUIRED = [
-    "Eg_300K",
+    "EGX_0",
+    "passler_eps",
+    "passler_theta",
+    "passler_p",
+    "E_exciton",
     "nu_c_band1",
     "m_c_band1",
     "m_v_band1",
@@ -66,7 +70,7 @@ def derived(reg: Registry, t_k: float):
     N_c: nu equivalent minima of mass m_c (band 1) plus the second minimum (band 2,
     Boltzmann-weighted) if registered. N_v: three valence bands with their
     offsets, PARABOLIC approximation (the source shows the nonparabolic DOS is
-    larger, so N_v is an underestimate; see stage-7 result). E_g held at 300 K.
+    larger, so N_v is an underestimate; see stage-7 result). E_g(T) from band_gap().
     """
     kt = K_B * t_k / Q
     nc = reg.value("nu_c_band1") * _nc_parabolic(reg.value("m_c_band1"), t_k)
@@ -79,9 +83,16 @@ def derived(reg: Registry, t_k: float):
     nv = _nc_parabolic(reg.value("m_v_band1"), t_k)
     nv += _nc_parabolic(reg.value("m_v_band2"), t_k) * np.exp(reg.value("Ev_band2") / kt)
     nv += _nc_parabolic(reg.value("m_v_band3"), t_k) * np.exp(reg.value("Ev_band3") / kt)
-    eg = reg.value("Eg_300K")
+    eg = band_gap(reg, t_k)
     ni = np.sqrt(nc * nv) * np.exp(-eg / (2 * kt))
     return ni, nc, nv
+
+
+def band_gap(reg: Registry, t_k: float) -> float:
+    """E_g(T) = E_GX(T) + E_ex, simplified Passler model (Grivickas et al. 2007, Eq. 5)."""
+    e0, eps, th, pp = (reg.value(n) for n in ("EGX_0", "passler_eps", "passler_theta", "passler_p"))
+    egx = e0 - 0.5 * eps * th * ((1.0 + (2.0 * t_k / th) ** pp) ** (1.0 / pp) - 1.0)
+    return float(egx + reg.value("E_exciton"))
 
 
 def donor_levels(reg: Registry, t_k, delta, nu_c):
@@ -265,7 +276,11 @@ def main() -> None:
             and res["M5"]["bulk_vs_neutrality"] <= 1e-10
             and res["M5"]["field_rel_err"] <= 2e-3
         )
-        res["R7a_ni_300K_cm3"] = derived(reg, 300.0)[0]
+        ni3, nc3, nv3 = derived(reg, 300.0)
+        res["R7a_ni_300K_cm3"] = ni3
+        res["R7a_Nc_Nv_300K_cm3"] = [nc3, nv3]
+        res["R7a_Eg_300K_eV"] = band_gap(reg, 300.0)
+        res["R7a_Nc_vs_Grivickas_quoted_1.66e19"] = nc3 / 1.66e19
     else:
         res["blocked"] = (
             "M2, M3, M5 not evaluable: required parameters lack a readable, verified primary source"
