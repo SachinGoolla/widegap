@@ -46,3 +46,23 @@ Stage 12 passes if S1–S6 hold. A pass means sourced-parameter 4H-SiC
 simulations are **numerically verified and fully traceable**. It does not
 mean they are **validated against measured devices**, which this stage does
 not attempt.
+
+## 4. Amendments (before the official run, after a development run; disclosed)
+
+- **S2.** The order window [0.8, 2.5] is ill-posed once successive BV
+  differences reach the convergence floor. In two Niwa cases the
+  differences were about 1e-7 relative, and the "order" came out at
+  2.6–2.9. **S2′:** the order window applies only where the last two
+  successive differences both exceed 1e-6 relative. Otherwise the gate is
+  that the finest mesh lies within 1% of Richardson. The 1% Richardson
+  check applies in all cases. The gated levels are unchanged.
+- **S4.** The measured round-off floor of the current-balance sum is about
+  2.5e-14 (absolute, scaled), so 1e-8 relative needs $|I_D|\gtrsim2.5\times10^{-6}$.
+  **S4′:** the threshold is $|I_D|\ge10^{-5}$, a 4× margin, with the
+  relative tolerance of 1e-8 unchanged.
+- **12b BV cut.** The "line through the peak-field point" lands on the
+  body/JFET corner column, where the field is geometrically singular and
+  mesh-dependent. The BV reported as primary uses the **planar cut under
+  the body contact**; the literal corner cut is reported alongside.
+- **Okuto–Crowell γ = 0** is now registered from Niwa Table II, the value
+  already confirmed by the stage-12 parameter verifier.
