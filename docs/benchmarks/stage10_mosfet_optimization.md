@@ -62,3 +62,30 @@ FD budget: $\epsilon=10^{-3}$ in $\theta$; $BV_s$ from Brent with
 | R3 | Qualitative comparison with the published trends (e.g. lower drift doping near the junction raises BV; higher JFET doping raises $I_D$), with no quantitative claim | reported |
 
 Stage 10 passes if O1–O7 hold.
+
+## 3. Amendments and disclosed deviations (before the official run, after a development run)
+
+**O3 (restated).** The development run showed that central FD at
+$\epsilon=10^{-3}$ carries an $O(\epsilon^2)$ truncation error of up to
+0.30 at the final design. The FD error fell as $\epsilon^2$: 0.30, 0.075
+and 0.0014 at $\epsilon=10^{-3}$, $5\times10^{-4}$ and $10^{-4}$. At the
+minimax optimum two field maxima nearly tie (the junction and the JFET
+surface), which makes $B_s$ strongly curved. The original O3 tolerance,
+$10^{-6}\lVert\nabla\rVert$, is unattainable with that step. **O3′:** the
+adjoint is compared with the Richardson extrapolation
+$(4\,FD(\epsilon/2)-FD(\epsilon))/3$, $\epsilon=10^{-3}$, with the same
+tolerance $|\cdot|\le10^{-6}\max(1,\lVert\nabla\rVert)$ for both gradients.
+In the development run the adjoint matched it to 3.8e-5 ($BV_s$) and
+1.1e-10 ($I_D$), and matched FD at $\epsilon=10^{-5}$ to 4e-5.
+
+**Deviation 1: breakdown index domain.** $B_s$ excludes a box around the
+n⁺ source / p-body junction (1609 of 1934 semiconductor edges are kept).
+At $\delta=10^{-24}$ that junction's built-in field (about 108
+$V_T/L_D$) exceeds the study $E_{crit}=75$ at zero drain bias and does
+not depend on $V_D$. Raising $E_{crit}$ above it pushes BV to about 600
+$V_T$ or more, where Newton fails. This is an artifact of the study
+scaling; the device's breakdown-relevant fields are the drain-dependent
+ones, which are kept.
+
+**Deviation 2: bounds.** These are enforced as SLSQP box and linear
+constraints, not by step rejection. The maximum violation was 5.6e-15.
