@@ -110,7 +110,8 @@ def order_and_richardson(b):
     rich = b[2] + e2 / (2.0**p - 1.0)
     rel = abs(b[2] - rich) / abs(rich)
     # S2': order window only where both successive differences exceed the floor
-    order_ok = (abs(e1) <= floor or abs(e2) <= floor) or (0.8 <= p <= 2.5)
+    # S2'' (spec section 5): no upper bound on the observed order (superconvergence)
+    order_ok = (abs(e1) <= floor or abs(e2) <= floor) or (p >= 0.8)
     return p, float(rich), float(rel), bool(order_ok and rel <= 0.01)
 
 

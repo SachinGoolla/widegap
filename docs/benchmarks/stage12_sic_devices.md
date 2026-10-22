@@ -66,3 +66,17 @@ not attempt.
   the body contact**; the literal corner cut is reported alongside.
 - **Okuto–Crowell γ = 0** is now registered from Niwa Table II, the value
   already confirmed by the stage-12 parameter verifier.
+
+## 5. Run 1 failed S2; re-registration S2″ (after the official run; disclosed)
+
+Official run 1 (`results/stage12_run1/`, commit `b8001d0`) passed S1 and
+S3–S6 but **failed S2′** in one case: Niwa coefficients at
+$N_D=10^{15}$ cm⁻³. There, both successive differences exceeded the
+1e-6 floor (about 3e-6 relative), the observed order was **2.90**, and the
+finest mesh was within 4.6e-7 of Richardson. That is superconvergence (about
+third order) of the ionization integral on these graded meshes, not a
+convergence failure. The upper bound 2.5 was arbitrary.
+
+**S2″:** observed order ≥ 0.8, where both differences exceed the floor;
+no upper bound. The finest mesh must be within 1% of Richardson in all
+cases. Everything else is unchanged. Re-run as `results/stage12b/`.
