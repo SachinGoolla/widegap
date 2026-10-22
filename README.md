@@ -15,6 +15,7 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 5 | Discrete adjoint doping sensitivities (potential, diode current, breakdown index, field-based BV) | verified on the first official run ([result](docs/benchmarks/stage5_result.md)); adjoint gradient costs 0.98 Newton iterations |
 | 6 | Constrained doping optimization (1D: maximize field-based BV at fixed drift-resistance proxy) | verified after one failed run and a disclosed re-registered gradient check ([result](docs/benchmarks/stage6_result.md)); exact field-based BV +11.3% via graded drift doping |
 | 7 | 4H-SiC material models (each parameter traced to a primary source that was read) | verified after a provenance block (resolved with user-supplied full texts) and one disclosed geometry re-registration ([result](docs/benchmarks/stage7_result.md)); 51 independently verified parameters |
+| 7.1 | Drift-diffusion at realistic 4H-SiC n_i/N0 (quasi-Fermi variables) | verified on the first official run ([result](docs/benchmarks/stage7_1_result.md)); minority currents exact to 4e-14 at n_i/N0 = 1e-24 |
 | 8 | 2D finite volume, then a SiC MOSFET half-cell | not started |
 | 9 | PINN / automatic-differentiation sensitivities vs the FV adjoint (research question) | not started |
 | 10 | GaN | out of scope for now |
@@ -121,7 +122,7 @@ python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSO
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
 - Stages 2, 3, 4 and 6 each failed their first run on a pre-registered criterion that was itself flawed (stages 2-3: below the round-off floor; stage 4: depletion-approximation references inadequate at ~100 V_T; stage 6: relative gradient error is ill-posed at a stationary point); each passed after a re-registered criterion disclosed as written after the failure.
 - The field-based breakdown voltage is a proxy: no impact ionization is modelled, and E_crit is a study constant, not a material value.
-- Realistic 4H-SiC n_i/N0 (~1e-24) is verified for equilibrium electrostatics with incomplete ionization (stage 7) but NOT for drift-diffusion (stage 3 is verified only for n_i/N0 >= 1e-3).
+- Realistic 4H-SiC n_i/N0 (~1e-24) is verified for equilibrium electrostatics with incomplete ionization (stage 7) and for steady drift-diffusion in quasi-Fermi variables (stage 7.1; complete ionization, constant mobility). The original stage-3 (psi, n, p) solver is valid only for n_i/N0 >= 1e-3.
 
 ## Scientific attribution
 
