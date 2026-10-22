@@ -270,7 +270,10 @@ def job_peak(args):
     pk = ev.base.peak_field(psi)
     mod, mesh = ev.mod, ev.mesh
     e = np.abs(psi[mod.b] - psi[mod.a]) / mesh.h
-    pr_, m3 = ev.prm, 3.0 * ev.base.r_s  # n+ source junction region (3 r margin), semiconductor edges
+    pr_, m3 = (
+        ev.prm,
+        3.0 * ev.base.r_s,
+    )  # n+ source junction region (3 r margin), semiconductor edges
     mx = 0.5 * (mesh.node_xy[mod.a, 0] + mesh.node_xy[mod.b, 0])
     my = 0.5 * (mesh.node_xy[mod.a, 1] + mesh.node_xy[mod.b, 1])
     box = ((ev.dev.reg.w_s > 0) & (mx >= pr_.x_src0 - m3) & (mx <= pr_.x_src1 + m3)
@@ -470,7 +473,9 @@ def main(argv=None) -> None:
     th1, sl, pr, its = timed("slsqp_main", run_slsqp, ev, TH0, bv0, r0, 1.0, bounds, args.maxiter)
     o1, rr1 = ev.objective(th1, grad=False), ev.ron(th1, grad=False)
     bv1, r1 = o1["BV"], rr1["R"]
-    print(f"main: BV_obj {bv0:.3f} -> {bv1:.3f} V, R {r0:.5e} -> {r1:.5e}, {sl.message}", flush=True)
+    print(
+        f"main: BV_obj {bv0:.3f} -> {bv1:.3f} V, R {r0:.5e} -> {r1:.5e}, {sl.message}", flush=True
+    )
     res["final"] = {
         "theta": th1.tolist(), "bv_obj": bv1, "bv_k": o1["bv_k"].tolist(),
         "weights": o1["w"].tolist(), "R": r1, "R_over_R0_minus_1": r1 / r0 - 1.0,
@@ -526,7 +531,9 @@ def main(argv=None) -> None:
     jobs_peak = [(lev, TH0, "initial_u1", v_ref[0]) for lev in U1_LEVELS]
     for lev in (0, 1):
         jobs_peak += [(lev, TH0, "initial_u6", v_ref[lev]), (lev, th1, "final_u6", v_ref[lev])]
-    jobs_d3 = [(0, np.asarray(pareto_res[rt]["theta"]), f"ratio_{rt:g}", True) for rt in PARETO_RATIOS]
+    jobs_d3 = [
+        (0, np.asarray(pareto_res[rt]["theta"]), f"ratio_{rt:g}", True) for rt in PARETO_RATIOS
+    ]
     t_ph3 = time.perf_counter()
     peaks: dict = {}
     with ProcessPoolExecutor(args.workers, mp_context=ctx) as pool:
@@ -561,7 +568,9 @@ def main(argv=None) -> None:
             q[f"R_over_ideal_{key}"] = q["R"] / q[f"R_ideal_at_{key}"]
     res["R1_pareto"] = par
     res["R1_unipolar_limit"] = ideal
-    res["R1_formula"] = "R_ideal = W_dep/(q mu_n,par(N_D) N_D), W_dep = 2 BV/E_m; triangular_breakdown (I_n = 1, Niwa); stage-13 R1"
+    res["R1_formula"] = (
+        "R_ideal = W_dep/(q mu_n,par(N_D) N_D), W_dep = 2 BV/E_m; triangular_breakdown (I_n = 1, Niwa); stage-13 R1"
+    )
     dump()
 
     # ---- criteria ------------------------------------------------------------------------
@@ -599,7 +608,9 @@ def main(argv=None) -> None:
     u6 = bool(all(v["E_final"] <= v["E_initial"] for v in u6_rec.values()))
 
     n_failed = ev.stats["failed_evals"] + sum(d["stats"]["failed_evals"] for d in dense.values())
-    pareto_failures = {str(k): v["failure"] for k, v in pareto_res.items() if v["failure"]}  # reported, not gating
+    pareto_failures = {
+        str(k): v["failure"] for k, v in pareto_res.items() if v["failure"]
+    }  # reported, not gating
     u7 = bool(sl.status == 0 and sl.nit <= args.maxiter and n_failed == 0
               and all(d["resolved_all"] for d in dense.values()))  # fmt: skip
     crit = {"U1": u1, "U2": u2, "U3": u3, "U4": u4, "U5": u5, "U6": u6, "U7": u7}
@@ -634,7 +645,9 @@ def main(argv=None) -> None:
         )
     blind["source_junction_box_peak_E_MV_cm"] = {k: [v["E_srcbox_initial"], v["E_srcbox_final"]]
                                                   for k, v in u6_rec.items()}  # fmt: skip
-    blind["global_peak_location_um"] = {k: [v["loc_initial"], v["loc_final"]] for k, v in u6_rec.items()}
+    blind["global_peak_location_um"] = {
+        k: [v["loc_initial"], v["loc_final"]] for k, v in u6_rec.items()
+    }
     res["blind_spot_analysis"] = blind
 
     # ---- R2: figures, stage-13 comparison -------------------------------------------------

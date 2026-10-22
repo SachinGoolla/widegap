@@ -113,7 +113,11 @@ class RoundedSiCDMOS(SiCDMOS):
         self.nd = dev.M @ dev.cell_donors(z)
         self.na = dev.M @ dev.cell_acceptors()
         mesh = dev.mesh
-        nd_cm = sc.n0 * 0.5 * (self.nd[mesh.ea] + self.nd[mesh.eb] + self.na[mesh.ea] + self.na[mesh.eb])
+        nd_cm = (
+            sc.n0
+            * 0.5
+            * (self.nd[mesh.ea] + self.nd[mesh.eb] + self.na[mesh.ea] + self.na[mesh.eb])
+        )
         mu_perp = sc.mobility_cm2(nd_cm, "n", "perp")
         mu_par = sc.mobility_cm2(nd_cm, "n", "par")
         self.mu_edge = sc.mu_s(np.where(mesh.edge_dir == 0, mu_perp, mu_par))
@@ -222,7 +226,9 @@ class CornerAdjoint(SiCAdjoint):
         outs = []
         for k, nodes in enumerate(self.cuts):
             cache = self.caches[k]
-            if cache is None and warm:  # start from the nearest already-solved cut (saves a cold march)
+            if (
+                cache is None and warm
+            ):  # start from the nearest already-solved cut (saves a cold march)
                 done = [j for j in range(len(self.cuts)) if self.caches[j] is not None]
                 if done:
                     cache = self.caches[min(done, key=lambda j: abs(j - k))]
@@ -339,8 +345,16 @@ def state_at(ev: CornerAdjoint, states, v_s):
     return s.X
 
 
-def dense_bv(ev: CornerAdjoint, theta, dense: DenseCuts, v_step_v=20.0, tol_v=0.02, cap=2.0,
-             loose_tol_v=1.0, near_frac=0.03):
+def dense_bv(
+    ev: CornerAdjoint,
+    theta,
+    dense: DenseCuts,
+    v_step_v=20.0,
+    tol_v=0.02,
+    cap=2.0,
+    loose_tol_v=1.0,
+    near_frac=0.03,
+):
     """BV of every dense vertical cut (root of I_n,k = 1) and their minimum.
 
     A march to the first crossing (and on to ``cap`` times that voltage so most cuts bracket),

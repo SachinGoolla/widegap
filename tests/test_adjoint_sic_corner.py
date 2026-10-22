@@ -17,6 +17,12 @@ from widegap.adjoint_sic_corner import (
 )
 from widegap.sic import DMOSDesign, SiC4H, TracedRegistry
 
+
+def _trap(y, x):
+    # np.trapezoid is NumPy >= 2 only; CI tests the minimum supported NumPy.
+    return float(np.sum(0.5 * (y[1:] + y[:-1]) * np.diff(x)))
+
+
 pytestmark = pytest.mark.filterwarnings(
     "ignore::RuntimeWarning", "ignore::scipy.sparse.linalg.MatrixRankWarning"
 )
@@ -58,7 +64,7 @@ def test_smooth_step_and_rounded_doping(adj):
     # variance of the smoothed edge = r^2
     ds = np.linspace(-8, 8, 4001)
     pdf = np.gradient(smooth_step(ds, r), ds)
-    assert np.sqrt(np.trapezoid(pdf * ds**2, ds) / np.trapezoid(pdf, ds)) == pytest.approx(r, rel=1e-3)
+    assert np.sqrt(_trap(pdf * ds**2, ds) / _trap(pdf, ds)) == pytest.approx(r, rel=1e-3)
     dev = adj.dev
     assert isinstance(dev, RoundedDMOSFET)
     p = dev.prm
@@ -67,8 +73,13 @@ def test_smooth_step_and_rounded_doping(adj):
     assert d.max() == pytest.approx(p.b_src, rel=1e-3) or d.max() == pytest.approx(p.b_drain)
     # rounded edge: acceptors vary smoothly (no cell jump larger than the plateau fraction)
     cc = dev.mesh.cell_centres
-    row = (np.abs(cc[:, 1] + 0.5 * p.d_body) == np.abs(cc[:, 1] + 0.5 * p.d_body).min()) & dev.reg.semi_cell
-    assert 0.0 < a[row][(cc[row, 0] > p.x_jfet - 3 * dev.r) & (cc[row, 0] < p.x_jfet + 3 * dev.r)].min()
+    row = (
+        np.abs(cc[:, 1] + 0.5 * p.d_body) == np.abs(cc[:, 1] + 0.5 * p.d_body).min()
+    ) & dev.reg.semi_cell
+    assert (
+        0.0
+        < a[row][(cc[row, 0] > p.x_jfet - 3 * dev.r) & (cc[row, 0] < p.x_jfet + 3 * dev.r)].min()
+    )
     # compensated node fields: donors and acceptors both present near the junction
     assert np.any((adj.nd > 0) & (adj.na > 0))
     assert np.all(adj.dev.cell_doping(np.zeros(5)) == d - a)
