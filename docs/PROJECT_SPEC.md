@@ -147,3 +147,21 @@ Concrete budgets:
 | LinkedIn and ResearchGate cited as background | Primary sources only | Secondary summaries are not evidence |
 | Nine physics and process docs created up front | Docs created by the stage that needs them | Avoids specification drift ahead of code |
 | No explicit PINN comparison metric | Cost-to-accuracy against the FV solver | Stage 1 already shows a gap of about 6,000× in wall time |
+
+## 10. Stage-table revision (v2.1, 2026-10-21)
+
+Work after version 2 inserted stages, so the table in §4 is superseded
+for stages 7 onwards:
+
+| # | Stage | Status at v0.1.0 |
+|---|---|---|
+| 7 | 4H-SiC material models (provenance registry) | passed |
+| 7.1 | Drift–diffusion at realistic $n_i/N_0$ (quasi-Fermi variables) | passed |
+| 8 | 2D tensor-mesh FV (shared edge core) | passed |
+| 8.1 | MOS structures in 2D (study-parameter oxide) | passed |
+| 9a | DD physics: incomplete ionization, field-dependent mobility, interface charge | passed |
+| 9b | Impact ionization and avalanche breakdown (1D) | passed (B1 caveat) |
+| 10 | 2D adjoint + vertical MOSFET doping optimization | see result |
+| 11 | PINN / AD sensitivities vs the FV adjoint (research question; was 9) | planned |
+| 12 | Sourced SiC MOS parameterization (oxide, interface traps, v_sat) and SiC device studies | planned (needs papers) |
+| 13 | GaN (was 10) | out of scope for now |

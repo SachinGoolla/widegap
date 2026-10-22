@@ -2,6 +2,8 @@
 
 Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), discrete adjoint doping sensitivities of those objectives (stage 5), constrained doping optimization on those proxies (stage 6), and 4H-SiC incomplete-ionization equilibrium with fully traced material parameters (stage 7). There are no SiC material models or device-scale simulations yet.**
 
+Current release: v0.1.0 (see [CHANGELOG.md](CHANGELOG.md)).
+
 ## Status
 
 Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each stage must pass its own pre-registered gate before the next starts.
@@ -17,11 +19,13 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 7 | 4H-SiC material models (each parameter traced to a primary source that was read) | verified after a provenance block (resolved with user-supplied full texts) and one disclosed geometry re-registration ([result](docs/benchmarks/stage7_result.md)); 51 independently verified parameters |
 | 7.1 | Drift-diffusion at realistic 4H-SiC n_i/N0 (quasi-Fermi variables) | verified on the first official run ([result](docs/benchmarks/stage7_1_result.md)); minority currents exact to 4e-14 at n_i/N0 = 1e-24 |
 | 8 | 2D finite volume (tensor meshes; linear, equilibrium, quasi-Fermi DD) | verified ([result](docs/benchmarks/stage8_result.md)); exact 1D reductions at n_i/N0 = 1e-24 |
+| 8.1 | MOS structures in 2D: oxide, gate, MOSFET half-cell (study-parameter oxide) | verified ([result](docs/benchmarks/stage8_1_result.md)); exact MOS-capacitor reference to 8e-5, I_D mesh order 2.1 |
 | 9a | DD physics: non-equilibrium incomplete ionization, field-dependent mobility, interface charge | verified ([result](docs/benchmarks/stage9a_result.md)) |
 | 9b | Impact ionization and avalanche breakdown (1D) | verified with a disclosed B1 caveat ([result](docs/benchmarks/stage9b_result.md)) |
-| 8.1 | MOS structures in 2D: oxide, gate, MOSFET half-cell (study-parameter oxide) | verified ([result](docs/benchmarks/stage8_1_result.md)); exact MOS-capacitor reference to 8e-5, I_D mesh order 2.1 |
-| 9 | PINN / automatic-differentiation sensitivities vs the FV adjoint (research question) | not started |
-| 10 | GaN | out of scope for now |
+| 10 | 2D adjoint sensitivities and doping optimization of a vertical MOSFET half-cell | verified after a disclosed O3 re-registration ([result](docs/benchmarks/stage10_result.md)); field-based BV +36% at fixed I_D (study parameters) |
+| 11 | PINN / AD sensitivities vs the FV adjoint (research question) | planned |
+| 12 | Sourced SiC MOS parameters (oxide, interface traps, v_sat) and SiC device studies | planned |
+| 13 | GaN | out of scope for now |
 
 ## Installation
 
