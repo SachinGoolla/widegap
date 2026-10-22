@@ -98,3 +98,13 @@ $E_g$(300 K), $N_c$, $N_v$, or site-resolved N-donor energies). The
 amendment therefore cannot change the stage-7 gate outcome. It only decides
 whether the thesis-sourced entries ($g_D$ and the Hall-mobility fits) are
 usable.
+
+### 2026-10-21: owner-approved conventions (single documented exception)
+
+The project owner explicitly approved one value that has no read primary
+source: the thermal SiO₂ static relative permittivity, 3.9. A search found
+no readable source. The one supplied paper measured 4.4 for PECVD oxide,
+which is not applicable to a thermal gate oxide. The registry accepts the
+class `owner-approved-convention` only with `approved_by`, `approved_on`
+and `rationale` fields, and the class is visible in every result that uses
+the value. No other parameter uses this class.

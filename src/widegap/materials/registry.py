@@ -26,7 +26,7 @@ REQUIRED_FIELDS = (
     "verified_by",
     "verified_value_match",
 )
-CLASSES = ("measured", "fit-to-data", "first-principles", "convention")
+CLASSES = ("measured", "fit-to-data", "first-principles", "convention", "owner-approved-convention")
 
 
 class ProvenanceError(ValueError):
@@ -52,6 +52,13 @@ class Parameter:
 
 
 def check_entry(e: dict) -> None:
+    if e.get("param_class") == "owner-approved-convention":
+        # Documented exception (stage-7 amendment 2026-10-21): no read source;
+        # requires an explicit, dated owner approval recorded in the entry.
+        for f in ("name", "value", "unit", "approved_by", "approved_on", "rationale"):
+            if f not in e or e[f] in (None, ""):
+                raise ProvenanceError(f"{e.get('name', '?')}: owner-approved entry missing {f}")
+        return
     missing = [f for f in REQUIRED_FIELDS if f not in e or e[f] in (None, "")]
     if missing:
         raise ProvenanceError(f"{e.get('name', '?')}: missing fields {missing}")

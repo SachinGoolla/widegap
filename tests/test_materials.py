@@ -94,3 +94,20 @@ def test_shipped_sic4h_registry_entries_all_pass_provenance():
     reg = Registry.from_json(files("widegap.materials") / "data" / "sic4h.json")
     assert reg.names(), "registry is empty"
     assert all(reg.usable(n) for n in reg.names())
+
+
+def test_owner_approved_convention_requires_approval_fields():
+    ok = {
+        "name": "e",
+        "value": 3.9,
+        "unit": "1",
+        "param_class": "owner-approved-convention",
+        "approved_by": "owner",
+        "approved_on": "2026-10-21",
+        "rationale": "r",
+    }
+    assert Registry([ok]).value("e") == 3.9
+    bad = dict(ok)
+    del bad["approved_by"]
+    with pytest.raises(ProvenanceError):
+        Registry([bad]).get("e")

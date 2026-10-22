@@ -1611,6 +1611,20 @@
       "param_class": "measured",
       "locator": "p.3113 (C-V)",
       "validity": "UPPER BOUND on interface charge density for Si-face SiC/SiO2 (dry oxide); not a value"
+    },
+    {
+      "name": "eps_r_SiO2_thermal",
+      "value": 3.9,
+      "unit": "1",
+      "param_class": "owner-approved-convention",
+      "approved_by": "Sachin Chandra Goolla (project owner)",
+      "approved_on": "2026-10-21",
+      "rationale": "Standard textbook static relative permittivity of thermal SiO2; no read primary source located (searched; a supplied PECVD study reported 4.4 for PECVD oxide, not applicable to thermal gate oxide). Owner approved use as a convention. Single documented exception to the provenance rule.",
+      "doi": null,
+      "locator": null,
+      "temperature_K": 300,
+      "orientation": null,
+      "validity": "static, room temperature, thermal (dry) SiO2 gate oxide"
     }
   ],
   "notes": [
