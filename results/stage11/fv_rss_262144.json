@@ -1,0 +1,16 @@
+{
+  "N": 262144,
+  "seconds_forward_plus_adjoint": 0.3898689479101449,
+  "rss_after_imports_mib": 75.95703125,
+  "peak_rss_mib": 108.68359375,
+  "J": 24.806169807490505,
+  "threads": {
+    "cpu_count": 16,
+    "usable_cpus": 16,
+    "env": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    }
+  }
+}

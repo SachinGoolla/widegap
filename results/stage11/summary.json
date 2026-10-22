@@ -1,0 +1,21 @@
+{
+  "criteria": {
+    "M1": true,
+    "M2": true,
+    "M3": true,
+    "M4": true,
+    "M5": true
+  },
+  "gate_passed": true,
+  "pre_registered_configuration": true,
+  "failures": [],
+  "R3_conclusion": [
+    "Q-A: PINN rel L2 error over 5 seeds: best 7.71e-04, worst 1.71e-02. FV reaches the best PINN error with N=128 in 1.46e-03 s versus a median PINN training time of 448 s.",
+    "Q-B: surrogate max rel error over 9 points, J: 9.08e-02-6.96e-01, dJ/da: 1.75e-01-5.33e-01.",
+    "No break-even M found: FV at the matched accuracy is not slower per evaluation than PINN inference (or the ladder cannot match PINN accuracy).",
+    "Scope: one 1D problem, one fixed PINN configuration (no tuning), CPU only; the conclusion does not extend to other problems."
+  ],
+  "total_runtime_seconds": 6968.085375075927,
+  "pinn_jobs": 1,
+  "pinn_threads_per_job": 16
+}

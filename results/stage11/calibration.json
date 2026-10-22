@@ -1,0 +1,15 @@
+{
+  "A_adam_step_s": 0.037226610590005295,
+  "B_adam_step_s": 0.03605035839020274,
+  "threads": {
+    "cpu_count": 16,
+    "usable_cpus": 16,
+    "env": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    },
+    "torch_threads": 8,
+    "torch_interop_threads": 16
+  }
+}
