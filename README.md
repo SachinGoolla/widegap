@@ -2,7 +2,7 @@
 
 Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), discrete adjoint doping sensitivities of those objectives (stage 5), constrained doping optimization on those proxies (stage 6), and 4H-SiC incomplete-ionization equilibrium with fully traced material parameters (stage 7). There are no SiC material models or device-scale simulations yet.**
 
-Current release: v0.2.0 (see [CHANGELOG.md](CHANGELOG.md)).
+Current release: v0.3.0 (see [CHANGELOG.md](CHANGELOG.md)).
 
 ## Status
 
@@ -23,7 +23,7 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 9a | DD physics: non-equilibrium incomplete ionization, field-dependent mobility, interface charge | verified ([result](docs/benchmarks/stage9a_result.md)) |
 | 9b | Impact ionization and avalanche breakdown (1D) | verified with a disclosed B1 caveat ([result](docs/benchmarks/stage9b_result.md)) |
 | 10 | 2D adjoint sensitivities and doping optimization of a vertical MOSFET half-cell | verified after a disclosed O3 re-registration ([result](docs/benchmarks/stage10_result.md)); field-based BV +36% at fixed I_D (study parameters) |
-| 11 | PINN / AD sensitivities vs the FV adjoint (research question) | planned |
+| 11 | PINN / AD sensitivities vs the FV adjoint (research question) | **new (comparison study)**, gate passed (M1-M5) ([result](docs/benchmarks/stage11_result.md)); **no PINN advantage found**: FV reaches the best PINN error (7.71e-4) in 1.46 ms vs a median 448 s of PINN training; no break-even M for the parametric surrogate; one 1D problem, one untuned config, CPU only |
 | 12 | 4H-SiC device studies with sourced parameters (avalanche BV vs doping; DMOSFET on/off) | verified after one disclosed re-registration ([result](docs/benchmarks/stage12_result.md)); BV 1.79 kV at 1e16 (Niwa) |
 | 13 | Full-physics adjoint optimization of a 4H-SiC DMOSFET | machinery verified; **objective flaw found**: planar-cut BV was gamed while the corner BV fell ([result](docs/benchmarks/stage13_result.md)); 13b fixed the blind spot but exposed an off-state artifact; 12c/13c ([result](docs/benchmarks/stage12c_13c_result.md)) fixed the artifact (true-min BV 517→619 V at fixed R_on) but **failed** on ill-posed peak criteria and a new gate-oxide-field issue; 13d ([result](docs/benchmarks/stage13d_result.md)) adds an oxide-field constraint at 400 V and **passes** D1-D7: true-min BV 517→578 V at fixed R_on and E_ox, costing ~41 V vs 13c; E_ox stays ~5.25 MV/cm (1.75x the 3 MV/cm guideline) |
 | 14 | GaN | out of scope for now |

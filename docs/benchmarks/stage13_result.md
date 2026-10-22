@@ -71,12 +71,13 @@ near the JFET/body corner are mesh-dependent artifacts**: in stage-13b
 diagnostics the corner peak field went 4.0 → 4.5 → 4.8 MV/cm on
 successive refinements, at observed order 0.67.
 
-- The **planar-cut** BV (stage 12: 512 V) was mesh-stable and appears
-  unaffected.
+- The **planar-cut** BV (stage 12: 512 V) was mesh-stable but was biased
+  about 8% low by the same artifact. Corrected value: 556 V (see
+  `stage12_result.md` and `stage12c_13c_result.md`).
 - **Corner-column** BV values (stage 12: 375–417 V; stage 13: 417 → 338 V)
   must not be used quantitatively.
 - Stage 13's qualitative conclusion, that the planar-cut objective was
   exploited, stands.
 
-A model fix is planned (a quasi-Fermi level that varies through the
-depletion region, or full drift–diffusion in the off state).
+The model fix was implemented in stage 12c (harmonic interpolation of
+$\phi_n$); see `stage12c_13c_result.md`.

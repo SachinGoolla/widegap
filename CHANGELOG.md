@@ -2,6 +2,40 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.3.0] - 2026-10-22
+
+### Added
+
+- **Stage 13**, full-physics adjoint optimization of the 4H-SiC DMOSFET (gates T1-T7 passed, but the objective was gamed). Adjoint gradients agree with Richardson FD to 6.7e-9 (R_on) and 2.0e-8 (BV). The optimizer raised the planar-cut BV from 512 V to 633 V while the peak field at the JFET/body corner rose from 4.54 to 6.32 MV/cm and the corner-column BV fell from 417 V to 338 V. This is a specification flaw, not a better device ([result](docs/benchmarks/stage13_result.md)).
+- **Stage 13b**, corner-aware soft-min BV objective with a rounded junction (r = 0.1 um). Gate failed on U1 (the corner peak field did not converge: 4.02, 4.48, 4.77 MV/cm on h, h/2, h/4, 9.3% from Richardson against a 2% gate); U2-U7 passed. The failure traced to the stage-12 off-state model, not the rounding ([result](docs/benchmarks/stage13b_result.md)).
+- **Stage 12c**, corrected zero-current off-state model (phi_n = V_D w, with w the harmonic extension across the p-body). C2, C3, C5 and C6 passed; C1 and C4 failed (see Fixed and Known limitations) ([result](docs/benchmarks/stage12c_13c_result.md)).
+- **Stage 13c**, the 13b problem re-run on the corrected model. True-minimum BV rises 516.9 to 618.8 V at unchanged R_on (518.1 to 622.5 V on h/2). Gate failed on U6 (JFET-centre surface field 2.94 to 3.18 MV/cm, under the gate oxide). The stage-13 optimum evaluated on the corrected rounded device has a true-minimum BV of only 181 V, confirming that stage 13 was gamed ([result](docs/benchmarks/stage12c_13c_result.md)).
+- **Stage 13d**, oxide-field-constrained, corner-aware optimization at V_blk = 400 V. All of D1-D7 passed: true-minimum BV 516.9 to 577.9 V on h (518.1 to 580.4 V on h/2) at fixed R_on and fixed E_ox; adjoint vs Richardson FD 1.7e-8 (BV), 1.1e-9 (R_on), 1.3e-12 (E_ox). The constraint costs about 41 V against 13c (618.8 to 577.9 V at R/R_0 = 1), 1.4 V at R/R_0 = 1.2 ([result](docs/benchmarks/stage13d_result.md)).
+- **Stage 11**, PINN-vs-FV comparison study, labelled new (comparison study). Gate M1-M5 passed. Q-A: PINN relative L2 error over 5 seeds ranges from 7.71e-4 (best) to 1.71e-2 (worst); FV reaches the best PINN error with N=128 in 1.46e-3 s versus a median PINN training time of 448 s. Q-B: worst-point surrogate dJ/da errors 1.75e-1 to 5.33e-1 across seeds; no break-even number of queries exists, because the PINN inference cost per query (about 2.7 ms) is not below FV at matched accuracy (about 1.1 ms), so training cost is never amortized. Conclusion: no advantage found for this problem ([result](docs/benchmarks/stage11_result.md)).
+
+### Fixed
+
+- **Stage 12 planar-cut BV was biased low.** The artifact in the stage-12 off-state model (phi_n set by local doping type, giving an artificial electron reservoir on the p side, about 2e18 cm-3 at 400 V) also affected the planar junction. Stage 12c gives 556.46 V against the old 512.27 V (+8.6%), within 3.4% of an independent 1D flat-quasi-Fermi bound of 576.16 V (the old value was 11.1% below it). The caveat in `stage12_result.md` was corrected; "mesh-stable" had not meant "correct". The corner-column values (375-417 V in stage 12, 417 to 338 V in stage 13) are artifacts and must not be used quantitatively.
+- A corrected off-state model (stage 12c) is added and used by stages 13c and 13d; the original stage-12 model is retained and reproduces 512.27 V. With the corrected model the corner field no longer runs away with refinement (global peak 2.536, 2.545, 2.554 MV/cm; variation 0.7% against 19% before), and a local corner-window measure converges at order 1.07.
+
+### Process
+
+- Stage 13's gates passed while its objective was flawed; this was reported as a specification flaw by the lead, with the lesson that breakdown objectives must cover every location that can break down first.
+- Stage 13b failed U1 and stage 12c/13c failed C1, C4 and U6. The C1 criterion (global peak-field convergence order) was ill-posed as written and the 13d criteria replaced it with defined local measures; no failed gate was re-registered into a pass. 13c recorded `git_dirty: true` only because of the untracked 12c results folder.
+- Stage 13b disclosed process deviations: the rounding length r = 0.1 um was chosen after r = 0.2 um gave a path-dependent on-state (R_on varied by 1.7e-4 between cold starts), and more than one development run was made.
+- Stage 13 disclosed deviation: the T3 tolerance was applied to R/R_0 because the literal tolerance is unit-dependent and vacuous for R_on in ohm cm2.
+- Stage 11 was amended before its official run, with disclosure: Q-B as written was degenerate (symmetric doping gives J = 0 and dJ/da = 0 identically), so only the n side is scaled and the evaluation points avoid a = 1. The PINN configuration was unchanged. Official run: `--jobs 1`, total runtime 6968 s, commit f19ccce, `git_dirty: false`.
+- The stage 13d manifest records `git_dirty: true` because untracked stage-11 files (not imported by 13d) existed at run time; they were committed afterwards.
+
+### Known limitations
+
+- Stage 13d: absolute E_ox is 5.25 MV/cm at 400 V, about 1.75 times an unsourced 3 MV/cm guideline, both before and after optimization, and rises to 6.20 MV/cm at the new rated BV (5.90 MV/cm for the initial design at its own BV). The constraint only prevents worsening at 400 V; no oxide reliability claim is made.
+- Stage 13d local window fields and E_ox are not mesh-converged (they rise about 1-6% from h to h/4; all eight convergence flags fail), so absolute values are mesh-dependent and only same-mesh comparisons are used.
+- Stage 12c C1 and C4 failed as defined, and the 13c U6 failure motivated 13d; the stage 13 and 13b optima are not better devices.
+- BV uses vertical-cut ionization-integral approximations of the 2D device (dense true minimum over at least 40 cuts), not a full 2D avalanche solution; SLSQP gives local optima from one starting design in a 5-parameter family. The V_blk = 400 V reference is a choice.
+- Stage 11 covers one 1D problem, one fixed untuned PINN configuration, CPU only (16 torch threads, one job at a time). It does not show that PINNs are generally uncompetitive. The parent-process manifest lists torch's default of 8 threads; each PINN subprocess set 16 and recorded it.
+- No agreement with measured devices is claimed for any stage 12-13d result.
+
 ## [0.2.0] - 2026-10-21
 
 ### Added
