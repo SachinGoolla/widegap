@@ -35,35 +35,63 @@ REGISTRY = REPO / "src" / "widegap" / "materials" / "data" / "sic4h.json"
 N0 = 1e16  # cm^-3, scaling density
 REQUIRED = [
     "Eg_300K",
-    "Nc_300K",
-    "Nv_300K",
-    "dE_N_donor",
+    "nu_c_band1",
+    "m_c_band1",
+    "m_v_band1",
+    "m_v_band2",
+    "Ev_band2",
+    "m_v_band3",
+    "Ev_band3",
+    "dE_N_donor_h",
+    "dE_N_donor_k",
+    "N_site_fraction_h",
     "dE_Al_acceptor",
+    "dE_Al_acceptor_alpha",
     "g_donor",
     "g_acceptor",
 ]
+H_PLANCK = 6.62607015e-34  # J s, exact (SI 2019)
+M0 = 9.1093837015e-31  # kg, CODATA 2018
 EPS_NAMES = ["eps_r_parallel_c", "eps_r_perp_c"]
 
 
+def _nc_parabolic(m_rel, t_k):
+    """2 (2 pi m k T / h^2)^{3/2} in cm^-3 for one parabolic valley (spin included)."""
+    return 2.0 * (2.0 * np.pi * m_rel * M0 * K_B * t_k / H_PLANCK**2) ** 1.5 * 1e-6
+
+
 def derived(reg: Registry, t_k: float):
-    """n_i, N_c, N_v at temperature t_k (parabolic-band T^{3/2} scaling; E_g held at 300 K value)."""
-    nc = reg.value("Nc_300K") * (t_k / 300.0) ** 1.5
-    nv = reg.value("Nv_300K") * (t_k / 300.0) ** 1.5
+    """n_i, N_c, N_v at t_k from Persson & Lindefelt (1998) DOS masses, parabolic bands.
+
+    N_c: nu equivalent minima of mass m_c (band 1) plus the second minimum (band 2,
+    Boltzmann-weighted) if registered. N_v: three valence bands with their
+    offsets, PARABOLIC approximation (the source shows the nonparabolic DOS is
+    larger, so N_v is an underestimate; see stage-7 result). E_g held at 300 K.
+    """
+    kt = K_B * t_k / Q
+    nc = reg.value("nu_c_band1") * _nc_parabolic(reg.value("m_c_band1"), t_k)
+    if reg.usable("m_c_band2") and reg.usable("Ec_band2_offset"):
+        nc += (
+            reg.value("nu_c_band2")
+            * _nc_parabolic(reg.value("m_c_band2"), t_k)
+            * np.exp(-reg.value("Ec_band2_offset") / kt)
+        )
+    nv = _nc_parabolic(reg.value("m_v_band1"), t_k)
+    nv += _nc_parabolic(reg.value("m_v_band2"), t_k) * np.exp(reg.value("Ev_band2") / kt)
+    nv += _nc_parabolic(reg.value("m_v_band3"), t_k) * np.exp(reg.value("Ev_band3") / kt)
     eg = reg.value("Eg_300K")
-    ni = np.sqrt(nc * nv) * np.exp(-eg * Q / (2 * K_B * t_k))
+    ni = np.sqrt(nc * nv) * np.exp(-eg / (2 * kt))
     return ni, nc, nv
 
 
 def donor_levels(reg: Registry, t_k, delta, nu_c):
-    """Two-site N donor if both site energies are usable, else the single registered level."""
+    """Two-site N donor (hexagonal / cubic) with the registered site fraction."""
     g = reg.value("g_donor")
-    if reg.usable("dE_N_donor_h") and reg.usable("dE_N_donor_k"):
-        fh = reg.value("N_site_fraction_h") if reg.usable("N_site_fraction_h") else 0.5
-        return (
-            Level(fh, log_gamma_donor(g, reg.value("dE_N_donor_h"), t_k, delta, nu_c)),
-            Level(1 - fh, log_gamma_donor(g, reg.value("dE_N_donor_k"), t_k, delta, nu_c)),
-        )
-    return (Level(1.0, log_gamma_donor(g, reg.value("dE_N_donor"), t_k, delta, nu_c)),)
+    fh = reg.value("N_site_fraction_h")  # no default: must be sourced
+    return (
+        Level(fh, log_gamma_donor(g, reg.value("dE_N_donor_h"), t_k, delta, nu_c)),
+        Level(1 - fh, log_gamma_donor(g, reg.value("dE_N_donor_k"), t_k, delta, nu_c)),
+    )
 
 
 def m2_m3(reg: Registry):
@@ -74,10 +102,11 @@ def m2_m3(reg: Registry):
         delta, nu_c = ni / N0, nc / N0
         lv = (
             Level(
-                1.0, log_gamma_donor(reg.value("g_donor"), reg.value("dE_N_donor"), t, delta, nu_c)
+                1.0,
+                log_gamma_donor(reg.value("g_donor"), reg.value("dE_N_donor_h"), t, delta, nu_c),
             ),
         )
-        n1 = nc / reg.value("g_donor") * np.exp(-reg.value("dE_N_donor") * Q / (K_B * t))
+        n1 = nc / reg.value("g_donor") * np.exp(-reg.value("dE_N_donor_h") * Q / (K_B * t))
         for nd_cm in np.logspace(14, 19, 11):
             nd = nd_cm / N0
             psi = neutral_potential(nd, 0.0, delta, lv, ())
@@ -132,14 +161,9 @@ def m5(reg: Registry, h_list=(0.025, 0.0125)):
     ni, nc, nv = derived(reg, t)
     delta, nu_c, nu_v = ni / N0, nc / N0, nv / N0
     donors = donor_levels(reg, t, delta, nu_c)
-    acceptors = (
-        Level(
-            1.0,
-            log_gamma_acceptor(
-                reg.value("g_acceptor"), reg.value("dE_Al_acceptor"), t, delta, nu_v
-            ),
-        ),
-    )
+    # Koizumi et al. (2009) Eq. (7): dE_A = dE_A0 - alpha * N_A^(1/3), at the junction's N_A
+    de_a = reg.value("dE_Al_acceptor") - reg.value("dE_Al_acceptor_alpha") * (1e17) ** (1.0 / 3.0)
+    acceptors = (Level(1.0, log_gamma_acceptor(reg.value("g_acceptor"), de_a, t, delta, nu_v)),)
     na_b, nd_b = 1e17 / N0, 1e16 / N0
     psi_p = neutral_potential(0.0, na_b, delta, donors, acceptors)
     psi_n = neutral_potential(nd_b, 0.0, delta, donors, acceptors)
