@@ -76,3 +76,26 @@ Stage 8.1 passes if G1–G8 hold. A pass verifies the MOS **machinery**
 (regions, gate, interface, 2D MOSFET currents). It is **not** a 4H-SiC
 MOSFET prediction. Sourced oxide, interface-trap and channel-mobility
 physics are needed for that, and they are later stages.
+
+## 6. Amendments
+
+### 2026-10-21: G2 round-off floor and G6 wording (before the official run, after a development run)
+
+**Disclosure.** Both points were raised by the implementing agent after a
+development run, which is not an official result.
+
+- **G2.** A relative error on $Q_s$ is ill-posed at flat band, where
+  $Q_s=0$. This is the same flaw as stage 6's gradient check at the
+  optimum. Restated: $|\text{err}|\le10^{-10}|Q_s|+10^{2}\epsilon_{mach}S$,
+  where $S$ is the magnitude scale of the charge and Gauss terms. That is
+  the explicit round-off floor. At every non-flat-band point the
+  $10^{-10}$ relative bound must hold by itself.
+- **G6, precise wording.** With fixed $V_G$, the case $V_D=-V_{DS}$ is not
+  the mirror of $V_D=+V_{DS}$, because $V_{GD}$ differs. The exact symmetry
+  is the **mirror test**. In configuration A, source = 0 and drain = $v$;
+  in configuration B, source = $v$ and drain = 0, with the same $V_G$ and
+  the body at 0. The test requires $I_{\text{right}}(A)=-I_{\text{right}}(B)$
+  to ≤ 1e-8 relative. "With source and drain exchanged" in §4 meant
+  exactly this.
+
+Thresholds are otherwise unchanged.
