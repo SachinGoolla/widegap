@@ -2,6 +2,35 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.0] - 2026-10-21
+
+### Added
+
+- **Stage 12**, first 4H-SiC device studies with sourced parameters (pre-registered; gate passed after one disclosed re-registration). Avalanche breakdown of 4H-SiC p+n diodes (non-punch-through, parallel to c, 300 K) at N_D = 1e15 to 1e17 cm⁻³, with Niwa 2015 and Hatakeyama 2004 coefficients giving 11.2 kV to 322 V and 14.2 kV to 310 V; the two coefficient sets differ by up to 21% in breakdown voltage. Vertical 4H-SiC DMOSFET half-cell: V_T = 7.9 V, R_on,sp ≈ 2.9e-4 Ω·cm², planar-cut avalanche BV = 512 V (Niwa; 522 V Hatakeyama), mesh-stable to 0.03%. Oxide-interface sensitivities: V_T = 7.6 V to 10.6 V over D_it ×0 to ×10, and 4.3 V to 11.3 V for Q_f = ±1.5e12 cm⁻² ([result](docs/benchmarks/stage12_result.md)).
+- Material registry grown to 87 entries, including impact ionization (Hatakeyama 2004, Niwa 2015), high-field transport (Khan & Cooper 2000), interface-trap densities (Saks 2000, Dhar 2004) and SiC/SiO₂ band offsets (Afanas'ev 1996) ([stage 7 amendments](docs/benchmarks/stage7_sic_materials.md)).
+- Owner-approved-convention parameter class (`approved_by`, `approved_on`, `rationale` required). Thermal SiO₂ static relative permittivity ε_r = 3.9 is the single documented use of this class; no other parameter uses it.
+
+### Fixed
+- A commit briefly pushed a failing test because a piped `pytest | tail` masked pytest's exit code; fixed in d954698, and commits are now gated on pytest's own exit status.
+
+- Material registry raised a KeyError for owner-approved entries that have no DOI or locator; the registry now tolerates them.
+
+### Process
+
+- Stage 12 run 1 failed S2′ (mesh-convergence order 2.90 at N_D = 1e15 Niwa, superconvergence). The criterion was re-registered as S2″ with no order upper bound, and run 2 passed S1–S6. The amendment is disclosed in the stage 12 spec.
+- Stage 13 (full-physics adjoint optimization of a 4H-SiC DMOSFET) pre-registered, not yet run.
+
+### Known limitations
+
+- Stage 12 uses Hall, not drift, mobility, with no interface-scattering (channel) mobility model, so R_on is optimistic.
+- The Khan & Cooper v_sat (perpendicular to c, 23 °C) is applied to all edges.
+- D_it is uniform, taken from an order-of-magnitude text value.
+- ε_ox is an owner-approved convention, not a read primary source.
+- Avalanche BV uses a 1D cut, not the full 2D ionization integral; the corner cut (375–417 V) is mesh-dependent and reported only.
+- V_DS is limited to 15 V by double-precision underflow in hole rows.
+- At N_D = 1e17 cm⁻³ the Niwa peak field (3.4 MV/cm) exceeds its stated 1–3 MV/cm validity.
+- No agreement with measured devices is claimed; outputs are model results from traceable parameters.
+
 ## [0.1.0] - 2026-10-21
 
 ### Stages

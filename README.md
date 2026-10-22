@@ -2,7 +2,7 @@
 
 Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), discrete adjoint doping sensitivities of those objectives (stage 5), constrained doping optimization on those proxies (stage 6), and 4H-SiC incomplete-ionization equilibrium with fully traced material parameters (stage 7). There are no SiC material models or device-scale simulations yet.**
 
-Current release: v0.1.0 (see [CHANGELOG.md](CHANGELOG.md)).
+Current release: v0.2.0 (see [CHANGELOG.md](CHANGELOG.md)).
 
 ## Status
 

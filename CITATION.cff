@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below, and cite the original works for the methods it implements (see references)."
 title: "widegap: verified numerical and physics-informed solvers for wide-bandgap semiconductor device equations"
 type: software
-version: 0.1.0
+version: 0.2.0
 date-released: 2026-10-21
 license: Apache-2.0
 authors:

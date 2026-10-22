@@ -1,7 +1,7 @@
 # Stage 12 result: gate PASSED after one disclosed re-registration (2026-10-21)
 
 These are the first widegap simulations that use **sourced 4H-SiC
-parameters** (84-entry registry). The single exception is the
+parameters** (87-entry registry). The single exception is the
 owner-approved convention $\varepsilon_{SiO_2}=3.9$. Implemented by a Sonnet
 subagent from the pre-registered spec, then reviewed.
 
