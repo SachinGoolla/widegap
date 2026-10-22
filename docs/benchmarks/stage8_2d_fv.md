@@ -51,3 +51,27 @@ using the per-row round-off tolerance of stage 7.1.
 ## 3. Gate
 
 Stage 8 passes if P1–P9 hold.
+
+## 4. Amendments
+
+### 2026-10-21: P9 compares only resolvable currents (before the official run, after a development run)
+
+**Disclosure.** A development run, which is not an official result, showed
+that P9 as written can never pass. For $V\lesssim25\,V_T$ the committed
+stage-7.1 total current `j_mean` is round-off noise, about 1e-28, with an
+element-to-element spread of 10–25. Its own pre-registration (stage 7.1
+§3) says total current is resolvable only for $|j|\ge10^{-6}$. Reproducing
+noise to 1e-12 is meaningless. P9 should have applied that rule.
+
+**P9 (restated).** The 1D path through the shared core reproduces the
+committed stage-7.1 Q3 results in two ways:
+
+1. Minority edge currents (`jn` at the first element, `jp` at the last
+   element) must agree to ≤ 1e-12 relative at every bias $V\ge1$.
+2. The total current must agree to ≤ 1e-12 relative wherever
+   $|j|\ge10^{-6}$.
+
+The interpretations of P2 (meshes of 32×16 and 16×32 cells, so that the
+interface lies on a grid line), P4 (P1 data with zero flux on top) and P5
+(N = 16…256) used by the implementation are recorded as part of the
+specification.
