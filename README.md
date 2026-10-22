@@ -18,6 +18,7 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 7.1 | Drift-diffusion at realistic 4H-SiC n_i/N0 (quasi-Fermi variables) | verified on the first official run ([result](docs/benchmarks/stage7_1_result.md)); minority currents exact to 4e-14 at n_i/N0 = 1e-24 |
 | 8 | 2D finite volume (tensor meshes; linear, equilibrium, quasi-Fermi DD) | verified ([result](docs/benchmarks/stage8_result.md)); exact 1D reductions at n_i/N0 = 1e-24 |
 | 9a | DD physics: non-equilibrium incomplete ionization, field-dependent mobility, interface charge | verified ([result](docs/benchmarks/stage9a_result.md)) |
+| 9b | Impact ionization and avalanche breakdown (1D) | verified with a disclosed B1 caveat ([result](docs/benchmarks/stage9b_result.md)) |
 | 8.1 | MOS structures in 2D: oxide, gate, MOSFET half-cell (study-parameter oxide) | verified ([result](docs/benchmarks/stage8_1_result.md)); exact MOS-capacitor reference to 8e-5, I_D mesh order 2.1 |
 | 9 | PINN / automatic-differentiation sensitivities vs the FV adjoint (research question) | not started |
 | 10 | GaN | out of scope for now |
