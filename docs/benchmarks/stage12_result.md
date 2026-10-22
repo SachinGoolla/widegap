@@ -68,3 +68,24 @@ is a real modelling uncertainty for SiC power-device design.
 **Not claimed:** agreement with measured devices. Validation against
 experimental 4H-SiC MOSFET data is out of scope here, and these numbers are
 model outputs from traceable parameters.
+
+## Post-hoc caveat (2026-10-22, found in stage 13b)
+
+The zero-current off-state electrostatics introduced in stage 12 sets
+$\phi_n=V_D$ on nodes with $N_D>N_A$ and $\phi_n=0$ elsewhere. Near the
+**lateral** body/JFET junction this creates an artificial electron
+reservoir on the p side (about 2e18 cm⁻³ at 400 V), and the depletion
+voltage then drops within a single cell. As a result, **peak fields and BVs
+near the JFET/body corner are mesh-dependent artifacts**: in stage-13b
+diagnostics the corner peak field went 4.0 → 4.5 → 4.8 MV/cm on
+successive refinements, at observed order 0.67.
+
+- The **planar-cut** BV (stage 12: 512 V) was mesh-stable and appears
+  unaffected.
+- **Corner-column** BV values (stage 12: 375–417 V; stage 13: 417 → 338 V)
+  must not be used quantitatively.
+- Stage 13's qualitative conclusion, that the planar-cut objective was
+  exploited, stands.
+
+A model fix is planned (a quasi-Fermi level that varies through the
+depletion region, or full drift–diffusion in the off state).
