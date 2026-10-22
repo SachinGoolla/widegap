@@ -167,7 +167,7 @@ def m4():
     return {"e_inf": errs, "orders": observed_orders(errs)}
 
 
-def m5(reg: Registry, h_list=(0.025, 0.0125)):
+def m5(reg: Registry, h_list=(0.025, 0.0125), lo=-10.0, hi=40.0, x_bulk=(-9.0, 39.0)):
     t = 300.0
     ni, nc, nv = derived(reg, t)
     delta, nu_c, nu_v = ni / N0, nc / N0, nv / N0
@@ -180,7 +180,7 @@ def m5(reg: Registry, h_list=(0.025, 0.0125)):
     psi_n = neutral_potential(nd_b, 0.0, delta, donors, acceptors)
     res = {"delta": delta, "psi_p": psi_p, "psi_n": psi_n, "Vbi_VT": psi_n - psi_p, "meshes": {}}
     for h in h_list:
-        x = np.linspace(-10.0, 40.0, int(round(50.0 / h)) + 1)
+        x = np.linspace(lo, hi, int(round((hi - lo) / h)) + 1)
         nd = cv_average_piecewise(x, [0.0], [0.0, nd_b])
         na = cv_average_piecewise(x, [0.0], [na_b, 0.0])
         j = IonizedJunction(x, nd, na, delta, donors, acceptors)
@@ -200,8 +200,8 @@ def m5(reg: Registry, h_list=(0.025, 0.0125)):
             "limited": rep.limited_steps,
             "bulk_p_err": float(abs(psi[0] - psi_p)),
             "bulk_n_err": float(abs(psi[-1] - psi_n)),
-            "psi_at_x=-9": float(psi[np.argmin(np.abs(x + 9))]),
-            "psi_at_x=39": float(psi[np.argmin(np.abs(x - 39))]),
+            "psi_bulk_p": float(psi[np.argmin(np.abs(x - x_bulk[0]))]),
+            "psi_bulk_n": float(psi[np.argmin(np.abs(x - x_bulk[1]))]),
             "junction_element_field": e_el,
             "first_integral_field": e_fi,
         }
@@ -217,7 +217,7 @@ def m5(reg: Registry, h_list=(0.025, 0.0125)):
     )
     # deep-bulk potentials vs independent neutrality roots (M5b), finest mesh
     fm = m[str(h_list[1])]
-    res["bulk_vs_neutrality"] = max(abs(fm["psi_at_x=-9"] - psi_p), abs(fm["psi_at_x=39"] - psi_n))
+    res["bulk_vs_neutrality"] = max(abs(fm["psi_bulk_p"] - psi_p), abs(fm["psi_bulk_n"] - psi_n))
     res["Al_ionized_fraction_p_bulk"] = float(
         (delta * np.exp(-psi_p) - delta * np.exp(psi_p) + 0) / na_b
     )  # = N_A^-/N_A in neutral p bulk (p - n = N_A^-)
@@ -243,6 +243,7 @@ def m6(reg: Registry):
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", type=Path, default=REPO / "results" / "stage7")
+    ap.add_argument("--criteria", choices=["v1", "7b"], default="v1")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "manifest.json").write_text(
@@ -269,7 +270,9 @@ def main() -> None:
         res["M2_worst_rel_err"] = worst
         crit["M2"] = worst <= 1e-10
         crit["M3"] = lim_ok
-        res["M5"] = m5(reg)
+        res["M5"] = (
+            m5(reg) if args.criteria == "v1" else m5(reg, lo=-60.0, hi=80.0, x_bulk=(-30.0, 45.0))
+        )
         mm = res["M5"]["meshes"].values()
         crit["M5"] = (
             all(v["converged"] for v in mm)
