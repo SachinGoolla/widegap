@@ -16,7 +16,8 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 6 | Constrained doping optimization (1D: maximize field-based BV at fixed drift-resistance proxy) | verified after one failed run and a disclosed re-registered gradient check ([result](docs/benchmarks/stage6_result.md)); exact field-based BV +11.3% via graded drift doping |
 | 7 | 4H-SiC material models (each parameter traced to a primary source that was read) | verified after a provenance block (resolved with user-supplied full texts) and one disclosed geometry re-registration ([result](docs/benchmarks/stage7_result.md)); 51 independently verified parameters |
 | 7.1 | Drift-diffusion at realistic 4H-SiC n_i/N0 (quasi-Fermi variables) | verified on the first official run ([result](docs/benchmarks/stage7_1_result.md)); minority currents exact to 4e-14 at n_i/N0 = 1e-24 |
-| 8 | 2D finite volume, then a SiC MOSFET half-cell | not started |
+| 8 | 2D finite volume (tensor meshes; linear, equilibrium, quasi-Fermi DD) | verified ([result](docs/benchmarks/stage8_result.md)); exact 1D reductions at n_i/N0 = 1e-24 |
+| 8.1 | SiC MOSFET half-cell (oxide, gate, interface) | not started |
 | 9 | PINN / automatic-differentiation sensitivities vs the FV adjoint (research question) | not started |
 | 10 | GaN | out of scope for now |
 
