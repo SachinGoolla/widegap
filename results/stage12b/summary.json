@@ -1,0 +1,158 @@
+{
+  "criteria": {
+    "S1": true,
+    "S2": true,
+    "S3": true,
+    "S4": true,
+    "S5": true,
+    "S6": true
+  },
+  "gate_passed": true,
+  "S2_detail": [
+    {
+      "N_D": 1000000000000000.0,
+      "set": "niwa",
+      "order": 2.904628332958019,
+      "rel_vs_richardson": 4.577894470830136e-07,
+      "ok": true
+    },
+    {
+      "N_D": 1000000000000000.0,
+      "set": "hatakeyama",
+      "order": 2.387161194961484,
+      "rel_vs_richardson": 1.0197366115906408e-06,
+      "ok": true
+    },
+    {
+      "N_D": 3000000000000000.0,
+      "set": "niwa",
+      "order": 1.8460074229683734,
+      "rel_vs_richardson": 7.61496363678362e-07,
+      "ok": true
+    },
+    {
+      "N_D": 3000000000000000.0,
+      "set": "hatakeyama",
+      "order": 1.237075568284099,
+      "rel_vs_richardson": 3.5304593072589915e-06,
+      "ok": true
+    },
+    {
+      "N_D": 1e+16,
+      "set": "niwa",
+      "order": 2.629143923754606,
+      "rel_vs_richardson": 9.014623914064979e-08,
+      "ok": true
+    },
+    {
+      "N_D": 1e+16,
+      "set": "hatakeyama",
+      "order": 2.123111761468218,
+      "rel_vs_richardson": 1.239740930384955e-06,
+      "ok": true
+    },
+    {
+      "N_D": 3e+16,
+      "set": "niwa",
+      "order": NaN,
+      "rel_vs_richardson": 1.912223633386568e-07,
+      "ok": true
+    },
+    {
+      "N_D": 3e+16,
+      "set": "hatakeyama",
+      "order": 1.9591841610174192,
+      "rel_vs_richardson": 1.372522140847862e-06,
+      "ok": true
+    },
+    {
+      "N_D": 1e+17,
+      "set": "niwa",
+      "order": NaN,
+      "rel_vs_richardson": 2.1419184543659338e-07,
+      "ok": true
+    },
+    {
+      "N_D": 1e+17,
+      "set": "hatakeyama",
+      "order": 1.9716433815315897,
+      "rel_vs_richardson": 1.258192989500421e-06,
+      "ok": true
+    }
+  ],
+  "S3_worst_rel": 1.6775159039639213e-10,
+  "S4": {
+    "n_reported_solves": 136,
+    "n_not_converged": 0,
+    "worst_kcl_rel": 2.7127606890566363e-11
+  },
+  "S5_rel_change": 0.023595270470216197,
+  "S6_worst_row_err": 7.208614152810109e-09,
+  "R1": [
+    {
+      "N_D_cm3": 1000000000000000.0,
+      "BV_niwa_V": 11191.466307219236,
+      "BV_hatakeyama_V": 14196.989149598397,
+      "ratio_niwa_over_hatakeyama": 0.7882985743872192,
+      "E_peak_niwa_MV_cm": 1.9928335227366816,
+      "E_peak_hatakeyama_MV_cm": 2.24447265323884
+    },
+    {
+      "N_D_cm3": 3000000000000000.0,
+      "BV_niwa_V": 4618.12635253117,
+      "BV_hatakeyama_V": 5581.611143527601,
+      "ratio_niwa_over_hatakeyama": 0.8273823155678479,
+      "E_peak_niwa_MV_cm": 2.2174559934082922,
+      "E_peak_hatakeyama_MV_cm": 2.4376945708459217
+    },
+    {
+      "N_D_cm3": 1e+16,
+      "BV_niwa_V": 1787.8817030709351,
+      "BV_hatakeyama_V": 2034.3933733525207,
+      "ratio_niwa_over_hatakeyama": 0.8788279230995756,
+      "E_peak_niwa_MV_cm": 2.5193557911299624,
+      "E_peak_hatakeyama_MV_cm": 2.687176530456658
+    },
+    {
+      "N_D_cm3": 3e+16,
+      "BV_niwa_V": 772.8715714762101,
+      "BV_hatakeyama_V": 821.7802816420833,
+      "ratio_niwa_over_hatakeyama": 0.9404844442505438,
+      "E_peak_niwa_MV_cm": 2.869166233369762,
+      "E_peak_hatakeyama_MV_cm": 2.958234112232359
+    },
+    {
+      "N_D_cm3": 1e+17,
+      "BV_niwa_V": 322.27063337468877,
+      "BV_hatakeyama_V": 310.13093259166095,
+      "ratio_niwa_over_hatakeyama": 1.0391437922092466,
+      "E_peak_niwa_MV_cm": 3.3796102741754583,
+      "E_peak_hatakeyama_MV_cm": 3.3159180484898823
+    }
+  ],
+  "R2": {
+    "V_T_V": {
+      "base (Dit x1, Qf 0)": 7.855078975616674,
+      "Dit x0": 7.5845349335729635,
+      "Dit x10": 10.586240493491934,
+      "Qf +bound": 4.344330031613108,
+      "Qf -bound": 11.289234417863902
+    },
+    "BV_V": {
+      "level0|niwa|literal_peak": 417.04690197128633,
+      "level0|niwa|planar_peak": 512.2726217151704,
+      "level0|hatakeyama|literal_peak": 344.3849628779046,
+      "level0|hatakeyama|planar_peak": 521.9237108397671,
+      "level1|niwa|literal_peak": 374.68806512085945,
+      "level1|niwa|planar_peak": 512.4091837024635
+    },
+    "BV_sens_planar_niwa_V": {
+      "base (Dit x1, Qf 0)": 512.2726217151704,
+      "Dit x0": 512.2726196276448,
+      "Dit x10": 512.2726296778247,
+      "Qf +bound": 512.2191531883467,
+      "Qf -bound": 512.3268354263078
+    }
+  },
+  "runtime_seconds": 269.73562600207515
+}
