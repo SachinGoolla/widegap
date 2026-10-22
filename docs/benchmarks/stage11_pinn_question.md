@@ -38,3 +38,22 @@ valid result.
 | R3 | conclusion stated with evidence, including "no advantage found" if that is the result | reported |
 
 Stage 11 passes if M1–M5 hold.
+
+## Amendment (2026-10-22, before the official run; disclosed)
+
+**Q-B was degenerate as written.** With symmetric doping $C=\mp a$ the
+solution is odd, so $J=\int\psi\,dx\equiv0$ and $dJ/da\equiv0$ for every
+$a$. The implementing agent found this analytically and confirmed it
+numerically ($J=0$ exactly).
+
+**Q-B (restated):**
+- Only the n side is scaled: $C=-1$ for $x<0$ and $C=+a$ for $x>0$.
+  At $a=1$ this is the stage-2 junction.
+- Evaluation points: linspace(0.5, 2, 9), which avoids $a=1$, where
+  $J=0$.
+- Relative $J$ errors near $a\approx1$ are ill-conditioned, so $J$ errors
+  are also reported normalized by $\int|\psi|dx$.
+- The FV $dJ/da$ includes the Dirichlet-datum term $\lambda_N\,\psi_R'(a)$.
+
+**Run configuration.** `--jobs 1` (sequential, uncontended timings), with
+the PINN configuration unchanged.
