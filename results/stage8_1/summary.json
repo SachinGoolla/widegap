@@ -1,0 +1,43 @@
+{
+  "criteria": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": true,
+    "G6": true,
+    "G7": true,
+    "G8": true
+  },
+  "gate_passed": true,
+  "values": {
+    "G1_worst_rel_err": 8.390569780460956e-05,
+    "G1_worst_abs_err": 0.010499057427153957,
+    "G2_worst_rel_err": 1.0,
+    "G2_worst_err_over_roundoff_floor": 0.01834167646815237,
+    "G3_max_abs_diff_psi": 1.4210854715202004e-14,
+    "G5": {
+      "n_points": 14,
+      "worst_rel_kcl": 2.8703094032077047e-09,
+      "ok": true
+    },
+    "G6_worst_rel": 5.393157791592341e-16,
+    "G7": {
+      "observed_order": 2.1215034722837673,
+      "richardson_I_D": 11.34920039451987,
+      "finest_rel_dev_from_richardson": 0.0010068272923434867
+    },
+    "G8_worst_row_err": 5.356549057387874e-10,
+    "R1_V_T": 153.87538526712015,
+    "R1_gm_max_over_gca": 0.7696637190357408
+  },
+  "seconds": {
+    "C1": 0.5389851459767669,
+    "C2": 0.5305688240332529,
+    "C3_transfer": 14.204276197007857,
+    "G6": 9.161603086977266,
+    "G7": 9.85650590795558,
+    "G8": 1.069182300940156
+  },
+  "peak_rss_mib": 339.63671875
+}
