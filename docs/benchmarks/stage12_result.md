@@ -86,5 +86,5 @@ successive refinements, at observed order 0.67.
 - Stage 13's qualitative conclusion, that the planar-cut objective was
   exploited, stands.
 
-A model fix is planned (a quasi-Fermi level that varies through the
-depletion region, or full drift–diffusion in the off state).
+The model fix was implemented in stage 12c (harmonic interpolation of
+$\phi_n$); see `stage12c_13c_result.md`.
