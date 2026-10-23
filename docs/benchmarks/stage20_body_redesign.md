@@ -40,3 +40,12 @@ Stage 20 passes if G1–G3 hold. Whether a safe design exists in this family is 
 - agreement with measured devices.
 
 The Pareto question (re-optimizing doping on the safe geometry) is **stage 17c**, which stays on hold until this stage is recorded.
+
+## Note (2026-10-23, after the dev run, before the official run; no criterion changed)
+
+- **Barrier columns.** "Columns crossing the p-body under the n⁺ source up to the body-contact edge" is implemented as mesh columns with $x_{src0}\le x\le x_{bc}$ whose **surface node is net n-type** (8 columns on h/2, x = 1.6–2.8 µm).
+  - Read literally, the spec would include p-type-surface columns. There $\psi_{surface}-\min\psi\approx0$ by construction, which would make $V_{pt,es}$ trivially 0.
+  - The barrier window runs from the surface to $d_{body}$ + 0.5 µm.
+- **Mesh.** The number of body cells scales as ceil(11·(d_body − 0.3)/0.5), so the vertical body cell size is that of the 0.8 µm design. At 0.8 µm this gives 11 cells, as in stage 12.
+- **Geometry.** The drift keeps its 3.0 µm thickness (it starts at y = −(d_body + w_drift)), so the device gets deeper by the same amount. The JFET layer extends to the body depth.
+- **Dev outcome seen.** G1–G3 passed. R2 selects 1.4 µm. The official run decides.
