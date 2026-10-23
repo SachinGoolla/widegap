@@ -1,0 +1,213 @@
+{
+  "criteria": {
+    "H1": true,
+    "H2": true,
+    "H3": true,
+    "H4": true,
+    "H5": false,
+    "H6": true
+  },
+  "gate_passed": false,
+  "dev_unverified_registry": false,
+  "values": {
+    "H2": {
+      "R_on_sp_code_path": 0.00029189823529917334,
+      "R_on_sp_stage12_sweep": 0.0002918982352991735,
+      "rel_diff": 5.551115123125783e-16,
+      "converged": true,
+      "picard": {
+        "converged": true,
+        "picard_converged": true,
+        "newton_all_converged": true,
+        "iterations": 1,
+        "final_rel": 0.0,
+        "newton_its": [
+          1
+        ],
+        "rel_history": [
+          0.0
+        ]
+      }
+    },
+    "H3": [
+      {
+        "N_A_cm3": 1e+16,
+        "V_GS_V": 9.244213355730466,
+        "N_S_mid_cm2": 3000000000000.112,
+        "mu_ch_mid": 53.663443337584276,
+        "mu_eff": 54.25931285340696,
+        "rel_diff": 0.01110382559826073,
+        "mu_local_gradient": 53.81967647000299,
+        "rel_diff_local": 0.002911351242146143,
+        "E_eff_mid_MV_cm": 0.27808678964005445,
+        "error": null
+      },
+      {
+        "N_A_cm3": 1e+17,
+        "V_GS_V": 12.198133435719953,
+        "N_S_mid_cm2": 2999999999999.8525,
+        "mu_ch_mid": 27.215673099740005,
+        "mu_eff": 27.426489921043213,
+        "rel_diff": 0.007746154964847207,
+        "mu_local_gradient": 27.214356339455076,
+        "rel_diff_local": 4.838242582150265e-05,
+        "E_eff_mid_MV_cm": 0.502358428404507,
+        "error": null
+      },
+      {
+        "N_A_cm3": 3e+17,
+        "V_GS_V": 15.382035507674145,
+        "N_S_mid_cm2": 3000000000000.022,
+        "mu_ch_mid": 18.120622100611595,
+        "mu_eff": 18.261538948203015,
+        "rel_diff": 0.0077766009803086344,
+        "mu_local_gradient": 18.118940095954606,
+        "rel_diff_local": 9.282267725962967e-05,
+        "E_eff_mid_MV_cm": 0.7455879154387187,
+        "error": null
+      }
+    ],
+    "H4": {
+      "n_evaluations": 67,
+      "failed": []
+    },
+    "H5": {
+      "R_on_channel_h": 0.003116922039678799,
+      "R_on_channel_h2": 0.003215047237922234,
+      "rel_diff": 0.03148144130468755
+    },
+    "H6": {
+      "R_on_20nm": 0.003215047237922234,
+      "R_on_40nm": 0.0032150471884198647,
+      "R_on_10nm": 0.003215028037769733,
+      "rel_diff_40_vs_20": 1.5397089270230424e-08,
+      "rel_diff_10_vs_20": 5.971965909012944e-06
+    },
+    "R1": [
+      {
+        "case": "12b",
+        "level": 0,
+        "R_on_bulk_ohm_cm2": 0.0002918982352991735,
+        "R_on_channel_ohm_cm2": 0.003116922039678799,
+        "share_channel_drop": 0.9414295235891489,
+        "share_bulk_drop": 0.3743198792996522,
+        "ratio": 10.678111967632113,
+        "share_delta_1_minus_Rb_over_Rc": 0.9063504856447248,
+        "V_T_bulk_V": 7.855078975616674,
+        "V_T_channel_V": 9.152722205711097
+      },
+      {
+        "case": "12b",
+        "level": 1,
+        "R_on_bulk_ohm_cm2": 0.00028525530797428734,
+        "R_on_channel_ohm_cm2": 0.003215047237922234,
+        "share_channel_drop": 0.9463665258689571,
+        "share_bulk_drop": 0.3952040735613238,
+        "ratio": 11.270770948150194,
+        "share_delta_1_minus_Rb_over_Rc": 0.911274924794375
+      },
+      {
+        "case": "12b",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.0002841923069260603,
+        "R_on_channel_ohm_cm2": 0.0032558290366153505,
+        "share_channel_drop": 0.9477887860752768,
+        "share_bulk_drop": 0.40166387330704334,
+        "ratio": 11.456429175834218,
+        "share_delta_1_minus_Rb_over_Rc": 0.9127127672460662
+      },
+      {
+        "case": "13d_initial",
+        "level": 0,
+        "R_on_bulk_ohm_cm2": 0.0002855540819722657,
+        "R_on_channel_ohm_cm2": 0.0022893394356701528,
+        "share_channel_drop": 0.9109007738108226,
+        "share_bulk_drop": 0.2851713457185453,
+        "ratio": 8.017183364559655,
+        "share_delta_1_minus_Rb_over_Rc": 0.8752679146119386,
+        "V_T_bulk_V": 7.666120074270849,
+        "V_T_channel_V": 8.654435612909108
+      },
+      {
+        "case": "13d_initial",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.00027803387641171405,
+        "R_on_channel_ohm_cm2": 0.002446694171118365,
+        "share_channel_drop": 0.922119409400384,
+        "share_bulk_drop": 0.31423628692788697,
+        "ratio": 8.799985824372305,
+        "share_delta_1_minus_Rb_over_Rc": 0.8863634533102979
+      },
+      {
+        "case": "13d_final",
+        "level": 0,
+        "R_on_bulk_ohm_cm2": 0.0002855540819728524,
+        "R_on_channel_ohm_cm2": 0.002286566681255973,
+        "share_channel_drop": 0.9107495286796343,
+        "share_bulk_drop": 0.28502341726511776,
+        "ratio": 8.007473279521728,
+        "share_delta_1_minus_Rb_over_Rc": 0.8751166610124825,
+        "V_T_bulk_V": 7.664353135601594,
+        "V_T_channel_V": 8.649186917058806
+      },
+      {
+        "case": "13d_final",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.0002779204459561115,
+        "R_on_channel_ohm_cm2": 0.0023984234748762046,
+        "share_channel_drop": 0.9195783188774006,
+        "share_bulk_drop": 0.30568078802929965,
+        "ratio": 8.62989214998222,
+        "share_delta_1_minus_Rb_over_Rc": 0.8841236967252181
+      }
+    ],
+    "R3_gamma": {
+      "N_A_cm3": [
+        1e+16,
+        3e+16,
+        1e+17,
+        4e+17
+      ],
+      "N_dep_cm2": [
+        567540846439.6698,
+        992733200686.2837,
+        1831732341894.4316,
+        3707317201346.9067
+      ],
+      "gamma_log10": [
+        0.22871076888606118,
+        0.3326443299205309,
+        0.44650494181379147,
+        0.5775575713908327
+      ],
+      "gamma_ln_reading": [
+        0.09156258598423961,
+        0.3308784542839963,
+        0.5930522019085988,
+        0.8948120331703644
+      ],
+      "gamma_N20_measured": [
+        0.2,
+        0.34,
+        0.46,
+        0.54
+      ],
+      "gamma_spec_log10": [
+        0.229,
+        0.333,
+        0.447,
+        0.578
+      ],
+      "gamma_spec_ln": [
+        0.092,
+        0.331,
+        0.593,
+        0.895
+      ],
+      "max_abs_diff_log10_vs_spec": 0.0004950581862085413,
+      "max_abs_diff_log10_vs_N20_measured": 0.03755757139083271,
+      "max_abs_diff_ln_vs_N20_measured": 0.35481203317036436
+    }
+  },
+  "runtime_seconds": 258.25930763501674
+}
