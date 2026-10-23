@@ -73,7 +73,7 @@ mesh-to-mesh differences for the initial vs final design are consistent
 $E_{ox}$ = 5.25 MV/cm on $h$ (5.29 on $h/2$, 5.32 on $h/4$), about **1.75x**
 the 3 MV/cm design guideline, both before and after. The guideline is
 unsourced and is not gated; the constraint only prevents $E_{ox}$ from
-getting worse than the initial design.
+getting worse than the initial design. (2026-10-23 update: the 3 MV/cm guideline is superseded. The comparison is now 1.3x the 4 MV/cm gate-bias TDDB convention stated by Shi et al. (2024), doi:10.1016/j.mssp.2024.108194, p. 6, which gives no citation. The 13d E_ox is an off-state, drain-induced field, a different stress polarity from positive-gate-bias TDDB, so this is a reference, not a design limit.)
 
 **At fixed 400 V the constraint holds, but the oxide field at rated BV
 rises.** Evaluated at each design's own true-minimum BV on $h$:
@@ -138,6 +138,7 @@ SiC field overall falls (2.54 to 2.40 MV/cm). This is reported, not gated.
 - No oxide **reliability** claim. $E_{ox}$ is 1.75x the unsourced 3 MV/cm
   guideline before and after, and rises to about 6.2 MV/cm at the new rated BV.
   The constraint prevents worsening at 400 V; it does not make the oxide safe.
+  (2026-10-23 update: 5.25 MV/cm is 1.3x the 4 MV/cm gate-bias TDDB convention of Shi et al. (2024), p. 6; the off-state, drain-induced field has a different stress polarity, so this is a reference, not a design limit.)
 - Not a global optimum: SLSQP finds a local solution from one starting
   design in a 5-parameter family.
 - BV uses a vertical-cut ionization-integral approximation of a 2D device

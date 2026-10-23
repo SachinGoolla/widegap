@@ -325,7 +325,7 @@ at that bias would meet the same hole-row underflow as 15c.
   log-space solution.
 - **15e (Hall, not channel, mobility): blocked on sources** (paper request sent to the owner).
 - **Oxide-field guideline (3 MV/cm): blocked on a source.** It remains unsourced; the 13d E_ox of
-  5.25 MV/cm (about 1.75 times the guideline) stays a reported number with no reliability claim.
+  5.25 MV/cm (about 1.75 times the guideline) stays a reported number with no reliability claim. (2026-10-23 update: the guideline is superseded by the 4 MV/cm gate-bias TDDB convention of Shi et al. (2024), p. 6; 5.25 MV/cm is 1.3x that, and the off-state, drain-induced field has a different stress polarity, so it is a reference, not a design limit.)
 
 ## Provenance
 
