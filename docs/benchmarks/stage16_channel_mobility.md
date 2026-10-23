@@ -82,3 +82,15 @@ Stage 16 passes if H1–H6 hold.
 - The 13d E_ox (5.25 MV/cm at 400 V) is an **off-state, drain-induced** field, which is a different stress polarity.
 - The README and result wording become: "5.25 MV/cm vs the 4 MV/cm gate-bias TDDB convention stated by Shi et al. (2024), 1.3×, different stress polarity". The unsourced 3 MV/cm guideline is dropped.
 - The paper's 11 MV/cm is an assumption it makes to estimate oxide thickness, and is not cited.
+
+## Note (2026-10-23, after the dev run, before the official run; no criterion changed)
+
+- **"Channel share"** (R1) was not defined above. It is reported two ways: (i) the surface φn drop across the gated p-surface span divided by V_DS; (ii) $1-R_{bulk}/R_{ch}$.
+- **Discretization choices made by the implementer before the first run:**
+  - the edge mobility is the harmonic mean of the two column values;
+  - $N_S$ is integrated over nodes at depth ≤ $d_{ch}$;
+  - clamps are applied to $N_S$ first, then to $E_{eff}$;
+  - $N_{dep}$ uses the total $N_A$, including compensated columns;
+  - H3 has the gate overlapping both n⁺ regions, with $V_{GS}$ set by root-finding so that $N_S(\mathrm{mid})=3\times10^{12}\pm1\%$.
+- **Dev outcome seen:** H5 failed (3.15 % vs 3 %); H2, H3, H4 and H6 passed. H5 stands as written, and the official run decides.
+- **Dev crash:** a dev run with 6 workers once crashed with a glibc "double free" in one worker, root cause not found. The official run uses 4 workers.
