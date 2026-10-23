@@ -1,0 +1,201 @@
+{
+  "criteria": {
+    "B1": true,
+    "B2": true,
+    "B3": false,
+    "B4": true
+  },
+  "gate_passed": false,
+  "dev": false,
+  "values": {
+    "B1": {
+      "R_on_B1_this_run": 0.003215047237922234,
+      "R_on_stage16": 0.003215047237922234,
+      "rel_diff": 0.0
+    },
+    "B2": {
+      "failed": [],
+      "on_entry_to_lines": 0,
+      "stderr_bytes": 0
+    },
+    "B3": {
+      "R_on_Lp_level1": 0.003297876387751674,
+      "R_on_Lp_level2": 0.00336706780129375,
+      "rel_diff": 0.020980596422307762
+    },
+    "B4": {
+      "R_on_Lp_20nm": 0.003297876387751674,
+      "R_on_Lp_40nm": 0.0032994687592602006,
+      "rel_diff": 0.00048284754226712856
+    },
+    "R1": [
+      {
+        "case": "12b",
+        "level": 1,
+        "R_on_bulk_ohm_cm2": 0.00028525530797428734,
+        "R_on_U_ohm_cm2": 0.003215047237922234,
+        "R_on_Lp_ohm_cm2": 0.003297876387751674,
+        "R_on_L18_ohm_cm2": 0.003338162994539712,
+        "n_acc_edges": 110,
+        "Lp_over_U_minus_1": 0.025762965113685032,
+        "L18_over_U_minus_1": 0.03829360737388199
+      },
+      {
+        "case": "12b",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.0002841923069260603,
+        "R_on_U_ohm_cm2": 0.0032558290366153505,
+        "R_on_Lp_ohm_cm2": 0.00336706780129375,
+        "R_on_L18_ohm_cm2": 0.0034287652781895077,
+        "n_acc_edges": 460,
+        "Lp_over_U_minus_1": 0.034166033728245004,
+        "L18_over_U_minus_1": 0.05311588527201527
+      },
+      {
+        "case": "13d_initial",
+        "level": 1,
+        "R_on_bulk_ohm_cm2": 0.0002792926937498106,
+        "R_on_U_ohm_cm2": 0.0024368821442725484,
+        "R_on_Lp_ohm_cm2": 0.002515244961805958,
+        "R_on_L18_ohm_cm2": 0.0025393223836138053,
+        "n_acc_edges": 100,
+        "Lp_over_U_minus_1": 0.032156999351645954,
+        "L18_over_U_minus_1": 0.04203742047272341
+      },
+      {
+        "case": "13d_initial",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.00027803387641171405,
+        "R_on_U_ohm_cm2": 0.002446694171118365,
+        "R_on_Lp_ohm_cm2": 0.0025587542346853097,
+        "R_on_L18_ohm_cm2": 0.002598883463906835,
+        "n_acc_edges": 420,
+        "Lp_over_U_minus_1": 0.045800601027190524,
+        "L18_over_U_minus_1": 0.06220200897397232
+      },
+      {
+        "case": "13d_final",
+        "level": 1,
+        "R_on_bulk_ohm_cm2": 0.00027924108726097254,
+        "R_on_U_ohm_cm2": 0.002433281952492102,
+        "R_on_Lp_ohm_cm2": 0.0025028945090566053,
+        "R_on_L18_ohm_cm2": 0.0025231560479128923,
+        "n_acc_edges": 100,
+        "Lp_over_U_minus_1": 0.02860850403842763,
+        "L18_over_U_minus_1": 0.036935339666964495
+      },
+      {
+        "case": "13d_final",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.0002779204459561115,
+        "R_on_U_ohm_cm2": 0.0023984234748762046,
+        "R_on_Lp_ohm_cm2": 0.0025604749973011636,
+        "R_on_L18_ohm_cm2": 0.0026082548217099947,
+        "n_acc_edges": 440,
+        "Lp_over_U_minus_1": 0.06756585070254251,
+        "L18_over_U_minus_1": 0.08748719691572426
+      },
+      {
+        "case": "s17_final",
+        "level": 1,
+        "R_on_bulk_ohm_cm2": 0.00028729819108914815,
+        "R_on_U_ohm_cm2": 0.0023370850340032365,
+        "R_on_Lp_ohm_cm2": 0.0025061425059919313,
+        "R_on_L18_ohm_cm2": 0.002550439101689774,
+        "n_acc_edges": 110,
+        "Lp_over_U_minus_1": 0.07233689383527198,
+        "L18_over_U_minus_1": 0.09129067388749634
+      },
+      {
+        "case": "s17_final",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.00028594053223970765,
+        "R_on_U_ohm_cm2": 0.0024023313959501743,
+        "R_on_Lp_ohm_cm2": 0.0025501658677670965,
+        "R_on_L18_ohm_cm2": 0.002597067869099848,
+        "n_acc_edges": 440,
+        "Lp_over_U_minus_1": 0.06153791773530504,
+        "L18_over_U_minus_1": 0.08106145283617328
+      },
+      {
+        "case": "s17b_final",
+        "level": 1,
+        "R_on_bulk_ohm_cm2": 0.0002797091029743571,
+        "R_on_U_ohm_cm2": 0.0024368821442722795,
+        "R_on_Lp_ohm_cm2": 0.0025140584061251123,
+        "R_on_L18_ohm_cm2": 0.002537634785256467,
+        "n_acc_edges": 100,
+        "Lp_over_U_minus_1": 0.03167008385458048,
+        "L18_over_U_minus_1": 0.041344896888427574
+      },
+      {
+        "case": "s17b_final",
+        "level": 2,
+        "R_on_bulk_ohm_cm2": 0.00027837193021998933,
+        "R_on_U_ohm_cm2": 0.0024465991438608063,
+        "R_on_Lp_ohm_cm2": 0.0025573152721788564,
+        "R_on_L18_ohm_cm2": 0.0025971224566601393,
+        "n_acc_edges": 420,
+        "Lp_over_U_minus_1": 0.045253072451965526,
+        "L18_over_U_minus_1": 0.061523487890134065
+      }
+    ],
+    "R3": {
+      "per_model": {
+        "U": {
+          "kind": "r3",
+          "model": "U",
+          "level": 1,
+          "error": null,
+          "R0": 0.0024368821442725484,
+          "dR_dthetaJ": -9.42612097805471e-05,
+          "fd_eps_1e-3": -9.426124065255344e-05,
+          "fd_eps_5e-4": -9.426121749854868e-05,
+          "spread": 2.3154004755165936e-11,
+          "n_solves": 5,
+          "all_converged": true,
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "seconds": 277.06247307697777,
+          "rss_mib": 239.671875
+        },
+        "Lp": {
+          "kind": "r3",
+          "model": "Lp",
+          "level": 1,
+          "error": null,
+          "R0": 0.002515244961805958,
+          "dR_dthetaJ": -0.00022506509878743655,
+          "fd_eps_1e-3": -0.0002250651175450015,
+          "fd_eps_5e-4": -0.0002250651034768278,
+          "spread": 1.4068173709302911e-11,
+          "n_solves": 5,
+          "all_converged": true,
+          "n_acc_columns": 11,
+          "n_acc_edges": 100,
+          "acc_x_range_um": [
+            0.0,
+            0.6666666666666667
+          ],
+          "mu_acc_cm2": 17.5,
+          "seconds": 273.2929405940231,
+          "rss_mib": 236.83203125
+        }
+      },
+      "Lp_over_U": 2.387674625770438
+    }
+  },
+  "designs": {
+    "s17_final": {
+      "source": "results/stage17/results.json",
+      "present": true
+    },
+    "s17b_final": {
+      "source": "/home/dada/widegap/results/stage17b/results.json",
+      "present": true,
+      "complete_results_file": true,
+      "dev": false
+    }
+  },
+  "runtime_seconds": 931.4639711809577
+}
