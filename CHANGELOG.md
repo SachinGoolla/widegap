@@ -6,16 +6,20 @@ All notable changes to this project are documented in this file. The format foll
 
 ### Added
 
-- **Stage 16**, channel mobility (Noguchi et al. 2017/2020), pre-registered ([spec](docs/benchmarks/stage16_channel_mobility.md)).
+- **Stage 16**, channel (inversion-layer) mobility, Noguchi et al. 2017/2020 (`widegap` registry entries, sheet model with Picard iteration), forward re-evaluation of 12b and 13d ([spec](docs/benchmarks/stage16_channel_mobility.md), [result](docs/benchmarks/stage16_result.md)). **The stage gate is NOT passed: H5 failed.** H1-H4 and H6 passed (11 registry entries verified; H2 5.6e-16; H3 0.77-1.11% for three N_A; 67 evaluations converged; d_ch 20 vs 40 nm 1.5e-8). H5: 12b channel R_on,sp 3.117e-3 (h) vs 3.215e-3 ohm cm2 (h/2), +3.148% against a 3% limit; h/2 to h/4 +1.27% (3.256e-3); the bulk model alone moves -2.28% and -0.37%. R1: channel R_on,sp is 8.0-11.5 times the bulk-Hall value, the channel carries about 90% of it, and V_T rises by 0.98-1.30 V. 13d initial vs final channel R_on,sp: -0.12% (h), -1.97% (h/4). R2: 0 columns with N_S above 1e13, N_S clamp only outside the gated span, d_ch = 10 nm changes R_on by 6.0e-6. Manifest commit `d85438d`, `git_dirty: false`. No agreement with measured devices is claimed; the 13d design was not re-optimized.
 - **Stage 15**, caveat closure for the SiC device results, pre-registered with two disclosed amendments ([spec](docs/benchmarks/stage15_caveat_closure.md), [result](docs/benchmarks/stage15_result.md)). **The stage gate is NOT passed: L1 failed.** 15b and 15f passed their gating criteria; 15d did not.
 - **15b**, field-line ionization-integral BV (`widegap.fieldline`), a post-hoc re-evaluation of the 12c off-state fields for the initial, 13b, 13c and 13d designs on h and h/2. F1-F5 passed (1D reduction 3.7e-6 relative, step 4.9e-7, seeds 2.9e-5, mesh 0.22%, 0 step-limit lines). Field-line minus dense vertical-cut BV is between -6.77 V (-1.09%) and +0.29 V (+0.06%); the 13d gain survives (+60.3 V field-line vs +61.1 V cut on h, +61.7 V vs +62.3 V on h/2), as do the 13b and 13c gains. Manifest commit `0d63445`, `git_dirty: false`.
 - **15d**, local-field mesh adequacy (`widegap.localfield`). **L1 failed** for E_ox (order 0.056; the area mean changes about 0.06% per refinement, so the pre-registered order is ill-conditioned; the failure stands) and W2 (order -0.044, 7.5% from Richardson, monotone increasing: genuine non-convergence); W1 (order 1.09) and W3 (order 1.42) pass. L2: E_ox area mean rises by a relative 2.4e-5 from the initial to the final design on h; W1-W3 decrease. R3 pinning table and the finding that the 13d smooth-max creep is mainly the ln(N)/kappa smooth-max bias growing with edge count are in the result.
 - **15f**, Ishikawa v_sat option (1.7e7 cm/s, isotropic) with 10 new registry entries that pass `check_entry` (V1), and an option in `widegap.sic`. All solves converged (V2). R4: R_on changes by +0.65% to +0.72% (beta 1.0) and +0.08% to +0.09% (beta 1.2), V_T by at most 0.0093 V, I_D at V_DS = 15 V by -20.0% to -20.7% (beta 1.0) and -11.7% to -12.9% (beta 1.2), for the 12b device and the 13d initial and final designs. The Khan and Cooper entries are unchanged.
 - 15a restated as a bound from the 12c gates C2 (relative difference 0) and C3 (n/N at most 2e-19) with no new run; 15c deferred; 15e blocked on sources. The 3 MV/cm oxide guideline is replaced by the 4 MV/cm gate-bias TDDB convention of Shi et al. (2024), p. 6, as a reference only: 13d E_ox is 1.3x that, and it is an off-state, drain-induced field with a different stress polarity.
 
+### Fixed
+
+- **Solver robustness** (commit `d85438d`): exp overflow on diverging Newton trial iterates produced inf/NaN Jacobians that were passed to SuperLU (illegal BLAS calls, seen in the stage 10, 12, 13 and 16 logs, and once a glibc double free that crashed the first stage-16 official attempt). A `safe_spsolve` wrapper now never passes non-finite matrices to SuperLU, and five Newton loops reject NaN steps and report non-convergence. Finite solves are bit-identical; a stage-13d re-run reproduced all 494 non-timing summary values exactly. Only 13d was re-run, so earlier stages' results are unaffected on that evidence only.
+
 ### Changed
 
-- README caveat list updated with the stage 15 status of each caveat: BV method difference quantified (15b); v_sat anisotropy closed but the value uncertain (15f); local-field convergence diagnosed and partly open (15d); mobility, V_DS limit and the oxide-field reference comparison open.
+- README caveat list updated with the stage 15 status of each caveat: BV method difference quantified (15b); v_sat anisotropy closed but the value uncertain (15f); local-field convergence diagnosed and partly open (15d); mobility, V_DS limit and the oxide-field reference comparison open. Updated after stage 16: the mobility caveat is quantified (channel R_on,sp 8.0-11.5 times the bulk value) but the stage-16 gate was not passed (H5).
 
 ### Process
 
@@ -26,6 +30,7 @@ All notable changes to this project are documented in this file. The format foll
 
 ### Known limitations
 
+- Stage 16 does not show a mesh-converged channel-model R_on,sp (12b: +3.15% then +1.27% per refinement; H5 failed); Hall factor 1, NO-annealed parameters, no N_it dependence, 300 K, no accumulation-layer model, and 13d not re-optimized under the channel model.
 - Stage 15 does not show mesh-converged local fields (E_ox and W2 area means fail L1); no agreement with measured devices is claimed.
 - The field-line BV is a post-hoc ionization-integral evaluation of zero-current fields, not a full 2D avalanche simulation.
 - The v_sat value remains uncertain between the two published values (2.2e7 and 1.7e7 cm/s); holes use the electron v_sat; beta below 1 is unsupported by the model.
