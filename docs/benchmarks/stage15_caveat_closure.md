@@ -100,3 +100,23 @@ Stage 15 passes if F1–F5, L1, V1 and V2 hold. The R items are reported whateve
 - a full 2D avalanche simulation (no impact-ionization generation in DD);
 - agreement with measured devices;
 - mesh convergence beyond $h/4$.
+
+## Amendment 1 (2026-10-22, after the dev runs, before any official run; disclosed)
+
+**15f, V2/R4 as written are outside the model's domain.**
+- The thesis fit exponents at $N_D\le10^{16}$ are below 1: α = 0.93 (⊥c) and 0.87 (//c) at $10^{16}$.
+- The stage-9a Caughey–Thomas implementation requires β ≥ 1 (`fv2d/physics.py::ct_factor`), because $F^{\beta-1}$ is singular at zero-field edges.
+- Extending the mobility model would be new physics with its own verification, so it is not done here.
+
+**Restated V2/R4.**
+- The Ishikawa set is $v_{sat}=1.7\times10^7$ cm/s, isotropic (the thesis finding).
+- It is evaluated at two values of β: **β = 1.0** (the model's lower bound) and **β = 1.2** (Khan & Cooper). This separates the $v_{sat}$ effect from the β effect.
+- V2 requires every solve in both variants to converge. β < 1 is recorded as unsupported.
+
+**Disclosure.** A dev run at β = 1.0 was seen before this amendment: it moved R_on by about 0.7 % and $I_D$ at 15 V by about −20 %. The amendment does not choose β on the basis of that outcome. Both bracketing values are run.
+
+**Other dev-run findings recorded here** (no criterion changes):
+- The thesis's 1.7e7 is its own recommended value. Its text says it averages the samples "below 1×10^16"; the three tabulated values at $N_D\le10^{16}$ are 1.7, 1.9 and 1.6.
+- 15d "oxide/SiC interface corner" is defined as the surface points where the boundary condition changes: the gate end, the source-contact start and the body-contact start. The interface itself is planar. The definition is frozen in `localfield.py`.
+- $I_D$ at $V_{DS}$ = 15 V uses $V_{GS}$ = 15 V, the stage-12 on-state gate bias. The spec did not state this.
+- 15d dev: L1 failed for E_ox and W2. L1 is unchanged; the official run decides.
