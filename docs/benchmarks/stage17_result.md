@@ -1,5 +1,7 @@
 # Stage 17 result: gate NOT passed (J4 failed; J1-J3 and J5-J7 pass) (2026-10-23)
 
+> **Note (2026-10-23, stage 19):** the BVs reported here are avalanche BVs of the zero-current off-state model, which cannot carry source-injected electrons. Stage 19 ([result](stage19_result.md)) found a 1D punch-through onset of about 90 to 130 V for this geometry (the body under the source is too thin), so these BVs are not the device's blocking voltage. Optimization results here (relative BV changes) remain statements about the avalanche objective only. The original text below is unchanged.
+
 Raw data: `results/stage17/` (`summary.json`, `results.json`, `manifest.json`). Figures:
 `figures/stage17_theta.png`, `figures/stage17_pareto.png`, `figures/stage17_per_cut_bv.png`,
 `figures/stage17_jfet_sensitivity.png`. Pre-registration: `stage17_channel_aware_opt.md`. Follow-up

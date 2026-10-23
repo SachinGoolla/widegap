@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **Stage 19**, punch-through check of the study DMOSFET by 1D drift-diffusion through the n+/p/n-/n+ stack at x = 2.0 and 1.6 um, floating and tied body, meshes h and h/2 ([spec](docs/benchmarks/stage19_punchthrough_check.md), [result](docs/benchmarks/stage19_result.md)). **The stage gate is NOT passed: P1 and P2 failed, P3 passed** (commit d568cc0, `git_dirty: false`, widegap 0.5.0). P1a failed (rel_log 0.0015 to 0.0024 against 1e-3) at J_n of about 1e-45 A/cm2, an ill-designed criterion (reported as a finding, not re-registered); P1b passed (|diff| <= 0.42 V_T at 10 V). P2: floating-body runs stall at 73 to 101 V (precision floor in depleted-body hole/electron rows), tied-body runs reach 108 to 225 V. P3: V_pt mesh change 3.04 % and 0.042 %. **R2 verdict: confirmed** for both body configurations. R1: practical onset (J_n = 1e-3 to 1e3 A/cm2, tied runs) 86.7 to 127.9 V, barrier below 10 V_T at 95.6 to 123.5 V, worst column x = 2.0 um, against the 516.87 V avalanche BV. The 512 to 620 V BVs of stages 12 to 17b are avalanche BVs of a zero-current model and not the device's blocking voltage; dated notes were added to the affected result documents. Not claimed: a 2D punch-through voltage, agreement with measured devices.
+
 ## [0.5.0] - 2026-10-23
 
 ### Added

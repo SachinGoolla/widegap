@@ -1,5 +1,7 @@
 # Stage 15 result: gate NOT passed (15d failed L1); 15b passed F1-F5, 15f passed V1-V2 (2026-10-22)
 
+> **Note (2026-10-23, stage 19):** the BVs reported here (in particular the 15b field-line BV part) are avalanche BVs of the zero-current off-state model, which cannot carry source-injected electrons. Stage 19 ([result](stage19_result.md)) found a 1D punch-through onset of about 90 to 130 V for this geometry (the body under the source is too thin), so these BVs are not the device's blocking voltage. Optimization results here (relative BV changes) remain statements about the avalanche objective only. The original text below is unchanged.
+
 Raw data: `results/stage15b/`, `results/stage15d/`, `results/stage15f/` (each with
 `summary.json`, `results.json`, `manifest.json`). Figures: `figures/stage15b_bv_comparison.png`,
 `stage15b_field_lines.png`, `stage15d_convergence.png`, `stage15d_hardmax_positions.png`.

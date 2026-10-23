@@ -1,5 +1,7 @@
 # Stage 12 result: gate PASSED after one disclosed re-registration (2026-10-21)
 
+> **Note (2026-10-23, stage 19):** the BVs reported here are avalanche BVs of the zero-current off-state model, which cannot carry source-injected electrons. Stage 19 ([result](stage19_result.md)) found a 1D punch-through onset of about 90 to 130 V for this geometry (the body under the source is too thin), so these BVs are not the device's blocking voltage. Optimization results here (relative BV changes) remain statements about the avalanche objective only. The original text below is unchanged.
+
 These are the first widegap simulations that use **sourced 4H-SiC
 parameters** (87-entry registry). The single exception is the
 owner-approved convention $\varepsilon_{SiO_2}=3.9$. Implemented by a Sonnet
