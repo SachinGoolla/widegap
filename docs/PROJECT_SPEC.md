@@ -216,5 +216,5 @@ closure) ran as 15b, 15d and 15f; its gate was not passed (L1 failed), see `stag
 |---|---|---|---|
 | 16 | Channel (inversion-layer) mobility, Noguchi et al., forward re-evaluation of 12b and 13d | not passed: H5 failed (R_on,sp +3.15% from h to h/2 against a 3% limit); H1-H4 and H6 passed | `stage16_result.md` |
 | 17 | Channel-aware re-optimization of the 13d DMOSFET (exact adjoint through the nonlocal mobility) | not passed: J4 failed (113 of 173 evaluations crossed the frozen surface classification); J1-J3 and J5-J7 passed; optimum numbers not trustworthy | `stage17_result.md` |
-| 17b | Stage 17 with the classification guard as an SLSQP constraint | planned (pre-registered, not run) | `stage17b_classification_constraint.md` |
+| 17b | Stage 17 with the classification guard as an SLSQP constraint | passed: J1-J3, J4b, J5-J8 hold; dense true-min BV 572.5 V (h), 35.1 V below the stage-17 final and 5.5 V below the 13d final | `stage17b_result.md` |
 | 18 | Accumulation-layer mobility bracket on the JFET surface (Zhao 2007 pessimistic bound) | planned (pre-registered, not run) | `stage18_accumulation_bracket.md` |

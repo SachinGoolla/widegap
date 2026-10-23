@@ -18,7 +18,7 @@ designs.
 constraint was evaluated partly outside the validity of the frozen surface classification (J4, see
 below), so "R_on,ch <= R_on,ch(0)" at the stage-17 final design is a statement about the frozen-map
 model, not about the model the spec intended. The numbers are reported as recorded, as a statement of
-what SLSQP converged to under that model. Stage 17b (pre-registered, not run) enforces the
+what SLSQP converged to under that model. Stage 17b (run later; passed, see `stage17b_result.md`) enforces the
 classification guard as a constraint and is the follow-up.
 
 ## Criteria
@@ -251,7 +251,7 @@ records `widegap 0.2.0` as the package version (the release is v0.4.0; not recon
 
 ## Next
 
-- **Stage 17b** (pre-registered `stage17b_classification_constraint.md`, not run): the same problem
+- **Stage 17b** (pre-registered `stage17b_classification_constraint.md`; run later and passed, see `stage17b_result.md`): the same problem
   with SLSQP inequality constraints keeping every gated, p-type-at-theta=0 surface column within a
   2 % margin of its classification on h/2 and h/4 (criteria J4b and J8; R4 reports the BV cost and
   the reclassified R_on of this stage-17 final). The margin m = 0.02 is a model-validity restriction,

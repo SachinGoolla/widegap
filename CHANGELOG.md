@@ -7,16 +7,21 @@ All notable changes to this project are documented in this file. The format foll
 ### Added
 
 - **Stage 17**, channel-aware re-optimization of the 13d DMOSFET (stage-16 channel-model R_on on h/2 with an exact adjoint through mu(N_S); off-state on h) ([spec](docs/benchmarks/stage17_channel_aware_opt.md), [result](docs/benchmarks/stage17_result.md)). **The stage gate is NOT passed: J4 failed** (113 of 173 evaluations changed the sign of N_D - N_A in a frozen-classification surface column). J1-J3 and J5-J7 passed: adjoint vs Richardson FD 5.19e-9; feasibility R/R0 - 1 = 6.5e-13, E_ox 4.5e-12; dense true-min BV 516.87 to 607.61 V (h) and 518.09 to 609.71 V (h/2), 13d final 577.94/580.41 V; h/4 R_on re-check -1.27e-4; SLSQP exit 0; 119 non-finite calls all in rejected Newton trial steps, 0 "On entry to" lines. R2: lagged-gradient error 5.07% (initial), 5.25% (final); the JFET-level sensitivity is 2.17 to 2.53 times the bulk value, with the excess in the node (Poisson/ionization) part near the JFET surface, not the mobility edges. The optimum numbers are not trustworthy as design results (the binding R_on constraint was partly evaluated outside the frozen-classification validity). Manifest commit `a2425f0`, `git_dirty: false`.
-- **Stage 17b** pre-registered, not run: the surface-classification guard enforced as SLSQP constraints (margin 0.02), with criteria J4b, J8 and R4 ([spec](docs/benchmarks/stage17b_classification_constraint.md)).
+- **Stage 17b**, stage 17 with the surface-classification guard enforced as 35 SLSQP constraints (margin 0.02; J4b, J8, R4) ([spec](docs/benchmarks/stage17b_classification_constraint.md), [result](docs/benchmarks/stage17b_result.md)). **The stage gate is PASSED** (J1-J3, J4b, J5-J8; commit 69eb1c3, `git_dirty: false`). Dense true-min BV 516.87 to 572.46 V (h) and 518.09 to 574.91 V (h/2) at R_on,ch active and E_ox inactive; one active classification constraint (h/4 corner column, x = 0.733 um). The constraint costs 35.1 V (h) against the stage-17 final, whose reclassified R_on,ch is -4.1% (h/2) and -1.8% (h/4). The 17b optimum is 5.5 V below the 13d final (577.94/580.41 V), so no improvement over 13d is claimed. m = 0.02 is not physical; the compensated corner region is unmodelled; accumulation-layer mobility is pending (stage 18).
 - **Stage 18** pre-registered, not run: accumulation-layer mobility bracket on the JFET surface ([spec](docs/benchmarks/stage18_accumulation_bracket.md)).
 - Registry entry for the Zhao et al. (2007) accumulation-layer mobility (17.5 cm2/Vs, stage-18 pessimistic bound); the registry now has 109 entries.
 
 ### Changed
 
-- README: stage 17 row and updated mobility caveat. `docs/PROJECT_SPEC.md`: v2.3 stage-table revision (16 and 17 not passed, 17b and 18 planned).
+- README: stage 17 and 17b rows and updated mobility caveat. `docs/PROJECT_SPEC.md`: v2.3 stage-table revision (16 and 17 not passed, 17b passed, 18 planned).
+
+### Fixed
+
+- Run manifests now record the source `__version__` of `widegap` (commit d2f1d9c); the stage 17 manifest still records 0.2.0, the stage 17b manifest records 0.4.0.
 
 ### Known limitations
 
+- Stage 17b passes but its optimum is not better than the 13d final in dense true-min BV (5.5 V lower); the 17b margin m = 0.02 is not physical.
 - Stage 17 does not pass (J4); its optimum depends on a frozen surface classification the optimum crosses (theta_J about 0.074, optimum 0.147); the reclassified R_on of the final design is not recorded in the official run (4.1% lower in the dev run, per the 17b spec). No accumulation-layer mobility; h/2 on-state mesh uncertainty of about 1.3%.
 
 ## [0.4.0] - 2026-10-23
