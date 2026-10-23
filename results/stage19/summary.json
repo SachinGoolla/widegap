@@ -1,0 +1,1545 @@
+{
+  "criteria": {
+    "P1": false,
+    "P2": false,
+    "P3": true
+  },
+  "gate_passed": false,
+  "dev": false,
+  "values": {
+    "P1": {
+      "P1a": {
+        "floating": [
+          {
+            "x_um": 2.0,
+            "J_h_A_cm2": -4.6816317513496294e-45,
+            "J_h2_A_cm2": -3.69168465931351e-45,
+            "abs_dlnJ": 0.2375638128725086,
+            "rel_log": 0.0023219943407616307,
+            "rel_J": 0.26815591888073276,
+            "rel_log_scaled_units": 0.002127918480609374,
+            "J_h4_A_cm2": -3.3100641828418604e-45,
+            "abs_dlnJ_h2_h4": 0.10911532131824656
+          },
+          {
+            "x_um": 1.6,
+            "J_h_A_cm2": -2.882361177140957e-45,
+            "J_h2_A_cm2": -2.3069823973670842e-45,
+            "abs_dlnJ": 0.22266946235987461,
+            "rel_log": 0.002166458649187415,
+            "rel_J": 0.24940752926010257,
+            "rel_log_scaled_units": 0.0019861420479395215,
+            "J_h4_A_cm2": -2.0859655953240545e-45,
+            "abs_dlnJ_h2_h4": 0.10070848575655714
+          }
+        ],
+        "tied": [
+          {
+            "x_um": 2.0,
+            "J_h_A_cm2": -4.681631751349637e-45,
+            "J_h2_A_cm2": -3.655864375450651e-45,
+            "abs_dlnJ": 0.24731415750494534,
+            "rel_log": 0.0024170657315741393,
+            "rel_J": 0.2805813538344244,
+            "rel_log_scaled_units": 0.002215061300593635
+          },
+          {
+            "x_um": 1.6,
+            "J_h_A_cm2": -2.6555674418136247e-45,
+            "J_h2_A_cm2": -2.2826439235128678e-45,
+            "abs_dlnJ": 0.15132397088063954,
+            "rel_log": 0.0014721520224410503,
+            "rel_J": 0.16337349617230146,
+            "rel_log_scaled_units": 0.0013496348724881624
+          }
+        ]
+      },
+      "P1b": {
+        "floating": [
+          {
+            "x_um": 2.0,
+            "level": 0,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.61914406136124,
+                "barrier_12c": 115.93625674121353,
+                "diff": -0.3171126798522863
+              },
+              "10": {
+                "barrier_1D": 115.35058700554254,
+                "barrier_12c": 115.772164910861,
+                "diff": -0.4215779053184576
+              },
+              "20": {
+                "barrier_1D": 115.04012980220259,
+                "barrier_12c": 115.35488657019685,
+                "diff": -0.3147567679942682
+              },
+              "40": {
+                "barrier_1D": 112.8115214163035,
+                "barrier_12c": 114.83056927610944,
+                "diff": -2.019047859805937
+              }
+            },
+            "phi_p_body_V_at_10V": -2.3135598085865207e-35,
+            "diff_10V": -0.4215779053184576,
+            "ok": true
+          },
+          {
+            "x_um": 2.0,
+            "level": 1,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.80347339063508,
+                "barrier_12c": 116.00940313525784,
+                "diff": -0.2059297446227646
+              },
+              "10": {
+                "barrier_1D": 115.63484488720732,
+                "barrier_12c": 115.89880070723785,
+                "diff": -0.26395582003053164
+              },
+              "20": {
+                "barrier_1D": 115.19294932543977,
+                "barrier_12c": 115.67617687279488,
+                "diff": -0.48322754735511353
+              },
+              "40": {
+                "barrier_1D": 114.0443147971669,
+                "barrier_12c": 114.9637088529478,
+                "diff": -0.9193940557808986
+              }
+            },
+            "phi_p_body_V_at_10V": 0.00025381822871341995,
+            "diff_10V": -0.26395582003053164,
+            "ok": true
+          },
+          {
+            "x_um": 1.6,
+            "level": 0,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.17716605054466,
+                "barrier_12c": 115.25863001771009,
+                "diff": -0.08146396716543336
+              },
+              "10": {
+                "barrier_1D": 115.26329527878086,
+                "barrier_12c": 115.07602599141453,
+                "diff": 0.18726928736633397
+              },
+              "20": {
+                "barrier_1D": 114.90037882619171,
+                "barrier_12c": 114.9724287347394,
+                "diff": -0.07204990854768312
+              },
+              "40": {
+                "barrier_1D": 114.16964843826221,
+                "barrier_12c": 114.03799167422547,
+                "diff": 0.1316567640367481
+              }
+            },
+            "phi_p_body_V_at_10V": 0.0021287214844060583,
+            "diff_10V": 0.18726928736633397,
+            "ok": true
+          },
+          {
+            "x_um": 1.6,
+            "level": 1,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.5325366032404,
+                "barrier_12c": 115.24836729728533,
+                "diff": 0.28416930595507495
+              },
+              "10": {
+                "barrier_1D": 115.39814217071796,
+                "barrier_12c": 115.19754550954204,
+                "diff": 0.200596661175922
+              },
+              "20": {
+                "barrier_1D": 114.13191019244363,
+                "barrier_12c": 115.0267117071559,
+                "diff": -0.8948015147122703
+              },
+              "40": {
+                "barrier_1D": 113.41795761389795,
+                "barrier_12c": 114.52846656814972,
+                "diff": -1.1105089542517703
+              }
+            },
+            "phi_p_body_V_at_10V": 0.00027559919572533683,
+            "diff_10V": 0.200596661175922,
+            "ok": true
+          }
+        ],
+        "tied": [
+          {
+            "x_um": 2.0,
+            "level": 0,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.61914406136124,
+                "barrier_12c": 115.93625674121353,
+                "diff": -0.3171126798522863
+              },
+              "10": {
+                "barrier_1D": 115.35058700554254,
+                "barrier_12c": 115.772164910861,
+                "diff": -0.4215779053184576
+              },
+              "20": {
+                "barrier_1D": 115.04012980220259,
+                "barrier_12c": 115.35488657019685,
+                "diff": -0.3147567679942682
+              },
+              "40": {
+                "barrier_1D": 112.81152141630352,
+                "barrier_12c": 114.83056927610944,
+                "diff": -2.019047859805923
+              }
+            },
+            "phi_p_body_V_at_10V": 0.0,
+            "diff_10V": -0.4215779053184576,
+            "ok": true
+          },
+          {
+            "x_um": 2.0,
+            "level": 1,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.81326578935288,
+                "barrier_12c": 116.00940313525784,
+                "diff": -0.19613734590495824
+              },
+              "10": {
+                "barrier_1D": 115.64463167181987,
+                "barrier_12c": 115.89880070723785,
+                "diff": -0.25416903541798774
+              },
+              "20": {
+                "barrier_1D": 115.22606823747049,
+                "barrier_12c": 115.67617687279488,
+                "diff": -0.4501086353243977
+              },
+              "40": {
+                "barrier_1D": 114.07713893090462,
+                "barrier_12c": 114.9637088529478,
+                "diff": -0.8865699220431793
+              }
+            },
+            "phi_p_body_V_at_10V": 0.0,
+            "diff_10V": -0.25416903541798774,
+            "ok": true
+          },
+          {
+            "x_um": 1.6,
+            "level": 0,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.40088777614278,
+                "barrier_12c": 115.25863001771009,
+                "diff": 0.14225775843269162
+              },
+              "10": {
+                "barrier_1D": 115.34548701283921,
+                "barrier_12c": 115.07602599141453,
+                "diff": 0.2694610214246893
+              },
+              "20": {
+                "barrier_1D": 114.98255140846857,
+                "barrier_12c": 114.9724287347394,
+                "diff": 0.010122673729171083
+              },
+              "40": {
+                "barrier_1D": 114.25127261997505,
+                "barrier_12c": 114.03799167422547,
+                "diff": 0.2132809457495881
+              }
+            },
+            "phi_p_body_V_at_10V": 0.0,
+            "diff_10V": 0.2694610214246893,
+            "ok": true
+          },
+          {
+            "x_um": 1.6,
+            "level": 1,
+            "by_V": {
+              "5": {
+                "barrier_1D": 115.52192778564884,
+                "barrier_12c": 115.24836729728533,
+                "diff": 0.27356048836351476
+              },
+              "10": {
+                "barrier_1D": 115.40878187430386,
+                "barrier_12c": 115.19754550954204,
+                "diff": 0.21123636476181673
+              },
+              "20": {
+                "barrier_1D": 115.10984763340531,
+                "barrier_12c": 115.0267117071559,
+                "diff": 0.0831359262494118
+              },
+              "40": {
+                "barrier_1D": 114.39185550644831,
+                "barrier_12c": 114.52846656814972,
+                "diff": -0.1366110617014158
+              }
+            },
+            "phi_p_body_V_at_10V": 0.0,
+            "diff_10V": 0.21123636476181673,
+            "ok": true
+          }
+        ]
+      },
+      "P1a_ok_floating": false,
+      "P1b_ok_floating": true,
+      "tied_P1a_ok": false,
+      "tied_P1b_ok": true
+    },
+    "P2": {
+      "by_body": {
+        "floating": [
+          {
+            "x_um": 2.0,
+            "level": 0,
+            "V_last_converged": 73.0,
+            "reached_150V": false,
+            "failure": {
+              "target_V": 74.0,
+              "iterations": 200,
+              "last_residual_ratio": 5.720274779283771e-16,
+              "last_dX": 3.121883700325043e-08,
+              "residual_test_ok": true,
+              "step_test_ok": false,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 29.31349629662386,
+                  "node": 34,
+                  "depth_um": 3.4515715709258967,
+                  "p_at_node": 1.8983319159850174e-50,
+                  "n_at_node": 4.551348199315891
+                },
+                "phi_n": {
+                  "max_abs_step": 29.313496296623835,
+                  "node": 30,
+                  "depth_um": 2.315178883577997,
+                  "p_at_node": 3.860805978741341e-51,
+                  "n_at_node": 4.516953052080539
+                },
+                "phi_p": {
+                  "max_abs_step": 29.31320536934377,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.2157341830664036e-51,
+                  "n_at_node": 220.7886170189825
+                }
+              },
+              "worst_row": {
+                "variable": "phi_n",
+                "node": 16,
+                "depth_um": 0.5727272727272728,
+                "ratio": 5.720274779283771e-16,
+                "F": 2.9387358770557188e-37,
+                "S": 5.137403342403202e-22,
+                "p_at_node": 1.970395564260422e-26,
+                "n_at_node": 2.437366605964847e-23
+              }
+            }
+          },
+          {
+            "x_um": 2.0,
+            "level": 1,
+            "V_last_converged": 76.0,
+            "reached_150V": false,
+            "failure": {
+              "target_V": 77.0,
+              "iterations": 200,
+              "last_residual_ratio": 6.214146365888739e-16,
+              "last_dX": 3.481455420194613e-07,
+              "residual_test_ok": true,
+              "step_test_ok": false,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 22.96727544890174,
+                  "node": 72,
+                  "depth_um": 3.9000000000000004,
+                  "p_at_node": 1.8628995566618014e-51,
+                  "n_at_node": 220.7881711646789
+                },
+                "phi_n": {
+                  "max_abs_step": 22.96727544890172,
+                  "node": 60,
+                  "depth_um": 2.315178883577997,
+                  "p_at_node": 3.9826652918867917e-51,
+                  "n_at_node": 4.517417263160328
+                },
+                "phi_p": {
+                  "max_abs_step": 22.967239660720338,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 3.884903964747118e-51,
+                  "n_at_node": 220.78864688587643
+                }
+              },
+              "worst_row": {
+                "variable": "phi_p",
+                "node": 19,
+                "depth_um": 0.2396349959038079,
+                "ratio": 6.214146365888739e-16,
+                "F": -9.13102232876255e-67,
+                "S": 1.46939286446251e-51,
+                "p_at_node": 6.275336091385443e-51,
+                "n_at_node": 164.1918767845456
+              }
+            }
+          },
+          {
+            "x_um": 1.6,
+            "level": 0,
+            "V_last_converged": 94.0,
+            "reached_150V": false,
+            "failure": {
+              "target_V": 95.0,
+              "iterations": 200,
+              "last_residual_ratio": 1.5350139727360088e-15,
+              "last_dX": 3.5633859323475953e-07,
+              "residual_test_ok": true,
+              "step_test_ok": false,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 10.425934249829933,
+                  "node": 35,
+                  "depth_um": 3.8000000000000003,
+                  "p_at_node": 2.3859441241869035e-51,
+                  "n_at_node": 88.59923371919359
+                },
+                "phi_n": {
+                  "max_abs_step": 10.425934249829888,
+                  "node": 29,
+                  "depth_um": 2.085536143817654,
+                  "p_at_node": 3.5210163553365523e-53,
+                  "n_at_node": 1.3111009567575211
+                },
+                "phi_p": {
+                  "max_abs_step": 10.425896044282368,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.2031042006209796e-51,
+                  "n_at_node": 220.7886170189825
+                }
+              },
+              "worst_row": {
+                "variable": "phi_p",
+                "node": 9,
+                "depth_um": 0.17926999180761582,
+                "ratio": 1.5350139727360088e-15,
+                "F": -2.781904613015566e-66,
+                "S": 1.812299211880853e-51,
+                "p_at_node": 9.600968113709267e-51,
+                "n_at_node": 109.90317747297766
+              }
+            }
+          },
+          {
+            "x_um": 1.6,
+            "level": 1,
+            "V_last_converged": 101.0,
+            "reached_150V": false,
+            "failure": {
+              "target_V": 102.0,
+              "iterations": 200,
+              "last_residual_ratio": 5.632922470640031e-16,
+              "last_dX": 2.897495011356576e-07,
+              "residual_test_ok": true,
+              "step_test_ok": false,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 32.03330523136238,
+                  "node": 72,
+                  "depth_um": 3.9000000000000004,
+                  "p_at_node": 1.8311480441516764e-51,
+                  "n_at_node": 220.7881711646789
+                },
+                "phi_n": {
+                  "max_abs_step": 32.03330523136222,
+                  "node": 71,
+                  "depth_um": 3.8500000000000005,
+                  "p_at_node": 1.150147586951664e-51,
+                  "n_at_node": 220.47915296304043
+                },
+                "phi_p": {
+                  "max_abs_step": 32.03326061651547,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 3.876981652345178e-51,
+                  "n_at_node": 220.78864688587643
+                }
+              },
+              "worst_row": {
+                "variable": "phi_n",
+                "node": 30,
+                "depth_um": 0.5272727272727273,
+                "ratio": 5.632922470640031e-16,
+                "F": 2.407412430484045e-35,
+                "S": 4.2738248982335216e-20,
+                "p_at_node": 7.047967193317936e-28,
+                "n_at_node": 1.810242507554911e-21
+              }
+            }
+          }
+        ],
+        "tied": [
+          {
+            "x_um": 2.0,
+            "level": 0,
+            "V_last_converged": 108.0,
+            "reached_150V": false,
+            "failure": {
+              "target_V": 109.0,
+              "iterations": 200,
+              "last_residual_ratio": 2.2427192933894345e-14,
+              "last_dX": 6.30366609850146e-10,
+              "residual_test_ok": false,
+              "step_test_ok": true,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 12.68123921414031,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.108153421425085e-51,
+                  "n_at_node": 220.78861467165987
+                },
+                "phi_n": {
+                  "max_abs_step": 12.681239215493433,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.108153421425085e-51,
+                  "n_at_node": 220.78861467165987
+                },
+                "phi_p": {
+                  "max_abs_step": 12.681810859034748,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.108153421425085e-51,
+                  "n_at_node": 220.78861467165987
+                }
+              },
+              "worst_row": {
+                "variable": "phi_n",
+                "node": 27,
+                "depth_um": 1.6798952083049832,
+                "ratio": 2.2427192933894345e-14,
+                "F": -1.310257458086994e-10,
+                "S": 5842.271308536319,
+                "p_at_node": 2.438593026751251e-53,
+                "n_at_node": 0.2797232389618194
+              }
+            }
+          },
+          {
+            "x_um": 2.0,
+            "level": 1,
+            "V_last_converged": 225.0,
+            "reached_150V": true,
+            "failure": {
+              "target_V": 230.0,
+              "iterations": 200,
+              "last_residual_ratio": 2.5952884949881745e-14,
+              "last_dX": 1.2923532040182804e-09,
+              "residual_test_ok": false,
+              "step_test_ok": true,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 119.3590750770095,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 4.252301910293652e-51,
+                  "n_at_node": 220.78864688577605
+                },
+                "phi_n": {
+                  "max_abs_step": 119.35907507700915,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 4.252301910293652e-51,
+                  "n_at_node": 220.78864688577605
+                },
+                "phi_p": {
+                  "max_abs_step": 119.36125685418196,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 4.252301910293652e-51,
+                  "n_at_node": 220.78864688577605
+                }
+              },
+              "worst_row": {
+                "variable": "phi_n",
+                "node": 55,
+                "depth_um": 1.7770800157715605,
+                "ratio": 2.5952884949881745e-14,
+                "F": -1.6844641237412361e-09,
+                "S": 64904.696606722,
+                "p_at_node": 4.472254225088489e-53,
+                "n_at_node": 2.0821824517775886
+              }
+            }
+          },
+          {
+            "x_um": 1.6,
+            "level": 0,
+            "V_last_converged": 135.0,
+            "reached_150V": false,
+            "failure": {
+              "target_V": 136.0,
+              "iterations": 200,
+              "last_residual_ratio": 2.3513140587876364e-14,
+              "last_dX": 9.999963204901715e-10,
+              "residual_test_ok": false,
+              "step_test_ok": true,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 10.870219786323851,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.1066863640297326e-51,
+                  "n_at_node": 220.78861514997993
+                },
+                "phi_n": {
+                  "max_abs_step": 10.870219787392735,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.1066863640297326e-51,
+                  "n_at_node": 220.78861514997993
+                },
+                "phi_p": {
+                  "max_abs_step": 10.870225989543856,
+                  "node": 37,
+                  "depth_um": 4.0,
+                  "p_at_node": 3.1066863640297326e-51,
+                  "n_at_node": 220.78861514997993
+                }
+              },
+              "worst_row": {
+                "variable": "phi_p",
+                "node": 23,
+                "depth_um": 1.045962409997967,
+                "ratio": 2.3513140587876364e-14,
+                "F": -1.2772818294168916e-62,
+                "S": 5.432204280169499e-49,
+                "p_at_node": 2.022320420891681e-53,
+                "n_at_node": 0.2205666999514069
+              }
+            }
+          },
+          {
+            "x_um": 1.6,
+            "level": 1,
+            "V_last_converged": 200.0,
+            "reached_150V": true,
+            "failure": {
+              "target_V": 205.0,
+              "iterations": 200,
+              "last_residual_ratio": 4.4358725640149286e-14,
+              "last_dX": 1.1863332942698045e-09,
+              "residual_test_ok": false,
+              "step_test_ok": true,
+              "state_finite": true,
+              "newton_step_by_variable": {
+                "psi": {
+                  "max_abs_step": 13.59727824271198,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 4.114748968668693e-51,
+                  "n_at_node": 220.78864688597685
+                },
+                "phi_n": {
+                  "max_abs_step": 13.597278242712518,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 4.114748968668693e-51,
+                  "n_at_node": 220.78864688597685
+                },
+                "phi_p": {
+                  "max_abs_step": 13.597800797902789,
+                  "node": 75,
+                  "depth_um": 4.05,
+                  "p_at_node": 4.114748968668693e-51,
+                  "n_at_node": 220.78864688597685
+                }
+              },
+              "worst_row": {
+                "variable": "phi_n",
+                "node": 51,
+                "depth_um": 1.4188179415267697,
+                "ratio": 4.4358725640149286e-14,
+                "F": 1.4057111030751912e-09,
+                "S": 31689.618734287433,
+                "p_at_node": 3.289224596746454e-53,
+                "n_at_node": 1.3052320338455121
+              }
+            }
+          }
+        ]
+      },
+      "on_entry_to_lines": 0,
+      "ok": false,
+      "grid": "1 V steps to 150 V, 5 V steps to 400 V, one continue_bias march"
+    },
+    "P3": {
+      "by_body": {
+        "floating": [
+          {
+            "x_um": 2.0,
+            "V_pt_h": 57.14523758094526,
+            "V_pt_h2": 58.93613125067607,
+            "rel_change": 0.03038702459300402,
+            "ok": true
+          },
+          {
+            "x_um": 1.6,
+            "V_pt_h": 79.21062213827065,
+            "V_pt_h2": 79.17733364335842,
+            "rel_change": 0.0004204296025194544,
+            "ok": true
+          }
+        ],
+        "tied": [
+          {
+            "x_um": 2.0,
+            "V_pt_h": 57.14523757976389,
+            "V_pt_h2": 58.95023313746097,
+            "rel_change": 0.03061897233702485,
+            "ok": true
+          },
+          {
+            "x_um": 1.6,
+            "V_pt_h": 79.19081625164411,
+            "V_pt_h2": 80.71180498817722,
+            "rel_change": 0.01884468742528939,
+            "ok": true
+          }
+        ]
+      },
+      "ok": true
+    },
+    "curve_metrics": {
+      "x1.6|L1|tied": {
+        "V_pt": 80.71180498817722,
+        "J_ref_10V": 2.2826439235128678e-45,
+        "J_threshold": 2.282643923512869e-42,
+        "barrier_at_V_pt_VT": 110.24423094178374,
+        "J_at_V_pt_A_cm2": 2.282643923512869e-42,
+        "barrier_drop_at_V_pt_VT": 5.164550932520115,
+        "onset_V": {
+          "0.001": 115.62823544573361,
+          "1": 120.30796211344712,
+          "1000": 127.85380582994223
+        },
+        "V_barrier_below_10VT": 123.45773015318629,
+        "V_reached": 200.0
+      },
+      "x2|L1|floating": {
+        "V_pt": 58.93613125067607,
+        "J_ref_10V": 3.69168465931351e-45,
+        "J_threshold": 3.6916846593134984e-42,
+        "barrier_at_V_pt_VT": 109.95933195134506,
+        "J_at_V_pt_A_cm2": 3.6916846593134984e-42,
+        "barrier_drop_at_V_pt_VT": 5.675512935862258,
+        "onset_V": {
+          "0.001": null,
+          "1": null,
+          "1000": null
+        },
+        "V_barrier_below_10VT": null,
+        "V_reached": 76.0
+      },
+      "x1.6|L1|floating": {
+        "V_pt": 79.17733364335842,
+        "J_ref_10V": 2.3069823973670842e-45,
+        "J_threshold": 2.306982397367087e-42,
+        "barrier_at_V_pt_VT": 110.1778205020992,
+        "J_at_V_pt_A_cm2": 2.306982397367087e-42,
+        "barrier_drop_at_V_pt_VT": 5.220321668618766,
+        "onset_V": {
+          "0.001": null,
+          "1": null,
+          "1000": null
+        },
+        "V_barrier_below_10VT": null,
+        "V_reached": 101.0
+      },
+      "x2|L0|floating": {
+        "V_pt": 57.14523758094526,
+        "J_ref_10V": 4.6816317513496294e-45,
+        "J_threshold": 4.681631751349601e-42,
+        "barrier_at_V_pt_VT": 110.33615231269708,
+        "J_at_V_pt_A_cm2": 4.681631751349601e-42,
+        "barrier_drop_at_V_pt_VT": 5.014434692845455,
+        "onset_V": {
+          "0.001": null,
+          "1": null,
+          "1000": null
+        },
+        "V_barrier_below_10VT": null,
+        "V_reached": 73.0
+      },
+      "x1.6|L0|floating": {
+        "V_pt": 79.21062213827065,
+        "J_ref_10V": 2.882361177140957e-45,
+        "J_threshold": 2.882361177140942e-42,
+        "barrier_at_V_pt_VT": 108.84667161185011,
+        "J_at_V_pt_A_cm2": 2.882361177140942e-42,
+        "barrier_drop_at_V_pt_VT": 6.416623666930747,
+        "onset_V": {
+          "0.001": null,
+          "1": null,
+          "1000": null
+        },
+        "V_barrier_below_10VT": null,
+        "V_reached": 94.0
+      },
+      "x2|L1|tied": {
+        "V_pt": 58.95023313746097,
+        "J_ref_10V": 3.655864375450651e-45,
+        "J_threshold": 3.655864375450634e-42,
+        "barrier_at_V_pt_VT": 109.9711501714124,
+        "J_at_V_pt_A_cm2": 3.655864375450634e-42,
+        "barrier_drop_at_V_pt_VT": 5.673481500407462,
+        "onset_V": {
+          "0.001": 90.15601916212874,
+          "1": 94.30668208779394,
+          "1000": 100.99387484174049
+        },
+        "V_barrier_below_10VT": 97.32855933590882,
+        "V_reached": 225.0
+      },
+      "x2|L0|tied": {
+        "V_pt": 57.14523757976389,
+        "J_ref_10V": 4.681631751349637e-45,
+        "J_threshold": 4.681631751349667e-42,
+        "barrier_at_V_pt_VT": 110.33615231264778,
+        "J_at_V_pt_A_cm2": 4.681631751349667e-42,
+        "barrier_drop_at_V_pt_VT": 5.014434692894753,
+        "onset_V": {
+          "0.001": 86.74691439977728,
+          "1": 91.51903331691771,
+          "1000": 98.29808330550782
+        },
+        "V_barrier_below_10VT": 95.55579920827594,
+        "V_reached": 108.0
+      },
+      "x1.6|L0|tied": {
+        "V_pt": 79.19081625164411,
+        "J_ref_10V": 2.6555674418136247e-45,
+        "J_threshold": 2.6555674418136406e-42,
+        "barrier_at_V_pt_VT": 108.9351952137385,
+        "J_at_V_pt_A_cm2": 2.6555674418136406e-42,
+        "barrier_drop_at_V_pt_VT": 6.410291799100719,
+        "onset_V": {
+          "0.001": 112.36664561030645,
+          "1": 117.80094396321377,
+          "1000": 125.93142981220043
+        },
+        "V_barrier_below_10VT": 121.97919656862429,
+        "V_reached": 135.0
+      }
+    },
+    "R1": {
+      "avalanche_BV": {
+        "avalanche_dense_min_BV_V": 516.8714405592293,
+        "source_dense_min": "results/stage12c/results.json jobs_raw['mode|harmonic']['dense_bv_min_V'] (rounded device r=0.1 um, theta=0, level 0, 49 dense lines)",
+        "stage13d_initial_bv_obj_V": 525.0768623971844,
+        "stage13d_initial_dense_bv_min_L0_V": 516.871440559229,
+        "stage13d_initial_dense_bv_min_L1_V": 518.0937578643103,
+        "stage13d_initial_limiting_cut_um": 1.6,
+        "source_13d": "results/stage13d/results.json initial.bv_obj, dense.initial_L0/L1.bv_min",
+        "on_entry_to_lines": 0
+      },
+      "scoping_estimate_V": [
+        100.0,
+        150.0
+      ],
+      "analytic_1D_estimate_V": 150.0,
+      "V_pt_finest_mesh": {
+        "floating": {
+          "2": 58.93613125067607,
+          "1.6": 79.17733364335842
+        },
+        "tied": {
+          "2": 58.95023313746097,
+          "1.6": 80.71180498817722
+        }
+      },
+      "worst_column_V_pt": {
+        "floating": {
+          "V_pt": 58.93613125067607,
+          "x_um": 2.0
+        },
+        "tied": {
+          "V_pt": 58.95023313746097,
+          "x_um": 2.0
+        }
+      },
+      "note_V_pt_definition": "V_pt as defined (1e3 x J_n(10 V)) marks a barrier drop of about ln(1e3) = 7 V_T from a ~1e-45 A/cm2 level; it is not an onset of appreciable current.  onset_V (J_n = 1e-3, 1, 1e3 A/cm2) and V_barrier_below_10VT (the 17c scoping metric) are reported in curve_metrics."
+    },
+    "R2": {
+      "verdict_by_body": {
+        "floating": "confirmed (DD V_pt below the avalanche BV)",
+        "tied": "confirmed (DD V_pt below the avalanche BV)"
+      },
+      "verdict": "confirmed (DD V_pt below the avalanche BV)"
+    },
+    "runs_short": {
+      "x1.6|L2|floating": {
+        "key": "x1.6|L2|floating",
+        "x_um_requested": 1.6,
+        "x_um_column": 1.6,
+        "level": 2,
+        "body": "floating",
+        "n_nodes": 153,
+        "body_tie_node_depth_um": 0.55,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.63926811384044,
+          "psi_min_t_um": 0.6522727272727273,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.3774814859310807
+        },
+        "V_last_converged": 40.0,
+        "failure": null,
+        "reached_target": true,
+        "stats": {
+          "solves": 164,
+          "failed": 0
+        },
+        "nonfinite_solves": 61,
+        "seconds": 5.0905469639692456,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x2|L2|floating": {
+        "key": "x2|L2|floating",
+        "x_um_requested": 2.0,
+        "x_um_column": 1.9983335769624324,
+        "level": 2,
+        "body": "floating",
+        "n_nodes": 153,
+        "body_tie_node_depth_um": 0.55,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 116.01823536189187,
+          "psi_min_t_um": 0.6636363636363636,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.1509434619918761
+        },
+        "V_last_converged": 40.0,
+        "failure": null,
+        "reached_target": true,
+        "stats": {
+          "solves": 166,
+          "failed": 0
+        },
+        "nonfinite_solves": 62,
+        "seconds": 5.779304038034752,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x1.6|L1|tied": {
+        "key": "x1.6|L1|tied",
+        "x_um_requested": 1.6,
+        "x_um_column": 1.6,
+        "level": 1,
+        "body": "tied",
+        "n_nodes": 77,
+        "body_tie_node_depth_um": 0.55,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.61479622460674,
+          "psi_min_t_um": 0.6409090909090911,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.3755178091562834
+        },
+        "V_last_converged": 200.0,
+        "failure": {
+          "target_V": 205.0,
+          "iterations": 200,
+          "last_residual_ratio": 4.4358725640149286e-14,
+          "last_dX": 1.1863332942698045e-09,
+          "residual_test_ok": false,
+          "step_test_ok": true,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 13.59727824271198,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 4.114748968668693e-51,
+              "n_at_node": 220.78864688597685
+            },
+            "phi_n": {
+              "max_abs_step": 13.597278242712518,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 4.114748968668693e-51,
+              "n_at_node": 220.78864688597685
+            },
+            "phi_p": {
+              "max_abs_step": 13.597800797902789,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 4.114748968668693e-51,
+              "n_at_node": 220.78864688597685
+            }
+          },
+          "worst_row": {
+            "variable": "phi_n",
+            "node": 51,
+            "depth_um": 1.4188179415267697,
+            "ratio": 4.4358725640149286e-14,
+            "F": 1.4057111030751912e-09,
+            "S": 31689.618734287433,
+            "p_at_node": 3.289224596746454e-53,
+            "n_at_node": 1.3052320338455121
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 343,
+          "failed": 1
+        },
+        "nonfinite_solves": 46,
+        "seconds": 17.165173984016292,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x2|L1|floating": {
+        "key": "x2|L1|floating",
+        "x_um_requested": 2.0,
+        "x_um_column": 1.9983335769624324,
+        "level": 1,
+        "body": "floating",
+        "n_nodes": 77,
+        "body_tie_node_depth_um": 0.55,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.99818380592446,
+          "psi_min_t_um": 0.6636363636363636,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.1464087594715018
+        },
+        "V_last_converged": 76.0,
+        "failure": {
+          "target_V": 77.0,
+          "iterations": 200,
+          "last_residual_ratio": 6.214146365888739e-16,
+          "last_dX": 3.481455420194613e-07,
+          "residual_test_ok": true,
+          "step_test_ok": false,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 22.96727544890174,
+              "node": 72,
+              "depth_um": 3.9000000000000004,
+              "p_at_node": 1.8628995566618014e-51,
+              "n_at_node": 220.7881711646789
+            },
+            "phi_n": {
+              "max_abs_step": 22.96727544890172,
+              "node": 60,
+              "depth_um": 2.315178883577997,
+              "p_at_node": 3.9826652918867917e-51,
+              "n_at_node": 4.517417263160328
+            },
+            "phi_p": {
+              "max_abs_step": 22.967239660720338,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 3.884903964747118e-51,
+              "n_at_node": 220.78864688587643
+            }
+          },
+          "worst_row": {
+            "variable": "phi_p",
+            "node": 19,
+            "depth_um": 0.2396349959038079,
+            "ratio": 6.214146365888739e-16,
+            "F": -9.13102232876255e-67,
+            "S": 1.46939286446251e-51,
+            "p_at_node": 6.275336091385443e-51,
+            "n_at_node": 164.1918767845456
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 229,
+          "failed": 1
+        },
+        "nonfinite_solves": 40,
+        "zero_current_12c": {
+          "5.0": 116.00940313525784,
+          "10.0": 115.89880070723785,
+          "20.0": 115.67617687279488,
+          "40.0": 114.9637088529478
+        },
+        "seconds": 19.247980090091005,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x1.6|L1|floating": {
+        "key": "x1.6|L1|floating",
+        "x_um_requested": 1.6,
+        "x_um_column": 1.6,
+        "level": 1,
+        "body": "floating",
+        "n_nodes": 77,
+        "body_tie_node_depth_um": 0.55,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.61479622460674,
+          "psi_min_t_um": 0.6409090909090911,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.3755178091562834
+        },
+        "V_last_converged": 101.0,
+        "failure": {
+          "target_V": 102.0,
+          "iterations": 200,
+          "last_residual_ratio": 5.632922470640031e-16,
+          "last_dX": 2.897495011356576e-07,
+          "residual_test_ok": true,
+          "step_test_ok": false,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 32.03330523136238,
+              "node": 72,
+              "depth_um": 3.9000000000000004,
+              "p_at_node": 1.8311480441516764e-51,
+              "n_at_node": 220.7881711646789
+            },
+            "phi_n": {
+              "max_abs_step": 32.03330523136222,
+              "node": 71,
+              "depth_um": 3.8500000000000005,
+              "p_at_node": 1.150147586951664e-51,
+              "n_at_node": 220.47915296304043
+            },
+            "phi_p": {
+              "max_abs_step": 32.03326061651547,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 3.876981652345178e-51,
+              "n_at_node": 220.78864688587643
+            }
+          },
+          "worst_row": {
+            "variable": "phi_n",
+            "node": 30,
+            "depth_um": 0.5272727272727273,
+            "ratio": 5.632922470640031e-16,
+            "F": 2.407412430484045e-35,
+            "S": 4.2738248982335216e-20,
+            "p_at_node": 7.047967193317936e-28,
+            "n_at_node": 1.810242507554911e-21
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 261,
+          "failed": 1
+        },
+        "nonfinite_solves": 41,
+        "zero_current_12c": {
+          "5.0": 115.24836729728533,
+          "10.0": 115.19754550954204,
+          "20.0": 115.0267117071559,
+          "40.0": 114.52846656814972
+        },
+        "seconds": 20.689765530987643,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x2|L0|floating": {
+        "key": "x2|L0|floating",
+        "x_um_requested": 2.0,
+        "x_um_column": 1.9983335769624324,
+        "level": 0,
+        "body": "floating",
+        "n_nodes": 39,
+        "body_tie_node_depth_um": 0.5272727272727273,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.93465059403141,
+          "psi_min_t_um": 0.6636363636363636,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -0.7047638446914821
+        },
+        "V_last_converged": 73.0,
+        "failure": {
+          "target_V": 74.0,
+          "iterations": 200,
+          "last_residual_ratio": 5.720274779283771e-16,
+          "last_dX": 3.121883700325043e-08,
+          "residual_test_ok": true,
+          "step_test_ok": false,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 29.31349629662386,
+              "node": 34,
+              "depth_um": 3.4515715709258967,
+              "p_at_node": 1.8983319159850174e-50,
+              "n_at_node": 4.551348199315891
+            },
+            "phi_n": {
+              "max_abs_step": 29.313496296623835,
+              "node": 30,
+              "depth_um": 2.315178883577997,
+              "p_at_node": 3.860805978741341e-51,
+              "n_at_node": 4.516953052080539
+            },
+            "phi_p": {
+              "max_abs_step": 29.31320536934377,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.2157341830664036e-51,
+              "n_at_node": 220.7886170189825
+            }
+          },
+          "worst_row": {
+            "variable": "phi_n",
+            "node": 16,
+            "depth_um": 0.5727272727272728,
+            "ratio": 5.720274779283771e-16,
+            "F": 2.9387358770557188e-37,
+            "S": 5.137403342403202e-22,
+            "p_at_node": 1.970395564260422e-26,
+            "n_at_node": 2.437366605964847e-23
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 428,
+          "failed": 1
+        },
+        "nonfinite_solves": 116,
+        "zero_current_12c": {
+          "5.0": 115.93625674121353,
+          "10.0": 115.772164910861,
+          "20.0": 115.35488657019685,
+          "40.0": 114.83056927610944
+        },
+        "seconds": 35.31263651000336,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x1.6|L0|floating": {
+        "key": "x1.6|L0|floating",
+        "x_um_requested": 1.6,
+        "x_um_column": 1.6,
+        "level": 0,
+        "body": "floating",
+        "n_nodes": 39,
+        "body_tie_node_depth_um": 0.5272727272727273,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.57444948165369,
+          "psi_min_t_um": 0.6636363636363636,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.30310365298764
+        },
+        "V_last_converged": 94.0,
+        "failure": {
+          "target_V": 95.0,
+          "iterations": 200,
+          "last_residual_ratio": 1.5350139727360088e-15,
+          "last_dX": 3.5633859323475953e-07,
+          "residual_test_ok": true,
+          "step_test_ok": false,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 10.425934249829933,
+              "node": 35,
+              "depth_um": 3.8000000000000003,
+              "p_at_node": 2.3859441241869035e-51,
+              "n_at_node": 88.59923371919359
+            },
+            "phi_n": {
+              "max_abs_step": 10.425934249829888,
+              "node": 29,
+              "depth_um": 2.085536143817654,
+              "p_at_node": 3.5210163553365523e-53,
+              "n_at_node": 1.3111009567575211
+            },
+            "phi_p": {
+              "max_abs_step": 10.425896044282368,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.2031042006209796e-51,
+              "n_at_node": 220.7886170189825
+            }
+          },
+          "worst_row": {
+            "variable": "phi_p",
+            "node": 9,
+            "depth_um": 0.17926999180761582,
+            "ratio": 1.5350139727360088e-15,
+            "F": -2.781904613015566e-66,
+            "S": 1.812299211880853e-51,
+            "p_at_node": 9.600968113709267e-51,
+            "n_at_node": 109.90317747297766
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 491,
+          "failed": 1
+        },
+        "nonfinite_solves": 134,
+        "zero_current_12c": {
+          "5.0": 115.25863001771009,
+          "10.0": 115.07602599141453,
+          "20.0": 114.9724287347394,
+          "40.0": 114.03799167422547
+        },
+        "seconds": 37.326719483942725,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x2|L1|tied": {
+        "key": "x2|L1|tied",
+        "x_um_requested": 2.0,
+        "x_um_column": 1.9983335769624324,
+        "level": 1,
+        "body": "tied",
+        "n_nodes": 77,
+        "body_tie_node_depth_um": 0.55,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.99818380592446,
+          "psi_min_t_um": 0.6636363636363636,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.1464087594715018
+        },
+        "V_last_converged": 225.0,
+        "failure": {
+          "target_V": 230.0,
+          "iterations": 200,
+          "last_residual_ratio": 2.5952884949881745e-14,
+          "last_dX": 1.2923532040182804e-09,
+          "residual_test_ok": false,
+          "step_test_ok": true,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 119.3590750770095,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 4.252301910293652e-51,
+              "n_at_node": 220.78864688577605
+            },
+            "phi_n": {
+              "max_abs_step": 119.35907507700915,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 4.252301910293652e-51,
+              "n_at_node": 220.78864688577605
+            },
+            "phi_p": {
+              "max_abs_step": 119.36125685418196,
+              "node": 75,
+              "depth_um": 4.05,
+              "p_at_node": 4.252301910293652e-51,
+              "n_at_node": 220.78864688577605
+            }
+          },
+          "worst_row": {
+            "variable": "phi_n",
+            "node": 55,
+            "depth_um": 1.7770800157715605,
+            "ratio": 2.5952884949881745e-14,
+            "F": -1.6844641237412361e-09,
+            "S": 64904.696606722,
+            "p_at_node": 4.472254225088489e-53,
+            "n_at_node": 2.0821824517775886
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 471,
+          "failed": 1
+        },
+        "nonfinite_solves": 63,
+        "seconds": 54.3604882620275,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x2|L0|tied": {
+        "key": "x2|L0|tied",
+        "x_um_requested": 2.0,
+        "x_um_column": 1.9983335769624324,
+        "level": 0,
+        "body": "tied",
+        "n_nodes": 39,
+        "body_tie_node_depth_um": 0.5272727272727273,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.93465059403141,
+          "psi_min_t_um": 0.6636363636363636,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -0.7047638446914821
+        },
+        "V_last_converged": 108.0,
+        "failure": {
+          "target_V": 109.0,
+          "iterations": 200,
+          "last_residual_ratio": 2.2427192933894345e-14,
+          "last_dX": 6.30366609850146e-10,
+          "residual_test_ok": false,
+          "step_test_ok": true,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 12.68123921414031,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.108153421425085e-51,
+              "n_at_node": 220.78861467165987
+            },
+            "phi_n": {
+              "max_abs_step": 12.681239215493433,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.108153421425085e-51,
+              "n_at_node": 220.78861467165987
+            },
+            "phi_p": {
+              "max_abs_step": 12.681810859034748,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.108153421425085e-51,
+              "n_at_node": 220.78861467165987
+            }
+          },
+          "worst_row": {
+            "variable": "phi_n",
+            "node": 27,
+            "depth_um": 1.6798952083049832,
+            "ratio": 2.2427192933894345e-14,
+            "F": -1.310257458086994e-10,
+            "S": 5842.271308536319,
+            "p_at_node": 2.438593026751251e-53,
+            "n_at_node": 0.2797232389618194
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 775,
+          "failed": 1
+        },
+        "nonfinite_solves": 145,
+        "seconds": 108.11858160200063,
+        "j_scale_A_cm2": 11284.220161829027
+      },
+      "x1.6|L0|tied": {
+        "key": "x1.6|L0|tied",
+        "x_um_requested": 1.6,
+        "x_um_column": 1.6,
+        "level": 0,
+        "body": "tied",
+        "n_nodes": 39,
+        "body_tie_node_depth_um": 0.5272727272727273,
+        "equilibrium": {
+          "Jn_A_cm2": -0.0,
+          "Jn_edge_spread_rel": 0.0,
+          "Jp_A_cm2": -0.0,
+          "barrier_VT": 115.57444948165369,
+          "psi_min_t_um": 0.6636363636363636,
+          "phi_p_body_V": 0.0,
+          "phi_n_body_V": 0.0,
+          "psi_body_V": -1.30310365298764
+        },
+        "V_last_converged": 135.0,
+        "failure": {
+          "target_V": 136.0,
+          "iterations": 200,
+          "last_residual_ratio": 2.3513140587876364e-14,
+          "last_dX": 9.999963204901715e-10,
+          "residual_test_ok": false,
+          "step_test_ok": true,
+          "state_finite": true,
+          "newton_step_by_variable": {
+            "psi": {
+              "max_abs_step": 10.870219786323851,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.1066863640297326e-51,
+              "n_at_node": 220.78861514997993
+            },
+            "phi_n": {
+              "max_abs_step": 10.870219787392735,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.1066863640297326e-51,
+              "n_at_node": 220.78861514997993
+            },
+            "phi_p": {
+              "max_abs_step": 10.870225989543856,
+              "node": 37,
+              "depth_um": 4.0,
+              "p_at_node": 3.1066863640297326e-51,
+              "n_at_node": 220.78861514997993
+            }
+          },
+          "worst_row": {
+            "variable": "phi_p",
+            "node": 23,
+            "depth_um": 1.045962409997967,
+            "ratio": 2.3513140587876364e-14,
+            "F": -1.2772818294168916e-62,
+            "S": 5.432204280169499e-49,
+            "p_at_node": 2.022320420891681e-53,
+            "n_at_node": 0.2205666999514069
+          }
+        },
+        "reached_target": false,
+        "stats": {
+          "solves": 835,
+          "failed": 1
+        },
+        "nonfinite_solves": 142,
+        "seconds": 123.96304768801201,
+        "j_scale_A_cm2": 11284.220161829027
+      }
+    }
+  },
+  "runtime_seconds": 124.1043361639604
+}
