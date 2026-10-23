@@ -1,0 +1,1622 @@
+{
+  "config": {
+    "V_ON": 15.0,
+    "V_LIN": 0.1,
+    "d_ch_nm": 20.0,
+    "levels": [
+      1,
+      2
+    ],
+    "tolerances": {
+      "A2": 1e-12,
+      "A4": 0.02,
+      "A5": 0.01
+    },
+    "eps_fd": [
+      0.001,
+      0.0005
+    ],
+    "dev": false,
+    "designs": {
+      "s17_final": {
+        "source": "results/stage17/results.json",
+        "present": true
+      },
+      "s17b_final": {
+        "source": "/home/dada/widegap/results/stage17b/results.json",
+        "present": true,
+        "complete_results_file": true,
+        "dev": false
+      }
+    },
+    "level_names": "1 = h/2, 2 = h/4"
+  },
+  "A1": {
+    "name": "mu_acc_n_zhao2007",
+    "in_sic4h_json": true,
+    "check_entry": "ok",
+    "verified_by": "verifier-agent-18 (haiku)",
+    "verified_value_match": true,
+    "value": 17.5,
+    "unit": "cm^2/(V s)",
+    "doi": "10.1016/j.sse.2007.06.006",
+    "locator": "p. 1141, Sec. 3 text ('mu_s = 17.5 +/- 0.1 cm2/V s', fit over 7.0 V < V_GS < 10.0 V, V_DS 50-200 mV); the abstract (p. 1139) notes about 17.5 cm2/V s was previously deduced (their ref. [17]) and p. 1141 re-derives it",
+    "ok": true
+  },
+  "runs": {
+    "bracket|13d_final|1": {
+      "kind": "bracket",
+      "case": "13d_final",
+      "level": 1,
+      "error": null,
+      "nodes": 4293,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 7.704947790898586e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0027717051956244187,
+              3.417505703984247e-06,
+              5.3122797272209255e-09,
+              7.704947790898586e-12
+            ]
+          },
+          "R_bulk": 0.00027924108726097254,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.002433281952492102,
+          "counts": {
+            "n_channel_columns": 21,
+            "n_gated_columns": 12,
+            "n_channel_edges": 190,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 190
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 6.282196984841448e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0025819178930941433,
+              2.975486066647548e-06,
+              4.8689290377268435e-09,
+              6.282196984841448e-12
+            ]
+          },
+          "R_bulk": 0.00027924108726097254,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0025231560479128923,
+          "counts": {
+            "n_channel_columns": 21,
+            "n_gated_columns": 12,
+            "n_channel_edges": 190,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 11,
+          "n_acc_edges": 100,
+          "acc_x_range_um": [
+            0.0,
+            0.6666666666666667
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 190
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.00027924108726097254,
+      "seconds": 104.84202304203063,
+      "rss_mib": 239.46875
+    },
+    "bracket|s17_final|1": {
+      "kind": "bracket",
+      "case": "s17_final",
+      "level": 1,
+      "error": null,
+      "nodes": 4293,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 9.339862216961592e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0030521092673946315,
+              3.939237131156403e-06,
+              5.768689748109068e-09,
+              9.339862216961592e-12
+            ]
+          },
+          "R_bulk": 0.00028729819108914815,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0023370850340032365,
+          "counts": {
+            "n_channel_columns": 20,
+            "n_gated_columns": 11,
+            "n_channel_edges": 180,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 180
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 5.7310822754175206e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002588159908471166,
+              2.8109697847167325e-06,
+              4.729410196802064e-09,
+              5.7310822754175206e-12
+            ]
+          },
+          "R_bulk": 0.00028729819108914815,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.002550439101689774,
+          "counts": {
+            "n_channel_columns": 20,
+            "n_gated_columns": 11,
+            "n_channel_edges": 180,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 12,
+          "n_acc_edges": 110,
+          "acc_x_range_um": [
+            0.0,
+            0.7333333333333335
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 180
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.00028729819108914815,
+      "seconds": 112.81587740289979,
+      "rss_mib": 241.890625
+    },
+    "bracket|13d_initial|1": {
+      "kind": "bracket",
+      "case": "13d_initial",
+      "level": 1,
+      "error": null,
+      "nodes": 4293,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 7.756573161543656e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002770427361643346,
+              3.4345147523762165e-06,
+              5.331052710388917e-09,
+              7.756573161543656e-12
+            ]
+          },
+          "R_bulk": 0.0002792926937498106,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0024368821442725484,
+          "counts": {
+            "n_channel_columns": 21,
+            "n_gated_columns": 12,
+            "n_channel_edges": 190,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 190
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 6.1526339578676925e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002555367736282843,
+              2.935140999138497e-06,
+              4.827930721873486e-09,
+              6.1526339578676925e-12
+            ]
+          },
+          "R_bulk": 0.0002792926937498106,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0025393223836138053,
+          "counts": {
+            "n_channel_columns": 21,
+            "n_gated_columns": 12,
+            "n_channel_edges": 190,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 11,
+          "n_acc_edges": 100,
+          "acc_x_range_um": [
+            0.0,
+            0.6666666666666667
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 190
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.0002792926937498106,
+      "seconds": 114.84287704702001,
+      "rss_mib": 237.94140625
+    },
+    "bracket|s17b_final|1": {
+      "kind": "bracket",
+      "case": "s17b_final",
+      "level": 1,
+      "error": null,
+      "nodes": 4293,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 7.74436070827278e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002773318464542651,
+              3.431963184530318e-06,
+              5.3316795423086205e-09,
+              7.74436070827278e-12
+            ]
+          },
+          "R_bulk": 0.0002797091029743571,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0024368821442722795,
+          "counts": {
+            "n_channel_columns": 21,
+            "n_gated_columns": 12,
+            "n_channel_edges": 190,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 190
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 6.165956634163194e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002561713722808001,
+              2.9402714911697103e-06,
+              4.836217648573893e-09,
+              6.165956634163194e-12
+            ]
+          },
+          "R_bulk": 0.0002797091029743571,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.002537634785256467,
+          "counts": {
+            "n_channel_columns": 21,
+            "n_gated_columns": 12,
+            "n_channel_edges": 190,
+            "clamp_ns": {
+              "all": 9,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 11,
+          "n_acc_edges": 100,
+          "acc_x_range_um": [
+            0.0,
+            0.6666666666666667
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 190
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.0002797091029743571,
+      "seconds": 125.38034330203664,
+      "rss_mib": 240.2421875
+    },
+    "bracket|12b|1": {
+      "kind": "bracket",
+      "case": "12b",
+      "level": 1,
+      "error": null,
+      "nodes": 4293,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 1.039146546588654e-11,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0035182664359801885,
+              4.348624879302321e-06,
+              5.721982221373878e-09,
+              1.039146546588654e-11
+            ]
+          },
+          "R_bulk": 0.00028525530797428734,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.003215047237922234,
+          "counts": {
+            "n_channel_columns": 30,
+            "n_gated_columns": 18,
+            "n_channel_edges": 280,
+            "clamp_ns": {
+              "all": 12,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 280
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 8.723355371387242e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0032604895209741303,
+              3.712308806358422e-06,
+              5.551741955045486e-09,
+              8.723355371387242e-12
+            ]
+          },
+          "R_bulk": 0.00028525530797428734,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.003338162994539712,
+          "counts": {
+            "n_channel_columns": 30,
+            "n_gated_columns": 18,
+            "n_channel_edges": 280,
+            "clamp_ns": {
+              "all": 12,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 12,
+          "n_acc_edges": 110,
+          "acc_x_range_um": [
+            0.0,
+            0.7333333333333335
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 280
+        },
+        "L_d40": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 8.053668842933348e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0031529362950251105,
+              3.4679538001292087e-06,
+              5.4200766097523e-09,
+              8.053668842933348e-12
+            ]
+          },
+          "R_bulk": 0.00028525530797428734,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0033924496701982615,
+          "counts": {
+            "n_channel_columns": 30,
+            "n_gated_columns": 18,
+            "n_channel_edges": 364,
+            "clamp_ns": {
+              "all": 12,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 12,
+          "n_acc_edges": 143,
+          "acc_x_range_um": [
+            0.0,
+            0.7333333333333335
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 364
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.00028525530797428734,
+      "seconds": 159.7306720360648,
+      "rss_mib": 237.97265625
+    },
+    "r2|bulk|1": {
+      "kind": "r2",
+      "model": "bulk",
+      "level": 1,
+      "error": null,
+      "R0": 0.0002792926937498106,
+      "dR_dthetaJ": -4.336342454607173e-05,
+      "fd_eps_1e-3": -4.336344947426492e-05,
+      "fd_eps_5e-4": -4.336343077812003e-05,
+      "spread": 1.869614489266591e-11,
+      "theta0": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_solves": 5,
+      "all_converged": true,
+      "n_acc_columns": 0,
+      "n_acc_edges": 0,
+      "seconds": 201.4993646000512,
+      "rss_mib": 240.33203125
+    },
+    "r2|U|1": {
+      "kind": "r2",
+      "model": "U",
+      "level": 1,
+      "error": null,
+      "R0": 0.0024368821442725484,
+      "dR_dthetaJ": -9.42612097805471e-05,
+      "fd_eps_1e-3": -9.426124065255344e-05,
+      "fd_eps_5e-4": -9.426121749854868e-05,
+      "spread": 2.3154004755165936e-11,
+      "theta0": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_solves": 5,
+      "all_converged": true,
+      "n_acc_columns": 0,
+      "n_acc_edges": 0,
+      "seconds": 220.43351246591192,
+      "rss_mib": 242.109375
+    },
+    "r2|L|1": {
+      "kind": "r2",
+      "model": "L",
+      "level": 1,
+      "error": null,
+      "R0": 0.0025393223836138053,
+      "dR_dthetaJ": -0.0002819608821104033,
+      "fd_eps_1e-3": -0.00028196077717004137,
+      "fd_eps_5e-4": -0.00028196085587531283,
+      "spread": 7.870527146680573e-11,
+      "theta0": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_solves": 5,
+      "all_converged": true,
+      "n_acc_columns": 11,
+      "n_acc_edges": 100,
+      "acc_x_range_um": [
+        0.0,
+        0.6666666666666667
+      ],
+      "mu_acc_cm2": 17.5,
+      "seconds": 169.9246942140162,
+      "rss_mib": 239.46875
+    },
+    "bracket|12b|2": {
+      "kind": "bracket",
+      "case": "12b",
+      "level": 2,
+      "error": null,
+      "nodes": 16905,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 1.1199263738603804e-11,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.003555352343560969,
+              4.50383227224016e-06,
+              5.976819261732658e-09,
+              1.1199263738603804e-11
+            ]
+          },
+          "R_bulk": 0.0002841923069260603,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0032558290366153505,
+          "counts": {
+            "n_channel_columns": 60,
+            "n_gated_columns": 36,
+            "n_channel_edges": 1160,
+            "clamp_ns": {
+              "all": 24,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 1160
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 8.707257137530178e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0031968117351938163,
+              3.580163044469842e-06,
+              5.713715500732519e-09,
+              8.707257137530178e-12
+            ]
+          },
+          "R_bulk": 0.0002841923069260603,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0034287652781895077,
+          "counts": {
+            "n_channel_columns": 60,
+            "n_gated_columns": 36,
+            "n_channel_edges": 1160,
+            "clamp_ns": {
+              "all": 24,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 24,
+          "n_acc_edges": 460,
+          "acc_x_range_um": [
+            0.0,
+            0.7666666666666667
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 1160
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.0002841923069260603,
+      "seconds": 473.19375048507936,
+      "rss_mib": 495.16796875
+    },
+    "bracket|13d_final|2": {
+      "kind": "bracket",
+      "case": "13d_final",
+      "level": 2,
+      "error": null,
+      "nodes": 16905,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 9.727996186370547e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002963485537951893,
+              3.851131864074375e-06,
+              6.110568495643065e-09,
+              9.727996186370547e-12
+            ]
+          },
+          "R_bulk": 0.0002779204459561115,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0023984234748762046,
+          "counts": {
+            "n_channel_columns": 39,
+            "n_gated_columns": 22,
+            "n_channel_edges": 740,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 740
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 6.291411835945837e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0025183252105458465,
+              2.831343941966935e-06,
+              5.040387662802459e-09,
+              6.291411835945837e-12
+            ]
+          },
+          "R_bulk": 0.0002779204459561115,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0026082548217099947,
+          "counts": {
+            "n_channel_columns": 39,
+            "n_gated_columns": 22,
+            "n_channel_edges": 740,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 23,
+          "n_acc_edges": 440,
+          "acc_x_range_um": [
+            0.0,
+            0.7333333333333335
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 740
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.0002779204459561115,
+      "seconds": 618.9087385609746,
+      "rss_mib": 499.328125
+    },
+    "bracket|s17_final|2": {
+      "kind": "bracket",
+      "case": "s17_final",
+      "level": 2,
+      "error": null,
+      "nodes": 16905,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 9.652389998393573e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0030042808780806896,
+              3.83211038634812e-06,
+              6.1963123521024954e-09,
+              9.652389998393573e-12
+            ]
+          },
+          "R_bulk": 0.00028594053223970765,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0024023313959501743,
+          "counts": {
+            "n_channel_columns": 39,
+            "n_gated_columns": 22,
+            "n_channel_edges": 740,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 740
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 6.4226401974565306e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0025921132587193307,
+              2.877434950088187e-06,
+              5.1780613130603115e-09,
+              6.4226401974565306e-12
+            ]
+          },
+          "R_bulk": 0.00028594053223970765,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.002597067869099848,
+          "counts": {
+            "n_channel_columns": 39,
+            "n_gated_columns": 22,
+            "n_channel_edges": 740,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 23,
+          "n_acc_edges": 440,
+          "acc_x_range_um": [
+            0.0,
+            0.7333333333333335
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 740
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.00028594053223970765,
+      "seconds": 620.8376159550389,
+      "rss_mib": 505.2109375
+    },
+    "bracket|13d_initial|2": {
+      "kind": "bracket",
+      "case": "13d_initial",
+      "level": 2,
+      "error": null,
+      "nodes": 16905,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 8.924749828054246e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0028677750263663704,
+              3.6102303540008762e-06,
+              5.901267474683891e-09,
+              8.924749828054246e-12
+            ]
+          },
+          "R_bulk": 0.00027803387641171405,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.002446694171118365,
+          "counts": {
+            "n_channel_columns": 40,
+            "n_gated_columns": 23,
+            "n_channel_edges": 760,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 760
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 6.506128968908342e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002549478331100863,
+              2.895717029938183e-06,
+              5.115887713458278e-09,
+              6.506128968908342e-12
+            ]
+          },
+          "R_bulk": 0.00027803387641171405,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.002598883463906835,
+          "counts": {
+            "n_channel_columns": 40,
+            "n_gated_columns": 23,
+            "n_channel_edges": 760,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 22,
+          "n_acc_edges": 420,
+          "acc_x_range_um": [
+            0.0,
+            0.7000000000000001
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 760
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.00027803387641171405,
+      "seconds": 622.3811802800046,
+      "rss_mib": 505.5625
+    },
+    "bracket|s17b_final|2": {
+      "kind": "bracket",
+      "case": "s17b_final",
+      "level": 2,
+      "error": null,
+      "nodes": 16905,
+      "mu_acc_cm2Vs": 17.5,
+      "runs": {
+        "U": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 8.918976668326195e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.002869284167698938,
+              3.608542876731846e-06,
+              5.905346878165574e-09,
+              8.918976668326195e-12
+            ]
+          },
+          "R_bulk": 0.00027837193021998933,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0024465991438608063,
+          "counts": {
+            "n_channel_columns": 40,
+            "n_gated_columns": 23,
+            "n_channel_edges": 760,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 0,
+          "n_acc_edges": 0,
+          "n_channel_edges": 760
+        },
+        "L": {
+          "picard": {
+            "converged": true,
+            "picard_converged": true,
+            "newton_all_converged": true,
+            "iterations": 4,
+            "final_rel": 6.5207839128333944e-12,
+            "newton_its": [
+              6,
+              3,
+              2,
+              1
+            ],
+            "rel_history": [
+              0.0025543987798337664,
+              2.901036270985813e-06,
+              5.127190894071987e-09,
+              6.5207839128333944e-12
+            ]
+          },
+          "R_bulk": 0.00027837193021998933,
+          "bulk_converged": true,
+          "converged": true,
+          "R_on_sp_ohm_cm2": 0.0025971224566601393,
+          "counts": {
+            "n_channel_columns": 40,
+            "n_gated_columns": 23,
+            "n_channel_edges": 760,
+            "clamp_ns": {
+              "all": 17,
+              "gated": 0
+            },
+            "clamp_eeff": {
+              "all": 0,
+              "gated": 0
+            },
+            "ns_extrap": {
+              "all": 0,
+              "gated": 0
+            },
+            "gamma_neg": {
+              "all": 0,
+              "gated": 0
+            },
+            "na_out_of_range": {
+              "all": 0,
+              "gated": 0
+            }
+          },
+          "n_acc_columns": 22,
+          "n_acc_edges": 420,
+          "acc_x_range_um": [
+            0.0,
+            0.7000000000000001
+          ],
+          "mu_acc_cm2": 17.5,
+          "n_channel_edges": 760
+        }
+      },
+      "R_on_bulk_ohm_cm2": 0.00027837193021998933,
+      "seconds": 627.1294697290286,
+      "rss_mib": 496.6484375
+    }
+  },
+  "R1_table": [
+    {
+      "case": "12b",
+      "level": 1,
+      "R_on_bulk_ohm_cm2": 0.00028525530797428734,
+      "R_on_U_ohm_cm2": 0.003215047237922234,
+      "R_on_L_ohm_cm2": 0.003338162994539712,
+      "n_acc_edges": 110,
+      "n_acc_columns": 12,
+      "L_over_U_minus_1": 0.03829360737388199,
+      "U_over_bulk_minus_1": 10.270770948150194
+    },
+    {
+      "case": "12b",
+      "level": 2,
+      "R_on_bulk_ohm_cm2": 0.0002841923069260603,
+      "R_on_U_ohm_cm2": 0.0032558290366153505,
+      "R_on_L_ohm_cm2": 0.0034287652781895077,
+      "n_acc_edges": 460,
+      "n_acc_columns": 24,
+      "L_over_U_minus_1": 0.05311588527201527,
+      "U_over_bulk_minus_1": 10.456429175834218
+    },
+    {
+      "case": "13d_initial",
+      "level": 1,
+      "R_on_bulk_ohm_cm2": 0.0002792926937498106,
+      "R_on_U_ohm_cm2": 0.0024368821442725484,
+      "R_on_L_ohm_cm2": 0.0025393223836138053,
+      "n_acc_edges": 100,
+      "n_acc_columns": 11,
+      "L_over_U_minus_1": 0.04203742047272341,
+      "U_over_bulk_minus_1": 7.725191166137339
+    },
+    {
+      "case": "13d_initial",
+      "level": 2,
+      "R_on_bulk_ohm_cm2": 0.00027803387641171405,
+      "R_on_U_ohm_cm2": 0.002446694171118365,
+      "R_on_L_ohm_cm2": 0.002598883463906835,
+      "n_acc_edges": 420,
+      "n_acc_columns": 22,
+      "L_over_U_minus_1": 0.06220200897397232,
+      "U_over_bulk_minus_1": 7.799985824372305
+    },
+    {
+      "case": "13d_final",
+      "level": 1,
+      "R_on_bulk_ohm_cm2": 0.00027924108726097254,
+      "R_on_U_ohm_cm2": 0.002433281952492102,
+      "R_on_L_ohm_cm2": 0.0025231560479128923,
+      "n_acc_edges": 100,
+      "n_acc_columns": 11,
+      "L_over_U_minus_1": 0.036935339666964495,
+      "U_over_bulk_minus_1": 7.713910894559762
+    },
+    {
+      "case": "13d_final",
+      "level": 2,
+      "R_on_bulk_ohm_cm2": 0.0002779204459561115,
+      "R_on_U_ohm_cm2": 0.0023984234748762046,
+      "R_on_L_ohm_cm2": 0.0026082548217099947,
+      "n_acc_edges": 440,
+      "n_acc_columns": 23,
+      "L_over_U_minus_1": 0.08748719691572426,
+      "U_over_bulk_minus_1": 7.62989214998222
+    },
+    {
+      "case": "s17_final",
+      "level": 1,
+      "R_on_bulk_ohm_cm2": 0.00028729819108914815,
+      "R_on_U_ohm_cm2": 0.0023370850340032365,
+      "R_on_L_ohm_cm2": 0.002550439101689774,
+      "n_acc_edges": 110,
+      "n_acc_columns": 12,
+      "L_over_U_minus_1": 0.09129067388749634,
+      "U_over_bulk_minus_1": 7.13470152785627
+    },
+    {
+      "case": "s17_final",
+      "level": 2,
+      "R_on_bulk_ohm_cm2": 0.00028594053223970765,
+      "R_on_U_ohm_cm2": 0.0024023313959501743,
+      "R_on_L_ohm_cm2": 0.002597067869099848,
+      "n_acc_edges": 440,
+      "n_acc_columns": 23,
+      "L_over_U_minus_1": 0.08106145283617328,
+      "U_over_bulk_minus_1": 7.4015070446055855
+    },
+    {
+      "case": "s17b_final",
+      "level": 1,
+      "R_on_bulk_ohm_cm2": 0.0002797091029743571,
+      "R_on_U_ohm_cm2": 0.0024368821442722795,
+      "R_on_L_ohm_cm2": 0.002537634785256467,
+      "n_acc_edges": 100,
+      "n_acc_columns": 11,
+      "L_over_U_minus_1": 0.041344896888427574,
+      "U_over_bulk_minus_1": 7.712201778058276
+    },
+    {
+      "case": "s17b_final",
+      "level": 2,
+      "R_on_bulk_ohm_cm2": 0.00027837193021998933,
+      "R_on_U_ohm_cm2": 0.0024465991438608063,
+      "R_on_L_ohm_cm2": 0.0025971224566601393,
+      "n_acc_edges": 420,
+      "n_acc_columns": 22,
+      "L_over_U_minus_1": 0.061523487890134065,
+      "U_over_bulk_minus_1": 7.788957787257248
+    }
+  ],
+  "R2": {
+    "per_model": {
+      "bulk": {
+        "kind": "r2",
+        "model": "bulk",
+        "level": 1,
+        "error": null,
+        "R0": 0.0002792926937498106,
+        "dR_dthetaJ": -4.336342454607173e-05,
+        "fd_eps_1e-3": -4.336344947426492e-05,
+        "fd_eps_5e-4": -4.336343077812003e-05,
+        "spread": 1.869614489266591e-11,
+        "theta0": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "n_solves": 5,
+        "all_converged": true,
+        "n_acc_columns": 0,
+        "n_acc_edges": 0,
+        "seconds": 201.4993646000512,
+        "rss_mib": 240.33203125
+      },
+      "U": {
+        "kind": "r2",
+        "model": "U",
+        "level": 1,
+        "error": null,
+        "R0": 0.0024368821442725484,
+        "dR_dthetaJ": -9.42612097805471e-05,
+        "fd_eps_1e-3": -9.426124065255344e-05,
+        "fd_eps_5e-4": -9.426121749854868e-05,
+        "spread": 2.3154004755165936e-11,
+        "theta0": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "n_solves": 5,
+        "all_converged": true,
+        "n_acc_columns": 0,
+        "n_acc_edges": 0,
+        "seconds": 220.43351246591192,
+        "rss_mib": 242.109375
+      },
+      "L": {
+        "kind": "r2",
+        "model": "L",
+        "level": 1,
+        "error": null,
+        "R0": 0.0025393223836138053,
+        "dR_dthetaJ": -0.0002819608821104033,
+        "fd_eps_1e-3": -0.00028196077717004137,
+        "fd_eps_5e-4": -0.00028196085587531283,
+        "spread": 7.870527146680573e-11,
+        "theta0": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "n_solves": 5,
+        "all_converged": true,
+        "n_acc_columns": 11,
+        "n_acc_edges": 100,
+        "acc_x_range_um": [
+          0.0,
+          0.6666666666666667
+        ],
+        "mu_acc_cm2": 17.5,
+        "seconds": 169.9246942140162,
+        "rss_mib": 239.46875
+      }
+    },
+    "ratios": {
+      "U_over_bulk": 2.173749208400243,
+      "L_over_bulk": 6.502274325931807,
+      "L_over_U": 2.9912716245298205
+    }
+  },
+  "runtime_seconds": 627.2863504680572
+}
