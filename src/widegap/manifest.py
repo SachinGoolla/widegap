@@ -37,6 +37,12 @@ def build_manifest(repo: Path, command: list[str], seeds: list[int]) -> dict:
             packages[name] = _md.version(name)
         except _md.PackageNotFoundError:
             packages[name] = None
+    # Installed metadata goes stale in an editable install after a version bump; record the
+    # imported source's own version as the authoritative one.
+    from widegap import __version__ as _src_version
+
+    packages["widegap_installed_metadata"] = packages["widegap"]
+    packages["widegap"] = _src_version
     try:
         import torch
 

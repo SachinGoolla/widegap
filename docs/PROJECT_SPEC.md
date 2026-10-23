@@ -205,3 +205,16 @@ any run; none is pre-registered yet):
 
 Numbering note: §10 listed GaN as stage 13; 13 is now the DMOSFET
 optimization series and GaN is 14.
+
+## 12. Stage-table revision (v2.3, 2026-10-23)
+
+Work after v2.2 added stages 16 to 18. These rows extend §11 (kept unchanged as history). Statuses
+are taken from the result documents in `docs/benchmarks/` and from `CHANGELOG.md`. Stage 15 (caveat
+closure) ran as 15b, 15d and 15f; its gate was not passed (L1 failed), see `stage15_result.md`.
+
+| # | Stage | Status | Result |
+|---|---|---|---|
+| 16 | Channel (inversion-layer) mobility, Noguchi et al., forward re-evaluation of 12b and 13d | not passed: H5 failed (R_on,sp +3.15% from h to h/2 against a 3% limit); H1-H4 and H6 passed | `stage16_result.md` |
+| 17 | Channel-aware re-optimization of the 13d DMOSFET (exact adjoint through the nonlocal mobility) | not passed: J4 failed (113 of 173 evaluations crossed the frozen surface classification); J1-J3 and J5-J7 passed; optimum numbers not trustworthy | `stage17_result.md` |
+| 17b | Stage 17 with the classification guard as an SLSQP constraint | planned (pre-registered, not run) | `stage17b_classification_constraint.md` |
+| 18 | Accumulation-layer mobility bracket on the JFET surface (Zhao 2007 pessimistic bound) | planned (pre-registered, not run) | `stage18_accumulation_bracket.md` |
