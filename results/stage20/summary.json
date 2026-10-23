@@ -1,0 +1,222 @@
+{
+  "criteria": {
+    "G1": true,
+    "G2": true,
+    "G3": true
+  },
+  "gate_passed": true,
+  "dev": false,
+  "per_design": {
+    "0.8": {
+      "d_body_um": 0.8,
+      "BV_L0": 516.871440559229,
+      "x_BV_L0_um": 1.7000000000000002,
+      "V_pt_es_L0": 114.07400254054245,
+      "worst_x_um_L0": 1.8192661891536326,
+      "dense_resolved_L0": true,
+      "BV_L1": 518.0937578643103,
+      "x_BV_L1_um": 1.7708333333333337,
+      "V_pt_es_L1": 117.49253958716626,
+      "worst_x_um_L1": 1.8192661891536326,
+      "dense_resolved_L1": true,
+      "V_T_es_V": 10.517977774009946,
+      "R_on_ch_ohm_cm2": 0.0024368821442725484,
+      "E_ox_400V_MV_cm_L0": 5.252521118256389,
+      "E_ox_400V_MV_cm_L1": 5.286711421326926,
+      "R_on_guard_ok": true,
+      "DD": {
+        "x_um": 1.8192661891536326,
+        "onset_V": {
+          "0.001": 90.63623680966994,
+          "1": 94.80687586026116,
+          "1000": 101.58139269430005
+        },
+        "V_reached": 225.0,
+        "first_failed_target_V": 230.0,
+        "V_barrier_below_10VT": 97.76513835805592
+      },
+      "ratio_L0": 0.22070092016908519,
+      "ratio_L0_at_least": null,
+      "ratio_L1": 0.22677852763850084,
+      "ratio_L1_at_least": null
+    },
+    "1.0": {
+      "d_body_um": 1.0,
+      "BV_L0": 550.4283976745198,
+      "x_BV_L0_um": 1.841666666666667,
+      "V_pt_es_L0": 312.99894077806294,
+      "worst_x_um_L0": 1.691360912147347,
+      "dense_resolved_L0": true,
+      "BV_L1": 549.3903221726813,
+      "x_BV_L1_um": 1.7708333333333337,
+      "V_pt_es_L1": 319.0508756230567,
+      "worst_x_um_L1": 1.691360912147347,
+      "dense_resolved_L1": true,
+      "V_T_es_V": 10.517977399133013,
+      "R_on_ch_ohm_cm2": 0.0024482102459165295,
+      "E_ox_400V_MV_cm_L0": 4.770012595816067,
+      "E_ox_400V_MV_cm_L1": 4.80248839640962,
+      "R_on_guard_ok": true,
+      "DD": {
+        "x_um": 1.691360912147347,
+        "onset_V": {
+          "0.001": 342.43744624601555,
+          "1": 350.2174758382732,
+          "1000": 364.2761142005047
+        },
+        "V_reached": 380.0,
+        "first_failed_target_V": 385.0,
+        "V_barrier_below_10VT": 355.9702072940904
+      },
+      "ratio_L0": 0.5686460620499199,
+      "ratio_L0_at_least": null,
+      "ratio_L1": 0.5807362502515551,
+      "ratio_L1_at_least": null
+    },
+    "1.2": {
+      "d_body_um": 1.2,
+      "BV_L0": 547.125572108434,
+      "x_BV_L0_um": 1.841666666666667,
+      "V_pt_es_L0": 578.2379216361408,
+      "worst_x_um_L0": 1.6,
+      "dense_resolved_L0": true,
+      "BV_L1": 545.9743977707793,
+      "x_BV_L1_um": 1.9125000000000003,
+      "V_pt_es_L1": 586.3828505072813,
+      "worst_x_um_L1": 1.6456804560736737,
+      "dense_resolved_L1": true,
+      "V_T_es_V": 10.517977788080604,
+      "R_on_ch_ohm_cm2": 0.0024594773474906555,
+      "E_ox_400V_MV_cm_L0": 4.277433194406339,
+      "E_ox_400V_MV_cm_L1": 4.31095922169664,
+      "R_on_guard_ok": true,
+      "DD": {
+        "x_um": 1.6456804560736737,
+        "onset_V": {
+          "0.001": null,
+          "1": null,
+          "1000": null
+        },
+        "V_reached": 400.0,
+        "first_failed_target_V": 410.0,
+        "V_barrier_below_10VT": null
+      },
+      "ratio_L0": 1.0568650984595922,
+      "ratio_L0_at_least": null,
+      "ratio_L1": 1.0740116256393895,
+      "ratio_L1_at_least": null
+    },
+    "1.4": {
+      "d_body_um": 1.4,
+      "BV_L0": 544.0033066669989,
+      "x_BV_L0_um": 1.841666666666667,
+      "V_pt_es_L0": 855.410276789082,
+      "worst_x_um_L0": 1.6,
+      "dense_resolved_L0": true,
+      "BV_L1": 543.1460884690359,
+      "x_BV_L1_um": 1.841666666666667,
+      "V_pt_es_L1": 866.2236566151387,
+      "worst_x_um_L1": 1.6,
+      "dense_resolved_L1": true,
+      "V_T_es_V": 10.517977492492326,
+      "R_on_ch_ohm_cm2": 0.0024707265053684853,
+      "E_ox_400V_MV_cm_L0": 3.8729434551747692,
+      "E_ox_400V_MV_cm_L1": 3.9079591433512966,
+      "R_on_guard_ok": true,
+      "DD": {
+        "x_um": 1.6,
+        "onset_V": {
+          "0.001": null,
+          "1": null,
+          "1000": null
+        },
+        "V_reached": 400.0,
+        "first_failed_target_V": 410.0,
+        "V_barrier_below_10VT": null
+      },
+      "ratio_L0": 1.5724358038005546,
+      "ratio_L0_at_least": null,
+      "ratio_L1": 1.5948262815566994,
+      "ratio_L1_at_least": null
+    },
+    "1.6": {
+      "d_body_um": 1.6,
+      "BV_L0": 542.7194746809791,
+      "x_BV_L0_um": 1.841666666666667,
+      "V_pt_es_L0": 1140.2789632082975,
+      "worst_x_um_L0": 1.6,
+      "dense_resolved_L0": true,
+      "BV_L1": 541.813681539435,
+      "x_BV_L1_um": 1.9125000000000003,
+      "V_pt_es_L1": 1150.4664483547724,
+      "worst_x_um_L1": 1.6,
+      "dense_resolved_L1": true,
+      "V_T_es_V": 10.517977740598917,
+      "R_on_ch_ohm_cm2": 0.002481972834444283,
+      "E_ox_400V_MV_cm_L0": 3.539873067818912,
+      "E_ox_400V_MV_cm_L1": 3.5768551797547254,
+      "R_on_guard_ok": true,
+      "DD": {
+        "x_um": 1.6,
+        "onset_V": {
+          "0.001": null,
+          "1": null,
+          "1000": null
+        },
+        "V_reached": 400.0,
+        "first_failed_target_V": 410.0,
+        "V_barrier_below_10VT": null
+      },
+      "ratio_L0": 2.101046703508429,
+      "ratio_L0_at_least": null,
+      "ratio_L1": 2.123361752486565,
+      "ratio_L1_at_least": null
+    }
+  },
+  "criteria_detail": {
+    "G1_errors": [],
+    "G2": {
+      "0.8": {
+        "bv_rel_change": 0.002364838157354665,
+        "bv_ok": true,
+        "vpt_rel_change": 0.029967713681378516,
+        "vpt_ok": true
+      },
+      "1.0": {
+        "bv_rel_change": 0.0018859410346999672,
+        "bv_ok": true,
+        "vpt_rel_change": 0.01933532052840059,
+        "vpt_ok": true
+      },
+      "1.2": {
+        "bv_rel_change": 0.0021040404549514946,
+        "bv_ok": true,
+        "vpt_rel_change": 0.01408577432641267,
+        "vpt_ok": true
+      },
+      "1.4": {
+        "bv_rel_change": 0.001575759168110591,
+        "bv_ok": true,
+        "vpt_rel_change": 0.01264116193067788,
+        "vpt_ok": true
+      },
+      "1.6": {
+        "bv_rel_change": 0.001668989567909951,
+        "bv_ok": true,
+        "vpt_rel_change": 0.008934204238769228,
+        "vpt_ok": true
+      }
+    },
+    "G3_value_L1": 117.49253958716626,
+    "R2": {
+      "rule": "smallest d_body with V_pt,es >= 1.2 BV on both meshes",
+      "safe_design_um": 1.4,
+      "R_on_ch_penalty": 0.013888386508753348,
+      "BV_change_L0": 0.05249248454976474,
+      "BV_change_L1": 0.048354820386172115,
+      "V_T_change_V": -2.8151761988226554e-07,
+      "E_ox_change_L1": -0.2607958271400357
+    }
+  },
+  "runtime_seconds": 198.9728363630129
+}
