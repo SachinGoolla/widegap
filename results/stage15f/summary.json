@@ -1,0 +1,135 @@
+{
+  "criteria": {
+    "V1": true,
+    "V2": true
+  },
+  "gate_passed": true,
+  "dev_unverified_registry": false,
+  "values": {
+    "V1_all_usable": true,
+    "V2_errors": {
+      "12b|ishikawa_beta1.0": null,
+      "12b|ishikawa_beta1.2": null,
+      "13d_initial|ishikawa_beta1.0": null,
+      "13d_initial|ishikawa_beta1.2": null,
+      "13d_final|ishikawa_beta1.0": null,
+      "13d_final|ishikawa_beta1.2": null
+    },
+    "beta_note": "beta values of the Ishikawa variants are model choices (Amendment 1), not registry values",
+    "R4": [
+      {
+        "case": "12b",
+        "khan_cooper": {
+          "R_on_sp_ohm_cm2": 0.0002918982352991735,
+          "V_T_V": 7.855078975616674,
+          "I_D_VDS15_A_per_cm": 3.617991293126945,
+          "converged_all": true,
+          "error": null
+        },
+        "ishikawa_beta1.0": {
+          "R_on_sp_ohm_cm2": 0.00029400733812536093,
+          "V_T_V": 7.857130839705722,
+          "I_D_VDS15_A_per_cm": 2.8931054964754814,
+          "converged_all": true,
+          "error": null,
+          "ratio_to_khan_cooper": {
+            "R_on_sp": 1.0072254730283852,
+            "V_T_shift_V": 0.0020518640890472284,
+            "I_D_VDS15": 0.7996441290423998
+          }
+        },
+        "ishikawa_beta1.2": {
+          "R_on_sp_ohm_cm2": 0.00029215165826775323,
+          "V_T_V": 7.855545140633123,
+          "I_D_VDS15_A_per_cm": 3.195522597002638,
+          "converged_all": true,
+          "error": null,
+          "ratio_to_khan_cooper": {
+            "R_on_sp": 1.0008681894507516,
+            "V_T_shift_V": 0.00046616501644880515,
+            "I_D_VDS15": 0.8832311462642639
+          }
+        }
+      },
+      {
+        "case": "13d_initial",
+        "khan_cooper": {
+          "R_on_sp_ohm_cm2": 0.0002855540819722657,
+          "V_T_V": 7.666120074270849,
+          "I_D_VDS15_A_per_cm": 4.445133947768542,
+          "converged_all": true,
+          "error": null
+        },
+        "ishikawa_beta1.0": {
+          "R_on_sp_ohm_cm2": 0.0002875304595086703,
+          "V_T_V": 7.675363590803967,
+          "I_D_VDS15_A_per_cm": 3.5280351596347943,
+          "converged_all": true,
+          "error": null,
+          "ratio_to_khan_cooper": {
+            "R_on_sp": 1.0069212021861293,
+            "V_T_shift_V": 0.00924351653311728,
+            "I_D_VDS15": 0.7936847800516492
+          }
+        },
+        "ishikawa_beta1.2": {
+          "R_on_sp_ohm_cm2": 0.0002857887859346826,
+          "V_T_V": 7.668415363033777,
+          "I_D_VDS15_A_per_cm": 3.873333724323635,
+          "converged_all": true,
+          "error": null,
+          "ratio_to_khan_cooper": {
+            "R_on_sp": 1.0008219247324215,
+            "V_T_shift_V": 0.0022952887629275054,
+            "I_D_VDS15": 0.8713649059480084
+          }
+        }
+      },
+      {
+        "case": "13d_final",
+        "khan_cooper": {
+          "R_on_sp_ohm_cm2": 0.0002855540819728524,
+          "V_T_V": 7.664353135601594,
+          "I_D_VDS15_A_per_cm": 4.467189965777001,
+          "converged_all": true,
+          "error": null
+        },
+        "ishikawa_beta1.0": {
+          "R_on_sp_ohm_cm2": 0.0002874235220160352,
+          "V_T_V": 7.673695654811139,
+          "I_D_VDS15_A_per_cm": 3.5444623948733835,
+          "converged_all": true,
+          "error": null,
+          "ratio_to_khan_cooper": {
+            "R_on_sp": 1.0065467109777142,
+            "V_T_shift_V": 0.009342519209544875,
+            "I_D_VDS15": 0.7934433999958355
+          }
+        },
+        "ishikawa_beta1.2": {
+          "R_on_sp_ohm_cm2": 0.00028577172285595005,
+          "V_T_V": 7.666671287905336,
+          "I_D_VDS15_A_per_cm": 3.889675896637425,
+          "converged_all": true,
+          "error": null,
+          "ratio_to_khan_cooper": {
+            "R_on_sp": 1.0007621704497935,
+            "V_T_shift_V": 0.0023181523037418827,
+            "I_D_VDS15": 0.8707209512996106
+          }
+        }
+      }
+    ],
+    "consistency_13d": {
+      "13d_initial": {
+        "R_on_stage13d_summary": 0.0002855540819722657,
+        "R_on_here_khan_cooper": 0.0002855540819722657
+      },
+      "13d_final": {
+        "R_on_stage13d_summary": 0.00028555408197285226,
+        "R_on_here_khan_cooper": 0.0002855540819728524
+      }
+    }
+  },
+  "runtime_seconds": 80.8343084299704
+}
