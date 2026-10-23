@@ -120,3 +120,18 @@ Stage 15 passes if F1–F5, L1, V1 and V2 hold. The R items are reported whateve
 - 15d "oxide/SiC interface corner" is defined as the surface points where the boundary condition changes: the gate end, the source-contact start and the body-contact start. The interface itself is planar. The definition is frozen in `localfield.py`.
 - $I_D$ at $V_{DS}$ = 15 V uses $V_{GS}$ = 15 V, the stage-12 on-state gate bias. The spec did not state this.
 - 15d dev: L1 failed for E_ox and W2. L1 is unchanged; the official run decides.
+
+## Amendment 2 (2026-10-22, after the 15b dev run, before the official run; disclosed)
+
+**15b tracer defect.**
+- The dev run found lines that end in a field-reversal sink: a zero of $\mathbf E$ in the p-body beside the n⁺ source junction, near (1.77, −0.44) µm.
+- Near the sink, $|\mathbf E|$ stays above $10^{-3}\max|\mathbf E|$, so neither stop rule fires. The line orbits the sink until the step limit (1 line in 49 586 at Δs = 0.00125 µm).
+- This is a defect in the method definition (field lines that converge on a sink do terminate), not in the outcome.
+
+**Change.**
+- A third stop rule is added: **stagnation**. Tracing stops when the net displacement over the last 200 steps is below 10 Δs.
+- Lines stopped this way are counted and reported. Their ionization integral up to the stop is kept.
+- F5 is **unchanged**: every line must end by one of the (now three) stop rules, with no step-limit hit.
+- Δs = 0.00125 µm was chosen for termination only, before any official evaluation.
+
+**Disclosure.** The dev BVs were seen. F1–F4 passed in dev, and the step-limit lines were at low-field march states, not at the BV state. The rule cannot raise or lower the BV of a line that reaches the avalanche region, because it acts only on paths that have stopped moving.
