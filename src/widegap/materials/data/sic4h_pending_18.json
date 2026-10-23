@@ -1,0 +1,26 @@
+{
+  "material": "4H-SiC",
+  "rules": "pending entries: must be independently verified before merging into sic4h.json",
+  "pending_note": "stage 18 (accumulation-layer mobility bracket); extracted 2026-10-23 | 2026-10-23: verified (second pass, after wording corrections) and merged into sic4h.json; kept as audit trail.",
+  "parameters": [
+    {
+      "name": "mu_acc_n_zhao2007",
+      "value": 17.5,
+      "unit": "cm^2/(V s)",
+      "doi": "10.1016/j.sse.2007.06.006",
+      "doi_agency": "Crossref",
+      "doi_metadata_match": true,
+      "citation": "P. Zhao, Rusli, C. L. Zhu, J. H. Xia, DC characterization of accumulation layer and bulk layer electron mobility in 4H-SiC depletion mode MOSFET, Solid-State Electronics 51, 1139-1143 (2007)",
+      "access": "full-text-read",
+      "access_url": "user-supplied full text (not redistributed)",
+      "extracted_by": "planner (claude-opus-5-5)",
+      "verified_by": "verifier-agent-18 (haiku)",
+      "verified_value_match": true,
+      "param_class": "fit-to-data",
+      "temperature_K": null,
+      "orientation": null,
+      "locator": "p. 1141, Sec. 3 text ('mu_s = 17.5 +/- 0.1 cm2/V s', fit over 7.0 V < V_GS < 10.0 V, V_DS 50-200 mV); the abstract (p. 1139) notes about 17.5 cm2/V s was previously deduced (their ref. [17]) and p. 1141 re-derives it",
+      "validity": "Average accumulation-layer electron mobility of a Si-face 4H-SiC depletion-mode MOSFET, n-channel N_D = 2.4e17 cm^-3 (SIMS, p. 1140), thermal gate oxide WITHOUT nitridation (abstract p. 1139; p. 1142), C_ox = 6.9e-4 F/m^2 and W/L = 40/3 um (p. 1141), room temperature (numeric temperature not stated), extracted from the slopes of I_DS vs V_GS (V_DS 50-200 mV) with the lumped accumulation-plus-bulk-channel model of Eq. (1), valid in strong accumulation; the paper treats it as an average over V_GS > 7 V (Fig. 4 shows about 19 -> 16 cm^2/Vs over V_GS 7-11 V). Used in widegap stage 18 ONLY as the pessimistic end of a bracket for the JFET accumulation surface; not representative of NO-nitrided oxide; no field or N_S dependence given."
+    }
+  ]
+}
