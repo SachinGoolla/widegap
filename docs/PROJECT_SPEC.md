@@ -208,7 +208,7 @@ optimization series and GaN is 14.
 
 ## 12. Stage-table revision (v2.3, 2026-10-23)
 
-Work after v2.2 added stages 16 to 18. These rows extend §11 (kept unchanged as history). Statuses
+Work after v2.2 added stages 16 to 18b. These rows extend §11 (kept unchanged as history). Statuses
 are taken from the result documents in `docs/benchmarks/` and from `CHANGELOG.md`. Stage 15 (caveat
 closure) ran as 15b, 15d and 15f; its gate was not passed (L1 failed), see `stage15_result.md`.
 
@@ -218,3 +218,5 @@ closure) ran as 15b, 15d and 15f; its gate was not passed (L1 failed), see `stag
 | 17 | Channel-aware re-optimization of the 13d DMOSFET (exact adjoint through the nonlocal mobility) | not passed: J4 failed (113 of 173 evaluations crossed the frozen surface classification); J1-J3 and J5-J7 passed; optimum numbers not trustworthy | `stage17_result.md` |
 | 17b | Stage 17 with the classification guard as an SLSQP constraint | passed: J1-J3, J4b, J5-J8 hold; dense true-min BV 572.5 V (h), 35.1 V below the stage-17 final and 5.5 V below the 13d final | `stage17b_result.md` |
 | 18 | Accumulation-layer mobility bracket on the JFET surface (Zhao 2007 pessimistic bound) | failed (A4, A5): A1-A3 passed; R_on(L) mesh change 2.71% (limit 2%) and d_ch change 1.63% (limit 1%); bracket L/U - 1 = +3.7% to +9.1% reported with that sensitivity | `stage18_result.md` |
+| 18b | Accumulation mobility on the gate-induced (excess) charge only (Zhao 2007 pessimistic bound) | failed narrowly (B3): B1, B2, B4 passed; R_on(L') mesh change 2.098% (limit 2%); d_ch change 0.048% (limit 1%); bracket L'/U - 1 = +2.6% to +7.2% reported | `stage18b_result.md` |
+| 17c (planned) | Channel-aware re-optimization with the p-body doping as a design variable | planned; pre-registration pending scoping | none yet |
