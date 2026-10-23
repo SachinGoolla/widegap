@@ -2,6 +2,33 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **Stage 15**, caveat closure for the SiC device results, pre-registered with two disclosed amendments ([spec](docs/benchmarks/stage15_caveat_closure.md), [result](docs/benchmarks/stage15_result.md)). **The stage gate is NOT passed: L1 failed.** 15b and 15f passed their gating criteria; 15d did not.
+- **15b**, field-line ionization-integral BV (`widegap.fieldline`), a post-hoc re-evaluation of the 12c off-state fields for the initial, 13b, 13c and 13d designs on h and h/2. F1-F5 passed (1D reduction 3.7e-6 relative, step 4.9e-7, seeds 2.9e-5, mesh 0.22%, 0 step-limit lines). Field-line minus dense vertical-cut BV is between -6.77 V (-1.09%) and +0.29 V (+0.06%); the 13d gain survives (+60.3 V field-line vs +61.1 V cut on h, +61.7 V vs +62.3 V on h/2), as do the 13b and 13c gains. Manifest commit `0d63445`, `git_dirty: false`.
+- **15d**, local-field mesh adequacy (`widegap.localfield`). **L1 failed** for E_ox (order 0.056; the area mean changes about 0.06% per refinement, so the pre-registered order is ill-conditioned; the failure stands) and W2 (order -0.044, 7.5% from Richardson, monotone increasing: genuine non-convergence); W1 (order 1.09) and W3 (order 1.42) pass. L2: E_ox area mean rises by a relative 2.4e-5 from the initial to the final design on h; W1-W3 decrease. R3 pinning table and the finding that the 13d smooth-max creep is mainly the ln(N)/kappa smooth-max bias growing with edge count are in the result.
+- **15f**, Ishikawa v_sat option (1.7e7 cm/s, isotropic) with 10 new registry entries that pass `check_entry` (V1), and an option in `widegap.sic`. All solves converged (V2). R4: R_on changes by +0.65% to +0.72% (beta 1.0) and +0.08% to +0.09% (beta 1.2), V_T by at most 0.0093 V, I_D at V_DS = 15 V by -20.0% to -20.7% (beta 1.0) and -11.7% to -12.9% (beta 1.2), for the 12b device and the 13d initial and final designs. The Khan and Cooper entries are unchanged.
+- 15a restated as a bound from the 12c gates C2 (relative difference 0) and C3 (n/N at most 2e-19) with no new run; 15c deferred; 15e and the 3 MV/cm oxide guideline blocked on sources.
+
+### Changed
+
+- README caveat list updated with the stage 15 status of each caveat: BV method difference quantified (15b); v_sat anisotropy closed but the value uncertain (15f); local-field convergence diagnosed and partly open (15d); mobility, V_DS limit and the oxide guideline open.
+
+### Process
+
+- Amendment 1 (15f, before the official run): the thesis exponents below 1 are outside the model's domain (beta >= 1 is required), so the Ishikawa set was evaluated at beta = 1.0 and 1.2; a dev run at beta = 1.0 had been seen and the amendment did not choose beta from it.
+- Amendment 2 (15b, before the official run): a stagnation stop rule was added after the dev run found lines orbiting a field-reversal sink; F5 is unchanged. The official run has 70 stagnation stops and 0 step-limit lines.
+- 15d L1 failed and was not re-registered into a pass.
+- The 15d and 15f manifests record `git_dirty: true` only because the (then untracked) 15b files existed at run time; they were committed afterwards in `0d63445` and 15d and 15f do not import them. Commit `2153246`.
+
+### Known limitations
+
+- Stage 15 does not show mesh-converged local fields (E_ox and W2 area means fail L1); no agreement with measured devices is claimed.
+- The field-line BV is a post-hoc ionization-integral evaluation of zero-current fields, not a full 2D avalanche simulation.
+- The v_sat value remains uncertain between the two published values (2.2e7 and 1.7e7 cm/s); holes use the electron v_sat; beta below 1 is unsupported by the model.
+
 ## [0.3.0] - 2026-10-22
 
 ### Added

@@ -2,7 +2,7 @@
 
 Verified finite-volume solvers (1D and 2D) for semiconductor device equations, with discrete adjoint sensitivities and constrained doping optimization, built in pre-registered stages toward optimization of wide-bandgap (4H-SiC) power devices. A physics-informed neural network (PINN) is included as a comparison study. **Verified so far (stages 1-13d, see the table below): linear and nonlinear Poisson, drift-diffusion with Scharfetter-Gummel fluxes (1D and 2D, including realistic 4H-SiC n_i/N0), impact ionization and avalanche breakdown, incomplete ionization, field-dependent mobility, a traced 4H-SiC material registry, sourced 4H-SiC device studies (p+n diodes, vertical DMOSFET half-cell), and adjoint-based doping optimization of that DMOSFET with a corner-aware breakdown objective and a gate-oxide-field constraint. All device results are model results from traceable parameters; no agreement with measured devices is claimed. A PINN-vs-FV comparison (stage 11) found no PINN advantage on the problem studied.**
 
-Current release: v0.3.0 (see [CHANGELOG.md](CHANGELOG.md)). This README describes the repository as of 2026-10-22, after v0.3.0.
+Current release: v0.3.0 (see [CHANGELOG.md](CHANGELOG.md)). This README describes the repository as of 2026-10-22, after v0.3.0 and the unreleased stage 15 caveat-closure work (see the stage table).
 
 ## Status
 
@@ -27,6 +27,7 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 12 | 4H-SiC device studies with sourced parameters (avalanche BV vs doping; DMOSFET on/off) | verified after one disclosed re-registration ([result](docs/benchmarks/stage12_result.md)); BV 1.79 kV at 1e16 (Niwa); the planar-cut DMOSFET BV of 512 V was later found biased low by the stage-12 off-state model (556 V with the stage-12c model, see [12c/13c result](docs/benchmarks/stage12c_13c_result.md)) |
 | 13 | Full-physics adjoint optimization of a 4H-SiC DMOSFET | machinery verified; **objective flaw found**: planar-cut BV was gamed while the corner BV fell ([result](docs/benchmarks/stage13_result.md)); 13b fixed the blind spot but exposed an off-state artifact; 12c/13c ([result](docs/benchmarks/stage12c_13c_result.md)) fixed the artifact (true-min BV 517→619 V at fixed R_on) but **failed** on ill-posed peak criteria and a new gate-oxide-field issue; 13d ([result](docs/benchmarks/stage13d_result.md)) adds an oxide-field constraint at 400 V and **passes** D1-D7: true-min BV 517→578 V at fixed R_on and E_ox, costing ~41 V vs 13c; E_ox stays ~5.25 MV/cm (1.75x the 3 MV/cm guideline) |
 | 14 | GaN | out of scope for now |
+| 15 | Caveat closure for the SiC device results ([result](docs/benchmarks/stage15_result.md)); **gate NOT passed (L1 failed)** | **15b** field-line ionization-integral BV passed F1-F5: field-line BV is within -1.09% to +0.06% of the dense vertical-cut BV for the initial, 13b, 13c and 13d designs on h and h/2, and the 13d gain survives (+60.3 V field-line vs +61.1 V cut on h). **15d** local-field mesh adequacy **failed L1** for E_ox (order 0.06, ill-conditioned: the area mean changes ~0.06% per refinement) and W2 (order -0.04, 7.5% from Richardson: genuine non-convergence); W1 and W3 pass. **15f** Ishikawa v_sat (1.7e7 cm/s, isotropic) passed V1-V2: R_on and V_T change by <1%, I_D at V_DS = 15 V by -12% to -20%. 15a restated from 12c C2/C3 (no new run); 15c deferred; 15e and the oxide guideline blocked on sources |
 
 ## Installation
 
@@ -144,18 +145,18 @@ Scope and models:
 - Device results use model parameters from traced sources (registry) plus study parameters where stated; optimized profiles are model results, not fabrication-ready designs. Agreement with measured devices is not claimed for any stage.
 - GaN (stage 14) is out of scope.
 
-Known caveats of the SiC device results (stages 12-13d; see [CHANGELOG.md](CHANGELOG.md) and the result documents):
+Known caveats of the SiC device results (stages 12-13d; status after stage 15, see [stage 15 result](docs/benchmarks/stage15_result.md), [CHANGELOG.md](CHANGELOG.md) and the result documents):
 
-- Mobility is Hall mobility; no interface-scattering (channel) mobility model, so R_on is optimistic.
-- The off-state uses a zero-current model (phi_n = V_D w with w a harmonic extension across the p-body in the corrected stage 12c model); it is not a full drift-diffusion off-state solution. The original stage-12 model had an artificial electron reservoir on the p side; its corner-column BV values (375-417 V, and 417 to 338 V in stage 13) are artifacts and must not be used quantitatively.
-- BV is evaluated with vertical-cut ionization integrals (dense true minimum over at least 40 cuts), not a full 2D field-line avalanche solution.
-- The Khan and Cooper v_sat (perpendicular to c, 23 C) is applied to all edges.
-- V_DS is limited to 15 V in the on-state model by double-precision underflow in hole rows.
-- Stage 13d local window fields and gate-oxide field E_ox are not mesh-converged (they rise about 1-6% from h to h/4), so only same-mesh comparisons are used.
-- Stage 13d absolute E_ox is 5.25 MV/cm at 400 V, about 1.75 times an unsourced 3 MV/cm guideline, before and after optimization; no oxide reliability claim is made.
-- SLSQP gives local optima from one starting design in a 5-parameter family; the 400 V blocking reference is a choice.
-- D_it is uniform from an order-of-magnitude text value; epsilon_ox = 3.9 is an owner-approved convention.
-- Stage 11 covers one 1D problem, one untuned PINN configuration, CPU only.
+- Mobility is Hall mobility; no interface-scattering (channel) mobility model, so R_on is optimistic. **Open** (15e blocked on sources).
+- The off-state uses a zero-current model (phi_n = V_D w with w a harmonic extension across the p-body in the corrected stage 12c model); it is not a full drift-diffusion off-state solution. **Open, bound restated (15a, no new run):** the 12c gates C2 (insensitivity to the w interpolation, relative difference 0, bit-identical) and C3 (carrier self-consistency, n/N at most 2e-19) bound the electron-density error of the interpolation; the hole and current response is not quantified. The original stage-12 model had an artificial electron reservoir on the p side; its corner-column BV values (375-417 V, and 417 to 338 V in stage 13) are artifacts and must not be used quantitatively.
+- BV is evaluated with vertical-cut ionization integrals (dense true minimum over at least 40 cuts). **Quantified (15b, gate passed):** a field-line ionization-integral BV on the same off-state fields differs from the dense cut minimum by -1.09% to +0.06% over the initial, 13b, 13c and 13d designs on h and h/2 (13d: -0.08% on h, -0.45% on h/2), and the 13b/13c/13d gains survive (13d: +60.3 V field-line vs +61.1 V cut on h). It is still a post-hoc ionization-integral evaluation of zero-current fields, not a full 2D avalanche simulation (no impact-ionization generation in drift-diffusion).
+- The Khan and Cooper v_sat (perpendicular to c, 23 C) was applied to all edges. **Anisotropy closed, value uncertain (15f, gate passed):** the Ishikawa thesis finds v_sat isotropic (1.7e7 cm/s, //c and perpendicular) versus Khan and Cooper 2.2e7 cm/s, a difference the thesis attributes to measurement difficulties and the Hall scattering factor. Switching to 1.7e7 (beta 1.0 and 1.2 evaluated; beta below 1 is outside the model) changes R_on and V_T by less than 1% and I_D at V_DS = 15 V by -12% to -20%. Holes still use the electron v_sat and beta (no registered hole value).
+- V_DS is limited to 15 V in the on-state model by double-precision underflow in hole rows. **Open** (15c deferred; needed only for output curves).
+- Stage 13d local window fields and gate-oxide field E_ox are not mesh-converged (they rise about 1-6% from h to h/4), so only same-mesh comparisons are used. **Diagnosed, partly open (15d, L1 failed):** the 13d creep is mainly the smooth-maximum bias ln(N)/kappa growing with edge count (e.g. W3: smooth max +6.1% h to h/4, hard max +0.19%). Replacement area-mean measures converge for W1 and W3 (orders 1.09 and 1.42) but not for E_ox (order 0.06, ill-conditioned, change about 0.06% per refinement) or W2 (order -0.04, 7.5% from Richardson). The pre-registered L1 failure stands as written.
+- Stage 13d absolute E_ox is 5.25 MV/cm at 400 V, about 1.75 times an unsourced 3 MV/cm guideline, before and after optimization; no oxide reliability claim is made. **Open** (guideline blocked on a source). The 15d area mean of E_ox on h rises by a relative 2.4e-5 from the initial to the final design (it falls 0.09% on h/2); W1-W3 fall on both meshes.
+- SLSQP gives local optima from one starting design in a 5-parameter family; the 400 V blocking reference is a choice. Unchanged.
+- D_it is uniform from an order-of-magnitude text value; epsilon_ox = 3.9 is an owner-approved convention. Unchanged.
+- Stage 11 covers one 1D problem, one untuned PINN configuration, CPU only. Unchanged.
 
 Earlier-stage notes:
 
