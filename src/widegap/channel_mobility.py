@@ -161,10 +161,25 @@ class ChannelMap:
     surface columns starting at the first column (x = 0) up to the first p-type surface column,
     restricted to x <= ``gate_x_max`` (under the gate; required with ``mu_acc_cm2``).  This
     excludes the n+ source side of the channel.
+
+    Stage 18b (docs/benchmarks/stage18b_accumulation_excess.md): ``acc_mode="all"`` (default) is the
+    stage-18 behaviour (constant ``mu_acc`` on every accumulation edge, bit-identical).
+    ``acc_mode="excess"`` applies ``mu_acc`` to the gate-induced charge only:
+
+        mu_edge = mu_bulk (1 - f) + mu_acc f,   f = max(nbar - n_fb, 0) / nbar,
+
+    ``nbar`` = mean of the two node electron densities of the edge, ``n_fb`` = mean of the two node
+    flat-band densities (``f = 0`` and mu_edge = mu_bulk in depletion).  The node flat-band density
+    is ``N_D^+ - N_A^-`` of the model's own incomplete-ionization levels (``model.ion``) at the
+    node's neutral-bulk potential psi_0 (root of rho(psi_0) = 0 for that node's scaled (N_D, N_A),
+    ``widegap.materials.ionization.neutral_potential``), computed once here from the doping (floor
+    1e-30).  ``mu_acc_cm2="bulk"`` (test hook for criterion B1) uses each edge's own bulk mobility.
+    The edge mobility then depends on n: :func:`picard_solve` lags it and includes its relative
+    change in the convergence measure.
     """
 
     def __init__(self, sc: SiC4H, model, nd, na, d_ch_um=20.0, gate_x_max=None, x_gate_min=None,
-                 mu_acc_cm2=None):  # fmt: skip
+                 mu_acc_cm2=None, acc_mode="all"):  # fmt: skip
         self.sc, self.model = sc, model
         mesh = model.mesh
         self.mesh = mesh
@@ -212,7 +227,16 @@ class ChannelMap:
         self.edge_ca, self.edge_cb = ix[a[self.edges]], ix[b[self.edges]]
         self.mu_bulk = np.asarray(model.mu_edge, dtype=float).copy()  # snapshot (low-field, scaled)
         # ---- stage 18: JFET accumulation surface (n-type columns under the gate)
-        self.mu_acc_cm2 = None if mu_acc_cm2 is None else float(mu_acc_cm2)
+        if acc_mode not in ("all", "excess"):
+            raise ValueError("acc_mode must be 'all' or 'excess'")
+        self.acc_mode = acc_mode
+        self.mu_acc_bulk = isinstance(mu_acc_cm2, str)
+        if self.mu_acc_bulk and (mu_acc_cm2 != "bulk" or acc_mode != "excess"):
+            raise ValueError("mu_acc_cm2='bulk' is only defined for acc_mode='excess'")
+        self.mu_acc_cm2 = (
+            None if mu_acc_cm2 is None else (mu_acc_cm2 if self.mu_acc_bulk else float(mu_acc_cm2))
+        )
+        self.nfb_node = None
         self.col_acc = np.zeros(mesh.nx + 1, dtype=bool)
         self.acc_edges = np.empty(0, dtype=int)
         if self.mu_acc_cm2 is not None:
@@ -231,6 +255,55 @@ class ChannelMap:
                 & (model.gw > 0.0)
             )
             self.acc_edges = np.flatnonzero(acc)
+            self._ix = ix
+            if acc_mode == "excess":
+                self._init_excess(nd, na, ix)
+
+    def _init_excess(self, nd, na, ix):
+        """Node flat-band densities (scaled) and psi_0 on the in-layer nodes of accumulation
+        columns; per-edge n_fb (mean of its two nodes) and the scaled mu_acc."""
+        from widegap.materials.ionization import (
+            ionized_acceptors,
+            ionized_donors,
+            neutral_potential,
+        )
+
+        model = self.model
+        if model.ion is None:
+            raise ValueError("acc_mode='excess' needs the model's incomplete-ionization levels")
+        delta = float(np.exp(model.ld))
+        nodes = np.flatnonzero(self.in_ch & self.col_acc[ix])
+        nd, na = np.asarray(nd, float), np.asarray(na, float)
+        pairs = np.unique(np.c_[nd[nodes], na[nodes]], axis=0)
+        psi0 = {
+            (a_, b_): neutral_potential(a_, b_, delta, model.ion.donors, model.ion.acceptors)
+            for a_, b_ in pairs
+        }
+        self.psi0_node = np.full(self.mesh.n_nodes, np.nan)
+        self.nfb_node = np.full(self.mesh.n_nodes, np.nan)
+        for i in nodes:
+            ps = psi0[(nd[i], na[i])]
+            nfb = ionized_donors(ps, nd[i], model.ion.donors) - ionized_acceptors(
+                ps, na[i], model.ion.acceptors
+            )
+            self.psi0_node[i], self.nfb_node[i] = ps, max(float(nfb), 1e-30)
+        e = self.acc_edges
+        self.nfb_edge = 0.5 * (self.nfb_node[model.a[e]] + self.nfb_node[model.b[e]])
+        self.mu_acc_edge_s = (
+            self.mu_bulk[e] if self.mu_acc_bulk else np.full(len(e), self.sc.mu_s(self.mu_acc_cm2))
+        )
+
+    def refresh_doping(self, nd, na):
+        """Recompute the excess-mode flat-band densities after the doping changed (theta moves);
+        the column / edge sets stay frozen.  Call after ``mu_bulk`` was updated."""
+        if self.acc_mode == "excess" and self.mu_acc_cm2 is not None:
+            self._init_excess(nd, na, self._ix)
+
+    def excess_fraction(self, n_scaled):
+        """f = max(nbar - n_fb, 0)/nbar on the accumulation edges (excess mode)."""
+        e, m = self.acc_edges, self.model
+        nbar = 0.5 * (np.asarray(n_scaled)[m.a[e]] + np.asarray(n_scaled)[m.b[e]])
+        return np.maximum(nbar - self.nfb_edge, 0.0) / nbar
 
     def sheet_density(self, n_scaled):
         """N_S [cm^-2] for every p-type surface column (nan elsewhere): trapezoid on nodes."""
@@ -249,16 +322,22 @@ class ChannelMap:
         res = noguchi_mobility(self.sc, p, self.col_na_cm3[c], ns_all[c], clamp=clamp)
         return res, ns_all
 
-    def edge_mobility(self, mu_col_cm2):
-        """New scaled per-edge mu array: bulk everywhere except the selected channel edges."""
+    def edge_mobility(self, mu_col_cm2, n_scaled=None):
+        """New scaled per-edge mu array: bulk everywhere except the selected channel edges.
+        ``n_scaled`` (node electron densities) is needed only for ``acc_mode='excess'``."""
         mu = self.mu_bulk.copy()
         full = np.full(self.mesh.nx + 1, np.nan)
         full[self.cols] = mu_col_cm2
         ma, mb = full[self.edge_ca], full[self.edge_cb]
         harm = 2.0 * ma * mb / (ma + mb)
         mu[self.edges] = self.sc.mu_s(harm)
-        if self.mu_acc_cm2 is not None:  # stage 18 (constant accumulation mobility)
+        if self.mu_acc_cm2 is not None and self.acc_mode == "all":  # stage 18
             mu[self.acc_edges] = self.sc.mu_s(self.mu_acc_cm2)
+        elif self.mu_acc_cm2 is not None:  # stage 18b: accumulation mobility on the excess charge
+            if n_scaled is None:
+                raise ValueError("acc_mode='excess' needs n_scaled")
+            f = self.excess_fraction(n_scaled)
+            mu[self.acc_edges] = self.mu_bulk[self.acc_edges] * (1.0 - f) + self.mu_acc_edge_s * f
         return mu
 
     def counts(self, res):
@@ -295,7 +374,7 @@ def picard_solve(cmap: ChannelMap, p: NoguchiParams, X0, bc, tol=PICARD_TOL, max
         res, ns_all = cmap.column_mobility(p, n_scaled)
         if mode == "bulk":
             return cmap.mu_bulk.copy(), res, ns_all, None
-        return cmap.edge_mobility(res["mu"]), res, ns_all, res["mu"]
+        return cmap.edge_mobility(res["mu"], n_scaled), res, ns_all, res["mu"]
 
     if mu_init is not None:
         mu_edge, mu_cols = mu_init
@@ -317,6 +396,9 @@ def picard_solve(cmap: ChannelMap, p: NoguchiParams, X0, bc, tol=PICARD_TOL, max
             rel = 0.0
         else:
             rel = float(np.max(np.abs(mu_cols_new / mu_cols - 1.0)))
+            if cmap.acc_mode == "excess" and len(cmap.acc_edges):  # n-dependent accumulation mu
+                e = cmap.acc_edges
+                rel = max(rel, float(np.max(np.abs(mu_edge_new[e] / model.mu_edge[e] - 1.0))))
         hist.append(rel)
         model.mu_edge = np.asarray(mu_edge_new, dtype=float)
         mu_cols = mu_cols_new

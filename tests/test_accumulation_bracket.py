@@ -89,3 +89,67 @@ def test_edge_selection_jfet_surface_only(stack):
     assert np.all(mu[e] == sc.mu_s(17.5))
     other = np.setdiff1d(np.arange(len(mu)), e)
     assert np.array_equal(mu[other], m0[other])  # nothing else changes
+
+
+# ------------------------------------------------------------------ stage 18b (excess mode)
+def _excess(sc, dev, mu_acc):
+    return ChannelMap(sc, dev.model, dev.nd, dev.na, 20.0e-3, gate_x_max=dev.prm.gate_x1,
+                      mu_acc_cm2=mu_acc, acc_mode="excess")  # fmt: skip
+
+
+def test_18b_defaults_and_all_mode_bit_identical(stack):
+    _, sc, dev, mu_acc = stack
+    base, acc = _maps(sc, dev, mu_acc)
+    assert base.acc_mode == acc.acc_mode == "all" and base.nfb_node is None
+    mu_col = np.full(len(base.cols), 80.0)
+    # the new optional n argument is ignored outside excess mode
+    n = np.full(dev.model.mesh.n_nodes, 1.0)
+    assert np.array_equal(acc.edge_mobility(mu_col), acc.edge_mobility(mu_col, n))
+    assert np.array_equal(base.edge_mobility(mu_col), base.edge_mobility(mu_col, n))
+    with pytest.raises(ValueError):
+        ChannelMap(sc, dev.model, dev.nd, dev.na, 20.0e-3, gate_x_max=dev.prm.gate_x1,
+                   mu_acc_cm2=17.5, acc_mode="bogus")  # fmt: skip
+    with pytest.raises(ValueError):
+        _excess(sc, dev, mu_acc).edge_mobility(mu_col)  # needs n
+
+
+def test_18b_excess_limits(stack):
+    _, sc, dev, mu_acc = stack
+    ex = _excess(sc, dev, mu_acc)
+    e = ex.acc_edges
+    assert len(e) > 0 and np.all(ex.nfb_edge > 0)
+    mu_col = np.full(len(ex.cols), 80.0)
+    nodes = np.zeros(dev.model.mesh.n_nodes)
+    a, b = dev.model.a[e], dev.model.b[e]
+    # depletion / flat band (n <= n_fb): bulk mobility
+    nodes[:] = 0.5 * np.median(ex.nfb_node[np.isfinite(ex.nfb_node)])
+    nodes[a], nodes[b] = ex.nfb_edge, ex.nfb_edge
+    mu = ex.edge_mobility(mu_col, nodes)
+    assert np.array_equal(mu[e], ex.mu_bulk[e])
+    nodes[a], nodes[b] = 0.3 * ex.nfb_edge, 0.3 * ex.nfb_edge
+    assert np.array_equal(ex.edge_mobility(mu_col, nodes)[e], ex.mu_bulk[e])
+    # strong accumulation: tends to mu_acc; always between mu_acc and mu_bulk
+    nodes[a], nodes[b] = 1e6 * ex.nfb_edge, 1e6 * ex.nfb_edge
+    mu = ex.edge_mobility(mu_col, nodes)[e]
+    assert np.allclose(mu, sc.mu_s(17.5), rtol=1e-4)
+    nodes[a], nodes[b] = 3.0 * ex.nfb_edge, 3.0 * ex.nfb_edge
+    mu = ex.edge_mobility(mu_col, nodes)[e]
+    assert np.allclose(mu, ex.mu_bulk[e] * (1 / 3) + sc.mu_s(17.5) * (2 / 3), rtol=1e-12)
+    # mu_acc := mu_bulk reduces to bulk for any density
+    bk = ChannelMap(sc, dev.model, dev.nd, dev.na, 20.0e-3, gate_x_max=dev.prm.gate_x1,
+                    mu_acc_cm2="bulk", acc_mode="excess")  # fmt: skip
+    nodes[bk.model.a[e]] = np.linspace(0.5, 50, len(e)) * bk.nfb_edge
+    nodes[bk.model.b[e]] = nodes[bk.model.a[e]]
+    assert np.allclose(bk.edge_mobility(mu_col, nodes)[e], bk.mu_bulk[e], rtol=1e-14)
+    # other edges untouched
+    other = np.setdiff1d(np.arange(len(bk.mu_bulk)), e)
+    assert np.array_equal(bk.edge_mobility(mu_col, nodes)[other],
+                          _maps(sc, dev, mu_acc)[0].edge_mobility(mu_col)[other])  # fmt: skip
+
+
+def test_18b_flat_band_density_is_ionized_donors(stack):
+    _, sc, dev, mu_acc = stack
+    ex = _excess(sc, dev, mu_acc)
+    nfb = ex.nfb_node[np.isfinite(ex.nfb_node)] * sc.n0
+    # JFET N_D = 1e17: incomplete ionization -> n_fb a bit below N_D, same order
+    assert np.all(nfb < 1.0e17 * 1.001) and np.all(nfb > 0.5e17)
