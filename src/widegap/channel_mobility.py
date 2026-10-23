@@ -68,6 +68,7 @@ NOGUCHI_NAMES = (
     "noguchi_eta",
 )
 # validity clamps (model choices, spec section 2; lower ends of the plotted fit ranges)
+ACC_NAME = "mu_acc_n_zhao2007"  # stage 18: accumulation-layer mobility, pessimistic bracket end
 NS_MIN_CM2 = 1.0e11
 EEFF_MIN_MV_CM = 1.0e-2
 NS_EXTRAP_CM2 = 1.0e13  # columns above this are an extrapolation (counted, not clamped)
@@ -101,6 +102,11 @@ class NoguchiParams:
             v("noguchi_coul_A"), v("noguchi_coul_B"), v("noguchi_coul_C"), v("noguchi_coul_D"),
             v("noguchi_coul_NS0"), v("noguchi_coul_Ndep0"), v("noguchi_eta"),
         )  # fmt: skip
+
+
+def acc_mobility_from_registry(reg) -> float:
+    """Zhao (2007) accumulation-layer mobility [cm^2/Vs] through a registry (provenance enforced)."""
+    return float(reg.value(ACC_NAME))
 
 
 def eps_sic_f_per_cm(sc: SiC4H) -> float:
@@ -148,9 +154,17 @@ class ChannelMap:
     ``model`` is an :class:`AnisoMobilityDD`; ``nd``/``na`` are the node doping arrays (scaled, the
     ones the model was built from).  ``gate_x_max`` (scaled) limits the *gated* subset used for
     reporting; the mobility replacement itself applies to all p-type surface columns (spec).
+
+    Stage 18 (docs/benchmarks/stage18_accumulation_bracket.md): ``mu_acc_cm2`` (default ``None`` =
+    stage-16 behaviour, bit-identical) sets a CONSTANT mobility [cm^2/Vs] on the lateral electron
+    edges (both nodes within d_ch) of the JFET accumulation surface: the contiguous run of n-type
+    surface columns starting at the first column (x = 0) up to the first p-type surface column,
+    restricted to x <= ``gate_x_max`` (under the gate; required with ``mu_acc_cm2``).  This
+    excludes the n+ source side of the channel.
     """
 
-    def __init__(self, sc: SiC4H, model, nd, na, d_ch_um=20.0, gate_x_max=None, x_gate_min=None):
+    def __init__(self, sc: SiC4H, model, nd, na, d_ch_um=20.0, gate_x_max=None, x_gate_min=None,
+                 mu_acc_cm2=None):  # fmt: skip
         self.sc, self.model = sc, model
         mesh = model.mesh
         self.mesh = mesh
@@ -197,6 +211,26 @@ class ChannelMap:
         self.edges = np.flatnonzero(sel)
         self.edge_ca, self.edge_cb = ix[a[self.edges]], ix[b[self.edges]]
         self.mu_bulk = np.asarray(model.mu_edge, dtype=float).copy()  # snapshot (low-field, scaled)
+        # ---- stage 18: JFET accumulation surface (n-type columns under the gate)
+        self.mu_acc_cm2 = None if mu_acc_cm2 is None else float(mu_acc_cm2)
+        self.col_acc = np.zeros(mesh.nx + 1, dtype=bool)
+        self.acc_edges = np.empty(0, dtype=int)
+        if self.mu_acc_cm2 is not None:
+            if gate_x_max is None:
+                raise ValueError("mu_acc_cm2 requires gate_x_max (columns under the gate)")
+            n_type = has & (np.asarray(nd)[s] > np.asarray(na)[s])
+            first_not_n = np.flatnonzero(~n_type)
+            run = np.arange(mesh.nx + 1) < (first_not_n[0] if len(first_not_n) else mesh.nx + 1)
+            self.col_acc = n_type & run & (mesh.x <= gate_x_max + 1e-9)
+            acc = (
+                (mesh.edge_dir == 0)
+                & self.in_ch[a]
+                & self.in_ch[b]
+                & self.col_acc[ix[a]]
+                & self.col_acc[ix[b]]
+                & (model.gw > 0.0)
+            )
+            self.acc_edges = np.flatnonzero(acc)
 
     def sheet_density(self, n_scaled):
         """N_S [cm^-2] for every p-type surface column (nan elsewhere): trapezoid on nodes."""
@@ -223,6 +257,8 @@ class ChannelMap:
         ma, mb = full[self.edge_ca], full[self.edge_cb]
         harm = 2.0 * ma * mb / (ma + mb)
         mu[self.edges] = self.sc.mu_s(harm)
+        if self.mu_acc_cm2 is not None:  # stage 18 (constant accumulation mobility)
+            mu[self.acc_edges] = self.sc.mu_s(self.mu_acc_cm2)
         return mu
 
     def counts(self, res):
