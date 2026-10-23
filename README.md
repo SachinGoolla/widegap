@@ -2,7 +2,7 @@
 
 Verified finite-volume solvers (1D and 2D) for semiconductor device equations, with discrete adjoint sensitivities and constrained doping optimization, built in pre-registered stages toward optimization of wide-bandgap (4H-SiC) power devices. A physics-informed neural network (PINN) is included as a comparison study. **Verified so far (stages 1-13d, see the table below): linear and nonlinear Poisson, drift-diffusion with Scharfetter-Gummel fluxes (1D and 2D, including realistic 4H-SiC n_i/N0), impact ionization and avalanche breakdown, incomplete ionization, field-dependent mobility, a traced 4H-SiC material registry, sourced 4H-SiC device studies (p+n diodes, vertical DMOSFET half-cell), and adjoint-based doping optimization of that DMOSFET with a corner-aware breakdown objective and a gate-oxide-field constraint. All device results are model results from traceable parameters; no agreement with measured devices is claimed. A PINN-vs-FV comparison (stage 11) found no PINN advantage on the problem studied.**
 
-Current release: v0.5.0 (see [CHANGELOG.md](CHANGELOG.md)).md](CHANGELOG.md)). This README describes the repository as of 2026-10-23, after v0.4.0 (stage 15 caveat closure, stage 16 channel mobility), with the stage 17, 17b, 18 and 18b results added.
+Current release: v0.5.0 (see [CHANGELOG.md](CHANGELOG.md)). This README describes the repository as of 2026-10-23, after v0.5.0 (stages 17, 17b, 18 and 18b on top of v0.4.0's stage 15 caveat closure and stage 16 channel mobility).
 
 ## Status
 
