@@ -150,3 +150,25 @@ def test_guard_flags_a_sign_change(cr):
         assert not r["guard"]["ok"] and r["guard"]["sign_changes"] > 0
     finally:
         cr.sign0 = saved
+
+
+def test_classification_constraint_gradient_and_sign():
+    from widegap.adjoint_channel import ClassificationConstraint
+
+    sc = SiC4H(TracedRegistry.from_json())
+    ev = OxideAdjoint(sc, DESIGN, 0)
+    cc = ClassificationConstraint([ev], margin=0.02)
+    assert cc.n >= 2
+    th = np.array([0.1, -0.05, 0.03, 0.02, 0.1])
+    c0 = cc.values(np.zeros(5))
+    assert np.all(c0 > 0.0) and np.all(c0 < 1.0 - 0.02 + 1e-12)
+    jac = cc.jac(th)
+    fd = np.zeros_like(jac)
+    for k in range(5):
+        u = np.zeros(5)
+        u[k] = 1.0
+        h = 1e-5
+        fd[:, k] = (cc.values(th + h * u) - cc.values(th - h * u)) / (2 * h)
+    assert np.linalg.norm(jac - fd) <= 1e-8 * np.linalg.norm(fd)
+    # raising the JFET level lowers the margin of the corner column
+    assert cc.values(np.array([0, 0, 0, 0, 1.0])).min() < c0.min()

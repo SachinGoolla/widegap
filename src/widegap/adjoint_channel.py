@@ -335,9 +335,74 @@ def mobility_part_theta(ev, zero_edges, w, X, k):
 
 __all__ = [
     "ChannelRon",
+    "ClassificationConstraint",
     "MuJacobian",
     "fmu_matrix",
     "mobility_part_theta",
     "noguchi_dmu_dns",
+    "ron_reclassified",
     "depletion_sheet",
 ]
+
+
+# ----------------------------------------------------------------- stage 17b additions
+class ClassificationConstraint:
+    r"""Stage-17b constraints ``c_k(theta) = (N_A,k - N_D,k(theta)) / N_A,k - m >= 0`` on every
+    gated surface column that is p-type at theta = 0, on each of the given meshes (evaluators).
+
+    ``N_D`` is the surface-node donor density (explicit in theta through ``dnd_dtheta``), so the
+    gradient is analytic: ``dc_k/dtheta = -(dnd_node/dtheta) / N_A,k``.  The evaluators passed in
+    are used (and mutated by ``set_theta``) only here: give them their own instances."""
+
+    def __init__(self, evs, margin=0.02, d_ch_um=D_CH_UM):
+        self.evs, self.margin = list(evs), float(margin)
+        self.nodes, self.na, self.x_um, self.level_of = [], [], [], []
+        for lv, ev in enumerate(self.evs):
+            ev.set_theta(np.zeros(5))
+            cm = ChannelMap(ev.sc, ev.mod, ev.nd, ev.na, d_ch_um, gate_x_max=ev.prm.gate_x1)
+            cols = np.flatnonzero(cm.col_gated)
+            nodes = cm.surf_node[cols]
+            self.nodes.append(nodes)
+            self.na.append(np.asarray(ev.na)[nodes].copy())
+            self.x_um.append(ev.mesh.node_xy[nodes, 0] * float(ev.sc.l_d) * 1e4)
+            self.level_of.append(np.full(len(nodes), lv))
+        self.n = sum(len(a) for a in self.nodes)
+
+    def values(self, theta):
+        out = []
+        for ev, nodes, na in zip(self.evs, self.nodes, self.na, strict=True):
+            ev.set_theta(theta)
+            out.append((na - np.asarray(ev.nd)[nodes]) / na - self.margin)
+        return np.concatenate(out)
+
+    def jac(self, theta):
+        out = []
+        for ev, nodes, na in zip(self.evs, self.nodes, self.na, strict=True):
+            ev.set_theta(theta)
+            out.append(-ev.dnd_dtheta[nodes] / na[:, None])
+        return np.vstack(out)
+
+    def labels(self):
+        return [
+            {"level": int(lv), "x_um": float(x)}
+            for lv, x in zip(np.concatenate(self.level_of), np.concatenate(self.x_um), strict=True)
+        ]
+
+
+def ron_reclassified(ev, params: NoguchiParams, theta, d_ch_um=D_CH_UM):
+    """R_on,ch with the channel map rebuilt (re-classified) at ``theta`` (stage-17b R4)."""
+    ev.set_theta(theta)
+    sol_b, bc = ev.on_state()
+    cm = ChannelMap(ev.sc, ev.mod, ev.nd, ev.na, d_ch_um, gate_x_max=ev.prm.gate_x1)
+    ev.mod.mu_edge = cm.mu_bulk.copy()
+    r = picard_solve(cm, params, sol_b.X, bc)
+    ev.mod.mu_edge = cm.mu_bulk.copy()
+    if not r["converged"]:
+        raise EvalError("re-classified channel Picard/Newton did not converge")
+    i_sc = ev.mod.contact_current(r["sol"], ev.base.dev.nodes["drain"])
+    R = ev.V_DS * ev.x_cm / ev.base.current_a_per_cm(abs(i_sc))
+    return {
+        "R": float(R),
+        "n_channel_columns": int(len(cm.cols)),
+        "n_channel_edges": int(len(cm.edges)),
+    }
