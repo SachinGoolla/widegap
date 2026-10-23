@@ -47,7 +47,6 @@ import numpy as np
 import scipy.sparse as sp
 from scipy.optimize import brentq
 from scipy.sparse.csgraph import connected_components, dijkstra
-from scipy.sparse.linalg import spsolve
 
 import widegap.adjoint_sic_corner as _corner
 from widegap.adjoint_sic_corner import SRC_MARGIN, CornerAdjoint, RoundedSiCDMOS
@@ -58,6 +57,7 @@ from widegap.fv2d.mos import Dirichlet
 from widegap.fv2d.physics import Ionization, Mobility
 from widegap.fv2d.qf_dd import EPS_MACH
 from widegap.fv2d.regions import Regions
+from widegap.linalg import safe_spsolve
 from widegap.sic import (
     AnisoMobilityDD,
     SiC4H,
@@ -103,7 +103,7 @@ def harmonic_w(model, semi, zero, one):
         if not touch[lab == c].any():
             raise ValueError("a connected component of free nodes has no Dirichlet neighbour")
     rhs = -np.asarray(lap[free][:, one].sum(axis=1)).ravel() if len(one) else np.zeros(len(free))
-    w[free] = np.clip(spsolve(lff, rhs), 0.0, 1.0)
+    w[free] = np.clip(safe_spsolve(lff, rhs), 0.0, 1.0)
     return w
 
 

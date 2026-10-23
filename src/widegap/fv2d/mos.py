@@ -24,11 +24,11 @@ from collections.abc import Callable
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv.drift_diffusion import DDParams, bernoulli
 from widegap.fv2d.qf_dd import EPS_MACH, QFDriftDiffusion, QFReport, QFSolution
 from widegap.fv2d.regions import Regions
+from widegap.linalg import safe_spsolve
 
 
 class Dirichlet:
@@ -171,7 +171,7 @@ class MOSDriftDiffusion(QFDriftDiffusion):
             rs = np.asarray(abs(J).max(axis=1).todense()).ravel()
             Js = sp.diags(1.0 / rs) @ J
             try:
-                dX = spsolve(sp.csc_matrix(Js), -F / rs)
+                dX = safe_spsolve(sp.csc_matrix(Js), -F / rs)
             except RuntimeError:
                 break
             if not np.all(np.isfinite(dX)):

@@ -14,10 +14,10 @@ from dataclasses import dataclass, field
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv2d.core import apply_dirichlet_rows, stiffness
 from widegap.fv2d.mesh import TensorMesh
+from widegap.linalg import safe_spsolve
 
 EPS_MACH = np.finfo(float).eps
 
@@ -73,7 +73,9 @@ def solve_equilibrium(
             break
         if rep.iterations == max_iter:
             break
-        d = spsolve(J, -F)
+        d = safe_spsolve(J, -F)
+        if not np.all(np.isfinite(d)):  # non-finite step: reject, report non-convergence
+            break
         step = float(np.max(np.abs(d)))
         if step > max_step:
             d *= max_step / step

@@ -20,9 +20,9 @@ from dataclasses import dataclass, field
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv.equilibrium import control_volumes
+from widegap.linalg import safe_spsolve
 
 EPS_MACH = np.finfo(float).eps
 
@@ -259,7 +259,9 @@ class DriftDiffusion1D:
                 break
             if rep.iterations == max_iter:
                 break
-            dX = spsolve(self.jacobian(X), -F)
+            dX = safe_spsolve(self.jacobian(X), -F)
+            if not np.all(np.isfinite(dX)):  # non-finite step: reject, report non-convergence
+                break
             step = float(np.max(np.abs(dX[0::3])))
             if step > max_step:
                 dX *= max_step / step

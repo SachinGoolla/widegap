@@ -1041,7 +1041,8 @@ def tangent_predictor_bc(model, x, bc_a, bc_b, frac):
     """Euler predictor X + frac * J(X)^{-1} (g_b - g_a) for Dirichlet data moving linearly from
     ``bc_a`` to ``bc_b`` (frac = fraction of that move; row-equilibrated sparse solve)."""
     import scipy.sparse as sp
-    from scipy.sparse.linalg import spsolve
+
+    from widegap.linalg import safe_spsolve
 
     rows, va = model._all_bc(bc_a)
     rows_b, vb = model._all_bc(bc_b)
@@ -1051,7 +1052,7 @@ def tangent_predictor_bc(model, x, bc_a, bc_b, frac):
     rhs[rows] = vb - va
     jac = model.jacobian_bc(x, rows)
     rs = np.asarray(abs(jac).max(axis=1).todense()).ravel()
-    return x + frac * spsolve(sp.csc_matrix(sp.diags(1.0 / rs) @ jac), rhs / rs)
+    return x + frac * safe_spsolve(sp.csc_matrix(sp.diags(1.0 / rs) @ jac), rhs / rs)
 
 
 __all__ = [

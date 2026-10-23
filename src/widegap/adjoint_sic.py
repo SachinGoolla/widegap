@@ -54,12 +54,12 @@ from dataclasses import dataclass
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.sparse.linalg import spsolve
 from scipy.special import expit as _expit
 
 from widegap.adjoint2d import solve_transposed
 from widegap.fv2d.mos import continue_bias
 from widegap.fv2d.physics import Ionization
+from widegap.linalg import safe_spsolve
 from widegap.sic import AnisoMobilityDD, DMOSDesign, SiC4H, SiCDMOS
 
 
@@ -412,7 +412,7 @@ class SiCAdjoint:
         rs = np.asarray(abs(jac).max(axis=1).todense()).ravel()
         rhs = np.zeros(len(X))
         rhs[rows] = dvals
-        return spsolve(sp.csc_matrix(sp.diags(1.0 / rs) @ jac), rhs / rs)
+        return safe_spsolve(sp.csc_matrix(sp.diags(1.0 / rs) @ jac), rhs / rs)
 
     def _off_solve(self, v, xg):
         rows, vals = self._off_bc(v)

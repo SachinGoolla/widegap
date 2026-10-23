@@ -33,10 +33,10 @@ from dataclasses import dataclass, field
 import numpy as np
 import scipy.sparse as sp
 from scipy.optimize import brentq
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv.drift_diffusion import bernoulli_prime
 from widegap.fv2d.mos import MOSDriftDiffusion, continue_bias
+from widegap.linalg import safe_spsolve
 
 
 # ----- transposed solve --------------------------------------------------------------
@@ -46,11 +46,11 @@ def solve_transposed(J: sp.spmatrix, g: np.ndarray, refine: int = 2) -> np.ndarr
     J = sp.csc_matrix(J)
     rs = np.asarray(abs(J).max(axis=1).todense()).ravel()
     Js_t = (sp.diags(1.0 / rs) @ J).T.tocsc()
-    lam = spsolve(Js_t, g) / rs
+    lam = safe_spsolve(Js_t, g) / rs
     Jt = J.T.tocsr()
     for _ in range(refine):
         r = g - Jt @ lam
-        lam = lam + spsolve(Js_t, r) / rs
+        lam = lam + safe_spsolve(Js_t, r) / rs
     return lam
 
 

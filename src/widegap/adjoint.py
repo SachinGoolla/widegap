@@ -16,12 +16,12 @@ from __future__ import annotations
 
 import numpy as np
 from scipy.linalg import solve_banded
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv import equilibrium as eq
 from widegap.fv import reverse_bias as rb
 from widegap.fv.drift_diffusion import DriftDiffusion1D, bernoulli, bernoulli_prime
 from widegap.fv.equilibrium import control_volumes
+from widegap.linalg import safe_spsolve
 
 
 def banded_transpose(ab: np.ndarray) -> np.ndarray:
@@ -77,7 +77,7 @@ def dd_mean_current(dd: DriftDiffusion1D, X: np.ndarray):
     """Returns (J, dJ/dC) for J = mean element total current at fixed bias."""
     psi, n, p = dd.split(X)
     jn, jp = dd.fluxes(psi, n, p)
-    lam = spsolve(dd.jacobian(X).T.tocsc(), dd_mean_current_grad_x(dd, X))
+    lam = safe_spsolve(dd.jacobian(X).T.tocsc(), dd_mean_current_grad_x(dd, X))
     return float(np.mean(jn + jp)), _interior(lam[0::3] * dd.vol)
 
 
@@ -120,7 +120,7 @@ def polish_equilibrium(psi, x, c, delta, steps=3):
 
 def polish_dd(dd: DriftDiffusion1D, X, bc, steps=3):
     for _ in range(steps):
-        X = X + spsolve(dd.jacobian(X), -dd.residual(X, bc))
+        X = X + safe_spsolve(dd.jacobian(X), -dd.residual(X, bc))
     return X
 
 

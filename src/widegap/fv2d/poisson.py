@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import numpy as np
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv2d.core import stiffness
 from widegap.fv2d.mesh import TensorMesh
+from widegap.linalg import safe_spsolve
 
 
 def solve_poisson(mesh: TensorMesh, eps_cell, f_nodes, dir_nodes, dir_values):
@@ -21,7 +21,7 @@ def solve_poisson(mesh: TensorMesh, eps_cell, f_nodes, dir_nodes, dir_values):
     fi = np.flatnonzero(free)
     rhs = mesh.vol * np.asarray(f_nodes, dtype=float)
     rhs_f = rhs[fi] - L[fi][:, dn] @ u[dn]
-    u[fi] = spsolve(L[fi][:, fi].tocsc(), rhs_f)
+    u[fi] = safe_spsolve(L[fi][:, fi].tocsc(), rhs_f)
     return u
 
 

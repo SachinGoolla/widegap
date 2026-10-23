@@ -54,11 +54,11 @@ from dataclasses import dataclass, field
 import numpy as np
 import scipy.sparse as sp
 from scipy.optimize import brentq
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv.drift_diffusion import DDParams, bernoulli_prime
 from widegap.fv.qf_drift_diffusion import QFDriftDiffusion1D, QFReport, QFSolution, pack
 from widegap.fv.reverse_bias import Diode1D, RBReport
+from widegap.linalg import safe_spsolve
 
 EPS_MACH = np.finfo(float).eps
 
@@ -346,7 +346,9 @@ class AvalancheQFDD1D(QFDriftDiffusion1D):
                 break
             rs = np.asarray(abs(J).max(axis=1).todense()).ravel()
             Js = sp.diags(1.0 / rs) @ J
-            dX = spsolve(sp.csc_matrix(Js), -F / rs)
+            dX = safe_spsolve(sp.csc_matrix(Js), -F / rs)
+            if not np.all(np.isfinite(dX)):  # non-finite step: reject, report non-convergence
+                break
             step = float(np.max(np.abs(dX)))
             if step > max_step:
                 dX *= max_step / step

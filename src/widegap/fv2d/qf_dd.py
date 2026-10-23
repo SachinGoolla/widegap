@@ -15,11 +15,11 @@ from dataclasses import dataclass, field
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.sparse.linalg import spsolve
 
 from widegap.fv.drift_diffusion import DDParams, bernoulli, bernoulli_prime
 from widegap.fv2d.core import edge_conductance
 from widegap.fv2d.mesh import TensorMesh
+from widegap.linalg import safe_spsolve
 
 EPS_MACH = np.finfo(float).eps
 
@@ -238,7 +238,9 @@ class QFDriftDiffusion:
                 break
             rs = np.asarray(abs(J).max(axis=1).todense()).ravel()
             Js = sp.diags(1.0 / rs) @ J
-            dX = spsolve(sp.csc_matrix(Js), -F / rs)
+            dX = safe_spsolve(sp.csc_matrix(Js), -F / rs)
+            if not np.all(np.isfinite(dX)):  # non-finite step: reject, report non-convergence
+                break
             step = float(np.max(np.abs(dX[0::3])))
             if step > max_step:
                 dX *= max_step / step
