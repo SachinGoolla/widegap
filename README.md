@@ -1,8 +1,8 @@
 # widegap
 
-Verified finite-volume and physics-informed neural network (PINN) solvers for semiconductor device equations, built in stages toward adjoint doping optimization of wide-bandgap (4H-SiC) power devices. **Verified so far (1D, scaled units, stated model assumptions only): linear Poisson (stage 1), nonlinear equilibrium Poisson for a pn junction (stage 2), steady-state drift-diffusion with Scharfetter-Gummel fluxes (stage 3), the field-based breakdown index as a numerical quantity (stage 4), discrete adjoint doping sensitivities of those objectives (stage 5), constrained doping optimization on those proxies (stage 6), and 4H-SiC incomplete-ionization equilibrium with fully traced material parameters (stage 7). There are no SiC material models or device-scale simulations yet.**
+Verified finite-volume solvers (1D and 2D) for semiconductor device equations, with discrete adjoint sensitivities and constrained doping optimization, built in pre-registered stages toward optimization of wide-bandgap (4H-SiC) power devices. A physics-informed neural network (PINN) is included as a comparison study. **Verified so far (stages 1-13d, see the table below): linear and nonlinear Poisson, drift-diffusion with Scharfetter-Gummel fluxes (1D and 2D, including realistic 4H-SiC n_i/N0), impact ionization and avalanche breakdown, incomplete ionization, field-dependent mobility, a traced 4H-SiC material registry, sourced 4H-SiC device studies (p+n diodes, vertical DMOSFET half-cell), and adjoint-based doping optimization of that DMOSFET with a corner-aware breakdown objective and a gate-oxide-field constraint. All device results are model results from traceable parameters; no agreement with measured devices is claimed. A PINN-vs-FV comparison (stage 11) found no PINN advantage on the problem studied.**
 
-Current release: v0.3.0 (see [CHANGELOG.md](CHANGELOG.md)).
+Current release: v0.3.0 (see [CHANGELOG.md](CHANGELOG.md)). This README describes the repository as of 2026-10-22, after v0.3.0.
 
 ## Status
 
@@ -24,7 +24,7 @@ Stage numbering follows [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) §4. Each s
 | 9b | Impact ionization and avalanche breakdown (1D) | verified with a disclosed B1 caveat ([result](docs/benchmarks/stage9b_result.md)) |
 | 10 | 2D adjoint sensitivities and doping optimization of a vertical MOSFET half-cell | verified after a disclosed O3 re-registration ([result](docs/benchmarks/stage10_result.md)); field-based BV +36% at fixed I_D (study parameters) |
 | 11 | PINN / AD sensitivities vs the FV adjoint (research question) | **new (comparison study)**, gate passed (M1-M5) ([result](docs/benchmarks/stage11_result.md)); **no PINN advantage found**: FV reaches the best PINN error (7.71e-4) in 1.46 ms vs a median 448 s of PINN training; no break-even M for the parametric surrogate; one 1D problem, one untuned config, CPU only |
-| 12 | 4H-SiC device studies with sourced parameters (avalanche BV vs doping; DMOSFET on/off) | verified after one disclosed re-registration ([result](docs/benchmarks/stage12_result.md)); BV 1.79 kV at 1e16 (Niwa) |
+| 12 | 4H-SiC device studies with sourced parameters (avalanche BV vs doping; DMOSFET on/off) | verified after one disclosed re-registration ([result](docs/benchmarks/stage12_result.md)); BV 1.79 kV at 1e16 (Niwa); the planar-cut DMOSFET BV of 512 V was later found biased low by the stage-12 off-state model (556 V with the stage-12c model, see [12c/13c result](docs/benchmarks/stage12c_13c_result.md)) |
 | 13 | Full-physics adjoint optimization of a 4H-SiC DMOSFET | machinery verified; **objective flaw found**: planar-cut BV was gamed while the corner BV fell ([result](docs/benchmarks/stage13_result.md)); 13b fixed the blind spot but exposed an off-state artifact; 12c/13c ([result](docs/benchmarks/stage12c_13c_result.md)) fixed the artifact (true-min BV 517→619 V at fixed R_on) but **failed** on ill-posed peak criteria and a new gate-oxide-field issue; 13d ([result](docs/benchmarks/stage13d_result.md)) adds an oxide-field constraint at 400 V and **passes** D1-D7: true-min BV 517→578 V at fixed R_on and E_ox, costing ~41 V vs 13c; E_ox stays ~5.25 MV/cm (1.75x the 3 MV/cm guideline) |
 | 14 | GaN | out of scope for now |
 
@@ -48,6 +48,8 @@ python examples/minimal_poisson.py
 It solves benchmark case P1 with the finite-volume solver and, if torch is installed, a shortened PINN run. It prints the max error of the FV solution and the relative L2 error of the short PINN run (with its training time). Without torch it prints the FV line and a message that the PINN was skipped. These numbers are not the benchmark results below.
 
 ## Benchmark results (stage 1)
+
+The tables below are the stage 1 results only (the generated block is rewritten by `benchmarks/poisson1d/report.py`). Results for later stages are in `docs/benchmarks/stage*_result.md` and the table above.
 
 Problem definitions, error measures and acceptance criteria were fixed before any solver result existed: [docs/benchmarks/poisson_1d.md](docs/benchmarks/poisson_1d.md). One dated amendment (R5 flux balance, restated as R5b/R5c) was also made before any solver output. All quantities are dimensionless.
 
@@ -117,19 +119,51 @@ python benchmarks/poisson1d/report.py   # rewrites the tables above from the JSO
 
 ## Supported features
 
+Stage 1 core:
+
 - 1D vertex-centred (box-method) finite-volume solver for $-(\varepsilon u')' = f$ with Dirichlet conditions, length-weighted harmonic-mean element permittivity, banded direct solve.
 - 1D PINN for the same equation: strong-form residual loss via automatic differentiation, Dirichlet conditions imposed exactly by construction.
 - Manufactured-solution problems P1 to P4 and error measures (max error, relative L2, observed order).
 - Reproducible benchmark runner that writes per-case and per-seed JSON and a manifest.
 
+Later stages (details in the result documents linked in the status table):
+
+- 1D Newton solvers for equilibrium pn junctions and steady drift-diffusion with Scharfetter-Gummel fluxes, plus quasi-Fermi-variable formulations valid at realistic 4H-SiC n_i/N0 (`widegap.fv`).
+- 2D tensor-mesh finite-volume core (linear, equilibrium, quasi-Fermi drift-diffusion, MOS structures) and a vertical DMOSFET half-cell (`widegap.fv2d`, `widegap.devices`).
+- Physics models: non-equilibrium incomplete ionization, field-dependent mobility, interface charge, impact ionization and avalanche breakdown.
+- A 4H-SiC material registry in which each parameter is traced to a primary source (`widegap.materials`).
+- Discrete adjoint sensitivities and constrained SLSQP doping optimization in 1D and 2D, including the full-physics SiC DMOSFET with a corner-aware soft-minimum BV objective and a gate-oxide-field constraint (`widegap.adjoint*`, `widegap.optimize`).
+- Corrected zero-current off-state model (stage 12c, `widegap.offstate`).
+- PINN-vs-FV comparison study (`widegap.pinn_study`).
+
 ## Limitations
 
-- 1D only. No field-dependent mobility, impact ionization, or avalanche breakdown; optimized profiles are proxy results, not fabrication-ready designs.
-- No 4H-SiC parameters and no physical units; permittivity contrast and all values are dimensionless.
+Scope and models:
+
+- The solvers are 1D and 2D (tensor meshes only), isothermal (300 K in the SiC device studies), and use a zero-current off-state model for blocking; there is no self-heating, no switching or transient simulation, and no unstructured meshes.
+- Device results use model parameters from traced sources (registry) plus study parameters where stated; optimized profiles are model results, not fabrication-ready designs. Agreement with measured devices is not claimed for any stage.
+- GaN (stage 14) is out of scope.
+
+Known caveats of the SiC device results (stages 12-13d; see [CHANGELOG.md](CHANGELOG.md) and the result documents):
+
+- Mobility is Hall mobility; no interface-scattering (channel) mobility model, so R_on is optimistic.
+- The off-state uses a zero-current model (phi_n = V_D w with w a harmonic extension across the p-body in the corrected stage 12c model); it is not a full drift-diffusion off-state solution. The original stage-12 model had an artificial electron reservoir on the p side; its corner-column BV values (375-417 V, and 417 to 338 V in stage 13) are artifacts and must not be used quantitatively.
+- BV is evaluated with vertical-cut ionization integrals (dense true minimum over at least 40 cuts), not a full 2D field-line avalanche solution.
+- The Khan and Cooper v_sat (perpendicular to c, 23 C) is applied to all edges.
+- V_DS is limited to 15 V in the on-state model by double-precision underflow in hole rows.
+- Stage 13d local window fields and gate-oxide field E_ox are not mesh-converged (they rise about 1-6% from h to h/4), so only same-mesh comparisons are used.
+- Stage 13d absolute E_ox is 5.25 MV/cm at 400 V, about 1.75 times an unsourced 3 MV/cm guideline, before and after optimization; no oxide reliability claim is made.
+- SLSQP gives local optima from one starting design in a 5-parameter family; the 400 V blocking reference is a choice.
+- D_it is uniform from an order-of-magnitude text value; epsilon_ox = 3.9 is an owner-approved convention.
+- Stage 11 covers one 1D problem, one untuned PINN configuration, CPU only.
+
+Earlier-stage notes:
+
+- The stage 1-6 solvers are 1D, in scaled (dimensionless) units, and their breakdown and optimization results are proxy results.
 - PINN timings are CPU-only and were measured on one machine.
 - The PINN error on the steep layer P4 varies by about 40x across seeds.
 - Stages 2, 3, 4 and 6 each failed their first run on a pre-registered criterion that was itself flawed (stages 2-3: below the round-off floor; stage 4: depletion-approximation references inadequate at ~100 V_T; stage 6: relative gradient error is ill-posed at a stationary point); each passed after a re-registered criterion disclosed as written after the failure.
-- The field-based breakdown voltage is a proxy: no impact ionization is modelled, and E_crit is a study constant, not a material value.
+- The stage 4-6 field-based breakdown voltage is a proxy: no impact ionization is modelled there, and E_crit is a study constant, not a material value. Avalanche breakdown is modelled from stage 9b on.
 - Realistic 4H-SiC n_i/N0 (~1e-24) is verified for equilibrium electrostatics with incomplete ionization (stage 7) and for steady drift-diffusion in quasi-Fermi variables (stage 7.1; complete ionization, constant mobility). The original stage-3 (psi, n, p) solver is valid only for n_i/N0 >= 1e-3.
 
 ## Scientific attribution
@@ -143,9 +177,10 @@ The method context comes from the following works. **No published device result 
 
 Classification of this project's work (`docs/literature/requirements_report.md`, section 4):
 
-- *Reproduction*: none claimed. Both device-level optimization studies cannot be reproduced from the published information (missing supplementary material, model parameters, meshes and impact-ionization coefficients).
-- *Independent implementation inspired by published work*: the adjoint doping-sensitivity method and the field-based BV index are planned (stages 4 and 5); neither is implemented yet.
-- *New contribution*: none yet. PINN and hybrid solvers for these equations remain unverified hypotheses until benchmarked.
+- *Reproduction*: none claimed. Both published device-level optimization studies cannot be reproduced from the published information (missing supplementary material, model parameters, meshes and impact-ionization coefficients).
+- *Independent implementation inspired by published work*: the discrete adjoint doping-sensitivity method and the field-based breakdown index (stages 4 and 5, 1D; stage 10, 2D) and their application to constrained doping optimization of a vertical MOSFET (stage 10) and a 4H-SiC DMOSFET with sourced parameters (stages 12-13d). These are implemented here from the method descriptions and verified against finite differences and exact references; they are not copies of the authors' code and do not reproduce their numbers.
+- *New contribution*: the PINN-vs-FV adjoint/sensitivity comparison (stage 11, labelled new, comparison study), whose result is that no PINN advantage was found on the one 1D problem studied; and the corner-aware, oxide-field-constrained objective sequence (stages 13, 13b-13d, 12c), including the finding that the stage 13 planar-cut objective was gamed. These are this project's own studies, not verified against any external result.
+- *Unverified*: any statement that PINN or hybrid solvers are competitive for these equations (not supported by stage 11), and any agreement of SiC device results with measurements.
 
 This project is not affiliated with and has not been endorsed by the cited authors.
 
@@ -154,6 +189,8 @@ This project is not affiliated with and has not been endorsed by the cited autho
 ```bash
 pytest
 ```
+
+The test suite covers all stages (`tests/`). The stage 1 checks are listed here as an example of the gate style:
 
 - R1: P1 and P2 observed max-norm orders in [1.9, 2.1].
 - R2, R3: max-error thresholds for P1 and P2 at N=512.
@@ -169,7 +206,9 @@ The R1 to R5b checks run on the reference solver; the full N1 check is part of t
 - [Project specification v2 (stages, gates, rules)](docs/PROJECT_SPEC.md)
 - [Benchmark P1-P4 pre-registration and amendment](docs/benchmarks/poisson_1d.md)
 - [Literature and requirements report](docs/literature/requirements_report.md)
-- [Raw results and manifest](results/poisson1d/)
+- [Stage result documents](docs/benchmarks/) (`stage*_result.md`, with the pre-registrations beside them)
+- [Changelog](CHANGELOG.md)
+- [Raw results and manifest (stage 1)](results/poisson1d/)
 
 ## Contributing
 

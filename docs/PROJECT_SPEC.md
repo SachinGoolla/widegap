@@ -165,3 +165,43 @@ for stages 7 onwards:
 | 11 | PINN / AD sensitivities vs the FV adjoint (research question; was 9) | planned |
 | 12 | Sourced SiC MOS parameterization (oxide, interface traps, v_sat) and SiC device studies | planned (needs papers) |
 | 13 | GaN (was 10) | out of scope for now |
+
+## 11. Stage-table revision (v2.2, 2026-10-22)
+
+Work after v0.1.0 changed several statuses and added stages. This table
+supersedes §10 (which is kept unchanged as history). Statuses are taken from
+the result documents in `docs/benchmarks/` and from `CHANGELOG.md`.
+
+| # | Stage | Status | Result |
+|---|---|---|---|
+| 7 | 4H-SiC material models (provenance registry) | passed (after a disclosed geometry re-registration, 7b) | `stage7_result.md` |
+| 7.1 | Drift-diffusion at realistic $n_i/N_0$ (quasi-Fermi variables) | passed | `stage7_1_result.md` |
+| 8 | 2D tensor-mesh FV (shared edge core) | passed | `stage8_result.md` |
+| 8.1 | MOS structures in 2D (study-parameter oxide) | passed | `stage8_1_result.md` |
+| 9a | DD physics: incomplete ionization, field-dependent mobility, interface charge | passed | `stage9a_result.md` |
+| 9b | Impact ionization and avalanche breakdown (1D) | passed with caveat (B1 passed only after study parameters were scanned) | `stage9b_result.md` |
+| 10 | 2D adjoint + vertical MOSFET doping optimization | passed (after a disclosed O3 re-registration) | `stage10_result.md` |
+| 11 | PINN / AD sensitivities vs the FV adjoint (research question) | passed (gate M1-M5); no PINN advantage found (one 1D problem, one untuned configuration, CPU only) | `stage11_result.md` |
+| 12 | Sourced SiC parameterization and SiC device studies | passed with caveat (after one disclosed re-registration; planar-cut DMOSFET BV later found biased low by the off-state model, see 12c) | `stage12_result.md` |
+| 12c | Corrected zero-current off-state model | C2, C3, C5, C6 passed; C1 and C4 failed as defined (C1 ill-posed; C4 showed the stage-12 value was biased low). Model adopted by 13c and 13d | `stage12c_13c_result.md` |
+| 13 | Full-physics adjoint optimization of a 4H-SiC DMOSFET | gates passed but the objective was flawed (planar-cut BV gamed while the corner BV fell); superseded | `stage13_result.md` |
+| 13b | Corner-aware soft-min BV objective | failed (U1; traced to the stage-12 off-state model), then superseded by 12c/13c | `stage13b_result.md` |
+| 13c | 13b re-run on the corrected off-state model | failed (U6: JFET-centre surface field under the gate oxide rose); superseded by 13d. Not re-registered into a pass | `stage12c_13c_result.md` |
+| 13d | Oxide-field-constrained, corner-aware optimization | passed (D1-D7), with caveats: absolute $E_{ox}$ about 1.75 times an unsourced 3 MV/cm guideline; local fields not mesh-converged | `stage13d_result.md` |
+| 14 | GaN (was 13 in §10, 10 in §4) | out of scope for now | n/a |
+| 15 | Caveat closure (planned; sub-items below are independent) | planned, none started | n/a |
+
+Stage 15 sub-items (each needs its own pre-registered spec and gate before
+any run; none is pre-registered yet):
+
+| # | Item | Addresses | Dependency |
+|---|---|---|---|
+| 15a | Off-state with full drift-diffusion (replace the zero-current model) | zero-current off-state limitation | none known |
+| 15b | Field-line ionization integral (replace vertical-cut integrals) | vertical-cut BV approximation | none known |
+| 15c | High-$V_{DS}$ numerics (remove the 15 V cap) | double-precision underflow in hole rows | none known |
+| 15d | Local-field mesh adequacy (converged window fields and $E_{ox}$) | stage 13d non-converged local fields | none known |
+| 15e | Channel / interface mobility model | Hall mobility makes $R_{on}$ optimistic | sourced papers required |
+| 15f | Anisotropic $v_{sat}$ | $v_{sat}$ (perpendicular to c) applied to all edges | source required |
+
+Numbering note: §10 listed GaN as stage 13; 13 is now the DMOSFET
+optimization series and GaN is 14.
