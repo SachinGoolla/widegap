@@ -286,6 +286,8 @@ class SiC4H:
     reg: TracedRegistry
     t_k: float = T_K
     n0: float = N0_CM3
+    vsat_set: str = "khan_cooper"  # saturation-velocity source for the DD mobility (stage 15f)
+    vsat_beta: float | None = None  # explicit Caughey-Thomas exponent (required for "ishikawa")
     vt: float = field(init=False)  # V
     eps_r: float = field(init=False)
     l_d: float = field(init=False)  # cm
@@ -345,6 +347,34 @@ class SiC4H:
 
     def mu_s(self, mu_cm2):
         return np.asarray(mu_cm2, dtype=float) / self.mu0
+
+    def saturation(self):
+        """(v_sat [cm/s], Caughey-Thomas exponent) of the selected set ``self.vsat_set``.
+
+        * ``"khan_cooper"`` (default, unchanged since stage 12): Khan & Cooper, perp c, one doping
+          (``vsat_n_perp_c``, ``ct_beta_n_perp_c``).
+        * ``"ishikawa"`` (stage 15f, Amendment 1): isotropic ``v_sat = 1.7e7`` cm/s (Ishikawa thesis
+          Table 3.1; ``vsat_n_perp_c_ishikawa``, ``vsat_n_par_c`` must agree) with the exponent
+          given explicitly as ``vsat_beta``.  The thesis fit exponents at N_D <= 1e16 are < 1, which
+          the stage-9a Caughey-Thomas implementation does not support (beta >= 1), so there is no
+          implicit default: ``vsat_beta`` is a MODEL CHOICE, not a registry value.  A missing or
+          unverified v_sat entry raises (no fallback).
+
+        The set applies to electrons and, as before, to holes (``vsat_p = vsat_n``)."""
+        r = self.reg
+        if self.vsat_set == "khan_cooper":
+            return r.value("vsat_n_perp_c"), r.value("ct_beta_n_perp_c")
+        if self.vsat_set == "ishikawa":
+            v_perp, v_par = r.value("vsat_n_perp_c_ishikawa"), r.value("vsat_n_par_c")
+            if v_perp != v_par:
+                raise ValueError(f"Ishikawa v_sat is not isotropic: perp {v_perp}, par {v_par}")
+            if self.vsat_beta is None:
+                raise ValueError(
+                    "vsat_set='ishikawa' needs an explicit vsat_beta (a model choice >= 1; the "
+                    "thesis alpha < 1 is outside the model, see stage-15 Amendment 1)"
+                )
+            return v_perp, float(self.vsat_beta)
+        raise ValueError(f"unknown vsat_set {self.vsat_set!r} (use 'khan_cooper' or 'ishikawa')")
 
     def vsat_s(self, v_cm_s):
         return np.asarray(v_cm_s, dtype=float) / (self.mu0 * self.vt / self.l_d)
@@ -795,8 +825,8 @@ class SiCDMOS:
         mu_par = sc.mobility_cm2(nd_cm, "n", "par")
         self.mu_edge = sc.mu_s(np.where(mesh.edge_dir == 0, mu_perp, mu_par))
         mu_p = float(sc.mu_s(sc.mobility_cm2(d.n_body, "p", "perp")))
-        vs = float(sc.vsat_s(sc.reg.value("vsat_n_perp_c")))
-        beta = sc.reg.value("ct_beta_n_perp_c")
+        vsat_cm, beta = sc.saturation()
+        vs = float(sc.vsat_s(vsat_cm))
         self.mob = Mobility(vsat_n=vs, vsat_p=vs, beta_n=beta, beta_p=beta)
         self.dp = DDParams(delta=sc.delta, mu_n=1.0, mu_p=mu_p, recombination=False)
         # interface: D_it uniform on [E_c - width, E_c] (above midgap, E_i = intrinsic level)
