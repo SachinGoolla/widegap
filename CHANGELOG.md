@@ -8,11 +8,12 @@ All notable changes to this project are documented in this file. The format foll
 
 - **Stage 21**, guarded re-optimization of the stage-17b problem on the punch-through-safe 1.4 um-body geometry ([spec](docs/benchmarks/stage21_safe_geometry_opt.md), [result](docs/benchmarks/stage21_result.md)); pre-registered 2026-10-23. **The stage gate is PASSED** (S1-S6; commit 63b92b1, `git_dirty` false): dense true-min BV 544.00 to 608.10 V (h) and 543.15 to 607.76 V (h/2); V_pt,es / BV at least 1.442 at all 81 checked iterates (guard 1.2); Pareto designs at R/R_0 = 1.05, 1.1, 1.2. First optimized design in the project that does not rest on a punching-through geometry. The comparison with stage 17b is on a different geometry.
 - **Stage 22**, cost of common adjoint simplifications (variants A-D) ([spec](docs/benchmarks/stage22_adjoint_simplifications.md), [result](docs/benchmarks/stage22_result.md)); pre-registered 2026-10-23. **The stage gate is PASSED** (Q1-Q3; commit c943a72, `git_dirty` false). P22a confirmed (D-variant R_on,ch gradient error 27.7 %; BV and E_ox about 1e-6); P22b refuted (same optimum, dense BV 608.055 vs 608.098 V, KKT ratio 0.9 %, but 37 vs 10 SLSQP iterations).
+- **Stage 23**, artifact budget: claimed vs real gains under each model correction, AB1 to AB5 ([spec](docs/benchmarks/stage23_artifact_budget.md), [result](docs/benchmarks/stage23_result.md)); pre-registered 2026-10-23. **The stage gate is PASSED** (T1-T3; commit a546d98, `git_dirty` false). AB1 120.9 to 12.4 V (89.7 %); AB2 90.7 to 55.6 V (17b) or unchanged under reclassification (sign model-dependent); AB3 blocking voltage 80.9 to 110.6 V against avalanche BV 181 to 619 V (0.8 um body, all punch-through limited); AB4 8.7x channel/bulk R_on (model error); AB5 -0.04 V (different geometry). Post hoc observation (not a pre-registered prediction): blocking-voltage changes vs the initial design of +15.7, +15.0, -11.7 and -13.9 V for 13, 13c, 13d, 17b; experiment A planned as the prospective test.
 - `docs/paper/claims.md`: claims ledger (C1-C8) with labels, evidence and status.
 
 ### Changed
 
-- README: stage 21 and 22 rows; `docs/PROJECT_SPEC.md`: stage table rows 21 and 22 (passed).
+- README: stage 21, 22 and 23 rows; `docs/PROJECT_SPEC.md`: stage table rows 21 to 23 (passed) and 24 (planned).
 
 ## [0.6.0] - 2026-10-23
 
