@@ -1,0 +1,425 @@
+{
+  "criteria": {
+    "T1": true,
+    "T2": true,
+    "T3": true
+  },
+  "gate_passed": true,
+  "dev": false,
+  "table": [
+    {
+      "id": "AB1",
+      "label": "stage 13 (planar cut -> dense true minimum), old off-state, sharp device, h",
+      "quantity": "BV gain initial -> final",
+      "unit": "V",
+      "claimed": 120.91054351483785,
+      "real": 12.413594300893237,
+      "artifact_fraction": 0.8973324084067997,
+      "sources": {
+        "claimed": "recomputed planar-cut BV of the stage-13 initial/final (T1: equals results/stage13/summary.json values/bv_initial_V, values/bv_final_V)",
+        "real": "recomputed dense true-minimum BV (49 lines) of the same two designs, same model; theta: results/stage13/results.json final/theta"
+      },
+      "note": "planar BV 512.273 -> 633.183 V; dense min 406.057 (x=0.92 um) -> 418.470 V (x=0.85 um)",
+      "claimed_endpoints": [
+        512.2726217151704,
+        633.1831652300083
+      ],
+      "real_endpoints": [
+        406.0568842335378,
+        418.47047853443104
+      ]
+    },
+    {
+      "id": "AB2a",
+      "label": "stage 17 (frozen surface classification), reading (a): 17b gain",
+      "quantity": "BV gain over initial (dense, h)",
+      "unit": "V",
+      "claimed": 90.73703098023884,
+      "real": 55.592275363224644,
+      "artifact_fraction": 0.387325386750512,
+      "sources": {
+        "claimed": [
+          {
+            "value": 90.73703098023884,
+            "file": "results/stage17/results.json",
+            "key": "R1/bv_gain_h_17"
+          },
+          {
+            "value": 607.6084715394678,
+            "file": "results/stage17/results.json",
+            "key": "R1/bv_true_min_h/17"
+          },
+          {
+            "value": 516.871440559229,
+            "file": "results/stage17/results.json",
+            "key": "R1/bv_true_min_h/initial"
+          }
+        ],
+        "real": [
+          {
+            "value": 572.4637159224536,
+            "file": "results/stage17b/results.json",
+            "key": "R4/bv_true_min_h/17b"
+          },
+          {
+            "value": 516.871440559229,
+            "file": "results/stage17b/results.json",
+            "key": "R4/bv_true_min_h/initial"
+          }
+        ]
+      },
+      "note": "17b keeps the surface classification valid (constraint); R_on,ch = R0 in both",
+      "claimed_endpoints": [
+        516.871440559229,
+        607.6084715394678
+      ],
+      "real_endpoints": [
+        516.871440559229,
+        572.4637159224536
+      ]
+    },
+    {
+      "id": "AB2b",
+      "label": "stage 17, reading (b): 17 final under dynamic reclassification",
+      "quantity": "BV gain over initial (dense, h)",
+      "unit": "V",
+      "claimed": 90.73703098023884,
+      "real": 90.73703098023884,
+      "artifact_fraction": 0.0,
+      "sources": {
+        "claimed": [
+          {
+            "value": 90.73703098023884,
+            "file": "results/stage17/results.json",
+            "key": "R1/bv_gain_h_17"
+          }
+        ],
+        "real": [
+          {
+            "value": 607.6084715394678,
+            "file": "results/stage17/results.json",
+            "key": "R1/bv_true_min_h/17"
+          },
+          {
+            "value": 516.871440559229,
+            "file": "results/stage17/results.json",
+            "key": "R1/bv_true_min_h/initial"
+          },
+          {
+            "value": -0.040952784895812,
+            "file": "results/stage17b/results.json",
+            "key": "R4/reclass_rel_change_h2"
+          },
+          {
+            "value": 0.0024463828365374877,
+            "file": "results/stage17b/results.json",
+            "key": "R4/frozen_R_s17_final/2"
+          },
+          {
+            "value": 0.0024023313959501743,
+            "file": "results/stage17b/results.json",
+            "key": "R4/reclassified_R_s17_final/2/R"
+          }
+        ]
+      },
+      "note": "BV (off-state) is independent of the on-state surface classification: gain unchanged; R_on,ch (h/2) is -4.10 % vs R0, so the design is feasible and the frozen constraint was slack. The sign of the artifact is model-dependent (this reading: no loss of gain, extra R_on margin; reading (a): -38.7 % gain)",
+      "claimed_endpoints": [
+        516.871440559229,
+        607.6084715394678
+      ],
+      "real_endpoints": [
+        516.871440559229,
+        607.6084715394678
+      ],
+      "R_on_rel_change_reclassified_h2": -0.040952784895812,
+      "real_not_unique": true
+    },
+    {
+      "id": "AB3[initial]",
+      "label": "initial on the 0.8 um geometry (12c model, h)",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 516.871440559229,
+      "real": 94.80687586026116,
+      "artifact_fraction": 0.8165755187446904,
+      "sources": {
+        "claimed": {
+          "value": 516.871440559229,
+          "file": "results/stage13d/results.json",
+          "key": "dense/initial_L0/bv_min"
+        },
+        "real": "min(BV, DD onset J_n=1 A/cm2, level h/2, tied body, worst column x=1.819 um); theta = 0"
+      },
+      "note": "V_pt,es(h/2)=117.5 V (h: 114.1); DD onset 94.81 V; limited by punch-through",
+      "V_pt_es_h": 114.07400254054245,
+      "V_pt_es_h2": 117.49253958716626,
+      "dd_onset_V": 94.80687586026116,
+      "lower_bound_only": false
+    },
+    {
+      "id": "AB3[13]",
+      "label": "13 final on the 0.8 um geometry (12c model, h)",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 181.05829703984625,
+      "real": 110.5505270350957,
+      "artifact_fraction": 0.3894202649505403,
+      "sources": {
+        "claimed": {
+          "value": 181.05829703984625,
+          "file": "results/stage13c/results.json",
+          "key": "dense/stage13_final_L0/bv_min"
+        },
+        "real": "min(BV, DD onset J_n=1 A/cm2, level h/2, tied body, worst column x=1.691 um); theta: results/stage13/results.json final/theta"
+      },
+      "note": "V_pt,es(h/2)=99.2 V (h: 95.5); DD onset 110.55 V; limited by punch-through",
+      "V_pt_es_h": 95.47556808381695,
+      "V_pt_es_h2": 99.19817192539136,
+      "dd_onset_V": 110.5505270350957,
+      "lower_bound_only": false
+    },
+    {
+      "id": "AB3[13c]",
+      "label": "13c final on the 0.8 um geometry (12c model, h)",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 618.8474383094457,
+      "real": 109.8543192283486,
+      "artifact_fraction": 0.8224856201579402,
+      "sources": {
+        "claimed": {
+          "value": 618.8474383094457,
+          "file": "results/stage13c/results.json",
+          "key": "dense/final_L0/bv_min"
+        },
+        "real": "min(BV, DD onset J_n=1 A/cm2, level h/2, tied body, worst column x=1.755 um); theta: results/stage13c/results.json final/theta"
+      },
+      "note": "V_pt,es(h/2)=114.5 V (h: 111.2); DD onset 109.85 V; limited by punch-through",
+      "V_pt_es_h": 111.155044637195,
+      "V_pt_es_h2": 114.48984366032066,
+      "dd_onset_V": 109.8543192283486,
+      "lower_bound_only": false
+    },
+    {
+      "id": "AB3[13d]",
+      "label": "13d final on the 0.8 um geometry (12c model, h)",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 577.9396356649966,
+      "real": 83.15625828187588,
+      "artifact_fraction": 0.8561160142854825,
+      "sources": {
+        "claimed": {
+          "value": 577.9396356649966,
+          "file": "results/stage13d/results.json",
+          "key": "dense/final_L0/bv_min"
+        },
+        "real": "min(BV, DD onset J_n=1 A/cm2, level h/2, tied body, worst column x=1.819 um); theta: results/stage13d/results.json final/theta"
+      },
+      "note": "V_pt,es(h/2)=106.6 V (h: 103.3); DD onset 83.16 V; limited by punch-through",
+      "V_pt_es_h": 103.2960071996406,
+      "V_pt_es_h2": 106.57055339051313,
+      "dd_onset_V": 83.15625828187588,
+      "lower_bound_only": false
+    },
+    {
+      "id": "AB3[17b]",
+      "label": "17b final on the 0.8 um geometry (12c model, h)",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 572.4637159224536,
+      "real": 80.8580152135724,
+      "artifact_fraction": 0.8587543402933759,
+      "sources": {
+        "claimed": {
+          "value": 572.4637159224536,
+          "file": "results/stage17b/results.json",
+          "key": "dense/final_L0/bv_min"
+        },
+        "real": "min(BV, DD onset J_n=1 A/cm2, level h/2, tied body, worst column x=1.819 um); theta: results/stage17b/results.json final/theta"
+      },
+      "note": "V_pt,es(h/2)=104.5 V (h: 101.2); DD onset 80.86 V; limited by punch-through",
+      "V_pt_es_h": 101.22728486650013,
+      "V_pt_es_h2": 104.45854983434884,
+      "dd_onset_V": 80.8580152135724,
+      "lower_bound_only": false
+    },
+    {
+      "id": "AB4[13d_initial]",
+      "label": "13d_initial (bulk Hall -> Noguchi channel mobility), h/2",
+      "quantity": "R_on,sp at V_GS=15 V, V_DS=0.1 V",
+      "unit": "ohm cm2",
+      "claimed": 0.0002792926937498106,
+      "real": 0.0024368821442725484,
+      "artifact_fraction": -7.725191166137339,
+      "sources": {
+        "claimed": "stage-16 job_ron bulk at level 1 (new solve; cross-check results/stage13d/results.json dense/initial_L1/R)",
+        "real": "stage-16 job_ron channel d_ch=20 nm at level 1 (new solve; stage 16 recorded levels 0 and 2 only: results/stage16/results.json runs/ron|13d_initial|0/channel/20/R_on_sp_ohm_cm2, level 2)"
+      },
+      "note": "channel/bulk = 8.73x at h/2 (recorded: L0 8.02x, L2 8.80x)",
+      "ratio": 8.72519116613734
+    },
+    {
+      "id": "AB4[13d_final]",
+      "label": "13d_final (bulk Hall -> Noguchi channel mobility), h/2",
+      "quantity": "R_on,sp at V_GS=15 V, V_DS=0.1 V",
+      "unit": "ohm cm2",
+      "claimed": 0.00027924108726097254,
+      "real": 0.002433281952492102,
+      "artifact_fraction": -7.713910894559762,
+      "sources": {
+        "claimed": "stage-16 job_ron bulk at level 1 (new solve; cross-check results/stage13d/results.json dense/final_L1/R)",
+        "real": "stage-16 job_ron channel d_ch=20 nm at level 1 (new solve; stage 16 recorded levels 0 and 2 only: results/stage16/results.json runs/ron|13d_final|0/channel/20/R_on_sp_ohm_cm2, level 2)"
+      },
+      "note": "channel/bulk = 8.71x at h/2 (recorded: L0 8.01x, L2 8.63x)",
+      "ratio": 8.713910894559762
+    },
+    {
+      "id": "AB5",
+      "label": "stage 22 (simplified D-gradient optimum -> exact E-gradient optimum), 1.4 um geometry",
+      "quantity": "BV gain over initial (dense, h)",
+      "unit": "V",
+      "claimed": 64.05169015487468,
+      "real": 64.0943952797827,
+      "artifact_fraction": -0.000666729087160256,
+      "sources": {
+        "claimed": [
+          {
+            "value": 608.0549968218736,
+            "file": "results/stage22/results.json",
+            "key": "p22b/dense_bv_min_D"
+          },
+          {
+            "value": 544.0033066669989,
+            "file": "results/stage22/results.json",
+            "key": "initial_dense_bv_min"
+          }
+        ],
+        "real": [
+          {
+            "value": 608.0977019467816,
+            "file": "results/stage22/results.json",
+            "key": "p22b/dense_bv_min_E"
+          },
+          {
+            "value": 544.0033066669989,
+            "file": "results/stage22/results.json",
+            "key": "initial_dense_bv_min"
+          },
+          {
+            "value": "/home/dada/widegap/results/stage21/results.json",
+            "file": "results/stage22/results.json",
+            "key": "p22b/E_run_source"
+          }
+        ]
+      },
+      "note": "BV(D) - BV(E) = -0.0427 V; SLSQP iterations D/E = 37/10 = 3.70x (E run from stage 21)",
+      "claimed_endpoints": [
+        544.0033066669989,
+        608.0549968218736
+      ],
+      "real_endpoints": [
+        544.0033066669989,
+        608.0977019467816
+      ],
+      "bv_diff_D_minus_E_V": -0.04270512490802503,
+      "iterations_D": 37,
+      "iterations_E": 10,
+      "iteration_ratio_D_over_E": 3.7
+    }
+  ],
+  "T1": {
+    "recorded": {
+      "bv_initial": {
+        "value": 512.2726217151704,
+        "file": "results/stage13/summary.json",
+        "key": "values/bv_initial_V"
+      },
+      "bv_final": {
+        "value": 633.1831652300083,
+        "file": "results/stage13/summary.json",
+        "key": "values/bv_final_V"
+      }
+    },
+    "rel_errors": {
+      "bv_initial": 0.0,
+      "bv_final": 0.0,
+      "gain": 0.0
+    },
+    "tol": 1e-06,
+    "ok": true,
+    "recomputed": {
+      "bv_initial": 512.2726217151704,
+      "bv_final": 633.1831652300083,
+      "gain": 120.91054351483785
+    }
+  },
+  "T2": {
+    "initial": {
+      "V_pt_es_h": 114.07400254054245,
+      "V_pt_es_h2": 117.49253958716626,
+      "rel_change": 0.029967713681378516,
+      "mesh_ok": true,
+      "dd_onset_V": 94.80687586026116,
+      "dd_V_reached": 225.0,
+      "dd_first_failed_target_V": 230.0,
+      "lower_bound_only": false
+    },
+    "13": {
+      "V_pt_es_h": 95.47556808381695,
+      "V_pt_es_h2": 99.19817192539136,
+      "rel_change": 0.038990119842035265,
+      "mesh_ok": true,
+      "dd_onset_V": 110.5505270350957,
+      "dd_V_reached": 235.0,
+      "dd_first_failed_target_V": 240.0,
+      "lower_bound_only": false
+    },
+    "13c": {
+      "V_pt_es_h": 111.155044637195,
+      "V_pt_es_h2": 114.48984366032066,
+      "rel_change": 0.030001328630745228,
+      "mesh_ok": true,
+      "dd_onset_V": 109.8543192283486,
+      "dd_V_reached": 235.0,
+      "dd_first_failed_target_V": 240.0,
+      "lower_bound_only": false
+    },
+    "13d": {
+      "V_pt_es_h": 103.2960071996406,
+      "V_pt_es_h2": 106.57055339051313,
+      "rel_change": 0.031700607599902675,
+      "mesh_ok": true,
+      "dd_onset_V": 83.15625828187588,
+      "dd_V_reached": 235.0,
+      "dd_first_failed_target_V": 240.0,
+      "lower_bound_only": false
+    },
+    "17b": {
+      "V_pt_es_h": 101.22728486650013,
+      "V_pt_es_h2": 104.45854983434884,
+      "rel_change": 0.03192088943322102,
+      "mesh_ok": true,
+      "dd_onset_V": 80.8580152135724,
+      "dd_V_reached": 235.0,
+      "dd_first_failed_target_V": 240.0,
+      "lower_bound_only": false
+    }
+  },
+  "T3": {
+    "ok": true,
+    "job_errors": [],
+    "on_entry_to_lines": 0,
+    "n_unbracketed_lines": {
+      "dense|13": 40,
+      "dense|initial": 0,
+      "dense|13c": 0,
+      "dense|13d": 0,
+      "dense|17b": 0,
+      "ab1|initial": 0,
+      "ab1|13": 0
+    },
+    "stage16_solves_converged": true
+  },
+  "runtime_seconds": 58.018356506945565
+}
