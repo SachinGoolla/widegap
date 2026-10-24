@@ -1,0 +1,328 @@
+{
+  "criteria": {
+    "H1": true,
+    "H2": true,
+    "H3": true
+  },
+  "gate_passed": true,
+  "dev": false,
+  "table": [
+    {
+      "id": "AB1[niwa]",
+      "label": "stage 13 planar -> dense, old off-state, sharp device, h, niwa",
+      "quantity": "BV gain initial -> final",
+      "unit": "V",
+      "claimed": 120.91054351483785,
+      "real": 12.413594300893237,
+      "artifact_fraction": 0.8973324084067997,
+      "sources": {
+        "claimed": "recomputed planar-cut BV",
+        "real": "recomputed dense true-min BV (49 lines)"
+      },
+      "note": "planar 512.27 -> 633.18; dense 406.06 -> 418.47 V",
+      "claimed_endpoints": [
+        512.2726217151704,
+        633.1831652300083
+      ],
+      "real_endpoints": [
+        406.0568842335378,
+        418.47047853443104
+      ],
+      "coefficient_set": "niwa"
+    },
+    {
+      "id": "AB1[hatakeyama]",
+      "label": "stage 13 planar -> dense, old off-state, sharp device, h, hatakeyama",
+      "quantity": "BV gain initial -> final",
+      "unit": "V",
+      "claimed": 126.69763375543994,
+      "real": -98.25257358371675,
+      "artifact_fraction": 1.775488623357957,
+      "sources": {
+        "claimed": "recomputed planar-cut BV",
+        "real": "recomputed dense true-min BV (49 lines)"
+      },
+      "note": "planar 521.92 -> 648.62; dense 350.41 -> 252.15 V",
+      "claimed_endpoints": [
+        521.9237108397671,
+        648.621344595207
+      ],
+      "real_endpoints": [
+        350.4063357839799,
+        252.15376220026315
+      ],
+      "coefficient_set": "hatakeyama"
+    },
+    {
+      "id": "AB3[initial][hatakeyama]",
+      "label": "initial, 0.8 um, 12c model, h, Hatakeyama",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 536.7168600354073,
+      "real": 94.80687586026116,
+      "artifact_fraction": 0.8233577461047027,
+      "sources": {
+        "claimed": "recomputed dense true-min BV (Hatakeyama)",
+        "real": [
+          {
+            "value": 94.80687586026116,
+            "file": "results/stage23/results.json",
+            "key": "AB3/initial/dd_onset_V"
+          },
+          {
+            "value": 225.0,
+            "file": "results/stage23/results.json",
+            "key": "AB3/initial/dd_V_reached"
+          }
+        ]
+      },
+      "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 94.81 V; limited by punch-through",
+      "coefficient_set": "hatakeyama"
+    },
+    {
+      "id": "AB3[13][hatakeyama]",
+      "label": "13 final, 0.8 um, 12c model, h, Hatakeyama",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 145.72055746443579,
+      "real": 110.5505270350957,
+      "artifact_fraction": 0.24135256576906527,
+      "sources": {
+        "claimed": "recomputed dense true-min BV (Hatakeyama)",
+        "real": [
+          {
+            "value": 110.5505270350957,
+            "file": "results/stage23/results.json",
+            "key": "AB3/13/dd_onset_V"
+          },
+          {
+            "value": 235.0,
+            "file": "results/stage23/results.json",
+            "key": "AB3/13/dd_V_reached"
+          }
+        ]
+      },
+      "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 110.55 V; limited by punch-through",
+      "coefficient_set": "hatakeyama"
+    },
+    {
+      "id": "AB3[13c][hatakeyama]",
+      "label": "13c final, 0.8 um, 12c model, h, Hatakeyama",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 635.166811907205,
+      "real": 109.8543192283486,
+      "artifact_fraction": 0.8270465062579532,
+      "sources": {
+        "claimed": "recomputed dense true-min BV (Hatakeyama)",
+        "real": [
+          {
+            "value": 109.8543192283486,
+            "file": "results/stage23/results.json",
+            "key": "AB3/13c/dd_onset_V"
+          },
+          {
+            "value": 235.0,
+            "file": "results/stage23/results.json",
+            "key": "AB3/13c/dd_V_reached"
+          }
+        ]
+      },
+      "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 109.85 V; limited by punch-through",
+      "coefficient_set": "hatakeyama"
+    },
+    {
+      "id": "AB3[13d][hatakeyama]",
+      "label": "13d final, 0.8 um, 12c model, h, Hatakeyama",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 593.4204342595459,
+      "real": 83.15625828187588,
+      "artifact_fraction": 0.8598695739461079,
+      "sources": {
+        "claimed": "recomputed dense true-min BV (Hatakeyama)",
+        "real": [
+          {
+            "value": 83.15625828187588,
+            "file": "results/stage23/results.json",
+            "key": "AB3/13d/dd_onset_V"
+          },
+          {
+            "value": 235.0,
+            "file": "results/stage23/results.json",
+            "key": "AB3/13d/dd_V_reached"
+          }
+        ]
+      },
+      "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 83.16 V; limited by punch-through",
+      "coefficient_set": "hatakeyama"
+    },
+    {
+      "id": "AB3[17b][hatakeyama]",
+      "label": "17b final, 0.8 um, 12c model, h, Hatakeyama",
+      "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+      "unit": "V",
+      "claimed": 587.5763669640834,
+      "real": 80.8580152135724,
+      "artifact_fraction": 0.8623872235853302,
+      "sources": {
+        "claimed": "recomputed dense true-min BV (Hatakeyama)",
+        "real": [
+          {
+            "value": 80.8580152135724,
+            "file": "results/stage23/results.json",
+            "key": "AB3/17b/dd_onset_V"
+          },
+          {
+            "value": 235.0,
+            "file": "results/stage23/results.json",
+            "key": "AB3/17b/dd_V_reached"
+          }
+        ]
+      },
+      "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 80.86 V; limited by punch-through",
+      "coefficient_set": "hatakeyama"
+    },
+    {
+      "id": "AB6[niwa]",
+      "label": "stage 21 optimum on the 1.4 um geometry, niwa, h",
+      "quantity": "dense true-min BV gain over initial",
+      "unit": "V",
+      "claimed": 64.0943952797827,
+      "real": 64.0943952797827,
+      "artifact_fraction": 0.0,
+      "sources": {
+        "claimed": "Niwa gain (recomputed; equals results/stage21 dense final_L0 - initial_L0)",
+        "real": "niwa gain (recomputed); theta: results/stage21/results.json final/theta"
+      },
+      "note": "BV 544.00 -> 608.10 V",
+      "coefficient_set": "niwa",
+      "gain_V": 64.0943952797827
+    },
+    {
+      "id": "AB6[hatakeyama]",
+      "label": "stage 21 optimum on the 1.4 um geometry, hatakeyama, h",
+      "quantity": "dense true-min BV gain over initial",
+      "unit": "V",
+      "claimed": 64.0943952797827,
+      "real": 59.06363665269953,
+      "artifact_fraction": 0.07848983682774557,
+      "sources": {
+        "claimed": "Niwa gain (recomputed; equals results/stage21 dense final_L0 - initial_L0)",
+        "real": "hatakeyama gain (recomputed); theta: results/stage21/results.json final/theta"
+      },
+      "note": "BV 565.43 -> 624.49 V",
+      "coefficient_set": "hatakeyama",
+      "gain_V": 59.06363665269953
+    }
+  ],
+  "H1": {
+    "rel_errors": {
+      "AB1|initial|planar": 0.0,
+      "AB1|initial|dense": 0.0,
+      "AB1|13|planar": 0.0,
+      "AB1|13|dense": 0.0,
+      "AB3|initial|dense": 0.0,
+      "AB3|13|dense": 0.0,
+      "AB3|13c|dense": 0.0,
+      "AB3|13d|dense": 0.0,
+      "AB3|17b|dense": 0.0,
+      "stage21|initial|L0": 0.0,
+      "stage21|final|L0": 0.0,
+      "stage21|initial|L1": 0.0,
+      "stage21|final|L1": 0.0
+    },
+    "tol": 1e-06,
+    "n_checks": 13
+  },
+  "H2": {
+    "job_errors": [],
+    "on_entry_to_lines": 0,
+    "n_unbracketed_lines_flagged_above_2x_first_crossing": {
+      "dense|niwa|13|0.8|0": 40,
+      "dense|niwa|13c|0.8|0": 0,
+      "dense|niwa|initial|0.8|0": 0,
+      "dense|niwa|13d|0.8|0": 0,
+      "dense|niwa|17b|0.8|0": 0,
+      "dense|hatakeyama|13|0.8|0": 40,
+      "dense|niwa|initial|1.4|0": 0,
+      "dense|niwa|final|1.4|0": 0,
+      "dense|hatakeyama|13c|0.8|0": 0,
+      "dense|hatakeyama|initial|0.8|0": 0,
+      "ab1|niwa|13": 0,
+      "ab1|niwa|initial": 0,
+      "dense|hatakeyama|13d|0.8|0": 0,
+      "dense|hatakeyama|17b|0.8|0": 0,
+      "ab1|hatakeyama|initial": 8,
+      "ab1|hatakeyama|13": 39,
+      "dense|hatakeyama|initial|0.8|1": 0,
+      "dense|hatakeyama|initial|1.4|0": 0,
+      "dense|hatakeyama|final|1.4|0": 0,
+      "dense|niwa|initial|1.4|1": 0,
+      "dense|niwa|final|1.4|1": 0
+    }
+  },
+  "H3": {
+    "bv_h": 536.7168600354073,
+    "bv_h2": 536.802092058599,
+    "rel_change": 0.00015880258202827235,
+    "ok": true
+  },
+  "predictions": {
+    "P25a": {
+      "artifact_fraction": 1.775488623357957,
+      "threshold": 0.5,
+      "confirmed": true
+    },
+    "P25b": {
+      "by_design": {
+        "initial": {
+          "V_pt": 94.80687586026116,
+          "BV_hat": 536.7168600354073,
+          "artifact_fraction": 0.8233577461047027,
+          "punch_through_limited": true,
+          "ok": true
+        },
+        "13": {
+          "V_pt": 110.5505270350957,
+          "BV_hat": 145.72055746443579,
+          "artifact_fraction": 0.24135256576906527,
+          "punch_through_limited": true,
+          "ok": false
+        },
+        "13c": {
+          "V_pt": 109.8543192283486,
+          "BV_hat": 635.166811907205,
+          "artifact_fraction": 0.8270465062579532,
+          "punch_through_limited": true,
+          "ok": true
+        },
+        "13d": {
+          "V_pt": 83.15625828187588,
+          "BV_hat": 593.4204342595459,
+          "artifact_fraction": 0.8598695739461079,
+          "punch_through_limited": true,
+          "ok": true
+        },
+        "17b": {
+          "V_pt": 80.8580152135724,
+          "BV_hat": 587.5763669640834,
+          "artifact_fraction": 0.8623872235853302,
+          "punch_through_limited": true,
+          "ok": true
+        }
+      },
+      "threshold": 0.7,
+      "confirmed": false
+    },
+    "P25c": {
+      "gain_hatakeyama_V": 59.06363665269953,
+      "gain_niwa_V": 64.0943952797827,
+      "gain_niwa_recorded_V": 64.0943952797827,
+      "rel_difference": -0.07848983682774557,
+      "tolerance": 0.3,
+      "confirmed": true
+    }
+  },
+  "runtime_seconds": 94.86006041895598
+}

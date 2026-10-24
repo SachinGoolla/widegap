@@ -1,0 +1,942 @@
+{
+ "config": {
+  "tolerances": {
+   "H1_rel": 1e-06,
+   "H3_rel": 0.03,
+   "P25a": 0.5,
+   "P25b": 0.7,
+   "P25c": 0.3
+  },
+  "coefficient_sets": {
+   "niwa": "SiC4H.niwa() (default)",
+   "hatakeyama": "SiC4H.hatakeyama(): ii_{a,b}_{n,p}_par_c (stage 12)"
+  },
+  "theta_stage21_final": [
+   -0.1569233307453616,
+   -0.023993915546343694,
+   0.8500705113053071,
+   0.023993915546343985,
+   0.00856667319174177
+  ],
+  "theta": {
+   "initial": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "13": [
+    -0.5749778814928859,
+    -0.25817922208462035,
+    1.06208196776884,
+    0.052136127800628596,
+    1.6094379124341003
+   ],
+   "13c": [
+    -0.45173261487214655,
+    -0.042639802934630426,
+    0.9178584979636285,
+    -0.18438149453383262,
+    0.842093216641496
+   ],
+   "13d": [
+    -0.15874030778940176,
+    0.035356331529828054,
+    0.8518874883493465,
+    -0.03535633152982891,
+    0.06798098445401049
+   ],
+   "17b": [
+    -0.14185956537025052,
+    0.01346001694858604,
+    0.8350067459301957,
+    -0.013460016948585413,
+    0.008566673191742048
+   ]
+  },
+  "n_dense": 49,
+  "note": "ev.ch set after construction; library unchanged"
+ },
+ "table": [
+  {
+   "id": "AB1[niwa]",
+   "label": "stage 13 planar -> dense, old off-state, sharp device, h, niwa",
+   "quantity": "BV gain initial -> final",
+   "unit": "V",
+   "claimed": 120.91054351483785,
+   "real": 12.413594300893237,
+   "artifact_fraction": 0.8973324084067997,
+   "sources": {
+    "claimed": "recomputed planar-cut BV",
+    "real": "recomputed dense true-min BV (49 lines)"
+   },
+   "note": "planar 512.27 -> 633.18; dense 406.06 -> 418.47 V",
+   "claimed_endpoints": [
+    512.2726217151704,
+    633.1831652300083
+   ],
+   "real_endpoints": [
+    406.0568842335378,
+    418.47047853443104
+   ],
+   "coefficient_set": "niwa"
+  },
+  {
+   "id": "AB1[hatakeyama]",
+   "label": "stage 13 planar -> dense, old off-state, sharp device, h, hatakeyama",
+   "quantity": "BV gain initial -> final",
+   "unit": "V",
+   "claimed": 126.69763375543994,
+   "real": -98.25257358371675,
+   "artifact_fraction": 1.775488623357957,
+   "sources": {
+    "claimed": "recomputed planar-cut BV",
+    "real": "recomputed dense true-min BV (49 lines)"
+   },
+   "note": "planar 521.92 -> 648.62; dense 350.41 -> 252.15 V",
+   "claimed_endpoints": [
+    521.9237108397671,
+    648.621344595207
+   ],
+   "real_endpoints": [
+    350.4063357839799,
+    252.15376220026315
+   ],
+   "coefficient_set": "hatakeyama"
+  },
+  {
+   "id": "AB3[initial][hatakeyama]",
+   "label": "initial, 0.8 um, 12c model, h, Hatakeyama",
+   "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+   "unit": "V",
+   "claimed": 536.7168600354073,
+   "real": 94.80687586026116,
+   "artifact_fraction": 0.8233577461047027,
+   "sources": {
+    "claimed": "recomputed dense true-min BV (Hatakeyama)",
+    "real": [
+     {
+      "value": 94.80687586026116,
+      "file": "results/stage23/results.json",
+      "key": "AB3/initial/dd_onset_V"
+     },
+     {
+      "value": 225.0,
+      "file": "results/stage23/results.json",
+      "key": "AB3/initial/dd_V_reached"
+     }
+    ]
+   },
+   "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 94.81 V; limited by punch-through",
+   "coefficient_set": "hatakeyama"
+  },
+  {
+   "id": "AB3[13][hatakeyama]",
+   "label": "13 final, 0.8 um, 12c model, h, Hatakeyama",
+   "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+   "unit": "V",
+   "claimed": 145.72055746443579,
+   "real": 110.5505270350957,
+   "artifact_fraction": 0.24135256576906527,
+   "sources": {
+    "claimed": "recomputed dense true-min BV (Hatakeyama)",
+    "real": [
+     {
+      "value": 110.5505270350957,
+      "file": "results/stage23/results.json",
+      "key": "AB3/13/dd_onset_V"
+     },
+     {
+      "value": 235.0,
+      "file": "results/stage23/results.json",
+      "key": "AB3/13/dd_V_reached"
+     }
+    ]
+   },
+   "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 110.55 V; limited by punch-through",
+   "coefficient_set": "hatakeyama"
+  },
+  {
+   "id": "AB3[13c][hatakeyama]",
+   "label": "13c final, 0.8 um, 12c model, h, Hatakeyama",
+   "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+   "unit": "V",
+   "claimed": 635.166811907205,
+   "real": 109.8543192283486,
+   "artifact_fraction": 0.8270465062579532,
+   "sources": {
+    "claimed": "recomputed dense true-min BV (Hatakeyama)",
+    "real": [
+     {
+      "value": 109.8543192283486,
+      "file": "results/stage23/results.json",
+      "key": "AB3/13c/dd_onset_V"
+     },
+     {
+      "value": 235.0,
+      "file": "results/stage23/results.json",
+      "key": "AB3/13c/dd_V_reached"
+     }
+    ]
+   },
+   "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 109.85 V; limited by punch-through",
+   "coefficient_set": "hatakeyama"
+  },
+  {
+   "id": "AB3[13d][hatakeyama]",
+   "label": "13d final, 0.8 um, 12c model, h, Hatakeyama",
+   "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+   "unit": "V",
+   "claimed": 593.4204342595459,
+   "real": 83.15625828187588,
+   "artifact_fraction": 0.8598695739461079,
+   "sources": {
+    "claimed": "recomputed dense true-min BV (Hatakeyama)",
+    "real": [
+     {
+      "value": 83.15625828187588,
+      "file": "results/stage23/results.json",
+      "key": "AB3/13d/dd_onset_V"
+     },
+     {
+      "value": 235.0,
+      "file": "results/stage23/results.json",
+      "key": "AB3/13d/dd_V_reached"
+     }
+    ]
+   },
+   "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 83.16 V; limited by punch-through",
+   "coefficient_set": "hatakeyama"
+  },
+  {
+   "id": "AB3[17b][hatakeyama]",
+   "label": "17b final, 0.8 um, 12c model, h, Hatakeyama",
+   "quantity": "blocking voltage min(BV, V_pt) vs avalanche BV",
+   "unit": "V",
+   "claimed": 587.5763669640834,
+   "real": 80.8580152135724,
+   "artifact_fraction": 0.8623872235853302,
+   "sources": {
+    "claimed": "recomputed dense true-min BV (Hatakeyama)",
+    "real": [
+     {
+      "value": 80.8580152135724,
+      "file": "results/stage23/results.json",
+      "key": "AB3/17b/dd_onset_V"
+     },
+     {
+      "value": 235.0,
+      "file": "results/stage23/results.json",
+      "key": "AB3/17b/dd_V_reached"
+     }
+    ]
+   },
+   "note": "V_pt (DD onset J_n = 1 A/cm2, stage 23) = 80.86 V; limited by punch-through",
+   "coefficient_set": "hatakeyama"
+  },
+  {
+   "id": "AB6[niwa]",
+   "label": "stage 21 optimum on the 1.4 um geometry, niwa, h",
+   "quantity": "dense true-min BV gain over initial",
+   "unit": "V",
+   "claimed": 64.0943952797827,
+   "real": 64.0943952797827,
+   "artifact_fraction": 0.0,
+   "sources": {
+    "claimed": "Niwa gain (recomputed; equals results/stage21 dense final_L0 - initial_L0)",
+    "real": "niwa gain (recomputed); theta: results/stage21/results.json final/theta"
+   },
+   "note": "BV 544.00 -> 608.10 V",
+   "coefficient_set": "niwa",
+   "gain_V": 64.0943952797827
+  },
+  {
+   "id": "AB6[hatakeyama]",
+   "label": "stage 21 optimum on the 1.4 um geometry, hatakeyama, h",
+   "quantity": "dense true-min BV gain over initial",
+   "unit": "V",
+   "claimed": 64.0943952797827,
+   "real": 59.06363665269953,
+   "artifact_fraction": 0.07848983682774557,
+   "sources": {
+    "claimed": "Niwa gain (recomputed; equals results/stage21 dense final_L0 - initial_L0)",
+    "real": "hatakeyama gain (recomputed); theta: results/stage21/results.json final/theta"
+   },
+   "note": "BV 565.43 -> 624.49 V",
+   "coefficient_set": "hatakeyama",
+   "gain_V": 59.06363665269953
+  }
+ ],
+ "H1": {
+  "rel_errors": {
+   "AB1|initial|planar": 0.0,
+   "AB1|initial|dense": 0.0,
+   "AB1|13|planar": 0.0,
+   "AB1|13|dense": 0.0,
+   "AB3|initial|dense": 0.0,
+   "AB3|13|dense": 0.0,
+   "AB3|13c|dense": 0.0,
+   "AB3|13d|dense": 0.0,
+   "AB3|17b|dense": 0.0,
+   "stage21|initial|L0": 0.0,
+   "stage21|final|L0": 0.0,
+   "stage21|initial|L1": 0.0,
+   "stage21|final|L1": 0.0
+  },
+  "tol": 1e-06,
+  "n_checks": 13
+ },
+ "H2": {
+  "job_errors": [],
+  "on_entry_to_lines": 0,
+  "n_unbracketed_lines_flagged_above_2x_first_crossing": {
+   "dense|niwa|13|0.8|0": 40,
+   "dense|niwa|13c|0.8|0": 0,
+   "dense|niwa|initial|0.8|0": 0,
+   "dense|niwa|13d|0.8|0": 0,
+   "dense|niwa|17b|0.8|0": 0,
+   "dense|hatakeyama|13|0.8|0": 40,
+   "dense|niwa|initial|1.4|0": 0,
+   "dense|niwa|final|1.4|0": 0,
+   "dense|hatakeyama|13c|0.8|0": 0,
+   "dense|hatakeyama|initial|0.8|0": 0,
+   "ab1|niwa|13": 0,
+   "ab1|niwa|initial": 0,
+   "dense|hatakeyama|13d|0.8|0": 0,
+   "dense|hatakeyama|17b|0.8|0": 0,
+   "ab1|hatakeyama|initial": 8,
+   "ab1|hatakeyama|13": 39,
+   "dense|hatakeyama|initial|0.8|1": 0,
+   "dense|hatakeyama|initial|1.4|0": 0,
+   "dense|hatakeyama|final|1.4|0": 0,
+   "dense|niwa|initial|1.4|1": 0,
+   "dense|niwa|final|1.4|1": 0
+  }
+ },
+ "H3": {
+  "bv_h": 536.7168600354073,
+  "bv_h2": 536.802092058599,
+  "rel_change": 0.00015880258202827235,
+  "ok": true
+ },
+ "predictions": {
+  "P25a": {
+   "artifact_fraction": 1.775488623357957,
+   "threshold": 0.5,
+   "confirmed": true
+  },
+  "P25b": {
+   "by_design": {
+    "initial": {
+     "V_pt": 94.80687586026116,
+     "BV_hat": 536.7168600354073,
+     "artifact_fraction": 0.8233577461047027,
+     "punch_through_limited": true,
+     "ok": true
+    },
+    "13": {
+     "V_pt": 110.5505270350957,
+     "BV_hat": 145.72055746443579,
+     "artifact_fraction": 0.24135256576906527,
+     "punch_through_limited": true,
+     "ok": false
+    },
+    "13c": {
+     "V_pt": 109.8543192283486,
+     "BV_hat": 635.166811907205,
+     "artifact_fraction": 0.8270465062579532,
+     "punch_through_limited": true,
+     "ok": true
+    },
+    "13d": {
+     "V_pt": 83.15625828187588,
+     "BV_hat": 593.4204342595459,
+     "artifact_fraction": 0.8598695739461079,
+     "punch_through_limited": true,
+     "ok": true
+    },
+    "17b": {
+     "V_pt": 80.8580152135724,
+     "BV_hat": 587.5763669640834,
+     "artifact_fraction": 0.8623872235853302,
+     "punch_through_limited": true,
+     "ok": true
+    }
+   },
+   "threshold": 0.7,
+   "confirmed": false
+  },
+  "P25c": {
+   "gain_hatakeyama_V": 59.06363665269953,
+   "gain_niwa_V": 64.0943952797827,
+   "gain_niwa_recorded_V": 64.0943952797827,
+   "rel_difference": -0.07848983682774557,
+   "tolerance": 0.3,
+   "confirmed": true
+  }
+ },
+ "AB3": {
+  "initial": {
+   "bv_hat": 536.7168600354073,
+   "bv_niwa": 516.871440559229,
+   "V_pt": 94.80687586026116,
+   "blocking_V": 94.80687586026116,
+   "lower_bound_only": false,
+   "limited_by": "punch-through"
+  },
+  "13": {
+   "bv_hat": 145.72055746443579,
+   "bv_niwa": 181.05829703984625,
+   "V_pt": 110.5505270350957,
+   "blocking_V": 110.5505270350957,
+   "lower_bound_only": false,
+   "limited_by": "punch-through"
+  },
+  "13c": {
+   "bv_hat": 635.166811907205,
+   "bv_niwa": 618.8474383094457,
+   "V_pt": 109.8543192283486,
+   "blocking_V": 109.8543192283486,
+   "lower_bound_only": false,
+   "limited_by": "punch-through"
+  },
+  "13d": {
+   "bv_hat": 593.4204342595459,
+   "bv_niwa": 577.9396356649966,
+   "V_pt": 83.15625828187588,
+   "blocking_V": 83.15625828187588,
+   "lower_bound_only": false,
+   "limited_by": "punch-through"
+  },
+  "17b": {
+   "bv_hat": 587.5763669640834,
+   "bv_niwa": 572.4637159224536,
+   "V_pt": 80.8580152135724,
+   "blocking_V": 80.8580152135724,
+   "lower_bound_only": false,
+   "limited_by": "punch-through"
+  }
+ },
+ "AB6_gains": {
+  "niwa": 64.0943952797827,
+  "hatakeyama": 59.06363665269953
+ },
+ "citations": [
+  {
+   "file": "results/stage13/results.json",
+   "key": "final/theta"
+  },
+  {
+   "file": "results/stage13c/results.json",
+   "key": "final/theta"
+  },
+  {
+   "file": "results/stage13d/results.json",
+   "key": "final/theta"
+  },
+  {
+   "file": "results/stage17b/results.json",
+   "key": "final/theta"
+  },
+  {
+   "file": "results/stage21/results.json",
+   "key": "dense/final_L0/bv_min"
+  },
+  {
+   "file": "results/stage21/results.json",
+   "key": "dense/final_L1/bv_min"
+  },
+  {
+   "file": "results/stage21/results.json",
+   "key": "dense/initial_L0/bv_min"
+  },
+  {
+   "file": "results/stage21/results.json",
+   "key": "dense/initial_L1/bv_min"
+  },
+  {
+   "file": "results/stage21/results.json",
+   "key": "final/theta"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13/bv_recomputed"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13/dd_V_reached"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13/dd_onset_V"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13c/bv_recomputed"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13c/dd_V_reached"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13c/dd_onset_V"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13d/bv_recomputed"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13d/dd_V_reached"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/13d/dd_onset_V"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/17b/bv_recomputed"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/17b/dd_V_reached"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/17b/dd_onset_V"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/initial/bv_recomputed"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/initial/dd_V_reached"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "AB3/initial/dd_onset_V"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "T1/recomputed/bv_final"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "T1/recomputed/bv_initial"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "detail/AB1/13/dense_bv_min"
+  },
+  {
+   "file": "results/stage23/results.json",
+   "key": "detail/AB1/initial/dense_bv_min"
+  }
+ ],
+ "jobs": {
+  "dense|niwa|13|0.8|0": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "0.8",
+   "name": "13",
+   "level": 0,
+   "bv_min": 181.05829703984625,
+   "x_argmin_um": 0.0,
+   "n_unbracketed": 40,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 46,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 22
+   },
+   "seconds": 8.601088950992562
+  },
+  "dense|niwa|13c|0.8|0": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "0.8",
+   "name": "13c",
+   "level": 0,
+   "bv_min": 618.8474383094457,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 169,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 2
+   },
+   "seconds": 19.806938409921713
+  },
+  "dense|niwa|initial|0.8|0": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "0.8",
+   "name": "initial",
+   "level": 0,
+   "bv_min": 516.871440559229,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 158,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 19.992664956022054
+  },
+  "dense|niwa|13d|0.8|0": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "0.8",
+   "name": "13d",
+   "level": 0,
+   "bv_min": 577.9396356649966,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 162,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 1
+   },
+   "seconds": 20.45987067196984
+  },
+  "dense|niwa|17b|0.8|0": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "0.8",
+   "name": "17b",
+   "level": 0,
+   "bv_min": 572.4637159224536,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 165,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 1
+   },
+   "seconds": 21.245541822980158
+  },
+  "dense|hatakeyama|13|0.8|0": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "0.8",
+   "name": "13",
+   "level": 0,
+   "bv_min": 145.72055746443579,
+   "x_argmin_um": 0.0,
+   "n_unbracketed": 40,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 47,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 22
+   },
+   "seconds": 8.792157239979133
+  },
+  "dense|niwa|initial|1.4|0": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "1.4",
+   "name": "initial",
+   "level": 0,
+   "bv_min": 544.0033066669989,
+   "x_argmin_um": 1.841666666666667,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 200,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 36.00324200303294
+  },
+  "dense|niwa|final|1.4|0": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "1.4",
+   "name": "final",
+   "level": 0,
+   "bv_min": 608.0977019467816,
+   "x_argmin_um": 1.841666666666667,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 206,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 1
+   },
+   "seconds": 37.100652763969265
+  },
+  "dense|hatakeyama|13c|0.8|0": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "0.8",
+   "name": "13c",
+   "level": 0,
+   "bv_min": 635.166811907205,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 180,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 2
+   },
+   "seconds": 21.27493588300422
+  },
+  "dense|hatakeyama|initial|0.8|0": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "0.8",
+   "name": "initial",
+   "level": 0,
+   "bv_min": 536.7168600354073,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 178,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 23.20001929497812
+  },
+  "ab1|niwa|13": {
+   "kind": "ab1",
+   "cs": "niwa",
+   "name": "13",
+   "planar_bv": 633.1831652300083,
+   "dense_bv_min": 418.47047853443104,
+   "x_argmin_um": 0.8500000000000001,
+   "dense_bv_at_x_bc": 633.1831590860627,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 255,
+    "failed_attempts": 2,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 21
+   },
+   "seconds": 50.26817157899495
+  },
+  "ab1|niwa|initial": {
+   "kind": "ab1",
+   "cs": "niwa",
+   "name": "initial",
+   "planar_bv": 512.2726217151704,
+   "dense_bv_min": 406.0568842335378,
+   "x_argmin_um": 0.9208333333333335,
+   "dense_bv_at_x_bc": 512.2726181497745,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 243,
+    "failed_attempts": 2,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 51.63697559200227
+  },
+  "dense|hatakeyama|13d|0.8|0": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "0.8",
+   "name": "13d",
+   "level": 0,
+   "bv_min": 593.4204342595459,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 181,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 1
+   },
+   "seconds": 22.945991676999256
+  },
+  "dense|hatakeyama|17b|0.8|0": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "0.8",
+   "name": "17b",
+   "level": 0,
+   "bv_min": 587.5763669640834,
+   "x_argmin_um": 1.7000000000000002,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 172,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 1
+   },
+   "seconds": 19.689459970104508
+  },
+  "ab1|hatakeyama|initial": {
+   "kind": "ab1",
+   "cs": "hatakeyama",
+   "name": "initial",
+   "planar_bv": 521.9237108397671,
+   "dense_bv_min": 350.4063357839799,
+   "x_argmin_um": 0.9208333333333335,
+   "dense_bv_at_x_bc": 521.9237037411363,
+   "n_unbracketed": 8,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 211,
+    "failed_attempts": 2,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 47.8156606949633
+  },
+  "ab1|hatakeyama|13": {
+   "kind": "ab1",
+   "cs": "hatakeyama",
+   "name": "13",
+   "planar_bv": 648.621344595207,
+   "dense_bv_min": 252.15376220026315,
+   "x_argmin_um": 0.7791666666666668,
+   "dense_bv_at_x_bc": NaN,
+   "n_unbracketed": 39,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 157,
+    "failed_attempts": 2,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 21
+   },
+   "seconds": 37.84305150900036
+  },
+  "dense|hatakeyama|initial|0.8|1": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "0.8",
+   "name": "initial",
+   "level": 1,
+   "bv_min": 536.802092058599,
+   "x_argmin_um": 1.7708333333333337,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 154,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 63.116055667051114
+  },
+  "dense|hatakeyama|initial|1.4|0": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "1.4",
+   "name": "initial",
+   "level": 0,
+   "bv_min": 565.4301852294142,
+   "x_argmin_um": 1.841666666666667,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 206,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 28.180374094983563
+  },
+  "dense|hatakeyama|final|1.4|0": {
+   "kind": "dense",
+   "cs": "hatakeyama",
+   "geom": "1.4",
+   "name": "final",
+   "level": 0,
+   "bv_min": 624.4938218821137,
+   "x_argmin_um": 1.841666666666667,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 225,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 1
+   },
+   "seconds": 27.705218214076012
+  },
+  "dense|niwa|initial|1.4|1": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "1.4",
+   "name": "initial",
+   "level": 1,
+   "bv_min": 543.1460884690359,
+   "x_argmin_um": 1.841666666666667,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 194,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 0
+   },
+   "seconds": 92.51039373595268
+  },
+  "dense|niwa|final|1.4|1": {
+   "kind": "dense",
+   "cs": "niwa",
+   "geom": "1.4",
+   "name": "final",
+   "level": 1,
+   "bv_min": 607.755287263086,
+   "x_argmin_um": 1.841666666666667,
+   "n_unbracketed": 0,
+   "resolved_all": true,
+   "stats": {
+    "attempts": 201,
+    "failed_attempts": 0,
+    "failed_evals": 0,
+    "warm_fallbacks": 0,
+    "flips_max": 41
+   },
+   "seconds": 94.68151141598355
+  }
+ },
+ "on_entry_to_lines": 0,
+ "runtime_seconds": 94.86006041895598
+}
