@@ -67,7 +67,8 @@ class RoundedDMOSFET(DMOSFET):
         semi = self.reg.semi_cell
         st = lambda s: smooth_step(s, self.r)  # noqa: E731
         self.m_upper = semi & (yc >= -p.d_body)
-        self.acc_cell = np.where(semi, p.a_body * st(xc - p.x_jfet) * st(yc + p.d_body), 0.0)
+        a_c = p.a_body if p.a_body_b <= 0.0 else self.body_acceptor(yc)
+        self.acc_cell = np.where(semi, a_c * st(xc - p.x_jfet) * st(yc + p.d_body), 0.0)
         self.src_cell = np.where(
             semi, p.b_src * st(xc - p.x_src0) * st(p.x_src1 - xc) * st(yc + p.d_src), 0.0
         )
@@ -78,6 +79,7 @@ class RoundedDMOSFET(DMOSFET):
         d = np.zeros(self.mesh.n_cells)
         d[self.m_drain] = self.prm.b_drain
         d[self.m_drift] = self.drift_level(th)[self.m_drift]
+        d[self.m_csl] = self.prm.n_csl
         d += self.prm.n_jfet * np.exp(th[4]) * self.g_jfet
         d += self.src_cell
         return d

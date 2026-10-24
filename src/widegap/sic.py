@@ -779,6 +779,13 @@ class DMOSDesign:
     n_src: float
     n_drain: float
     mesh_kw: dict = field(default_factory=dict)
+    # ---- stage-26 extensions (all default to "absent": every earlier design is unchanged) ----
+    t_csl: float = 0.0  # [um] current-spreading layer between the body bottom and the drift
+    n_csl: float = 0.0  # [cm^-3] CSL donor density (used only when t_csl > 0)
+    n_body_b: float | None = None  # [cm^-3] body N_A at the body bottom (None: uniform n_body);
+    # otherwise N_A(y) is log-linear from n_body (surface) to n_body_b (y = -d_body)
+    l_ov: float = 0.0  # [um] gate overhang past the n+ source edge x_src0 (gate_x1 = x_src0 + l_ov)
+    src_gap: float | None = None  # [um] source-contact start past x_src0 (None: 1 Debye length)
 
 
 class SiCDMOS:
@@ -796,15 +803,30 @@ class SiCDMOS:
         x_src0 = x_jfet + ls(d.ch_len)
         x_src1 = x_src0 + ls(d.src_w)
         x_bc = x_src1 + ls(0.5 * d.bc_w)
+        ext = {}  # stage-26 extensions; empty for every pre-stage-26 design (bit-identical path)
+        if d.t_csl > 0.0:
+            ext.update(t_csl=ls(d.t_csl), n_csl=ds(d.n_csl))
+        if d.n_body_b is not None:
+            ext.update(a_body_b=ds(d.n_body_b))
+        gate_x1 = x_src0 + ls(d.l_ov)
+        x_cs = None
+        if d.src_gap is not None:
+            x_cs = x_src0 + ls(d.src_gap)
+            ext.update(src_contact_gap=ls(d.src_gap))
+        if d.l_ov > 0.0 or x_cs is not None:
+            pts = [gate_x1 if d.l_ov > 0.0 else None, x_cs]
+            ext.update(
+                x_split=tuple(sorted(v for v in pts if v is not None and x_src0 < v < x_src1))
+            )
         prm = DMOSParams(
             x_jfet=x_jfet, x_src0=x_src0, x_src1=x_src1, x_bc=x_bc, x_max=x_bc + ls(d.pad_w),
-            gate_x1=x_src0, x_ch_mid=x_jfet + 0.5 * ls(d.ch_len),
+            gate_x1=gate_x1, x_ch_mid=x_jfet + 0.5 * ls(d.ch_len),
             d_src=ls(d.d_src), d_body=ls(d.d_body), w_drift=ls(d.w_drift),
             t_drain=ls(d.t_drain), t_ox=ls(d.t_ox),
             a_body=ds(d.n_body), b_src=ds(d.n_src), b_drain=ds(d.n_drain),
             n0_drift=ds(d.n_drift), n_jfet=ds(d.n_jfet),
             eps_ratio=sc.reg.value("eps_r_SiO2_thermal") / sc.eps_r,
-            delta=sc.delta, mu_n=1.0, mu_p=1.0, **d.mesh_kw,
+            delta=sc.delta, mu_n=1.0, mu_p=1.0, **ext, **d.mesh_kw,
         )  # fmt: skip
         self.prm = prm
         self.dev = dev = DMOSFET(prm, level)

@@ -104,3 +104,19 @@ measurement.
 Stage 26 passes if E1–E3 and C1–C3 hold. The predictions are reported whatever the outcome.
 
 **Not claimed:** validation of the model in general; agreement with any device but this one; that the unsourced substrate value is correct.
+
+## Note (2026-10-23, after a dev pre-run, before the official run; no criterion, range or prediction changed)
+
+- **Channel-length mapping.**
+  - The literal mapping ch_len = L_ch (50 % points, r = 0.1 µm) is degenerate: the 1e20 n⁺ source tail removes all net-p surface at $N_{A,s}$ = 2.5e17.
+  - In a first dev pre-run, 5 of 16 bracket corners had no channel columns and failed.
+  - The runner therefore implements $L_{ch}$ as the **electrical channel length** (the extent of the net-p gated surface), calibrating ch_len per configuration.
+  - The literal mapping is kept as the reported scan row `nominal_l_ch`.
+  - This choice was made after seeing the pre-run failure, and is disclosed as such.
+- **Other choices,** made where the spec is underdetermined:
+  - $t_{csl}$ = 0.3 µm (Fig. 1);
+  - central $R_{sub}$ = 0.35 mΩ·cm², the range midpoint, since the spec gave no central value;
+  - $V_{DS}$ = 0.1 V;
+  - the W_J trend uses pitch 9 + W_J;
+  - W_J,eff changes $x_{jfet}$ only.
+- **Dev outcome seen:** E1–E3 and C1–C3 passed. Criterion A, P26b and P26c failed. The official run decides.

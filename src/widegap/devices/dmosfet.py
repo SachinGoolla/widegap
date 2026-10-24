@@ -70,6 +70,16 @@ class DMOSParams:
     w_drift: float = 12.0
     t_drain: float = 3.0
     t_ox: float = 0.3
+    # stage-26 extensions (defaults: absent -> every earlier device is bit-identical)
+    t_csl: float = (
+        0.0  # current-spreading layer between the body bottom and the drift (y > -(d_body + t_csl))
+    )
+    n_csl: float = 0.0  # its donor level (units of N0)
+    a_body_b: float = 0.0  # > 0: N_A(y) log-linear from a_body (y = 0) to a_body_b (y = -d_body)
+    x_split: tuple = ()  # extra breakpoints inside the n+ source segment [x_src0, x_src1]
+    nx_sub: int = 4  # cells per sub-segment of the split source segment
+    ny_csl: int = 4
+    q_csl: float = 1.0
     # zero-bias source-junction exclusion box for the breakdown field index (edge midpoints)
     excl_dx0: float = 3.5  # to the left of the source edge
     excl_dx1: float = 2.0  # to the right of the source edge
@@ -101,7 +111,7 @@ class DMOSParams:
 
     @property
     def y_bottom(self):
-        return -(self.d_body + self.w_drift + self.t_drain)
+        return -(self.d_body + self.t_csl + self.w_drift + self.t_drain)
 
 
 class DMOSFET:
@@ -110,16 +120,26 @@ class DMOSFET:
         self.level = level
         xb = [0.0, p.x_jfet, p.x_ch_mid, p.x_src0, p.x_src1, p.x_bc, p.x_max]
         xs = [0.0]
-        for lo, hi, n, q in zip(xb[:-1], xb[1:], p.nx, p.qx, strict=True):
+        for k, (lo, hi, n, q) in enumerate(zip(xb[:-1], xb[1:], p.nx, p.qx, strict=True)):
+            if k == 3 and p.x_split:  # stage 26: source segment split at gate edge / contact start
+                pts = [lo] + [v for v in sorted(set(p.x_split)) if lo < v < hi] + [hi]
+                for a, b in zip(pts[:-1], pts[1:], strict=True):
+                    xs += list(seg(a, b, p.nx_sub, 1.0)[1:])
+                continue
             xs += list(seg(lo, hi, n, q)[1:])
-        y_drift0 = -(p.d_body + p.w_drift)
-        ys = np.r_[
-            seg(p.y_bottom, y_drift0, p.ny_drain, 1.0),
-            seg(y_drift0, -p.d_body, p.ny_drift, p.q_drift)[1:],
-            seg(-p.d_body, -p.d_src, p.ny_body, p.q_body)[1:],
-            seg(-p.d_src, 0.0, p.ny_surf, p.q_surf)[1:],
-            np.linspace(0.0, p.t_ox, p.ny_ox + 1)[1:],
-        ]
+        self.y_dtop = -(p.d_body + p.t_csl)  # top of the drift (= body bottom without a CSL)
+        y_drift0 = -(p.d_body + p.t_csl + p.w_drift)
+        csl = [seg(self.y_dtop, -p.d_body, p.ny_csl, p.q_csl)[1:]] if p.t_csl > 0.0 else []
+        ys = np.concatenate(
+            [
+                seg(p.y_bottom, y_drift0, p.ny_drain, 1.0),
+                seg(y_drift0, self.y_dtop, p.ny_drift, p.q_drift)[1:],
+                *csl,
+                seg(-p.d_body, -p.d_src, p.ny_body, p.q_body)[1:],
+                seg(-p.d_src, 0.0, p.ny_surf, p.q_surf)[1:],
+                np.linspace(0.0, p.t_ox, p.ny_ox + 1)[1:],
+            ]
+        )
         self.mesh = m = TensorMesh(refine(xs, level), refine(ys, level))
         self.reg = Regions.from_function(m, lambda xc, yc: yc < 0)
         self.dp = DDParams(delta=p.delta, mu_n=p.mu_n, mu_p=p.mu_p, recombination=False)
@@ -129,12 +149,13 @@ class DMOSFET:
         xc, yc = cc[:, 0], cc[:, 1]
         semi = self.reg.semi_cell
         self.m_drain = semi & (yc < y_drift0)
-        self.m_drift = semi & (yc >= y_drift0) & (yc < -p.d_body)
+        self.m_drift = semi & (yc >= y_drift0) & (yc < self.y_dtop)
+        self.m_csl = semi & (yc >= self.y_dtop) & (yc < -p.d_body)
         upper = semi & (yc >= -p.d_body)
         self.m_jfet = upper & (xc < p.x_jfet)
         self.m_src = upper & (xc > p.x_src0) & (xc < p.x_src1) & (yc > -p.d_src)
         self.m_body = upper & ~self.m_jfet & ~self.m_src
-        eta = np.where(self.m_drift, 2.0 * (-p.d_body - yc) / p.w_drift - 1.0, 0.0)
+        eta = np.where(self.m_drift, 2.0 * (self.y_dtop - yc) / p.w_drift - 1.0, 0.0)
         self.eta = eta
         self.leg = np.stack(
             [legendre.legval(eta, np.eye(4)[k]) for k in range(4)]
@@ -143,7 +164,8 @@ class DMOSFET:
         self.q_fixed = np.zeros(m.n_cells)
         self.q_fixed[self.m_drain] = p.b_drain
         self.q_fixed[self.m_src] = p.b_src
-        self.q_fixed[self.m_body] = -p.a_body
+        self.q_fixed[self.m_body] = -self.body_acceptor(yc[self.m_body])
+        self.q_fixed[self.m_csl] = p.n_csl
         ok = self.reg.vol_s > 0
         rows = np.concatenate([m.cell_nodes[:, k] for k in range(m.cell_nodes.shape[1])])
         cols = np.tile(np.arange(m.n_cells), m.cell_nodes.shape[1])
@@ -166,6 +188,15 @@ class DMOSFET:
         self.nodes["source_body"] = np.union1d(self.nodes["source"], self.nodes["body"])
 
     # ---- doping ------------------------------------------------------------------
+    def body_acceptor(self, y):
+        """Body acceptor level N_A(y)/N0: ``a_body`` (uniform) or, with ``a_body_b > 0``, log-linear
+        from ``a_body`` at y = 0 to ``a_body_b`` at y = -d_body (clamped to that range)."""
+        p = self.prm
+        if p.a_body_b <= 0.0:
+            return p.a_body
+        t = np.clip(-np.asarray(y, dtype=float) / p.d_body, 0.0, 1.0)
+        return p.a_body * (p.a_body_b / p.a_body) ** t
+
     def drift_level(self, theta):
         """Drift donor level N_D(eta)/N0 at the drift cells and the P_k factors."""
         th = np.asarray(theta, dtype=float)
@@ -195,13 +226,13 @@ class DMOSFET:
     def drift_profile(self, theta, y):
         """N_D(y)/N0 along the drift depth (y in [-(d_body+w_drift), -d_body])."""
         p = self.prm
-        eta = 2.0 * (-p.d_body - np.asarray(y, float)) / p.w_drift - 1.0
+        eta = 2.0 * (self.y_dtop - np.asarray(y, float)) / p.w_drift - 1.0
         P = np.stack([legendre.legval(eta, np.eye(4)[k]) for k in range(4)])
         return p.n0_drift * np.exp(np.asarray(theta, float)[:4] @ P)
 
     def drift_profile_jac(self, theta, y):
         p = self.prm
-        eta = 2.0 * (-p.d_body - np.asarray(y, float)) / p.w_drift - 1.0
+        eta = 2.0 * (self.y_dtop - np.asarray(y, float)) / p.w_drift - 1.0
         P = np.stack([legendre.legval(eta, np.eye(4)[k]) for k in range(4)])
         nd = p.n0_drift * np.exp(np.asarray(theta, float)[:4] @ P)
         return nd[:, None] * P.T  # (len(y), 4)
