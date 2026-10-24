@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **Stage 21**, guarded re-optimization of the stage-17b problem on the punch-through-safe 1.4 um-body geometry ([spec](docs/benchmarks/stage21_safe_geometry_opt.md), [result](docs/benchmarks/stage21_result.md)); pre-registered 2026-10-23. **The stage gate is PASSED** (S1-S6; commit 63b92b1, `git_dirty` false): dense true-min BV 544.00 to 608.10 V (h) and 543.15 to 607.76 V (h/2); V_pt,es / BV at least 1.442 at all 81 checked iterates (guard 1.2); Pareto designs at R/R_0 = 1.05, 1.1, 1.2. First optimized design in the project that does not rest on a punching-through geometry. The comparison with stage 17b is on a different geometry.
+- **Stage 22**, cost of common adjoint simplifications (variants A-D) ([spec](docs/benchmarks/stage22_adjoint_simplifications.md), [result](docs/benchmarks/stage22_result.md)); pre-registered 2026-10-23. **The stage gate is PASSED** (Q1-Q3; commit c943a72, `git_dirty` false). P22a confirmed (D-variant R_on,ch gradient error 27.7 %; BV and E_ox about 1e-6); P22b refuted (same optimum, dense BV 608.055 vs 608.098 V, KKT ratio 0.9 %, but 37 vs 10 SLSQP iterations).
+- `docs/paper/claims.md`: claims ledger (C1-C8) with labels, evidence and status.
+
+### Changed
+
+- README: stage 21 and 22 rows; `docs/PROJECT_SPEC.md`: stage table rows 21 and 22 (passed).
+
 ## [0.6.0] - 2026-10-23
 
 ### Added

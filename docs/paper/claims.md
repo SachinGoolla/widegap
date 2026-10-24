@@ -15,12 +15,13 @@ Each claim gives: its label (reproduction / independent implementation / new / u
 | # | Claim | Label | Evidence | Status |
 |---|---|---|---|---|
 | C1 | Adjoint optimizers in SiC MOSFET design exploit unmodelled failure modes: a planar-cut objective was gamed (13), a frozen model classification was exploited for 35 V of a 91 V gain (17 to 17b), and the blocking-voltage claims of a zero-current off-state model were invalidated by punch-through (19) | new (systematic characterization; the phenomenon is known in general) | stage13, 13b, 12c, 17, 17b and 19 results | needs the pre-registered artifact-budget metric (planned) and a pre-registered prediction experiment (experiment A, planned) |
-| C2 | Neglecting mobility and ionization doping-dependence in the adjoint gives an X % gradient error and changes the optimum | new (if confirmed) | stage 22 (pre-registered) | planned |
+| C2 | Neglecting mobility and ionization doping-dependence in the adjoint (variants A-D) gives a 27.7 % R_on,ch gradient error at theta = 0 (BV, E_ox about 1e-6) but, in this problem, does not change the optimum: the D-gradient SLSQP run reaches the same design (dense BV 608.055 vs 608.098 V, both feasible, KKT ratio 0.9 %) at 37 vs 10 iterations. The cost is convergence speed, not the optimum. | new (one problem; constraint-gradient corruption only) | stage 22 (P22a confirmed, P22b refuted) | done; do not claim the simplifications are harmless in general or that any published result is wrong |
 | C3 | Exact adjoint through a nonlocal sheet-charge inversion mobility (Noguchi), verified against FD to ~5e-9 | new (likely; no prior found) | stages 17 and 17b J1 | done |
 | C4 | A fair PINN-vs-FV comparison on a drift-diffusion problem found no PINN advantage | new for semiconductor DD (partially) | stage 11 | done; one 1D problem only |
 | C5 | Open, verified, provenance-enforced SiC TCAD framework | new (plausibly) | repo; 109 verified parameters | done; check DEVSIM and ChargeTransport.jl before claiming |
 | C6 | Channel-dominated R_on (~90 %) means drift/JFET doping optimization addresses a minor part of R_on | model result; textbook-consistent | stages 16 and 17 R2 | done; do not present as a discovery |
 | C7 | Punch-through-safe body depth 1.4 µm at +1.4 % R_on for the study cell | model result (design study) | stage 20 | done; study geometry only |
+| C8 | Guarded optimum on the punch-through-safe geometry (d_body 1.4 um): dense true-min BV 544.00 to 608.10 V (h), V_pt,es / BV >= 1.442 at every iterate (guard 1.2), Pareto at R/R_0 1.05 to 1.2 | model result (design study) | stage 21 | done; electrostatic punch-through criterion only (DD stopped at 400 V for >= 1.2 um); 17b comparison is on a different geometry |
 
 ## Gaps a reviewer will raise
 - No measured-device validation. Mitigation: compare against sourced published devices; papers to be requested from the owner.
