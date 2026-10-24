@@ -21,10 +21,18 @@ Each claim gives: its label (reproduction / independent implementation / new / u
 | C4 | A fair PINN-vs-FV comparison on a drift-diffusion problem found no PINN advantage | new for semiconductor DD (partially) | stage 11 | done; one 1D problem only |
 | C5 | Open, verified, provenance-enforced SiC TCAD framework | new (plausibly) | repo; 109 verified parameters | done; check DEVSIM and ChargeTransport.jl before claiming |
 | C6 | Channel-dominated R_on (~90 %) means drift/JFET doping optimization addresses a minor part of R_on | model result; textbook-consistent | stages 16 and 17 R2 | done; do not present as a discovery |
-| C7 | Punch-through-safe body depth 1.4 µm at +1.4 % R_on for the study cell | model result (design study) | stage 20 | done; study geometry only |
+| C7 | Punch-through-safe body depth 1.4 µm at +1.4 % R_on for the study cell | model result (design study) | stage 20 | done; study geometry only. **Caveat (stage 26):** the electrostatic punch-through criterion behind "punch-through-safe" is unvalidated against measurement; applied to the Saha & Cooper 2007 device with an assumed body profile it gives V_pt,es 210 V, whereas the device blocks 1050 V |
 | C8 | Guarded optimum on the punch-through-safe geometry (d_body 1.4 um): dense true-min BV 544.00 to 608.10 V (h), V_pt,es / BV >= 1.442 at every iterate (guard 1.2), Pareto at R/R_0 1.05 to 1.2 | model result (design study) | stage 21 | done; electrostatic punch-through criterion only (DD stopped at 400 V for >= 1.2 um); 17b comparison is on a different geometry |
 
+## Validation (stage 26: one fabricated device, Saha & Cooper 2007; [result](../benchmarks/stage26_result.md))
+Stage gate passed (E1-E3, C1-C3); all three pre-registered predictions FAILED. No claim of validated absolute R_on is made.
+- **Criterion A (cross-simulator vs S07 Table I): failed.** Central 2.889 vs 3.89 (-25.7 %) and 3.910 vs 5.38 mOhm cm2 (-27.3 %); Table I is outside the N_A bracket. Table I implies x_max/L_c = 2.98 vs 2.04 in our model (interpretation, untested: different effective contact geometry, e.g. segmented contacts).
+- **P26b (mobility model vs Fig. 12): failed.** 0 of 11 swept N_A values within 1.5x at all included points (1 MV/cm point excluded, N_S <= 0); E_eff stays about 1 MV/cm or below at 3-4 MV/cm gate field, so Noguchi stays high while the measured mobility falls faster.
+- **P26c (measured R_on,sp 6.95 mOhm cm2): failed.** Noguchi arm 3.774 (ratio 0.543, -45.7 %); S07-fit mobility arm 5.216 (0.750, -25.0 %); 64-corner bracket 2.214 to 4.706 (width 2.13x, WEAK) excludes 6.95. Model W_J trend flat vs measured +0.95 mOhm cm2 (1 to 2 um).
+- **Off-state:** dense BV 1233 V vs S06 simulated 1230 V; but V_pt,es 210 V vs fabricated BV 1050 V: the assumed (M04-borrowed) body profile and/or the barrier criterion is wrong for this device. The punch-through criterion is unvalidated against any measured device.
+- **Status:** absolute R_on,sp underpredicted by 25 to 46 % for the one device checked; part of the gap is geometry/contact representation (cross-simulator miss), not physics alone. Not claimed: validation in general.
+
 ## Gaps a reviewer will raise
-- No measured-device validation. Mitigation: compare against sourced published devices; papers to be requested from the owner.
+- Measured-device validation: one device checked (stage 26), failed (see Validation). Earlier mitigation: compare against sourced published devices; papers to be requested from the owner.
 - Generality: one device and one coefficient set. Mitigation: a Hatakeyama arm of an exploit demonstration.
 - Narrow gate failures (16 H5, 18b B3, 19 P1/P2) are reported as they are.
